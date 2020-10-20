@@ -8,5 +8,5 @@
 # Setting Up IPS Inline for Windows
 - https://suricata.readthedocs.io/en/latest/setting-up-ipsinline-for-windows.html?highlight=windows
 
-#WinDivert
+# WinDivert
 - https://www.reqrypt.org/windivert.html
