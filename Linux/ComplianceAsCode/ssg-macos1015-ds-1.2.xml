@@ -1,0 +1,1872 @@
+<?xml version="1.0"?>
+<ds:data-stream-collection xmlns:cat="urn:oasis:names:tc:entity:xmlns:xml:catalog" xmlns:cpe-dict="http://cpe.mitre.org/dictionary/2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ds="http://scap.nist.gov/schema/scap/source/1.2" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:ind="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" xmlns:ocil="http://scap.nist.gov/schema/ocil/2.0" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xccdf-1.2="http://checklists.nist.gov/xccdf/1.2" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="scap_org.open-scap_collection_from_xccdf_ssg-macos1015-xccdf-1.2.xml" schematron-version="1.2">
+  <ds:data-stream id="scap_org.open-scap_datastream_from_xccdf_ssg-macos1015-xccdf-1.2.xml" scap-version="1.2" use-case="OTHER">
+    <ds:dictionaries>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-macos1015-cpe-dictionary.xml" xlink:href="#scap_org.open-scap_comp_ssg-macos1015-cpe-dictionary.xml">
+        <cat:catalog>
+          <cat:uri name="ssg-macos1015-cpe-oval.xml" uri="#scap_org.open-scap_cref_ssg-macos1015-cpe-oval.xml"/>
+        </cat:catalog>
+      </ds:component-ref>
+    </ds:dictionaries>
+    <ds:checklists>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-macos1015-xccdf-1.2.xml" xlink:href="#scap_org.open-scap_comp_ssg-macos1015-xccdf-1.2.xml">
+        <cat:catalog>
+          <cat:uri name="ssg-macos1015-ocil.xml" uri="#scap_org.open-scap_cref_ssg-macos1015-ocil.xml"/>
+          <cat:uri name="ssg-macos1015-oval.xml" uri="#scap_org.open-scap_cref_ssg-macos1015-oval.xml"/>
+        </cat:catalog>
+      </ds:component-ref>
+    </ds:checklists>
+    <ds:checks>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-macos1015-ocil.xml" xlink:href="#scap_org.open-scap_comp_ssg-macos1015-ocil.xml"/>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-macos1015-oval.xml" xlink:href="#scap_org.open-scap_comp_ssg-macos1015-oval.xml"/>
+      <ds:component-ref id="scap_org.open-scap_cref_ssg-macos1015-cpe-oval.xml" xlink:href="#scap_org.open-scap_comp_ssg-macos1015-cpe-oval.xml"/>
+    </ds:checks>
+  </ds:data-stream>
+  <ds:component id="scap_org.open-scap_comp_ssg-macos1015-ocil.xml" timestamp="2020-09-18T05:58:14">
+    <ocil:ocil>
+      <ocil:generator>
+        <ocil:product_name>xccdf-create-ocil.xslt from SCAP Security Guide</ocil:product_name>
+        <ocil:product_version>ssg: 0.1.52</ocil:product_version>
+        <ocil:schema_version>2.0</ocil:schema_version>
+        <ocil:timestamp>2020-09-18T05:58:13-04:00</ocil:timestamp>
+      </ocil:generator>
+      <ocil:questionnaires>
+        <ocil:questionnaire id="ocil:ssg-service_auditd_enabled_ocil:questionnaire:1">
+          <ocil:title>Enable audit Service</ocil:title>
+          <ocil:actions>
+            <ocil:test_action_ref>ocil:ssg-service_auditd_enabled_action:testaction:1</ocil:test_action_ref>
+          </ocil:actions>
+        </ocil:questionnaire>
+        <ocil:questionnaire id="ocil:ssg-audit_failure_halt_ocil:questionnaire:1">
+          <ocil:title>Shutdown System When Auditing Failures Occur</ocil:title>
+          <ocil:actions>
+            <ocil:test_action_ref>ocil:ssg-audit_failure_halt_action:testaction:1</ocil:test_action_ref>
+          </ocil:actions>
+        </ocil:questionnaire>
+      </ocil:questionnaires>
+      <ocil:test_actions>
+        <ocil:boolean_question_test_action id="ocil:ssg-service_auditd_enabled_action:testaction:1" question_ref="ocil:ssg-service_auditd_enabled_question:question:1">
+          <ocil:when_true>
+            <ocil:result>PASS</ocil:result>
+          </ocil:when_true>
+          <ocil:when_false>
+            <ocil:result>FAIL</ocil:result>
+          </ocil:when_false>
+        </ocil:boolean_question_test_action>
+        <ocil:boolean_question_test_action id="ocil:ssg-audit_failure_halt_action:testaction:1" question_ref="ocil:ssg-audit_failure_halt_question:question:1">
+          <ocil:when_true>
+            <ocil:result>PASS</ocil:result>
+          </ocil:when_true>
+          <ocil:when_false>
+            <ocil:result>FAIL</ocil:result>
+          </ocil:when_false>
+        </ocil:boolean_question_test_action>
+      </ocil:test_actions>
+      <ocil:questions>
+        <ocil:boolean_question id="ocil:ssg-service_auditd_enabled_question:question:1">
+          <ocil:question_text>To verify that auditing is enabled and running, run the
+following command:
+$ sudo launchctl list com.apple.auditd
+The output should return process information for
+com.apple.auditd
+      Is it the case that auditing is not enabled or running?
+      </ocil:question_text>
+        </ocil:boolean_question>
+        <ocil:boolean_question id="ocil:ssg-audit_failure_halt_question:question:1">
+          <ocil:question_text>To verify that auditing is enabled and running, run the
+following command:
+$ sudo grep -E "^policy.*ahlt" /etc/security/audit_control
+The output should contain ahlt
+      Is it the case that auditing is not configured to shut down on audit failure?
+      </ocil:question_text>
+        </ocil:boolean_question>
+      </ocil:questions>
+    </ocil:ocil>
+  </ds:component>
+  <ds:component id="scap_org.open-scap_comp_ssg-macos1015-oval.xml" timestamp="2020-09-18T05:58:13">
+    <oval-def:oval_definitions xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5#linux linux-definitions-schema.xsd">
+      <oval-def:generator>
+        <oval:product_name>combine_ovals.py from SCAP Security Guide</oval:product_name>
+        <oval:product_version>ssg: [0, 1, 52], python: 3.8.5</oval:product_version>
+        <oval:schema_version>5.11</oval:schema_version>
+        <oval:timestamp>2020-09-18T09:58:12</oval:timestamp>
+      </oval-def:generator>
+      <oval-def:definitions>
+        <oval-def:definition class="compliance" id="oval:ssg-audit_failure_halt:def:1" version="1">
+          <oval-def:metadata>
+            <oval-def:title>Shutdown System When Auditing Failures Occur</oval-def:title>
+            <oval-def:affected family="macos">
+              <oval-def:platform>Apple macOS 10.15</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:description>The system will shutdown when auditing fails.</oval-def:description>
+            <oval-def:reference ref_id="audit_failure_halt" source="ssg"/>
+          </oval-def:metadata>
+          <oval-def:criteria>
+            <oval-def:criterion comment="audit configuration shutdown" test_ref="oval:ssg-test_audit_shutdown:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+        <oval-def:definition class="inventory" id="oval:ssg-installed_OS_is_macos1015:def:1" version="1">
+          <oval-def:metadata>
+            <oval-def:title>Apple macOS 10.15</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Apple macOS 10.15</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:apple:macos:10.15" source="CPE"/>
+            <oval-def:description>The operating system installed on the system is
+      Apple macOS 10.15</oval-def:description>
+            <oval-def:reference ref_id="installed_OS_is_macos1015" source="ssg"/>
+          </oval-def:metadata>
+          <oval-def:criteria>
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_macos1015_macos_family:tst:1"/>
+            <oval-def:criterion comment="macOS 10.15 is installed" test_ref="oval:ssg-test_macos1015:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+      </oval-def:definitions>
+      <oval-def:tests>
+        <ind:textfilecontent54_test check="all" comment="audit configuration shutdown" id="oval:ssg-test_audit_shutdown:tst:1" version="1">
+          <ind:object object_ref="oval:ssg-object_audit_shutdown:obj:1"/>
+        </ind:textfilecontent54_test>
+        <ind:family_test check="all" check_existence="at_least_one_exists" comment="installed OS part of macos family" id="oval:ssg-test_macos1015_macos_family:tst:1" version="1">
+          <ind:object object_ref="oval:ssg-obj_macos1015_macos_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_macos1015_macos_family:ste:1"/>
+        </ind:family_test>
+        <ind:textfilecontent54_test check="all" check_existence="at_least_one_exists" comment="redhat-release is version 8" id="oval:ssg-test_macos1015:tst:1" version="1">
+          <ind:object object_ref="oval:ssg-obj_macos1015:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_macos1015:ste:1"/>
+        </ind:textfilecontent54_test>
+      </oval-def:tests>
+      <oval-def:objects>
+        <ind:textfilecontent54_object id="oval:ssg-object_audit_shutdown:obj:1" version="1">
+          <ind:filepath>/etc/security/audit_control</ind:filepath>
+          <ind:pattern operation="pattern match">^policy:.*,ahlt.*$</ind:pattern>
+          <ind:instance datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+        <ind:family_object id="oval:ssg-obj_macos1015_macos_family:obj:1" version="1"/>
+        <ind:textfilecontent54_object id="oval:ssg-obj_macos1015:obj:1" version="1">
+          <ind:filepath>/System/Library/CoreServices/SystemVersion.plist</ind:filepath>
+          <ind:pattern operation="pattern match">^.*&lt;string\&gt;(\d+\.\d+).*$</ind:pattern>
+          <ind:instance operation="equals" datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+      </oval-def:objects>
+      <oval-def:states>
+        <ind:family_state id="oval:ssg-state_macos1015_macos_family:ste:1" version="1">
+          <ind:family>macos</ind:family>
+        </ind:family_state>
+        <ind:textfilecontent54_state id="oval:ssg-state_macos1015:ste:1" version="1">
+          <ind:subexpression operation="pattern match">10.15</ind:subexpression>
+        </ind:textfilecontent54_state>
+      </oval-def:states>
+    </oval-def:oval_definitions>
+  </ds:component>
+  <ds:component id="scap_org.open-scap_comp_ssg-macos1015-xccdf-1.2.xml" timestamp="2020-09-18T05:58:14">
+    <xccdf-1.2:Benchmark id="xccdf_org.ssgproject.content_benchmark_macOS-1015" resolved="1" xml:lang="en-US" style="SCAP_1.2">
+      <xccdf-1.2:status date="2020-09-18">draft</xccdf-1.2:status>
+      <xccdf-1.2:title xml:lang="en-US">Guide to the Secure Configuration of Apple macOS 10.15</xccdf-1.2:title>
+      <xccdf-1.2:description xml:lang="en-US">This guide presents a catalog of security-relevant
+configuration settings for Apple macOS 10.15. It is a rendering of
+content structured in the eXtensible Configuration Checklist Description Format (XCCDF)
+in order to support security automation.
+<html:br/><html:br/>
+Providing system administrators with such guidance informs them how to securely
+configure systems under their control in a variety of network roles. Policy
+makers and baseline creators can use this catalog of settings, with its
+associated references to higher-level security control catalogs, in order to
+assist them in security baseline creation. This guide is a <html:em>catalog, not a
+checklist</html:em>, and satisfaction of every item is not likely to be possible or
+sensible in many operational scenarios. However, the XCCDF format enables
+granular selection and adjustment of settings, and their association with OVAL
+and OCIL content provides an automated checking capability. Transformations of
+this document, and its associated automated checking content, are capable of
+providing baselines that meet a diverse set of policy objectives. Some example
+XCCDF <html:em>Profiles</html:em>, which are selections of items that form checklists and
+can be used as baselines, are available with this guide. They can be
+processed, in an automated fashion, with tools that support the Security
+Content Automation Protocol (SCAP). The DISA STIG, which provides required
+settings for US Department of Defense systems, is one example of a baseline
+created from this guidance.
+</xccdf-1.2:description>
+      <xccdf-1.2:notice xml:lang="en-US" id="terms_of_use">Do not attempt to implement any of the settings in
+this guide without first testing them in a non-operational environment. The
+creators of this guidance assume no responsibility whatsoever for its use by
+other parties, and makes no guarantees, expressed or implied, about its
+quality, reliability, or any other characteristic.
+</xccdf-1.2:notice>
+      <xccdf-1.2:front-matter xml:lang="en-US">The Compliance As Code Project<html:br/>
+
+    <html:a href="https://github.com/ComplianceAsCode/content">https://github.com/ComplianceAsCode/content</html:a>
+</xccdf-1.2:front-matter>
+      <xccdf-1.2:rear-matter xml:lang="en-US">Apple, iPadOS, tvOS, watchOS, macOS and OS X are either registered
+trademarks or trademarks of Apple, Inc. in the United States and other
+countries. All other names are registered trademarks or trademarks of their
+respective companies.
+</xccdf-1.2:rear-matter>
+      <xccdf-1.2:platform idref="cpe:/o:apple:macos:10.15"/>
+      <xccdf-1.2:version update="https://github.com/OpenSCAP/scap-security-guide/releases/latest">0.1.52</xccdf-1.2:version>
+      <xccdf-1.2:metadata>
+        <dc:publisher>SCAP Security Guide Project</dc:publisher>
+        <dc:creator>SCAP Security Guide Project</dc:creator>
+        <dc:contributor>Frank J Cameron (CAM1244) &lt;cameron@ctc.com&gt;</dc:contributor>
+        <dc:contributor>0x66656c6978 &lt;0x66656c6978@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Jack Adolph &lt;jack.adolph@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Gabe Alford &lt;redhatrises@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Firas AlShafei &lt;firas.alshafei@us.abb.com&gt;</dc:contributor>
+        <dc:contributor>Christopher Anderson &lt;cba@fedoraproject.org&gt;</dc:contributor>
+        <dc:contributor>angystardust &lt;angystardust@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>anixon-rh &lt;55244503+anixon-rh@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Chuck Atkins &lt;chuck.atkins@kitware.com&gt;</dc:contributor>
+        <dc:contributor>Ryan Ballanger &lt;root@rballang-admin-2.fastenal.com&gt;</dc:contributor>
+        <dc:contributor>Alex Baranowski &lt;alex@euro-linux.com&gt;</dc:contributor>
+        <dc:contributor>Molly Jo Bault &lt;Molly.Jo.Bault@ballardtech.com&gt;</dc:contributor>
+        <dc:contributor>Gabriel Becker &lt;ggasparb@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Alexander Bergmann &lt;abergmann@suse.com&gt;</dc:contributor>
+        <dc:contributor>Jose Luis BG &lt;bgjoseluis@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Joseph Bisch &lt;joseph.bisch@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Jeffrey Blank &lt;blank@eclipse.ncsc.mil&gt;</dc:contributor>
+        <dc:contributor>Olivier Bonhomme &lt;ptitoliv@ptitoliv.net&gt;</dc:contributor>
+        <dc:contributor>Ted Brunell &lt;tbrunell@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Blake Burkhart &lt;blake.burkhart@us.af.mil&gt;</dc:contributor>
+        <dc:contributor>Patrick Callahan &lt;pmc@patrickcallahan.com&gt;</dc:contributor>
+        <dc:contributor>George Campbell &lt;gcampbell@palantir.com&gt;</dc:contributor>
+        <dc:contributor>Nick Carboni &lt;ncarboni@redhat.com&gt;</dc:contributor>
+        <dc:contributor>James Cassell &lt;james.cassell@ll.mit.edu&gt;</dc:contributor>
+        <dc:contributor>Frank Caviggia &lt;fcaviggi@ra.iad.redhat.com&gt;</dc:contributor>
+        <dc:contributor>Eric Christensen &lt;echriste@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jayson Cofell &lt;1051437+70k10@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Caleb Cooper &lt;coopercd@ornl.gov&gt;</dc:contributor>
+        <dc:contributor>Deric Crago &lt;deric.crago@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Will Cushen &lt;wcushen@redhat.com&gt;</dc:contributor>
+        <dc:contributor>cyarbrough76 &lt;42849651+cyarbrough76@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Maura Dailey &lt;maura@eclipse.ncsc.mil&gt;</dc:contributor>
+        <dc:contributor>Klaas Demter &lt;demter@atix.de&gt;</dc:contributor>
+        <dc:contributor>dhanushkar-wso2 &lt;dhanushkar@wso2.com&gt;</dc:contributor>
+        <dc:contributor>Andrew DiPrinzio &lt;andrew.diprinzio@jhuapl.edu&gt;</dc:contributor>
+        <dc:contributor>dom &lt;dominique.blaze@devinci.fr&gt;</dc:contributor>
+        <dc:contributor>Jean-Baptiste Donnette &lt;jean-baptiste.donnette@epita.fr&gt;</dc:contributor>
+        <dc:contributor>drax &lt;applezip@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Sebastian Dunne &lt;sdunne@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Greg Elin &lt;gregelin@gitmachines.com&gt;</dc:contributor>
+        <dc:contributor>eradot4027 &lt;jrtonmac@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Alexis Facques &lt;alexis.facques@mythalesgroup.io&gt;</dc:contributor>
+        <dc:contributor>Leah Fisher &lt;lfisher047@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Alijohn Ghassemlouei &lt;alijohn.ghassemlouei@sapns2.com&gt;</dc:contributor>
+        <dc:contributor>ghylock &lt;ghylock@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Andrew Gilmore &lt;agilmore2@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Joshua Glemza &lt;jglemza@nasa.gov&gt;</dc:contributor>
+        <dc:contributor>Nick Gompper &lt;forestgomp@yahoo.com&gt;</dc:contributor>
+        <dc:contributor>Loren Gordon &lt;lorengordon@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Patrik Greco &lt;sikevux@sikevux.se&gt;</dc:contributor>
+        <dc:contributor>Steve Grubb &lt;sgrubb@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Marek Haicman &lt;mhaicman@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Rebekah Hayes &lt;rhayes@corp.rivierautilities.com&gt;</dc:contributor>
+        <dc:contributor>Trey Henefield &lt;thenefield@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Henning Henkel &lt;henning.henkel@helvetia.ch&gt;</dc:contributor>
+        <dc:contributor>hex2a &lt;hex2a@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>John Hooks &lt;jhooks@starscream.pa.jhbcomputers.com&gt;</dc:contributor>
+        <dc:contributor>Jakub Hrozek &lt;jhrozek@redhat.com&gt;</dc:contributor>
+        <dc:contributor>De Huo &lt;De.Huo@windriver.com&gt;</dc:contributor>
+        <dc:contributor>Robin Price II &lt;robin@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Yasir Imam &lt;yimam@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jiri Jaburek &lt;jjaburek@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Keith Jackson &lt;keithkjackson@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Jeremiah Jahn &lt;jeremiah@goodinassociates.com&gt;</dc:contributor>
+        <dc:contributor>Stephan Joerrens &lt;Stephan.Joerrens@fiduciagad.de&gt;</dc:contributor>
+        <dc:contributor>Jono &lt;jono@ubuntu-18.localdomain&gt;</dc:contributor>
+        <dc:contributor>Kai Kang &lt;kai.kang@windriver.com&gt;</dc:contributor>
+        <dc:contributor>Charles Kernstock &lt;charles.kernstock@ultra-ats.com&gt;</dc:contributor>
+        <dc:contributor>Yuli Khodorkovskiy &lt;ykhodorkovskiy@tresys.com&gt;</dc:contributor>
+        <dc:contributor>Nathan Kinder &lt;nkinder@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Lee Kinser &lt;lee.kinser@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Evgeny Kolesnikov &lt;ekolesni@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Peter 'Pessoft' Kol&#xED;nek &lt;github@pessoft.com&gt;</dc:contributor>
+        <dc:contributor>Luke Kordell &lt;luke.t.kordell@lmco.com&gt;</dc:contributor>
+        <dc:contributor>Malte Kraus &lt;malte.kraus@suse.com&gt;</dc:contributor>
+        <dc:contributor>kspargur &lt;kspargur@kspargur.csb&gt;</dc:contributor>
+        <dc:contributor>Amit Kumar &lt;amitkuma@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Fen Labalme &lt;fen@civicactions.com&gt;</dc:contributor>
+        <dc:contributor>Christopher Lee &lt;Crleekwc@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Ian Lee &lt;lee1001@llnl.gov&gt;</dc:contributor>
+        <dc:contributor>Jarrett Lee &lt;jarrettl@umd.edu&gt;</dc:contributor>
+        <dc:contributor>Jan Lieskovsky &lt;jlieskov@redhat.com&gt;</dc:contributor>
+        <dc:contributor>&#x160;imon Luka&#x161;&#xED;k &lt;slukasik@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Milan Lysonek &lt;mlysonek@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Fredrik Lys&#xE9;n &lt;fredrik@pipemore.se&gt;</dc:contributor>
+        <dc:contributor>Caitlin Macleod &lt;caitelatte@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Matus Marhefka &lt;mmarhefk@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jamie Lorwey Martin &lt;jlmartin@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Carlos Matos &lt;cmatos@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Robert McAllister &lt;rmcallis@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Michael McConachie &lt;michael@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Khary Mendez &lt;kharyam@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Rodney Mercer &lt;rmercer@harris.com&gt;</dc:contributor>
+        <dc:contributor>Matt Micene &lt;nzwulfin@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Brian Millett &lt;bmillett@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Mixer9 &lt;35545791+Mixer9@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>mmosel &lt;mmosel@kde.example.com&gt;</dc:contributor>
+        <dc:contributor>Zbynek Moravec &lt;zmoravec@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Kazuo Moriwaka &lt;moriwaka@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Michael Moseley &lt;michael@eclipse.ncsc.mil&gt;</dc:contributor>
+        <dc:contributor>Renaud M&#xE9;trich &lt;rmetrich@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Joe Nall &lt;joe@nall.com&gt;</dc:contributor>
+        <dc:contributor>Neiloy &lt;neiloy@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Axel Nennker &lt;axel@nennker.de&gt;</dc:contributor>
+        <dc:contributor>Michele Newman &lt;mnewman@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Sean O'Keeffe &lt;seanokeeffe797@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Ilya Okomin &lt;ilya.okomin@oracle.com&gt;</dc:contributor>
+        <dc:contributor>Kaustubh Padegaonkar &lt;theTuxRacer@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Michael Palmiotto &lt;mpalmiotto@tresys.com&gt;</dc:contributor>
+        <dc:contributor>Max R.D. Parmer &lt;maxp@trystero.is&gt;</dc:contributor>
+        <dc:contributor>Jan Pazdziora &lt;jpazdziora@redhat.com&gt;</dc:contributor>
+        <dc:contributor>pcactr &lt;paul.c.arnold4.ctr@mail.mil&gt;</dc:contributor>
+        <dc:contributor>Kenneth Peeples &lt;kennethwpeeples@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Nathan Peters &lt;Nathaniel.Peters@ca.com&gt;</dc:contributor>
+        <dc:contributor>Frank Lin PIAT &lt;fpiat@klabs.be&gt;</dc:contributor>
+        <dc:contributor>Stefan Pietsch &lt;mail.ipv4v6+gh@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Vojtech Polasek &lt;vpolasek@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Orion Poplawski &lt;orion@nwra.com&gt;</dc:contributor>
+        <dc:contributor>Nick Poyant &lt;npoyant@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Martin Preisler &lt;mpreisle@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Wesley Ceraso Prudencio &lt;wcerasop@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Raphael Sanchez Prudencio &lt;rsprudencio@redhat.com&gt;</dc:contributor>
+        <dc:contributor>T.O. Radzy Radzykewycz &lt;radzy@windriver.com&gt;</dc:contributor>
+        <dc:contributor>Kenyon Ralph &lt;kenyon@kenyonralph.com&gt;</dc:contributor>
+        <dc:contributor>Mike Ralph &lt;mralph@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Rick Renshaw &lt;Richard_Renshaw@xtoenergy.com&gt;</dc:contributor>
+        <dc:contributor>Chris Reynolds &lt;c.reynolds82@gmail.com&gt;</dc:contributor>
+        <dc:contributor>rhayes &lt;rhayes@rivierautilities.com&gt;</dc:contributor>
+        <dc:contributor>Pat Riehecky &lt;riehecky@fnal.gov&gt;</dc:contributor>
+        <dc:contributor>rlucente-se-jboss &lt;rlucente@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Juan Antonio Osorio Robles &lt;jaosorior@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Matt Rogers &lt;mrogers@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Jesse Roland &lt;j.roland277@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Joshua Roys &lt;roysjosh@gmail.com&gt;</dc:contributor>
+        <dc:contributor>rrenshaw &lt;bofh69@yahoo.com&gt;</dc:contributor>
+        <dc:contributor>Chris Ruffalo &lt;chris.ruffalo@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Ray Shaw (Cont ARL/CISD) rvshaw &lt;rvshaw@esme.arl.army.mil&gt;</dc:contributor>
+        <dc:contributor>Willy Santos &lt;wsantos@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Gautam Satish &lt;gautams@hpe.com&gt;</dc:contributor>
+        <dc:contributor>Watson Sato &lt;wsato@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Satoru SATOH &lt;satoru.satoh@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Alexander Scheel &lt;ascheel@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Bryan Schneiders &lt;pschneiders@trisept.com&gt;</dc:contributor>
+        <dc:contributor>shaneboulden &lt;shane.boulden@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Spencer Shimko &lt;sshimko@tresys.com&gt;</dc:contributor>
+        <dc:contributor>Mark Shoger &lt;mshoger@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Thomas Sj&#xF6;gren &lt;konstruktoid@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Francisco Slavin &lt;fslavin@tresys.com&gt;</dc:contributor>
+        <dc:contributor>David Smith &lt;dsmith@eclipse.ncsc.mil&gt;</dc:contributor>
+        <dc:contributor>Kevin Spargur &lt;kspargur@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Kenneth Stailey &lt;kstailey.lists@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Leland Steinke &lt;leland.j.steinke.ctr@mail.mil&gt;</dc:contributor>
+        <dc:contributor>Justin Stephenson &lt;jstephen@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Brian Stinson &lt;brian@bstinson.com&gt;</dc:contributor>
+        <dc:contributor>Jake Stookey &lt;jakestookey@gmail.com&gt;</dc:contributor>
+        <dc:contributor>Jonathan Sturges &lt;jsturges@jsturges.remote.csb&gt;</dc:contributor>
+        <dc:contributor>Philippe Thierry &lt;phil@reseau-libre.net&gt;</dc:contributor>
+        <dc:contributor>Derek Thurston &lt;thegrit@gmail.com&gt;</dc:contributor>
+        <dc:contributor>tianzhenjia &lt;jiatianzhen@cmss.chinamobile.com&gt;</dc:contributor>
+        <dc:contributor>Paul Tittle &lt;ptittle@cmf.nrl.navy.mil&gt;</dc:contributor>
+        <dc:contributor>tomas.hudik &lt;tomas.hudik@embedit.cz&gt;</dc:contributor>
+        <dc:contributor>Jeb Trayer &lt;jeb.d.trayer@uscg.mil&gt;</dc:contributor>
+        <dc:contributor>Mat&#x11B;j T&#xFD;&#x10D; &lt;matyc@redhat.com&gt;</dc:contributor>
+        <dc:contributor>VadimDor &lt;29509093+VadimDor@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Shawn Wells &lt;shawn@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Daniel E. White &lt;linuxdan@users.noreply.github.com&gt;</dc:contributor>
+        <dc:contributor>Roy Williams &lt;roywilli@roywilli.redhat.com&gt;</dc:contributor>
+        <dc:contributor>Willumpie &lt;willumpie@xs4all.nl&gt;</dc:contributor>
+        <dc:contributor>Rob Wilmoth &lt;rwilmoth@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Lucas Yamanishi &lt;lucas.yamanishi@onyxpoint.com&gt;</dc:contributor>
+        <dc:contributor>Xirui Yang &lt;xirui.yang@oracle.com&gt;</dc:contributor>
+        <dc:contributor>Kevin Zimmerman &lt;kevin.zimmerman@kitware.com&gt;</dc:contributor>
+        <dc:contributor>Jan &#x10C;ern&#xFD; &lt;jcerny@redhat.com&gt;</dc:contributor>
+        <dc:contributor>Michal &#x160;ruba&#x159; &lt;msrubar@redhat.com&gt;</dc:contributor>
+        <dc:source>https://github.com/OpenSCAP/scap-security-guide/releases/latest</dc:source>
+      </xccdf-1.2:metadata>
+      <xccdf-1.2:model system="urn:xccdf:scoring:default"/>
+      <xccdf-1.2:Profile id="xccdf_org.ssgproject.content_profile_moderate">
+        <xccdf-1.2:title xml:lang="en-US" override="true">NIST 800-53 Moderate-Impact Baseline for Apple macOS 10.15 Catalina</xccdf-1.2:title>
+        <xccdf-1.2:description xml:lang="en-US" override="true">This compliance profile reflects the core set of Moderate-Impact Baseline
+configuration settings for deployment of Apple macOS 10.15 Catalina
+into U.S. Defense, Intelligence, and Civilian agencies.
+Development partners and sponsors include the U.S. National Institute
+of Standards and Technology (NIST), U.S. Department of Defense, and the
+the National Security Agency.
+
+This baseline implements configuration requirements from the following
+sources:
+
+- NIST 800-53 control selections for Moderate-Impact systems (NIST 800-53)
+
+For any differing configuration requirements, e.g. password lengths, the stricter
+security setting was chosen. Security Requirement Traceability Guides (RTMs) and
+sample System Security Configuration Guides are provided via the
+scap-security-guide-docs package.
+
+This profile reflects U.S. Government consensus content and is developed through
+the ComplianceAsCode initiative, championed by the National
+Security Agency. Except for differences in formatting to accommodate
+publishing processes, this profile mirrors ComplianceAsCode
+content as minor divergences, such as bugfixes, work through the
+consensus and release processes.</xccdf-1.2:description>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_rule_audit_failure_halt" selected="true"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_rule_service_auditd_enabled" selected="true"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_remediation_functions" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_services" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_intro" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_how-to-use" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_intro-root-shell-assumed" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_intro-formatting-conventions" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_intro-reboot-required" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_intro-test-non-production" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_intro-read-sections-completely" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_general-principles" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_principle-minimize-software" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_principle-encrypt-transmitted-data" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_principle-use-security-tools" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_principle-least-privilege" selected="false"/>
+        <xccdf-1.2:select idref="xccdf_org.ssgproject.content_group_principle-separate-servers" selected="false"/>
+      </xccdf-1.2:Profile>
+      <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_remediation_functions">
+        <xccdf-1.2:title xml:lang="en-US">Remediation functions used by the SCAP Security Guide Project</xccdf-1.2:title>
+        <xccdf-1.2:description xml:lang="en-US">XCCDF form of the various remediation functions as used by remediation scripts from the SCAP Security Guide Project.</xccdf-1.2:description>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_create_audit_remediation_unsuccessful_file_modification_detailed" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function create_audit_remediation_unsuccessful_file_modification_detailed</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value>function create_audit_remediation_unsuccessful_file_modification_detailed {
+	mkdir -p "$(dirname "$1")"
+	# The - option to mark a here document limit string (&lt;&lt;-EOF) suppresses leading tabs (but not spaces) in the output.
+	cat &lt;&lt;-EOF &gt; "$1"
+		## This content is a section of an Audit config snapshot recommended for linux systems that target OSPP compliance.
+		## The following content has been retreived on 2019-03-11 from: https://github.com/linux-audit/audit-userspace/blob/master/rules/30-ospp-v42.rules
+
+		## The purpose of these rules is to meet the requirements for Operating
+		## System Protection Profile (OSPP)v4.2. These rules depends on having
+		## 10-base-config.rules, 11-loginuid.rules, and 43-module-load.rules installed.
+
+		## Unsuccessful file creation (open with O_CREAT)
+		-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b32 -S open -F a1&amp;0100 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b64 -S open -F a1&amp;0100 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;0100 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b32 -S open -F a1&amp;0100 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b64 -S open -F a1&amp;0100 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b32 -S creat -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b64 -S creat -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b32 -S creat -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+		-a always,exit -F arch=b64 -S creat -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-create
+
+		## Unsuccessful file modifications (open for write or truncate)
+		-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b32 -S open -F a1&amp;01003 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b64 -S open -F a1&amp;01003 -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b32 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b64 -S openat,open_by_handle_at -F a2&amp;01003 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b32 -S open -F a1&amp;01003 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b64 -S open -F a1&amp;01003 -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b32 -S truncate,ftruncate -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b64 -S truncate,ftruncate -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b32 -S truncate,ftruncate -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+		-a always,exit -F arch=b64 -S truncate,ftruncate -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-modification
+
+		## Unsuccessful file access (any other opens) This has to go last.
+		-a always,exit -F arch=b32 -S open,creat,truncate,ftruncate,openat,open_by_handle_at -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-access
+		-a always,exit -F arch=b64 -S open,creat,truncate,ftruncate,openat,open_by_handle_at -F exit=-EACCES -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-access
+		-a always,exit -F arch=b32 -S open,creat,truncate,ftruncate,openat,open_by_handle_at -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-access
+		-a always,exit -F arch=b64 -S open,creat,truncate,ftruncate,openat,open_by_handle_at -F exit=-EPERM -F auid&gt;=1000 -F auid!=unset -F key=unsuccesful-access
+	EOF
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_die" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function die</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value># Print a message to stderr and exit the shell
+# $1: The message to print.
+# $2: The error code (optional, default is 1)
+function die {
+	local _message="$1" _rc="${2:-1}"
+	printf '%s\n' "$_message" &gt;&amp;2
+	exit "$_rc"
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_fix_audit_syscall_rule" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function fix_audit_syscall_rule</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value># Function to fix syscall audit rule for given system call. It is
+# based on example audit syscall rule definitions as outlined in
+# /usr/share/doc/audit-2.3.7/stig.rules file provided with the audit
+# package. It will combine multiple system calls belonging to the same
+# syscall group into one audit rule (rather than to create audit rule per
+# different system call) to avoid audit infrastructure performance penalty
+# in the case of 'one-audit-rule-definition-per-one-system-call'. See:
+#
+#   https://www.redhat.com/archives/linux-audit/2014-November/msg00009.html
+#
+# for further details.
+#
+# Expects five arguments (each of them is required) in the form of:
+# * audit tool				tool used to load audit rules,
+# 					either 'auditctl', or 'augenrules
+# * audit rules' pattern		audit rule skeleton for same syscall
+# * syscall group			greatest common string this rule shares
+# 					with other rules from the same group
+# * architecture			architecture this rule is intended for
+# * full form of new rule to add	expected full form of audit rule as to be
+# 					added into audit.rules file
+#
+# Note: The 2-th up to 4-th arguments are used to determine how many existing
+# audit rules will be inspected for resemblance with the new audit rule
+# (5-th argument) the function is going to add. The rule's similarity check
+# is performed to optimize audit.rules definition (merge syscalls of the same
+# group into one rule) to avoid the "single-syscall-per-audit-rule" performance
+# penalty.
+#
+# Example call:
+#
+#	See e.g. 'audit_rules_file_deletion_events.sh' remediation script
+#
+function fix_audit_syscall_rule {
+
+# Load function arguments into local variables
+local tool="$1"
+local pattern="$2"
+local group="$3"
+local arch="$4"
+local full_rule="$5"
+
+# Check sanity of the input
+if [ $# -ne "5" ]
+then
+	echo "Usage: fix_audit_syscall_rule 'tool' 'pattern' 'group' 'arch' 'full rule'"
+	echo "Aborting."
+	exit 1
+fi
+
+# Create a list of audit *.rules files that should be inspected for presence and correctness
+# of a particular audit rule. The scheme is as follows:
+# 
+# -----------------------------------------------------------------------------------------
+#  Tool used to load audit rules | Rule already defined  |  Audit rules file to inspect    |
+# -----------------------------------------------------------------------------------------
+#        auditctl                |     Doesn't matter    |  /etc/audit/audit.rules         |
+# -----------------------------------------------------------------------------------------
+#        augenrules              |          Yes          |  /etc/audit/rules.d/*.rules     |
+#        augenrules              |          No           |  /etc/audit/rules.d/$key.rules  |
+# -----------------------------------------------------------------------------------------
+#
+declare -a files_to_inspect
+
+retval=0
+
+# First check sanity of the specified audit tool
+if [ "$tool" != 'auditctl' ] &amp;&amp; [ "$tool" != 'augenrules' ]
+then
+	echo "Unknown audit rules loading tool: $1. Aborting."
+	echo "Use either 'auditctl' or 'augenrules'!"
+	return 1
+# If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
+# file to the list of files to be inspected
+elif [ "$tool" == 'auditctl' ]
+then
+	files_to_inspect+=('/etc/audit/audit.rules' )
+# If audit tool is 'augenrules', then check if the audit rule is defined
+# If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
+# If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
+elif [ "$tool" == 'augenrules' ]
+then
+	# Extract audit $key from audit rule so we can use it later
+	matches=()
+	key=$(expr "$full_rule" : '.*-k[[:space:]]\([^[:space:]]\+\)' '|' "$full_rule" : '.*-F[[:space:]]key=\([^[:space:]]\+\)')
+	readarray -t matches &lt; &lt;(sed -s -n -e "\;${pattern};!d" -e "/${arch}/!d" -e "/${group}/!d;F" /etc/audit/rules.d/*.rules)
+	if [ $? -ne 0 ]
+	then
+		retval=1
+	fi
+	for match in "${matches[@]}"
+	do
+		files_to_inspect+=("${match}")
+	done
+	# Case when particular rule isn't defined in /etc/audit/rules.d/*.rules yet
+	if [ ${#files_to_inspect[@]} -eq "0" ]
+	then
+		file_to_inspect="/etc/audit/rules.d/$key.rules"
+		files_to_inspect=("$file_to_inspect")
+		if [ ! -e "$file_to_inspect" ]
+		then
+			touch "$file_to_inspect"
+			chmod 0640 "$file_to_inspect"
+		fi
+	fi
+fi
+
+#
+# Indicator that we want to append $full_rule into $audit_file by default
+local append_expected_rule=0
+
+for audit_file in "${files_to_inspect[@]}"
+do
+	# Filter existing $audit_file rules' definitions to select those that:
+	# * follow the rule pattern, and
+	# * meet the hardware architecture requirement, and
+	# * are current syscall group specific
+	readarray -t existing_rules &lt; &lt;(sed -e "\;${pattern};!d" -e "/${arch}/!d" -e "/${group}/!d"  "$audit_file")
+	if [ $? -ne 0 ]
+	then
+		retval=1
+	fi
+
+	# Process rules found case-by-case
+	for rule in "${existing_rules[@]}"
+	do
+		# Found rule is for same arch &amp; key, but differs (e.g. in count of -S arguments)
+		if [ "${rule}" != "${full_rule}" ]
+		then
+			# If so, isolate just '(-S \w)+' substring of that rule
+			rule_syscalls=$(echo "$rule" | grep -o -P '(-S \w+ )+')
+			# Check if list of '-S syscall' arguments of that rule is subset
+			# of '-S syscall' list of expected $full_rule
+			if grep -q -- "$rule_syscalls" &lt;&lt;&lt; "$full_rule"
+			then
+				# Rule is covered (i.e. the list of -S syscalls for this rule is
+				# subset of -S syscalls of $full_rule =&gt; existing rule can be deleted
+				# Thus delete the rule from audit.rules &amp; our array
+				sed -i -e "\;${rule};d" "$audit_file"
+				if [ $? -ne 0 ]
+				then
+					retval=1
+				fi
+				existing_rules=("${existing_rules[@]//$rule/}")
+			else
+				# Rule isn't covered by $full_rule - it besides -S syscall arguments
+				# for this group contains also -S syscall arguments for other syscall
+				# group. Example: '-S lchown -S fchmod -S fchownat' =&gt; group='chown'
+				# since 'lchown' &amp; 'fchownat' share 'chown' substring
+				# Therefore:
+				# * 1) delete the original rule from audit.rules
+				# (original '-S lchown -S fchmod -S fchownat' rule would be deleted)
+				# * 2) delete the -S syscall arguments for this syscall group, but
+				# keep those not belonging to this syscall group
+				# (original '-S lchown -S fchmod -S fchownat' would become '-S fchmod'
+				# * 3) append the modified (filtered) rule again into audit.rules
+				# if the same rule not already present
+				#
+				# 1) Delete the original rule
+				sed -i -e "\;${rule};d" "$audit_file"
+				if [ $? -ne 0 ]
+				then
+					retval=1
+				fi
+
+				# 2) Delete syscalls for this group, but keep those from other groups
+				# Convert current rule syscall's string into array splitting by '-S' delimiter
+				IFS_BKP="$IFS"
+				IFS=$'-S'
+				read -a rule_syscalls_as_array &lt;&lt;&lt; "$rule_syscalls"
+				# Reset IFS back to default
+				IFS="$IFS_BKP"
+				# Splitting by "-S" can't be replaced by the readarray functionality easily
+
+				# Declare new empty string to hold '-S syscall' arguments from other groups
+				new_syscalls_for_rule=''
+				# Walk through existing '-S syscall' arguments
+				for syscall_arg in "${rule_syscalls_as_array[@]}"
+				do
+					# Skip empty $syscall_arg values
+					if [ "$syscall_arg" == '' ]
+					then
+						continue
+					fi
+					# If the '-S syscall' doesn't belong to current group add it to the new list
+					# (together with adding '-S' delimiter back for each of such item found)
+					if grep -q -v -- "$group" &lt;&lt;&lt; "$syscall_arg"
+					then
+						new_syscalls_for_rule="$new_syscalls_for_rule -S $syscall_arg"
+					fi
+				done
+				# Replace original '-S syscall' list with the new one for this rule
+				updated_rule=${rule//$rule_syscalls/$new_syscalls_for_rule}
+				# Squeeze repeated whitespace characters in rule definition (if any) into one
+				updated_rule=$(echo "$updated_rule" | tr -s '[:space:]')
+				# 3) Append the modified / filtered rule again into audit.rules
+				#    (but only in case it's not present yet to prevent duplicate definitions)
+				if ! grep -q -- "$updated_rule" "$audit_file"
+				then
+					echo "$updated_rule" &gt;&gt; "$audit_file"
+				fi
+			fi
+		else
+			# $audit_file already contains the expected rule form for this
+			# architecture &amp; key =&gt; don't insert it second time
+			append_expected_rule=1
+		fi
+	done
+
+	# We deleted all rules that were subset of the expected one for this arch &amp; key.
+	# Also isolated rules containing system calls not from this system calls group.
+	# Now append the expected rule if it's not present in $audit_file yet
+	if [[ ${append_expected_rule} -eq "0" ]]
+	then
+		echo "$full_rule" &gt;&gt; "$audit_file"
+	fi
+done
+
+return $retval
+
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_fix_audit_watch_rule" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function fix_audit_watch_rule</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value># Function to fix audit file system object watch rule for given path:
+# * if rule exists, also verifies the -w bits match the requirements
+# * if rule doesn't exist yet, appends expected rule form to $files_to_inspect
+#   audit rules file, depending on the tool which was used to load audit rules
+#
+# Expects four arguments (each of them is required) in the form of:
+# * audit tool				tool used to load audit rules,
+# 					either 'auditctl', or 'augenrules'
+# * path                        	value of -w audit rule's argument
+# * required access bits        	value of -p audit rule's argument
+# * key                         	value of -k audit rule's argument
+#
+# Example call:
+#
+#       fix_audit_watch_rule "auditctl" "/etc/localtime" "wa" "audit_time_rules"
+#
+function fix_audit_watch_rule {
+
+# Load function arguments into local variables
+local tool="$1"
+local path="$2"
+local required_access_bits="$3"
+local key="$4"
+
+# Check sanity of the input
+if [ $# -ne "4" ]
+then
+	echo "Usage: fix_audit_watch_rule 'tool' 'path' 'bits' 'key'"
+	echo "Aborting."
+	exit 1
+fi
+
+# Create a list of audit *.rules files that should be inspected for presence and correctness
+# of a particular audit rule. The scheme is as follows:
+#
+# -----------------------------------------------------------------------------------------
+# Tool used to load audit rules	| Rule already defined	|  Audit rules file to inspect	  |
+# -----------------------------------------------------------------------------------------
+#	auditctl		|     Doesn't matter	|  /etc/audit/audit.rules	  |
+# -----------------------------------------------------------------------------------------
+# 	augenrules		|          Yes		|  /etc/audit/rules.d/*.rules	  |
+# 	augenrules		|          No		|  /etc/audit/rules.d/$key.rules  |
+# -----------------------------------------------------------------------------------------
+declare -a files_to_inspect
+files_to_inspect=()
+
+# Check sanity of the specified audit tool
+if [ "$tool" != 'auditctl' ] &amp;&amp; [ "$tool" != 'augenrules' ]
+then
+	echo "Unknown audit rules loading tool: $1. Aborting."
+	echo "Use either 'auditctl' or 'augenrules'!"
+	exit 1
+# If the audit tool is 'auditctl', then add '/etc/audit/audit.rules'
+# into the list of files to be inspected
+elif [ "$tool" == 'auditctl' ]
+then
+	files_to_inspect+=('/etc/audit/audit.rules')
+# If the audit is 'augenrules', then check if rule is already defined
+# If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
+# If rule isn't defined, add '/etc/audit/rules.d/$key.rules' to list of files for inspection.
+elif [ "$tool" == 'augenrules' ]
+then
+	readarray -t matches &lt; &lt;(grep -P "[\s]*-w[\s]+$path" /etc/audit/rules.d/*.rules)
+
+	# For each of the matched entries
+	for match in "${matches[@]}"
+	do
+		# Extract filepath from the match
+		rulesd_audit_file=$(echo $match | cut -f1 -d ':')
+		# Append that path into list of files for inspection
+		files_to_inspect+=("$rulesd_audit_file")
+	done
+	# Case when particular audit rule isn't defined yet
+	if [ "${#files_to_inspect[@]}" -eq "0" ]
+	then
+		# Append '/etc/audit/rules.d/$key.rules' into list of files for inspection
+		local key_rule_file="/etc/audit/rules.d/$key.rules"
+		# If the $key.rules file doesn't exist yet, create it with correct permissions
+		if [ ! -e "$key_rule_file" ]
+		then
+			touch "$key_rule_file"
+			chmod 0640 "$key_rule_file"
+		fi
+
+		files_to_inspect+=("$key_rule_file")
+	fi
+fi
+
+# Finally perform the inspection and possible subsequent audit rule
+# correction for each of the files previously identified for inspection
+for audit_rules_file in "${files_to_inspect[@]}"
+do
+
+	# Check if audit watch file system object rule for given path already present
+	if grep -q -P -- "[\s]*-w[\s]+$path" "$audit_rules_file"
+	then
+		# Rule is found =&gt; verify yet if existing rule definition contains
+		# all of the required access type bits
+
+		# Escape slashes in path for use in sed pattern below
+		local esc_path=${path//$'/'/$'\/'}
+		# Define BRE whitespace class shortcut
+		local sp="[[:space:]]"
+		# Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
+		current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+		# Split required access bits string into characters array
+		# (to check bit's presence for one bit at a time)
+		for access_bit in $(echo "$required_access_bits" | grep -o .)
+		do
+			# For each from the required access bits (e.g. 'w', 'a') check
+			# if they are already present in current access bits for rule.
+			# If not, append that bit at the end
+			if ! grep -q "$access_bit" &lt;&lt;&lt; "$current_access_bits"
+			then
+				# Concatenate the existing mask with the missing bit
+				current_access_bits="$current_access_bits$access_bit"
+			fi
+		done
+		# Propagate the updated rule's access bits (original + the required
+		# ones) back into the /etc/audit/audit.rules file for that rule
+		sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+	else
+		# Rule isn't present yet. Append it at the end of $audit_rules_file file
+		# with proper key
+
+		echo "-w $path -p $required_access_bits -k $key" &gt;&gt; "$audit_rules_file"
+	fi
+done
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_include_merge_files_by_lines" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function include_merge_files_by_lines</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value>function include_merge_files_by_lines {
+	:
+}
+
+# 1: Filename of the "master" file
+# 2: Filename of the newly created file
+function create_empty_file_like {
+	local lines_count
+	lines_count=$(cat "$1" | wc -l)
+	for _ in $(seq 1 "$lines_count"); do
+		printf '\n' &gt;&gt; "$2"
+	done
+}
+
+
+# 1: Filename of the "master" file
+# 2: Filename of sample flie
+function second_file_is_same_except_newlines {
+	local lines_of_master lines_of_sample len_of_master line_number i
+	readarray -t lines_of_master &lt; "$1"
+	readarray -t lines_of_sample &lt; "$2"
+
+	len_of_master="${#lines_of_master[@]}"
+	if test "$len_of_master" != "${#lines_of_sample[@]}"; then
+		echo "Files '$1' and '$2' have different number of lines, $len_of_master and ${#lines_of_sample[@]} respectively."
+		return 1
+	fi
+
+	for line_number in $(seq 1 "$len_of_master"); do
+		i=$((line_number - 1))
+		test -n "${lines_of_sample[$i]}" || continue
+		if test "${lines_of_master[$i]}" != "${lines_of_sample[$i]}"; then
+			echo "Line $line_number is different in files '$1' and '$2'."
+			return 1
+		fi
+	done
+}
+
+
+# 1: Filename of the "master" file
+# 2: Filename of sample flie
+# 3: List of indices (1-based, space-separated string)
+function merge_first_lines_to_second_on_indices {
+	local lines_of_master lines_of_sample line_number i
+	test -f "$2" || create_empty_file_like "$1" "$2"
+
+	readarray -t lines_of_master &lt; "$1"
+	readarray -t lines_of_sample &lt; "$2"
+
+	error_msg="$(second_file_is_same_except_newlines "$1" "$2")"
+	if test $? != 0; then
+		echo "Error merging lines into '$2': $error_msg" &gt;&amp;2
+		return 1
+	fi
+
+	for line_number in $3; do
+		i=$((line_number - 1))
+		lines_of_sample[$i]="${lines_of_master[$i]}"
+	done
+
+	printf "%s\n" "${lines_of_sample[@]}" &gt; "$2"
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_include_mount_options_functions" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function include_mount_options_functions</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value>function include_mount_options_functions {
+	:
+}
+
+# $1: type of filesystem
+# $2: new mount point option
+# $3: filesystem of new mount point (used when adding new entry in fstab)
+# $4: mount type of new mount point (used when adding new entry in fstab)
+function ensure_mount_option_for_vfstype {
+        local _vfstype="$1" _new_opt="$2" _filesystem=$3 _type=$4 _vfstype_points=()
+        readarray -t _vfstype_points &lt; &lt;(grep -E "[[:space:]]${_vfstype}[[:space:]]" /etc/fstab | awk '{print $2}')
+
+        for _vfstype_point in "${_vfstype_points[@]}"
+        do
+                ensure_mount_option_in_fstab "$_vfstype_point" "$_new_opt" "$_filesystem" "$_type"
+        done
+}
+
+# $1: mount point
+# $2: new mount point option
+# $3: device or virtual string (used when adding new entry in fstab)
+# $4: mount type of mount point (used when adding new entry in fstab)
+function ensure_mount_option_in_fstab {
+	local _mount_point="$1" _new_opt="$2" _device=$3 _type=$4
+	local _mount_point_match_regexp="" _previous_mount_opts=""
+	_mount_point_match_regexp="$(get_mount_point_regexp "$_mount_point")"
+
+	if [ "$(grep -c "$_mount_point_match_regexp" /etc/fstab)" -eq 0 ]; then
+		# runtime opts without some automatic kernel/userspace-added defaults
+		_previous_mount_opts=$(grep "$_mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
+					| sed -E "s/(rw|defaults|seclabel|${_new_opt})(,|$)//g;s/,$//")
+		[ "$_previous_mount_opts" ] &amp;&amp; _previous_mount_opts+=","
+		echo "${_device} ${_mount_point} ${_type} defaults,${_previous_mount_opts}${_new_opt} 0 0" &gt;&gt; /etc/fstab
+	elif [ "$(grep "$_mount_point_match_regexp" /etc/fstab | grep -c "$_new_opt")" -eq 0 ]; then
+		_previous_mount_opts=$(grep "$_mount_point_match_regexp" /etc/fstab | awk '{print $4}')
+		sed -i "s|\(${_mount_point_match_regexp}.*${_previous_mount_opts}\)|\1,${_new_opt}|" /etc/fstab
+	fi
+}
+
+# $1: mount point
+function get_mount_point_regexp {
+		printf "[[:space:]]%s[[:space:]]" "$1"
+}
+
+# $1: mount point
+function assert_mount_point_in_fstab {
+	local _mount_point_match_regexp
+	_mount_point_match_regexp="$(get_mount_point_regexp "$1")"
+	grep "$_mount_point_match_regexp" -q /etc/fstab \
+		|| { echo "The mount point '$1' is not even in /etc/fstab, so we can't set up mount options" &gt;&amp;2; return 1; }
+}
+
+# $1: mount point
+function remove_defaults_from_fstab_if_overriden {
+	local _mount_point_match_regexp
+	_mount_point_match_regexp="$(get_mount_point_regexp "$1")"
+	if grep "$_mount_point_match_regexp" /etc/fstab | grep -q "defaults,"
+	then
+		sed -i "s|\(${_mount_point_match_regexp}.*\)defaults,|\1|" /etc/fstab
+	fi
+}
+
+# $1: mount point
+function ensure_partition_is_mounted {
+	local _mount_point="$1"
+	mkdir -p "$_mount_point" || return 1
+	if mountpoint -q "$_mount_point"; then
+		mount -o remount --target "$_mount_point"
+	else
+		mount --target "$_mount_point"
+	fi
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_perform_audit_adjtimex_settimeofday_stime_remediation" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function perform_audit_adjtimex_settimeofday_stime_remediation</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value># Function to fix syscall audit rule for given system call. It is
+# based on example audit syscall rule definitions as outlined in
+# /usr/share/doc/audit-2.3.7/stig.rules file provided with the audit
+# package. It will combine multiple system calls belonging to the same
+# syscall group into one audit rule (rather than to create audit rule per
+# different system call) to avoid audit infrastructure performance penalty
+# in the case of 'one-audit-rule-definition-per-one-system-call'. See:
+#
+#   https://www.redhat.com/archives/linux-audit/2014-November/msg00009.html
+#
+# for further details.
+#
+# Expects five arguments (each of them is required) in the form of:
+# * audit tool				tool used to load audit rules,
+# 					either 'auditctl', or 'augenrules
+# * audit rules' pattern		audit rule skeleton for same syscall
+# * syscall group			greatest common string this rule shares
+# 					with other rules from the same group
+# * architecture			architecture this rule is intended for
+# * full form of new rule to add	expected full form of audit rule as to be
+# 					added into audit.rules file
+#
+# Note: The 2-th up to 4-th arguments are used to determine how many existing
+# audit rules will be inspected for resemblance with the new audit rule
+# (5-th argument) the function is going to add. The rule's similarity check
+# is performed to optimize audit.rules definition (merge syscalls of the same
+# group into one rule) to avoid the "single-syscall-per-audit-rule" performance
+# penalty.
+#
+# Example call:
+#
+#	See e.g. 'audit_rules_file_deletion_events.sh' remediation script
+#
+function fix_audit_syscall_rule {
+
+# Load function arguments into local variables
+local tool="$1"
+local pattern="$2"
+local group="$3"
+local arch="$4"
+local full_rule="$5"
+
+# Check sanity of the input
+if [ $# -ne "5" ]
+then
+	echo "Usage: fix_audit_syscall_rule 'tool' 'pattern' 'group' 'arch' 'full rule'"
+	echo "Aborting."
+	exit 1
+fi
+
+# Create a list of audit *.rules files that should be inspected for presence and correctness
+# of a particular audit rule. The scheme is as follows:
+# 
+# -----------------------------------------------------------------------------------------
+#  Tool used to load audit rules | Rule already defined  |  Audit rules file to inspect    |
+# -----------------------------------------------------------------------------------------
+#        auditctl                |     Doesn't matter    |  /etc/audit/audit.rules         |
+# -----------------------------------------------------------------------------------------
+#        augenrules              |          Yes          |  /etc/audit/rules.d/*.rules     |
+#        augenrules              |          No           |  /etc/audit/rules.d/$key.rules  |
+# -----------------------------------------------------------------------------------------
+#
+declare -a files_to_inspect
+
+retval=0
+
+# First check sanity of the specified audit tool
+if [ "$tool" != 'auditctl' ] &amp;&amp; [ "$tool" != 'augenrules' ]
+then
+	echo "Unknown audit rules loading tool: $1. Aborting."
+	echo "Use either 'auditctl' or 'augenrules'!"
+	return 1
+# If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
+# file to the list of files to be inspected
+elif [ "$tool" == 'auditctl' ]
+then
+	files_to_inspect+=('/etc/audit/audit.rules' )
+# If audit tool is 'augenrules', then check if the audit rule is defined
+# If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
+# If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
+elif [ "$tool" == 'augenrules' ]
+then
+	# Extract audit $key from audit rule so we can use it later
+	matches=()
+	key=$(expr "$full_rule" : '.*-k[[:space:]]\([^[:space:]]\+\)' '|' "$full_rule" : '.*-F[[:space:]]key=\([^[:space:]]\+\)')
+	readarray -t matches &lt; &lt;(sed -s -n -e "\;${pattern};!d" -e "/${arch}/!d" -e "/${group}/!d;F" /etc/audit/rules.d/*.rules)
+	if [ $? -ne 0 ]
+	then
+		retval=1
+	fi
+	for match in "${matches[@]}"
+	do
+		files_to_inspect+=("${match}")
+	done
+	# Case when particular rule isn't defined in /etc/audit/rules.d/*.rules yet
+	if [ ${#files_to_inspect[@]} -eq "0" ]
+	then
+		file_to_inspect="/etc/audit/rules.d/$key.rules"
+		files_to_inspect=("$file_to_inspect")
+		if [ ! -e "$file_to_inspect" ]
+		then
+			touch "$file_to_inspect"
+			chmod 0640 "$file_to_inspect"
+		fi
+	fi
+fi
+
+#
+# Indicator that we want to append $full_rule into $audit_file by default
+local append_expected_rule=0
+
+for audit_file in "${files_to_inspect[@]}"
+do
+	# Filter existing $audit_file rules' definitions to select those that:
+	# * follow the rule pattern, and
+	# * meet the hardware architecture requirement, and
+	# * are current syscall group specific
+	readarray -t existing_rules &lt; &lt;(sed -e "\;${pattern};!d" -e "/${arch}/!d" -e "/${group}/!d"  "$audit_file")
+	if [ $? -ne 0 ]
+	then
+		retval=1
+	fi
+
+	# Process rules found case-by-case
+	for rule in "${existing_rules[@]}"
+	do
+		# Found rule is for same arch &amp; key, but differs (e.g. in count of -S arguments)
+		if [ "${rule}" != "${full_rule}" ]
+		then
+			# If so, isolate just '(-S \w)+' substring of that rule
+			rule_syscalls=$(echo "$rule" | grep -o -P '(-S \w+ )+')
+			# Check if list of '-S syscall' arguments of that rule is subset
+			# of '-S syscall' list of expected $full_rule
+			if grep -q -- "$rule_syscalls" &lt;&lt;&lt; "$full_rule"
+			then
+				# Rule is covered (i.e. the list of -S syscalls for this rule is
+				# subset of -S syscalls of $full_rule =&gt; existing rule can be deleted
+				# Thus delete the rule from audit.rules &amp; our array
+				sed -i -e "\;${rule};d" "$audit_file"
+				if [ $? -ne 0 ]
+				then
+					retval=1
+				fi
+				existing_rules=("${existing_rules[@]//$rule/}")
+			else
+				# Rule isn't covered by $full_rule - it besides -S syscall arguments
+				# for this group contains also -S syscall arguments for other syscall
+				# group. Example: '-S lchown -S fchmod -S fchownat' =&gt; group='chown'
+				# since 'lchown' &amp; 'fchownat' share 'chown' substring
+				# Therefore:
+				# * 1) delete the original rule from audit.rules
+				# (original '-S lchown -S fchmod -S fchownat' rule would be deleted)
+				# * 2) delete the -S syscall arguments for this syscall group, but
+				# keep those not belonging to this syscall group
+				# (original '-S lchown -S fchmod -S fchownat' would become '-S fchmod'
+				# * 3) append the modified (filtered) rule again into audit.rules
+				# if the same rule not already present
+				#
+				# 1) Delete the original rule
+				sed -i -e "\;${rule};d" "$audit_file"
+				if [ $? -ne 0 ]
+				then
+					retval=1
+				fi
+
+				# 2) Delete syscalls for this group, but keep those from other groups
+				# Convert current rule syscall's string into array splitting by '-S' delimiter
+				IFS_BKP="$IFS"
+				IFS=$'-S'
+				read -a rule_syscalls_as_array &lt;&lt;&lt; "$rule_syscalls"
+				# Reset IFS back to default
+				IFS="$IFS_BKP"
+				# Splitting by "-S" can't be replaced by the readarray functionality easily
+
+				# Declare new empty string to hold '-S syscall' arguments from other groups
+				new_syscalls_for_rule=''
+				# Walk through existing '-S syscall' arguments
+				for syscall_arg in "${rule_syscalls_as_array[@]}"
+				do
+					# Skip empty $syscall_arg values
+					if [ "$syscall_arg" == '' ]
+					then
+						continue
+					fi
+					# If the '-S syscall' doesn't belong to current group add it to the new list
+					# (together with adding '-S' delimiter back for each of such item found)
+					if grep -q -v -- "$group" &lt;&lt;&lt; "$syscall_arg"
+					then
+						new_syscalls_for_rule="$new_syscalls_for_rule -S $syscall_arg"
+					fi
+				done
+				# Replace original '-S syscall' list with the new one for this rule
+				updated_rule=${rule//$rule_syscalls/$new_syscalls_for_rule}
+				# Squeeze repeated whitespace characters in rule definition (if any) into one
+				updated_rule=$(echo "$updated_rule" | tr -s '[:space:]')
+				# 3) Append the modified / filtered rule again into audit.rules
+				#    (but only in case it's not present yet to prevent duplicate definitions)
+				if ! grep -q -- "$updated_rule" "$audit_file"
+				then
+					echo "$updated_rule" &gt;&gt; "$audit_file"
+				fi
+			fi
+		else
+			# $audit_file already contains the expected rule form for this
+			# architecture &amp; key =&gt; don't insert it second time
+			append_expected_rule=1
+		fi
+	done
+
+	# We deleted all rules that were subset of the expected one for this arch &amp; key.
+	# Also isolated rules containing system calls not from this system calls group.
+	# Now append the expected rule if it's not present in $audit_file yet
+	if [[ ${append_expected_rule} -eq "0" ]]
+	then
+		echo "$full_rule" &gt;&gt; "$audit_file"
+	fi
+done
+
+return $retval
+
+}
+
+
+# Function to perform remediation for the 'adjtimex', 'settimeofday', and 'stime' audit
+# system calls on RHEL, Fedora or OL systems.
+# Remediation performed for both possible tools: 'auditctl' and 'augenrules'.
+#
+# Note: 'stime' system call isn't known at 64-bit arch (see "$ ausyscall x86_64 stime" 's output)
+# therefore excluded from the list of time group system calls to be audited on this arch
+#
+# Example Call:
+#
+#      perform_audit_adjtimex_settimeofday_stime_remediation
+#
+function perform_audit_adjtimex_settimeofday_stime_remediation {
+
+# Retrieve hardware architecture of the underlying system
+[ "$(getconf LONG_BIT)" = "32" ] &amp;&amp; RULE_ARCHS=("b32") || RULE_ARCHS=("b32" "b64")
+
+for ARCH in "${RULE_ARCHS[@]}"
+do
+
+	PATTERN="-a always,exit -F arch=${ARCH} -S .* -k *"
+	# Create expected audit group and audit rule form for particular system call &amp; architecture
+	if [ ${ARCH} = "b32" ]
+	then
+		# stime system call is known at 32-bit arch (see e.g "$ ausyscall i386 stime" 's output)
+		# so append it to the list of time group system calls to be audited
+		GROUP="\(adjtimex\|settimeofday\|stime\)"
+		FULL_RULE="-a always,exit -F arch=${ARCH} -S adjtimex -S settimeofday -S stime -k audit_time_rules"
+	elif [ ${ARCH} = "b64" ]
+	then
+		# stime system call isn't known at 64-bit arch (see "$ ausyscall x86_64 stime" 's output)
+		# therefore don't add it to the list of time group system calls to be audited
+		GROUP="\(adjtimex\|settimeofday\)"
+		FULL_RULE="-a always,exit -F arch=${ARCH} -S adjtimex -S settimeofday -k audit_time_rules"
+	fi
+	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+	fix_audit_syscall_rule "auditctl" "$PATTERN" "$GROUP" "$ARCH" "$FULL_RULE"
+	fix_audit_syscall_rule "augenrules" "$PATTERN" "$GROUP" "$ARCH" "$FULL_RULE"
+done
+
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_perform_audit_rules_privileged_commands_remediation" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function perform_audit_rules_privileged_commands_remediation</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value># Function to perform remediation for 'audit_rules_privileged_commands' rule
+#
+# Expects two arguments:
+#
+# audit_tool		tool used to load audit rules
+# 			One of 'auditctl' or 'augenrules'
+#
+# min_auid		Minimum original ID the user logged in with
+#
+# Example Call(s):
+#
+#      perform_audit_rules_privileged_commands_remediation "auditctl" "500"
+#      perform_audit_rules_privileged_commands_remediation "augenrules"	"1000"
+#
+function perform_audit_rules_privileged_commands_remediation {
+#
+# Load function arguments into local variables
+local tool="$1"
+local min_auid="$2"
+
+# Check sanity of the input
+if [ $# -ne "2" ]
+then
+	echo "Usage: perform_audit_rules_privileged_commands_remediation 'auditctl | augenrules' '500 | 1000'"
+	echo "Aborting."
+	exit 1
+fi
+
+declare -a files_to_inspect=()
+
+# Check sanity of the specified audit tool
+if [ "$tool" != 'auditctl' ] &amp;&amp; [ "$tool" != 'augenrules' ]
+then
+	echo "Unknown audit rules loading tool: $1. Aborting."
+	echo "Use either 'auditctl' or 'augenrules'!"
+	exit 1
+# If the audit tool is 'auditctl', then:
+# * add '/etc/audit/audit.rules'to the list of files to be inspected,
+# * specify '/etc/audit/audit.rules' as the output audit file, where
+#   missing rules should be inserted
+elif [ "$tool" == 'auditctl' ]
+then
+	files_to_inspect=("/etc/audit/audit.rules")
+	output_audit_file="/etc/audit/audit.rules"
+#
+# If the audit tool is 'augenrules', then:
+# * add '/etc/audit/rules.d/*.rules' to the list of files to be inspected
+#   (split by newline),
+# * specify /etc/audit/rules.d/privileged.rules' as the output file, where
+#   missing rules should be inserted
+elif [ "$tool" == 'augenrules' ]
+then
+	readarray -t files_to_inspect &lt; &lt;(find /etc/audit/rules.d -maxdepth 1 -type f -name '*.rules' -print)
+	output_audit_file="/etc/audit/rules.d/privileged.rules"
+fi
+
+# Obtain the list of SUID/SGID binaries on the particular system (split by newline)
+# into privileged_binaries array
+privileged_binaries=()
+readarray -t privileged_binaries &lt; &lt;(find / -xdev -type f -perm -4000 -o -type f -perm -2000 2&gt;/dev/null)
+
+# Keep list of SUID/SGID binaries that have been already handled within some previous iteration
+declare -a sbinaries_to_skip=()
+
+# For each found sbinary in privileged_binaries list
+for sbinary in "${privileged_binaries[@]}"
+do
+
+	# Check if this sbinary wasn't already handled in some of the previous sbinary iterations
+	# Return match only if whole sbinary definition matched (not in the case just prefix matched!!!)
+	if [[ $(sed -ne "\|${sbinary}|p" &lt;&lt;&lt; "${sbinaries_to_skip[*]}") ]]
+	then
+		# If so, don't process it second time &amp; go to process next sbinary
+		continue
+	fi
+
+	# Reset the counter of inspected files when starting to check
+	# presence of existing audit rule for new sbinary
+	local count_of_inspected_files=0
+
+	# Define expected rule form for this binary
+	expected_rule="-a always,exit -F path=${sbinary} -F perm=x -F auid&gt;=${min_auid} -F auid!=unset -k privileged"
+
+	# If list of audit rules files to be inspected is empty, just add new rule and move on to next binary
+	if [[ ${#files_to_inspect[@]} -eq 0 ]]; then
+		echo "$expected_rule" &gt;&gt; "$output_audit_file"
+		continue
+	fi
+
+	# Replace possible slash '/' character in sbinary definition so we could use it in sed expressions below
+	sbinary_esc=${sbinary//$'/'/$'\/'}
+
+	# For each audit rules file from the list of files to be inspected
+	for afile in "${files_to_inspect[@]}"
+	do
+
+		# Search current audit rules file's content for match. Match criteria:
+		# * existing rule is for the same SUID/SGID binary we are currently processing (but
+		#   can contain multiple -F path= elements covering multiple SUID/SGID binaries)
+		# * existing rule contains all arguments from expected rule form (though can contain
+		#   them in arbitrary order)
+	
+		base_search=$(sed -e '/-a always,exit/!d' -e '/-F path='"${sbinary_esc}"'[^[:graph:]]/!d'		\
+				-e '/-F path=[^[:space:]]\+/!d'   -e '/-F perm=.*/!d'						\
+				-e '/-F auid&gt;='"${min_auid}"'/!d' -e '/-F auid!=\(4294967295\|unset\)/!d'	\
+				-e '/-k \|-F key=/!d' "$afile")
+
+		# Increase the count of inspected files for this sbinary
+		count_of_inspected_files=$((count_of_inspected_files + 1))
+
+		# Require execute access type to be set for existing audit rule
+		exec_access='x'
+
+		# Search current audit rules file's content for presence of rule pattern for this sbinary
+		if [[ $base_search ]]
+		then
+
+			# Current audit rules file already contains rule for this binary =&gt;
+			# Store the exact form of found rule for this binary for further processing
+			concrete_rule=$base_search
+
+			# Select all other SUID/SGID binaries possibly also present in the found rule
+
+			readarray -t handled_sbinaries &lt; &lt;(grep -o -e "-F path=[^[:space:]]\+" &lt;&lt;&lt; "$concrete_rule")
+			handled_sbinaries=("${handled_sbinaries[@]//-F path=/}")
+
+			# Merge the list of such SUID/SGID binaries found in this iteration with global list ignoring duplicates
+			readarray -t sbinaries_to_skip &lt; &lt;(for i in "${sbinaries_to_skip[@]}" "${handled_sbinaries[@]}"; do echo "$i"; done | sort -du)
+
+			# Separate concrete_rule into three sections using hash '#'
+			# sign as a delimiter around rule's permission section borders
+			concrete_rule="$(echo "$concrete_rule" | sed -n "s/\(.*\)\+\(-F perm=[rwax]\+\)\+/\1#\2#/p")"
+
+			# Split concrete_rule into head, perm, and tail sections using hash '#' delimiter
+
+			rule_head=$(cut -d '#' -f 1 &lt;&lt;&lt; "$concrete_rule")
+			rule_perm=$(cut -d '#' -f 2 &lt;&lt;&lt; "$concrete_rule")
+			rule_tail=$(cut -d '#' -f 3 &lt;&lt;&lt; "$concrete_rule")
+
+			# Extract already present exact access type [r|w|x|a] from rule's permission section
+			access_type=${rule_perm//-F perm=/}
+
+			# Verify current permission access type(s) for rule contain 'x' (execute) permission
+			if ! grep -q "$exec_access" &lt;&lt;&lt; "$access_type"
+			then
+
+				# If not, append the 'x' (execute) permission to the existing access type bits
+				access_type="$access_type$exec_access"
+				# Reconstruct the permissions section for the rule
+				new_rule_perm="-F perm=$access_type"
+				# Update existing rule in current audit rules file with the new permission section
+				sed -i "s#${rule_head}\(.*\)${rule_tail}#${rule_head}${new_rule_perm}${rule_tail}#" "$afile"
+
+			fi
+
+		# If the required audit rule for particular sbinary wasn't found yet, insert it under following conditions:
+		#
+		# * in the "auditctl" mode of operation insert particular rule each time
+		#   (because in this mode there's only one file -- /etc/audit/audit.rules to be inspected for presence of this rule),
+		#
+		# * in the "augenrules" mode of operation insert particular rule only once and only in case we have already
+		#   searched all of the files from /etc/audit/rules.d/*.rules location (since that audit rule can be defined
+		#   in any of those files and if not, we want it to be inserted only once into /etc/audit/rules.d/privileged.rules file)
+		#
+		elif [ "$tool" == "auditctl" ] || [[ "$tool" == "augenrules" &amp;&amp; $count_of_inspected_files -eq "${#files_to_inspect[@]}" ]]
+		then
+
+			# Check if this sbinary wasn't already handled in some of the previous afile iterations
+			# Return match only if whole sbinary definition matched (not in the case just prefix matched!!!)
+			if [[ ! $(sed -ne "\|${sbinary}|p" &lt;&lt;&lt; "${sbinaries_to_skip[*]}") ]]
+			then
+				# Current audit rules file's content doesn't contain expected rule for this
+				# SUID/SGID binary yet =&gt; append it
+				echo "$expected_rule" &gt;&gt; "$output_audit_file"
+			fi
+
+			continue
+		fi
+
+	done
+
+done
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_populate" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function populate</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value># The populate function isn't directly used by SSG at the moment but it can be 
+# used for testing purposes and will be used in SSG Testsuite in the future.
+
+function populate {
+# code to populate environment variables needed (for unit testing)
+if [ -z "${!1}" ]; then
+	echo "$1 is not defined. Exiting."
+	exit
+fi
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_replace_or_append" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function replace_or_append</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value># Function to replace configuration setting in config file or add the configuration setting if
+# it does not exist.
+#
+# Expects arguments:
+#
+# config_file:		Configuration file that will be modified
+# key:			Configuration option to change
+# value:		Value of the configuration option to change
+# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
+# format:		The printf-like format string that will be given stripped key and value as arguments,
+#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
+#
+# Optional arugments:
+#
+# format:		Optional argument to specify the format of how key/value should be
+# 			modified/appended in the configuration file. The default is key = value.
+#
+# Example Call(s):
+#
+#     With default format of 'key = value':
+#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
+#
+#     With custom key/value format:
+#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
+#
+#     With a variable:
+#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
+#
+function replace_or_append {
+  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
+  local config_file=$1
+  local key=$2
+  local value=$3
+  local cce=$4
+  local format=$5
+
+  if [ "$case_insensitive_mode" = yes ]; then
+    sed_case_insensitive_option="i"
+    grep_case_insensitive_option="-i"
+  fi
+  [ -n "$format" ] || format="$default_format"
+  # Check sanity of the input
+  [ $# -ge "3" ] || { echo "Usage: replace_or_append &lt;config_file_location&gt; &lt;key_to_search&gt; &lt;new_value&gt; [&lt;CCE number or literal '@CCENUM@' if unknown&gt;] [printf-like format, default is '$default_format']" &gt;&amp;2; exit 1; }
+
+  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+  # Otherwise, regular sed command will do.
+  sed_command=('sed' '-i')
+  if test -L "$config_file"; then
+    sed_command+=('--follow-symlinks')
+  fi
+
+  # Test that the cce arg is not empty or does not equal @CCENUM@.
+  # If @CCENUM@ exists, it means that there is no CCE assigned.
+  if [ -n "$cce" ] &amp;&amp; [ "$cce" != '@CCENUM@' ]; then
+    cce="${cce}"
+  else
+    cce="CCE"
+  fi
+
+  # Strip any search characters in the key arg so that the key can be replaced without
+  # adding any search characters to the config file.
+  stripped_key=$(sed 's/[\^=\$,;+]*//g' &lt;&lt;&lt; "$key")
+
+  # shellcheck disable=SC2059
+  printf -v formatted_output "$format" "$stripped_key" "$value"
+
+  # If the key exists, change it. Otherwise, add it to the config_file.
+  # We search for the key string followed by a word boundary (matched by \&gt;),
+  # so if we search for 'setting', 'setting2' won't match.
+  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\&gt;" "$config_file"; then
+    "${sed_command[@]}" "s/${key}\\&gt;.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
+  else
+    # \n is precaution for case where file ends without trailing newline
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" &gt;&gt; "$config_file"
+    printf '%s\n' "$formatted_output" &gt;&gt; "$config_file"
+  fi
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+        <xccdf-1.2:Value id="xccdf_org.ssgproject.content_value_function_set_faillock_option_to_value_in_pam_file" hidden="true" prohibitChanges="true" operator="equals" type="string">
+          <xccdf-1.2:title xml:lang="en-US">Remediation function set_faillock_option_to_value_in_pam_file</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Shared bash remediation function. Not intended to be changed by tailoring.</xccdf-1.2:description>
+          <xccdf-1.2:value>function set_faillock_option_to_value_in_pam_file {
+	# If invoked with no arguments, exit. This is an intentional behavior.
+	[ $# -gt 1 ] || return 0
+	[ $# -ge 3 ] || die "$0 requires exactly zero, three, or four arguments"
+	[ $# -le 4 ] || die "$0 requires exactly zero, three, or four arguments"
+	local _pamFile="$1" _option="$2" _value="$3" _insert_lines_callback="$4"
+	# pam_faillock.so already present?
+	if grep -q "^auth.*pam_faillock.so.*" "$_pamFile"; then
+
+		# pam_faillock.so present, is the option present?
+		if grep -q "^auth.*[default=die].*pam_faillock.so.*authfail.*$_option=" "$_pamFile"; then
+
+			# both pam_faillock.so &amp; option present, just correct option to the right value
+			sed -i --follow-symlinks "s/\(^auth.*required.*pam_faillock.so.*preauth.*silent.*\)\($_option *= *\).*/\1\2$_value/" "$_pamFile"
+			sed -i --follow-symlinks "s/\(^auth.*[default=die].*pam_faillock.so.*authfail.*\)\($_option *= *\).*/\1\2$_value/" "$_pamFile"
+
+		# pam_faillock.so present, but the option not yet
+		else
+
+			# append correct option value to appropriate places
+			sed -i --follow-symlinks "/^auth.*required.*pam_faillock.so.*preauth.*silent.*/ s/$/ $_option=$_value/" "$_pamFile"
+			sed -i --follow-symlinks "/^auth.*[default=die].*pam_faillock.so.*authfail.*/ s/$/ $_option=$_value/" "$_pamFile"
+		fi
+
+	# pam_faillock.so not present yet
+	else
+		test -z "$_insert_lines_callback" || "$_insert_lines_callback" "$_option" "$_value" "$_pamFile"
+		# insert pam_faillock.so preauth &amp; authfail rows with proper value of the option in question
+	fi
+}</xccdf-1.2:value>
+        </xccdf-1.2:Value>
+      </xccdf-1.2:Group>
+      <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_services">
+        <xccdf-1.2:title xml:lang="en-US">Services</xccdf-1.2:title>
+        <xccdf-1.2:description xml:lang="en-US">The best protection against vulnerable software is running less software. This section describes how to review
+the software which Apple macOS 10.15 installs on a system and disable software which is not needed. It
+then enumerates the software packages installed on a default Apple macOS 10.15 system and provides guidance about which
+ones can be safely disabled.
+<html:br/><html:br/>
+Apple macOS 10.15 provides a convenient minimal install option that essentially installs the bare necessities for a functional
+system. When building Apple macOS 10.15 systems, it is highly recommended to select the minimal packages and then build up
+the system from there.</xccdf-1.2:description>
+      </xccdf-1.2:Group>
+      <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_intro">
+        <xccdf-1.2:title xml:lang="en-US">Introduction</xccdf-1.2:title>
+        <xccdf-1.2:description xml:lang="en-US">The purpose of this guidance is to provide security configuration
+recommendations and baselines for the Apple macOS 10.15 operating
+system. Recommended settings for the basic operating system are provided,
+as well as for many network services that the system can provide to other systems.
+The guide is intended for system administrators. Readers are assumed to
+possess basic system administration skills for Unix-like systems, as well
+as some familiarity with the product's documentation and administration
+conventions. Some instructions within this guide are complex.
+All directions should be followed completely and with understanding of
+their effects in order to avoid serious adverse effects on the system
+and its security.</xccdf-1.2:description>
+        <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_how-to-use">
+          <xccdf-1.2:title xml:lang="en-US">How to Use This Guide</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">Readers should heed the following points when using the guide.</xccdf-1.2:description>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_intro-root-shell-assumed">
+            <xccdf-1.2:title xml:lang="en-US">Root Shell Environment Assumed</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">Most of the actions listed in this document are written with the
+assumption that they will be executed by the root user running the
+<html:code>/bin/bash</html:code> shell. Commands preceded with a hash mark (#)
+assume that the administrator will execute the commands as root, i.e.
+apply the command via <html:code>sudo</html:code> whenever possible, or use
+<html:code>su</html:code> to gain root privileges if <html:code>sudo</html:code> cannot be
+used. Commands which can be executed as a non-root user are are preceded
+by a dollar sign ($) prompt.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_intro-formatting-conventions">
+            <xccdf-1.2:title xml:lang="en-US">Formatting Conventions</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">Commands intended for shell execution, as well as configuration file text,
+are featured in a <html:code>monospace font</html:code>. <html:i>Italics</html:i> are used
+to indicate instances where the system administrator must substitute
+the appropriate information into a command or configuration file.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_intro-reboot-required">
+            <xccdf-1.2:title xml:lang="en-US">Reboot Required</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">A system reboot is implicitly required after some actions in order to
+complete the reconfiguration of the system. In many cases, the changes
+will not take effect until a reboot is performed. In order to ensure
+that changes are applied properly and to test functionality, always
+reboot the system after applying a set of recommendations from this guide.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_intro-test-non-production">
+            <xccdf-1.2:title xml:lang="en-US">Test in Non-Production Environment</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">This guidance should always be tested in a non-production environment
+before deployment. This test environment should simulate the setup in
+which the system will be deployed as closely as possible.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_intro-read-sections-completely">
+            <xccdf-1.2:title xml:lang="en-US">Read Sections Completely and in Order</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">Each section may build on information and recommendations discussed in
+prior sections. Each section should be read and understood completely;
+instructions should never be blindly applied. Relevant discussion may
+occur after instructions for an action.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+        </xccdf-1.2:Group>
+        <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_general-principles">
+          <xccdf-1.2:title xml:lang="en-US">General Principles</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">The following general principles motivate much of the advice in this
+guide and should also influence any configuration decisions that are
+not explicitly covered.</xccdf-1.2:description>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_principle-minimize-software">
+            <xccdf-1.2:title xml:lang="en-US">Minimize Software to Minimize Vulnerability</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">The simplest way to avoid vulnerabilities in software is to avoid
+installing that software. Apple macOS 10.15
+allows for careful management of
+the set of software packages installed on a system. Installed software
+contributes to system vulnerability in several ways. Packages that
+include setuid programs may provide local attackers a potential path to
+privilege escalation. Packages that include network services may give
+this opportunity to network-based attackers. Packages that include
+programs which are predictably executed by local users (e.g. after
+graphical login) may provide opportunities for trojan horses or other
+attack code to be run undetected. The number of software packages
+installed on a system can almost always be significantly pruned to include
+only the software for which there is an environmental or operational need.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_principle-encrypt-transmitted-data">
+            <xccdf-1.2:title xml:lang="en-US">Encrypt Transmitted Data Whenever Possible</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">Data transmitted over a network, whether wired or wireless, is susceptible
+to passive monitoring. Whenever practical solutions for encrypting
+such data exist, they should be applied. Even if data is expected to
+be transmitted only over a local network, it should still be encrypted.
+Encrypting authentication data, such as passwords, is particularly
+important. Networks of Apple macOS 10.15 machines can and should be configured
+so that no unencrypted authentication data is ever transmitted between
+machines.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_principle-use-security-tools">
+            <xccdf-1.2:title xml:lang="en-US">Configure Security Tools to Improve System Robustness</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">Several tools exist which can be effectively used to improve a system's
+resistance to and detection of unknown attacks. These tools can improve
+robustness against attack at the cost of relatively little configuration
+effort. In particular, this guide recommends and discusses the use of
+host-based firewalling, a logging, and auditing infrastructure for
+detection of problems.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_principle-least-privilege">
+            <xccdf-1.2:title xml:lang="en-US">Least Privilege</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">Grant the least privilege necessary for user accounts and software to perform tasks.
+For example, <html:code>sudo</html:code> can be implemented to limit authorization to super user
+accounts on the system only to designated personnel. Another example is to limit
+logins on server systems to only those administrators who need to log into them in
+order to perform administration tasks.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+          <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_principle-separate-servers">
+            <xccdf-1.2:title xml:lang="en-US">Run Different Network Services on Separate Systems</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">Whenever possible, a server should be dedicated to serving exactly one
+network service. This limits the number of other services that can
+be compromised in the event that an attacker is able to successfully
+exploit a software flaw in one network service.</xccdf-1.2:description>
+          </xccdf-1.2:Group>
+        </xccdf-1.2:Group>
+      </xccdf-1.2:Group>
+      <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_auditing">
+        <xccdf-1.2:title xml:lang="en-US">System Accounting with audit</xccdf-1.2:title>
+        <xccdf-1.2:description xml:lang="en-US">The Basic Security Module (BSM) security audit API and file format is Apple's
+auditing system. The audit() function submits a record to the kernel for inclusion in the
+global audit trail. The record must already be in BSM format. To protect
+the integrity of the audit trail, this system call must be made with sufficient
+privileges. Libbsm can be used to create and manipulate BSM data. Length
+is the length in bytes of the BSM record and record points to the data.
+The audit service provides substantial capabilities for recording system
+activities. Secure networks often have substantial auditing
+requirements, and <html:code>auditd</html:code> can be configured to meet these
+requirements.</xccdf-1.2:description>
+        <xccdf-1.2:Rule id="xccdf_org.ssgproject.content_rule_service_auditd_enabled" selected="false" severity="high">
+          <xccdf-1.2:title xml:lang="en-US">Enable audit Service</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">The <html:code>audit</html:code> service is an essential userspace component of
+the auditing system, as it is responsible for writing audit records to
+disk.</xccdf-1.2:description>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-000130</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-000131</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-000132</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-000133</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-000134</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-000135</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-000159</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-001464</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-001487</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-001889</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-001890</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-001914</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-002130</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-3</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-3(1)</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-8(a)</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-8(b)</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-12(3)</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-14(1)</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000037-GPOS-00015</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000038-GPOS-00016</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000039-GPOS-00017</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000040-GPOS-00018</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000041-GPOS-00019</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000042-GPOS-00020</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000042-GPOS-00021</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000055-GPOS-00026</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000254-GPOS-00095</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000255-GPOS-00096</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000303-GPOS-00120</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000337-GPOS-00129</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000358-GPOS-00145</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000359-GPOS-00146</xccdf-1.2:reference>
+          <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux">AOSX-14-001013</xccdf-1.2:reference>
+          <xccdf-1.2:rationale xml:lang="en-US">Without establishing what type of events occurred, when they
+occurred, and by whom, it would be difficult to establish, correlate,
+and investigate the events leading up to an outage or attack.
+<html:br/><html:br/>
+Audit record content that may be necessary to satisfy this requirement
+includes, for example, time stamps, source and destination addresses,
+user/process identifiers, event descriptions, success/fail indications,
+filenames involved, and access control or flow control rules invoked.
+<html:br/><html:br/>
+Associating event types with detected events in the operating system
+audit logs provides a means of investigating an attack, recognizing
+resource utilization or capacity thresholds, or identifying an
+improperly configured operating system.  </xccdf-1.2:rationale>
+          <xccdf-1.2:fix id="service_auditd_enabled" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">
+launchctl load -w /System/Library/LaunchDaemons/com.apple.auditd.plist
+</xccdf-1.2:fix>
+          <xccdf-1.2:check system="http://scap.nist.gov/schema/ocil/2">
+            <xccdf-1.2:check-content-ref name="ocil:ssg-service_auditd_enabled_ocil:questionnaire:1" href="ssg-macos1015-ocil.xml"/>
+          </xccdf-1.2:check>
+        </xccdf-1.2:Rule>
+        <xccdf-1.2:Group id="xccdf_org.ssgproject.content_group_configure_auditing">
+          <xccdf-1.2:title xml:lang="en-US">Configure auditd</xccdf-1.2:title>
+          <xccdf-1.2:description xml:lang="en-US">The <html:code>auditd</html:code> program can perform comprehensive
+monitoring of system activity. This section describes recommended
+configuration settings for comprehensive auditing, but a full
+description of the auditing system's capabilities is beyond the
+scope of this guide.</xccdf-1.2:description>
+          <xccdf-1.2:Rule id="xccdf_org.ssgproject.content_rule_audit_failure_halt" selected="false" severity="medium">
+            <xccdf-1.2:title xml:lang="en-US">Shutdown System When Auditing Failures Occur</xccdf-1.2:title>
+            <xccdf-1.2:description xml:lang="en-US">The macOS system must shut down by default upon audit
+failure unless availability is an overriding concern.</xccdf-1.2:description>
+            <xccdf-1.2:reference href="https://public.cyber.mil/stigs/cci/">CCI-000140</xccdf-1.2:reference>
+            <xccdf-1.2:reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-5(b)</xccdf-1.2:reference>
+            <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cgeneral-purpose-os">SRG-OS-000047-GPOS-00023</xccdf-1.2:reference>
+            <xccdf-1.2:reference href="https://public.cyber.mil/stigs/downloads/?_dl_facet_stigs=operating-systems%2Cunix-linux">AOSX-14-001010</xccdf-1.2:reference>
+            <xccdf-1.2:rationale xml:lang="en-US">The audit service should shut down the computer if it 
+is unable to audit system events. Once audit failure
+occurs, user and system activity is no longer recorded
+and malicious activity could go undetected. Audit
+processing failures include software/hardware errors,
+failures in the audit capturing mechanisms, and audit
+storage capacity being reached or exceeded. Responses
+to audit failure depend on the nature of the failure
+mode.</xccdf-1.2:rationale>
+            <xccdf-1.2:fix id="audit_failure_halt" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">
+/usr/bin/sed -i.bak '/^policy/ s/$/,ahlt/' /etc/security/audit_control; sudo /usr/sbin/audit -s
+</xccdf-1.2:fix>
+            <xccdf-1.2:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+              <xccdf-1.2:check-content-ref name="oval:ssg-audit_failure_halt:def:1" href="ssg-macos1015-oval.xml"/>
+            </xccdf-1.2:check>
+            <xccdf-1.2:check system="http://scap.nist.gov/schema/ocil/2">
+              <xccdf-1.2:check-content-ref name="ocil:ssg-audit_failure_halt_ocil:questionnaire:1" href="ssg-macos1015-ocil.xml"/>
+            </xccdf-1.2:check>
+          </xccdf-1.2:Rule>
+        </xccdf-1.2:Group>
+      </xccdf-1.2:Group>
+    </xccdf-1.2:Benchmark>
+  </ds:component>
+  <ds:component id="scap_org.open-scap_comp_ssg-macos1015-cpe-oval.xml" timestamp="2020-09-18T05:58:14">
+    <oval-def:oval_definitions xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5#linux linux-definitions-schema.xsd">
+      <oval-def:generator>
+        <oval:product_name>combine_ovals.py from SCAP Security Guide</oval:product_name>
+        <oval:product_version>ssg: [0, 1, 52], python: 3.8.5</oval:product_version>
+        <oval:schema_version>5.11</oval:schema_version>
+        <oval:timestamp>2020-09-18T09:58:12</oval:timestamp>
+      </oval-def:generator>
+      <oval-def:definitions>
+        <oval-def:definition class="inventory" id="oval:ssg-installed_OS_is_macos1015:def:1" version="1">
+          <oval-def:metadata>
+            <oval-def:title>Apple macOS 10.15</oval-def:title>
+            <oval-def:affected family="unix">
+              <oval-def:platform>Apple macOS 10.15</oval-def:platform>
+            </oval-def:affected>
+            <oval-def:reference ref_id="cpe:/o:apple:macos:10.15" source="CPE"/>
+            <oval-def:description>The operating system installed on the system is
+      Apple macOS 10.15</oval-def:description>
+          </oval-def:metadata>
+          <oval-def:criteria>
+            <oval-def:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_macos1015_macos_family:tst:1"/>
+            <oval-def:criterion comment="macOS 10.15 is installed" test_ref="oval:ssg-test_macos1015:tst:1"/>
+          </oval-def:criteria>
+        </oval-def:definition>
+      </oval-def:definitions>
+      <oval-def:tests>
+        <ind:family_test check="all" check_existence="at_least_one_exists" comment="installed OS part of macos family" id="oval:ssg-test_macos1015_macos_family:tst:1" version="1">
+          <ind:object object_ref="oval:ssg-obj_macos1015_macos_family:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_macos1015_macos_family:ste:1"/>
+        </ind:family_test>
+        <ind:textfilecontent54_test check="all" check_existence="at_least_one_exists" comment="redhat-release is version 8" id="oval:ssg-test_macos1015:tst:1" version="1">
+          <ind:object object_ref="oval:ssg-obj_macos1015:obj:1"/>
+          <ind:state state_ref="oval:ssg-state_macos1015:ste:1"/>
+        </ind:textfilecontent54_test>
+      </oval-def:tests>
+      <oval-def:objects>
+        <ind:family_object id="oval:ssg-obj_macos1015_macos_family:obj:1" version="1"/>
+        <ind:textfilecontent54_object id="oval:ssg-obj_macos1015:obj:1" version="1">
+          <ind:filepath>/System/Library/CoreServices/SystemVersion.plist</ind:filepath>
+          <ind:pattern operation="pattern match">^.*&lt;string\&gt;(\d+\.\d+).*$</ind:pattern>
+          <ind:instance operation="equals" datatype="int">1</ind:instance>
+        </ind:textfilecontent54_object>
+      </oval-def:objects>
+      <oval-def:states>
+        <ind:family_state id="oval:ssg-state_macos1015_macos_family:ste:1" version="1">
+          <ind:family>macos</ind:family>
+        </ind:family_state>
+        <ind:textfilecontent54_state id="oval:ssg-state_macos1015:ste:1" version="1">
+          <ind:subexpression operation="pattern match">10.15</ind:subexpression>
+        </ind:textfilecontent54_state>
+      </oval-def:states>
+    </oval-def:oval_definitions>
+  </ds:component>
+  <ds:component id="scap_org.open-scap_comp_ssg-macos1015-cpe-dictionary.xml" timestamp="2020-09-18T05:58:14">
+    <cpe-dict:cpe-list xsi:schemaLocation="http://cpe.mitre.org/dictionary/2.0 http://cpe.mitre.org/files/cpe-dictionary_2.1.xsd">
+      <cpe-dict:cpe-item name="cpe:/o:apple:macos:10.15">
+        <cpe-dict:title xml:lang="en-us">Apple macOS 10.15</cpe-dict:title>
+        <cpe-dict:check system="http://oval.mitre.org/XMLSchema/oval-definitions-5" href="ssg-macos1015-cpe-oval.xml">oval:ssg-installed_OS_is_macos1015:def:1</cpe-dict:check>
+      </cpe-dict:cpe-item>
+    </cpe-dict:cpe-list>
+  </ds:component>
+</ds:data-stream-collection>

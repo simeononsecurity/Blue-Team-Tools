@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} 
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<h2>References for product ocp4</h2>
+
+<ul>
+<li class="collapsible">cis</li>
+  <ul class="content">
+  <li class="collapsible">1.1.1</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_kube_apiserver<span class="tooltiptext">Verify Permissions on the Kube API Server Pod Specification File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.10</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_openvswitch<span class="tooltiptext">Verify Group Who Owns The OpenShift Open vSwitch Files</span></div></li>
+    <li><div class="tooltip">file_owner_openvswitch<span class="tooltiptext">Verify User Who Owns The OpenShift Open vSwitch Files</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.11</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_var_lib_etcd<span class="tooltiptext">The OpenShift etcd Data Directory Must Have Mode 0700</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.12</li>
+    <ul class="content">
+    <li><div class="tooltip">file_owner_var_lib_etcd<span class="tooltiptext">Verify User Who Owns The OpenShift etcd Data Directory</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.13</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_kubeconfig<span class="tooltiptext">Verify Permissions on the OpenShift Admin Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.14</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_kubeconfig<span class="tooltiptext">Verify Group Who Owns The OpenShift Admin Kubeconfig File</span></div></li>
+    <li><div class="tooltip">file_owner_kubeconfig<span class="tooltiptext">Verify User Who Owns The OpenShift Admin Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.15</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_scheduler_kubeconfig<span class="tooltiptext">Verify Permissions on the OpenShift Scheduler Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.16</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_scheduler_kubeconfig<span class="tooltiptext">Verify Group Who Owns The OpenShift Scheduler Kubeconfig File</span></div></li>
+    <li><div class="tooltip">file_owner_scheduler_kubeconfig<span class="tooltiptext">Verify User Who Owns The OpenShift Scheduler Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.17</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_controller_manager_kubeconfig<span class="tooltiptext">Verify Permissions on the OpenShift Controller Manager Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.18</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_controller_manager_kubeconfig<span class="tooltiptext">Verify Group Who Owns The OpenShift Controller Manager Kubeconfig File</span></div></li>
+    <li><div class="tooltip">file_owner_controller_manager_kubeconfig<span class="tooltiptext">Verify User Who Owns The OpenShift Controller Manager Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.2</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_kube_apiserver<span class="tooltiptext">Verify Group Who Owns The Kube API Server Pod Specification File</span></div></li>
+    <li><div class="tooltip">file_owner_kube_apiserver<span class="tooltiptext">Verify User Who Owns The Kube API Server Pod Specification File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.3</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_kube_controller_manager<span class="tooltiptext">Verify Permissions on the Kube Controller Manager Pod Specificiation File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.4</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_kube_controller_manager<span class="tooltiptext">Verify Group Who Owns The Kube Controller Manager Pod Specificiation File</span></div></li>
+    <li><div class="tooltip">file_owner_kube_controller_manager<span class="tooltiptext">Verify User Who Owns The Kube Controller Manager Pod Specificiation File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.5</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_kube_scheduler<span class="tooltiptext">Verify Permissions on the Kube Scheduler Pod Specification File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.6</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_kube_scheduler<span class="tooltiptext">Verify Group Who Owns The Kube Scheduler Pod Specification File</span></div></li>
+    <li><div class="tooltip">file_owner_kube_scheduler<span class="tooltiptext">Verify User Who Owns The Kube Scheduler Pod Specification File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.7</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_etcd_member<span class="tooltiptext">Verify Permissions on the ETCD Member Pod Specification File</span></div></li>
+    </ul>
+  <li class="collapsible">1.1.8</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_etcd_member<span class="tooltiptext">Verify Group Who Owns The ETCD Member Pod Specification File</span></div></li>
+    <li><div class="tooltip">file_owner_etcd_member<span class="tooltiptext">Verify User Who Owns The ETCD Member Pod Specification File</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.1</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_anonymous_auth<span class="tooltiptext">Disable Anonymous Authentication to the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.10</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_admission_control_plugin_EventRateLimit<span class="tooltiptext">Enable the EventRateLimit Admission Control Plugin</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.11</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_admission_control_plugin_AlwaysAdmit<span class="tooltiptext">Disable the AlwaysAdmit Admission Control Plugin</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.12</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_admission_control_plugin_AlwaysPullImages<span class="tooltiptext">Enable the AlwaysPullImages Admission Control Plugin</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.13</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_admission_control_plugin_SecurityContextDeny<span class="tooltiptext">Enable the SecurityContextDeny Admission Control Plugin</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.14</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_admission_control_plugin_ServiceAccount<span class="tooltiptext">Enable the ServiceAccount Admission Control Plugin</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.15</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_admission_control_plugin_NamespaceLifecycle<span class="tooltiptext">Enable the NamespaceLifecyle Admission Control Plugin</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.16</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_admission_control_plugin_PodSecurityPolicy<span class="tooltiptext">Enable the PodSecurityPolicy Admission Control Plugin</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.17</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_admission_control_plugin_NodeRestriction<span class="tooltiptext">Enable the NodeRestriction Admission Control Plugin</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.18</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_insecure_bind_address<span class="tooltiptext">Disable Use of the Insecure Bind Address</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.19</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_insecure_port<span class="tooltiptext">Prevent Insecure Port Access</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.2</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_basic_auth<span class="tooltiptext">Disable basic-auth-file for the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.20</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_secure_port<span class="tooltiptext">Enable the Secure Port for the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.21</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_profiling<span class="tooltiptext">Disable Profiling on the API server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.22</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_audit_log_path<span class="tooltiptext">Configure the Audit Log Path</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.23</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_audit_log_maxage<span class="tooltiptext">Configure the Audit Log Maximum Retention Days (maximumFileRetentionDays)</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.24</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_audit_log_maxbackup<span class="tooltiptext">Configure the Maximum Retained Audit Logs</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.25</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_audit_log_maxsize<span class="tooltiptext">Configure Maximum Audit Log Size</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.26</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_request_timeout<span class="tooltiptext">Configure the API Server Request Timeout</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.28</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_service_account_public_key<span class="tooltiptext">Configure the Service Account Public Key for the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.29</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_etcd_cert<span class="tooltiptext">Configure the etcd Certificate for the API Server</span></div></li>
+    <li><div class="tooltip">api_server_etcd_key<span class="tooltiptext">Configure the etcd Certificate Key for the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.3</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_token_auth<span class="tooltiptext">Disable Token-based Authentication</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.30</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_tls_cert<span class="tooltiptext">Configure the Certificate for the API Server</span></div></li>
+    <li><div class="tooltip">api_server_tls_private_key<span class="tooltiptext">Configure the Certificate Key for the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.31</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_client_ca<span class="tooltiptext">Configure the Client Certificate Authority for the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.32</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_etcd_ca<span class="tooltiptext">Configure the etcd Certificate Authority for the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.33</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_encryption_provider_config<span class="tooltiptext">Configure the Encryption Provider</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.34</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_encryption_provider_cipher<span class="tooltiptext">Configure the Encryption Provider Cipher</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.35</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_tls_cipher_suites<span class="tooltiptext">Use Strong Cryptographic Ciphers on the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.4</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_kubelet_https<span class="tooltiptext">Enable kubelet HTTPS connections to the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.5</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_kubelet_client_cert<span class="tooltiptext">Configure the kubelet Certificate File for the API Server</span></div></li>
+    <li><div class="tooltip">api_server_kubelet_client_key<span class="tooltiptext">Configure the kubelet Certificate Key for the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.6</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_kubelet_certificate_authority<span class="tooltiptext">Configure the kubelet Certificate Authority for the API Server</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.7</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_authorization_mode<span class="tooltiptext">Ensure API Server authorization-mode is set to Webhook</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.8</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_authorization_mode<span class="tooltiptext">Ensure API Server authorization-mode is set to Webhook</span></div></li>
+    </ul>
+  <li class="collapsible">1.2.9</li>
+    <ul class="content">
+    <li><div class="tooltip">api_server_authorization_mode<span class="tooltiptext">Ensure API Server authorization-mode is set to Webhook</span></div></li>
+    </ul>
+  <li class="collapsible">1.3.3</li>
+    <ul class="content">
+    <li><div class="tooltip">controller_use_service_account<span class="tooltiptext">Ensure that the --use-service-account-credentials argument is set</span></div></li>
+    </ul>
+  <li class="collapsible">1.3.4</li>
+    <ul class="content">
+    <li><div class="tooltip">controller_service_account_private_key<span class="tooltiptext">Configure the Service Account Private Key for the Controller Manager</span></div></li>
+    </ul>
+  <li class="collapsible">1.3.5</li>
+    <ul class="content">
+    <li><div class="tooltip">controller_service_account_ca<span class="tooltiptext">Configure the Service Account Certificate Authority Key for the Controller Manager</span></div></li>
+    </ul>
+  <li class="collapsible">1.3.6</li>
+    <ul class="content">
+    <li><div class="tooltip">controller_rotate_kubelet_server_certs<span class="tooltiptext">Ensure that the RotateKubeletServerCertificate argument is set</span></div></li>
+    </ul>
+  <li class="collapsible">1.3.7</li>
+    <ul class="content">
+    <li><div class="tooltip">controller_bind_address<span class="tooltiptext">Ensure Controller bind-address argument is set</span></div></li>
+    </ul>
+  <li class="collapsible">1.4.1</li>
+    <ul class="content">
+    <li><div class="tooltip">scheduler_profiling_argument<span class="tooltiptext">Disable Scheduler Profiling</span></div></li>
+    </ul>
+  <li class="collapsible">1.4.10</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_cni_conf<span class="tooltiptext">Verify Group Who Owns The OpenShift Container Network Interface Files</span></div></li>
+    <li><div class="tooltip">file_owner_cni_conf<span class="tooltiptext">Verify User Who Owns The OpenShift Container Network Interface Files</span></div></li>
+    </ul>
+  <li class="collapsible">1.4.9</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_cni_conf<span class="tooltiptext">Verify Permissions on the OpenShift Container Network Interface Files</span></div></li>
+    <li><div class="tooltip">file_permissions_openvswitch<span class="tooltiptext">Verify Permissions on the OpenShift Open vSwitch Files</span></div></li>
+    </ul>
+  <li class="collapsible">2.1</li>
+    <ul class="content">
+    <li><div class="tooltip">etcd_cert_file<span class="tooltiptext">Ensure That The etcd Client Certificate Is Correctly Set</span></div></li>
+    <li><div class="tooltip">etcd_key_file<span class="tooltiptext">Ensure That The etcd Key File Is Correctly Set</span></div></li>
+    </ul>
+  <li class="collapsible">2.2</li>
+    <ul class="content">
+    <li><div class="tooltip">etcd_client_cert_auth<span class="tooltiptext">Enable The Client Certificate Authentication</span></div></li>
+    </ul>
+  <li class="collapsible">2.3</li>
+    <ul class="content">
+    <li><div class="tooltip">etcd_auto_tls<span class="tooltiptext">Disable etcd Self-Signed Certificates</span></div></li>
+    </ul>
+  <li class="collapsible">2.4</li>
+    <ul class="content">
+    <li><div class="tooltip">etcd_peer_cert_file<span class="tooltiptext">Ensure That The etcd Peer Client Certificate Is Correctly Set</span></div></li>
+    <li><div class="tooltip">etcd_peer_key_file<span class="tooltiptext">Ensure That The etcd Peer Key File Is Correctly Set</span></div></li>
+    </ul>
+  <li class="collapsible">2.5</li>
+    <ul class="content">
+    <li><div class="tooltip">etcd_peer_client_cert_auth<span class="tooltiptext">Enable The Peer Client Certificate Authentication</span></div></li>
+    </ul>
+  <li class="collapsible">2.6</li>
+    <ul class="content">
+    <li><div class="tooltip">etcd_peer_auto_tls<span class="tooltiptext">Disable etcd Peer Self-Signed Certificates</span></div></li>
+    </ul>
+  <li class="collapsible">2.7</li>
+    <ul class="content">
+    <li><div class="tooltip">etcd_unique_ca<span class="tooltiptext">Configure A Unique CA Certificate for etcd</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.1</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_worker_service<span class="tooltiptext">Verify Permissions on the OpenShift Node Service File</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.10</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_worker_kubeconfig<span class="tooltiptext">Verify Group Who Owns The Worker Kubeconfig File</span></div></li>
+    <li><div class="tooltip">file_owner_worker_kubeconfig<span class="tooltiptext">Verify User Who Owns The Worker Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.2</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_worker_service<span class="tooltiptext">Verify Group Who Owns The OpenShift Node Service File</span></div></li>
+    <li><div class="tooltip">file_owner_worker_service<span class="tooltiptext">Verify User Who Owns The OpenShift Node Service File</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.3</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_proxy_kubeconfig<span class="tooltiptext">Verify Permissions on the Worker Proxy Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.4</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_proxy_kubeconfig<span class="tooltiptext">Verify Group Who Owns The Worker Proxy Kubeconfig File</span></div></li>
+    <li><div class="tooltip">file_owner_proxy_kubeconfig<span class="tooltiptext">Verify User Who Owns The Worker Proxy Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.5</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_kubelet_conf<span class="tooltiptext">Verify Permissions on The Kubelet Configuration File</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.6</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_kubelet_conf<span class="tooltiptext">Verify Group Who Owns The Kubelet Configuration File</span></div></li>
+    <li><div class="tooltip">file_owner_kubelet_conf<span class="tooltiptext">Verify User Who Owns The Kubelet Configuration File</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.7</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_worker_ca<span class="tooltiptext">Verify Permissions on the Worker Certificate Authority File</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.8</li>
+    <ul class="content">
+    <li><div class="tooltip">file_groupowner_worker_ca<span class="tooltiptext">Verify Group Who Owns the Worker Certificate Authority File</span></div></li>
+    <li><div class="tooltip">file_owner_worker_ca<span class="tooltiptext">Verify User Who Owns the Worker Certificate Authority File</span></div></li>
+    </ul>
+  <li class="collapsible">4.1.9</li>
+    <ul class="content">
+    <li><div class="tooltip">file_permissions_worker_kubeconfig<span class="tooltiptext">Verify Permissions on the Worker Kubeconfig File</span></div></li>
+    </ul>
+  <li class="collapsible">4.2.1</li>
+    <ul class="content">
+    <li><div class="tooltip">kubelet_anonymous_auth<span class="tooltiptext">Disable Anonymous Authentication to the Kubelet</span></div></li>
+    </ul>
+  <li class="collapsible">4.2.10</li>
+    <ul class="content">
+    <li><div class="tooltip">kubelet_configure_tls_cert<span class="tooltiptext">Ensure That The kubelet Client Certificate Is Correctly Set</span></div></li>
+    <li><div class="tooltip">kubelet_configure_tls_key<span class="tooltiptext">Ensure That The kubelet Server Key Is Correctly Set</span></div></li>
+    </ul>
+  <li class="collapsible">4.2.11</li>
+    <ul class="content">
+    <li><div class="tooltip">kubelet_enable_client_cert_rotation<span class="tooltiptext">kubelet - Enable Client Certificate Rotation</span></div></li>
+    </ul>
+  <li class="collapsible">4.2.12</li>
+    <ul class="content">
+    <li><div class="tooltip">kubelet_enable_server_cert_rotation<span class="tooltiptext">kubelet - Enable Server Certificate Rotation</span></div></li>
+    </ul>
+  <li class="collapsible">4.2.2</li>
+    <ul class="content">
+    <li><div class="tooltip">kubelet_authorization_mode<span class="tooltiptext">Ensure authorization is set to Webhook</span></div></li>
+    </ul>
+  <li class="collapsible">4.2.3</li>
+    <ul class="content">
+    <li><div class="tooltip">kubelet_configure_client_ca<span class="tooltiptext">kubelet - Configure the Client CA Certificate</span></div></li>
+    <li><div class="tooltip">kubelet_disable_readonly_port<span class="tooltiptext">kubelet - Disable the Read-Only Port</span></div></li>
+    </ul>
+  <li class="collapsible">4.2.4</li>
+    <ul class="content">
+    <li><div class="tooltip">kubelet_enable_streaming_connections<span class="tooltiptext">kubelet - Do Not Disable Streaming Timeouts</span></div></li>
+    </ul>
+  <li class="collapsible">4.2.9</li>
+    <ul class="content">
+    <li><div class="tooltip">kubelet_configure_event_creation<span class="tooltiptext">kubelet - Do Not Limit Event Creation</span></div></li>
+    </ul>
+  <li class="collapsible">5.1.1</li>
+    <ul class="content">
+    <li><div class="tooltip">rbac_limit_cluster_admin<span class="tooltiptext">Limit Access to Cluser Admin</span></div></li>
+    </ul>
+  <li class="collapsible">5.1.2</li>
+    <ul class="content">
+    <li><div class="tooltip">rbac_limit_secrets_access<span class="tooltiptext">Limit Access to Kubernetes Secrets</span></div></li>
+    </ul>
+  <li class="collapsible">5.1.3</li>
+    <ul class="content">
+    <li><div class="tooltip">rbac_wildcard_use<span class="tooltiptext">Minimize Wildcard Usage in Cluster and Local Roles</span></div></li>
+    </ul>
+  <li class="collapsible">5.1.4</li>
+    <ul class="content">
+    <li><div class="tooltip">rbac_pod_creation_access<span class="tooltiptext">Minimize Access to Pod Creation</span></div></li>
+    </ul>
+  <li class="collapsible">5.1.5</li>
+    <ul class="content">
+    <li><div class="tooltip">accounts_unique_service_account<span class="tooltiptext">Ensure Usage of Unique Service Accounts </span></div></li>
+    </ul>
+  <li class="collapsible">5.1.6</li>
+    <ul class="content">
+    <li><div class="tooltip">accounts_restrict_service_account_tokens<span class="tooltiptext">Restrict Automounting of Service Account Tokens</span></div></li>
+    </ul>
+  <li class="collapsible">5.2.1</li>
+    <ul class="content">
+    <li><div class="tooltip">scc_limit_privileged_containers<span class="tooltiptext">Limit Privileged Container Use</span></div></li>
+    </ul>
+  <li class="collapsible">5.2.2</li>
+    <ul class="content">
+    <li><div class="tooltip">scc_limit_process_id_namespace<span class="tooltiptext">Limit Access to the Host Process ID Namespace</span></div></li>
+    </ul>
+  <li class="collapsible">5.2.3</li>
+    <ul class="content">
+    <li><div class="tooltip">scc_limit_ipc_namespace<span class="tooltiptext">Limit Access to the Host IPC Namespace</span></div></li>
+    </ul>
+  <li class="collapsible">5.2.4</li>
+    <ul class="content">
+    <li><div class="tooltip">scc_limit_network_namespace<span class="tooltiptext">Limit Access to the Host Network Namespace</span></div></li>
+    </ul>
+  <li class="collapsible">5.2.5</li>
+    <ul class="content">
+    <li><div class="tooltip">scc_limit_privilege_escalation<span class="tooltiptext">Limit Containers Ability to Escalate Privileges</span></div></li>
+    </ul>
+  <li class="collapsible">5.2.6</li>
+    <ul class="content">
+    <li><div class="tooltip">scc_limit_root_containers<span class="tooltiptext">Limit Container Running As Root User</span></div></li>
+    </ul>
+  <li class="collapsible">5.2.7</li>
+    <ul class="content">
+    <li><div class="tooltip">scc_limit_net_raw_capability<span class="tooltiptext">Limit Use of the CAP_NET_RAW</span></div></li>
+    </ul>
+  <li class="collapsible">5.2.8</li>
+    <ul class="content">
+    <li><div class="tooltip">scc_drop_container_capabilities<span class="tooltiptext">Limit Container Capabilities</span></div></li>
+    </ul>
+  <li class="collapsible">5.2.9</li>
+    <ul class="content">
+    <li><div class="tooltip">scc_limit_container_allowed_capabilities<span class="tooltiptext">Drop Container Capabilities</span></div></li>
+    </ul>
+  <li class="collapsible">5.3.1</li>
+    <ul class="content">
+    <li><div class="tooltip">configure_network_policies<span class="tooltiptext">Ensure Network Policies are Configured</span></div></li>
+    </ul>
+  <li class="collapsible">5.3.2</li>
+    <ul class="content">
+    <li><div class="tooltip">configure_network_policies_namespaces<span class="tooltiptext">Ensure Project Namespaces Use Network Policies</span></div></li>
+    </ul>
+  <li class="collapsible">5.4.1</li>
+    <ul class="content">
+    <li><div class="tooltip">secrets_no_environment_variables<span class="tooltiptext">Do Not Use Environment Variables with Secrets</span></div></li>
+    </ul>
+  <li class="collapsible">5.5.1</li>
+    <ul class="content">
+    <li><div class="tooltip">general_configure_imagepolicywebhook<span class="tooltiptext">Manage Image Provenance Using ImagePolicyWebhook</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">cui</li>
+  <ul class="content">
+  <li class="collapsible">3.1.1</li>
+    <ul class="content">
+    <li><div class="tooltip">keystone_disable_user_account_days_inactive<span class="tooltiptext">Set Maximum Inactivity Period</span></div></li>
+    </ul>
+  <li class="collapsible">3.1.2</li>
+    <ul class="content">
+    <li><div class="tooltip">keystone_disable_user_account_days_inactive<span class="tooltiptext">Set Maximum Inactivity Period</span></div></li>
+    <li><div class="tooltip">keystone_lockout_duration<span class="tooltiptext">Set Account Lockout Duration</span></div></li>
+    </ul>
+  <li class="collapsible">3.1.8</li>
+    <ul class="content">
+    <li><div class="tooltip">keystone_lockout_failure_attempts<span class="tooltiptext">Set Maximum Number of Failed Authentication Attempts</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">nist</li>
+  <ul class="content">
+  <li class="collapsible">AC-2(3)</li>
+    <ul class="content">
+    <li><div class="tooltip">container_keystone_disable_user_account_days_inactive<span class="tooltiptext">Set Maximum Inactivity Period</span></div></li>
+    <li><div class="tooltip">keystone_disable_user_account_days_inactive<span class="tooltiptext">Set Maximum Inactivity Period</span></div></li>
+    </ul>
+  <li class="collapsible">AC-7</li>
+    <ul class="content">
+    <li><div class="tooltip">container_keystone_lockout_duration<span class="tooltiptext">Set Account Lockout Duration</span></div></li>
+    <li><div class="tooltip">container_keystone_lockout_failure_attempts<span class="tooltiptext">Set Maximum Number of Failed Authentication Attempts</span></div></li>
+    <li><div class="tooltip">keystone_lockout_duration<span class="tooltiptext">Set Account Lockout Duration</span></div></li>
+    <li><div class="tooltip">keystone_lockout_failure_attempts<span class="tooltiptext">Set Maximum Number of Failed Authentication Attempts</span></div></li>
+    </ul>
+  </ul>
+</ul>  
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
+</body>
+</html>

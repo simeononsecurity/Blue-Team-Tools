@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Guide to the Secure Configuration of Red Hat Enterprise Linux 6</title>
+		<script>
+			function change_profile(option_element)
+			{
+				var benchmark_id=option_element.getAttribute('data-benchmark-id');
+				var profile_id=option_element.getAttribute('data-profile-id');
+				var eval_snippet=document.getElementById('eval_snippet');
+				var input_path='/usr/share/xml/scap/ssg/content/ssg-rhel6-ds.xml';
+				if (profile_id == '')
+				{
+					if (benchmark_id == '')
+						eval_snippet.innerHTML='# oscap xccdf eval ' + input_path;
+					else
+						eval_snippet.innerHTML='# oscap xccdf eval --benchmark-id ' + benchmark_id + ' &#92;<br/>' + input_path;
+				}
+				else
+				{
+					if (benchmark_id == '')
+						eval_snippet.innerHTML='# oscap xccdf eval --profile ' + profile_id + ' &#92;<br/>' + input_path;
+					else
+						eval_snippet.innerHTML='# oscap xccdf eval --benchmark-id ' + benchmark_id + ' &#92;<br/>--profile ' + profile_id + ' &#92;<br/>' + input_path;
+				}
+				window.open(option_element.value, 'guide');
+			}
+		</script>
+		<style>
+			html, body { margin: 0; height: 100% }
+			#js_switcher { position: fixed; right: 30px; top: 10px; padding: 2px; background: #ddd; border: 1px solid #999 }
+			#guide_div { margin: auto; width: 99%; height: 99% }
+		</style>
+	</head>
+	<body onload="document.getElementById('js_switcher').style.display = 'block'">
+		<noscript>
+Profiles: <a target="guide" href="ssg-rhel6-guide-C2S.html">C2S for Red Hat Enterprise Linux 6 in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-nist-CL-IL-AL.html">CNSSI 1253 Low/Low/Low Control Baseline in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-CSCF-RHEL6-MLS.html">CSCF RHEL6 MLS Core Baseline in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-stig.html">DISA STIG for Red Hat Enterprise Linux 6 in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-desktop.html">Desktop Baseline in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-CS2.html">Example Server Profile in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-fisma-medium-rhel6-server.html">FISMA Medium for Red Hat Enterprise Linux 6 in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-ftp-server.html">FTP Server Profile (vsftpd) in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-pci-dss.html">PCI-DSS v3 Control Baseline for Red Hat Enterprise Linux 6 in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-rht-ccp.html">Red Hat Corporate Profile for Certified Cloud Providers (RH CCP) in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-server.html">Server Baseline in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-standard.html">Standard System Security Profile for Red Hat Enterprise Linux 6 in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-usgcb-rhel6-server.html">United States Government Configuration Baseline (USGCB) in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-guide-default.html">(default) in xccdf_org.ssgproject.content_benchmark_RHEL-6</a>, <a target="guide" href="ssg-rhel6-PCIDSS-RHEL-6-guide-pci-dss_centric.html">PCI-DSS v3 Control Baseline for Red Hat Enterprise Linux 6 in xccdf_org.ssgproject.content_benchmark_PCIDSS-RHEL-6</a>, <a target="guide" href="ssg-rhel6-PCIDSS-RHEL-6-guide-default.html">(default) in xccdf_org.ssgproject.content_benchmark_PCIDSS-RHEL-6</a>
+		</noscript>
+		<div id="js_switcher" style="display: none">
+			Profile: 
+			<select style="margin-bottom: 5px" onchange="change_profile(this.options[this.selectedIndex]);">
+
+<optgroup label="benchmark: xccdf_org.ssgproject.content_benchmark_RHEL-6">
+<option value="ssg-rhel6-guide-C2S.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_C2S">C2S for Red Hat Enterprise Linux 6</option>
+<option value="ssg-rhel6-guide-nist-CL-IL-AL.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_nist-CL-IL-AL">CNSSI 1253 Low/Low/Low Control Baseline</option>
+<option value="ssg-rhel6-guide-CSCF-RHEL6-MLS.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_CSCF-RHEL6-MLS">CSCF RHEL6 MLS Core Baseline</option>
+<option value="ssg-rhel6-guide-stig.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_stig">DISA STIG for Red Hat Enterprise Linux 6</option>
+<option value="ssg-rhel6-guide-desktop.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_desktop">Desktop Baseline</option>
+<option value="ssg-rhel6-guide-CS2.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_CS2">Example Server Profile</option>
+<option value="ssg-rhel6-guide-fisma-medium-rhel6-server.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_fisma-medium-rhel6-server">FISMA Medium for Red Hat Enterprise Linux 6</option>
+<option value="ssg-rhel6-guide-ftp-server.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_ftp-server">FTP Server Profile (vsftpd)</option>
+<option value="ssg-rhel6-guide-pci-dss.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_pci-dss">PCI-DSS v3 Control Baseline for Red Hat Enterprise Linux 6</option>
+<option value="ssg-rhel6-guide-rht-ccp.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_rht-ccp">Red Hat Corporate Profile for Certified Cloud Providers (RH CCP)</option>
+<option value="ssg-rhel6-guide-server.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_server">Server Baseline</option>
+<option value="ssg-rhel6-guide-standard.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_standard">Standard System Security Profile for Red Hat Enterprise Linux 6</option>
+<option value="ssg-rhel6-guide-usgcb-rhel6-server.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_usgcb-rhel6-server">United States Government Configuration Baseline (USGCB)</option>
+<option value="ssg-rhel6-guide-default.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_RHEL-6" data-profile-id="">(default)</option></optgroup>
+<optgroup label="benchmark: xccdf_org.ssgproject.content_benchmark_PCIDSS-RHEL-6">
+<option value="ssg-rhel6-PCIDSS-RHEL-6-guide-pci-dss_centric.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_PCIDSS-RHEL-6" data-profile-id="xccdf_org.ssgproject.content_profile_pci-dss_centric">PCI-DSS v3 Control Baseline for Red Hat Enterprise Linux 6</option>
+<option value="ssg-rhel6-PCIDSS-RHEL-6-guide-default.html" data-benchmark-id="xccdf_org.ssgproject.content_benchmark_PCIDSS-RHEL-6" data-profile-id="">(default)</option></optgroup>
+
+			</select>
+			<div id='eval_snippet' style='background: #eee; padding: 3px; border: 1px solid #000'>select a profile to display its guide and a command line snippet needed to use it</div>
+		</div>
+		<div id="guide_div">
+			<iframe src="ssg-rhel6-guide-C2S.html" name="guide" width="100%" height="100%">
+			</iframe>
+		</div>
+	</body>
+</html>

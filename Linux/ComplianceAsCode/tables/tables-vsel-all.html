@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} 
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<h2>References for product vsel</h2>
+
+<ul>
+<li class="collapsible">disa</li>
+  <ul class="content">
+  <li class="collapsible">CCI-000870</li>
+    <ul class="content">
+    <li><div class="tooltip">scanned_media<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must scan all media used for system maintenance prior to use</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001240</li>
+    <ul class="content">
+    <li><div class="tooltip">dats_updated<span class="tooltiptext">The anti-virus signature file age must not exceed 7 days</span></div></li>
+    <li><div class="tooltip">virus_notification<span class="tooltiptext">A notification mechanism or process must be in place to notify Administrators of out of date DAT, detected malware and error codes</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001241</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_action_app_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Clean as first action when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">ods_action_app_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Quarantine if first action fails when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">ods_action_default_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Clean as first action when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">ods_action_default_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Quarantine if first action fails when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">ods_allFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to scan all file types</span></div></li>
+    <li><div class="tooltip">ods_decompArchive<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to decompress archives when scanning</span></div></li>
+    <li><div class="tooltip">ods_enabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to run a scheduled On-Demand scan at least once a week</span></div></li>
+    <li><div class="tooltip">ods_exclusions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must only be configured with exclusions that are documented and approved by the ISSO/ISSM/AO</span></div></li>
+    <li><div class="tooltip">ods_extensions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to include all local drives and their sub-directories</span></div></li>
+    <li><div class="tooltip">ods_heuristicAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find unknown program viruses</span></div></li>
+    <li><div class="tooltip">ods_macroAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find unknown macro viruses</span></div></li>
+    <li><div class="tooltip">ods_mime<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to decode MIME encoded files.</span></div></li>
+    <li><div class="tooltip">ods_program<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find potentially unwanted programs</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001242</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_scanNWFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be enabled to scan mounted volumes when mounted volumes point to a network server without an anti-virus solution installed</span></div></li>
+    <li><div class="tooltip">ods_scanNWFiles_local<span class="tooltiptext"> The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be enabled to scan mounted volumes when mounted volumes point to a network server without an anti-virus solution installed</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001243</li>
+    <ul class="content">
+    <li><div class="tooltip">dats_auto_update<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to receive automatic updates</span></div></li>
+    <li><div class="tooltip">oas_action_app_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Clean as first action when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">oas_action_app_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Quarantine if first action fails when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">oas_action_default_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Clean as first action when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">oas_action_default_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Quarantine if first action fails when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">oas_action_error<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to deny access to the file if an error occurs during scanning</span></div></li>
+    <li><div class="tooltip">oas_action_timeout<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to allow access to files if scanning times out</span></div></li>
+    <li><div class="tooltip">oas_allFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan all file types</span></div></li>
+    <li><div class="tooltip">oas_decompArchive<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to decompress archives when scanning</span></div></li>
+    <li><div class="tooltip">oas_enabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to enable On-Access scanning</span></div></li>
+    <li><div class="tooltip">oas_exclusions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must only be configured with exclusions that are documented and approved by the ISSO/ISSM/AO</span></div></li>
+    <li><div class="tooltip">oas_heuristicAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find unknown program viruses</span></div></li>
+    <li><div class="tooltip">oas_macroAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find unknown macro viruses</span></div></li>
+    <li><div class="tooltip">oas_program<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find potentially unwanted programs</span></div></li>
+    <li><div class="tooltip">oas_scanMaxTmo<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner maximum scan time must not be less than 45 seconds</span></div></li>
+    <li><div class="tooltip">oas_scanOnRead<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan files when being read from disk</span></div></li>
+    <li><div class="tooltip">oas_scanOnWrite<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan files when being written to disk</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001749</li>
+    <ul class="content">
+    <li><div class="tooltip">updates_source<span class="tooltiptext">The McAfee VirusScan Enterprise must be configured to receive all patches, service packs and updates from a DoD-managed source</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001813</li>
+    <ul class="content">
+    <li><div class="tooltip">web_client_disabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux Web interface must be disabled unless the system is on a segregated network</span></div></li>
+    <li><div class="tooltip">web_client_firewalled<span class="tooltiptext">Access to the McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x Web UI must be enforced by firewall rules</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002235</li>
+    <ul class="content">
+    <li><div class="tooltip">restricted_user<span class="tooltiptext">The nails user and nailsgroup group must be restricted to the least privilege access required for the intended role</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">nist</li>
+  <ul class="content">
+  <li class="collapsible">AC-6(10)</li>
+    <ul class="content">
+    <li><div class="tooltip">restricted_user<span class="tooltiptext">The nails user and nailsgroup group must be restricted to the least privilege access required for the intended role</span></div></li>
+    </ul>
+  <li class="collapsible">CM-5</li>
+    <ul class="content">
+    <li><div class="tooltip">updates_source<span class="tooltiptext">The McAfee VirusScan Enterprise must be configured to receive all patches, service packs and updates from a DoD-managed source</span></div></li>
+    <li><div class="tooltip">web_client_firewalled<span class="tooltiptext">Access to the McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x Web UI must be enforced by firewall rules</span></div></li>
+    </ul>
+  <li class="collapsible">CM-5(1)</li>
+    <ul class="content">
+    <li><div class="tooltip">web_client_disabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux Web interface must be disabled unless the system is on a segregated network</span></div></li>
+    </ul>
+  <li class="collapsible">MA-3(2)</li>
+    <ul class="content">
+    <li><div class="tooltip">scanned_media<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must scan all media used for system maintenance prior to use</span></div></li>
+    </ul>
+  <li class="collapsible">SI-3</li>
+    <ul class="content">
+    <li><div class="tooltip">dats_auto_update<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to receive automatic updates</span></div></li>
+    <li><div class="tooltip">dats_updated<span class="tooltiptext">The anti-virus signature file age must not exceed 7 days</span></div></li>
+    <li><div class="tooltip">oas_action_app_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Clean as first action when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">oas_action_app_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Quarantine if first action fails when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">oas_action_default_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Clean as first action when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">oas_action_default_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Quarantine if first action fails when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">oas_action_error<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to deny access to the file if an error occurs during scanning</span></div></li>
+    <li><div class="tooltip">oas_action_timeout<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to allow access to files if scanning times out</span></div></li>
+    <li><div class="tooltip">oas_allFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan all file types</span></div></li>
+    <li><div class="tooltip">oas_decompArchive<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to decompress archives when scanning</span></div></li>
+    <li><div class="tooltip">oas_enabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to enable On-Access scanning</span></div></li>
+    <li><div class="tooltip">oas_exclusions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must only be configured with exclusions that are documented and approved by the ISSO/ISSM/AO</span></div></li>
+    <li><div class="tooltip">oas_heuristicAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find unknown program viruses</span></div></li>
+    <li><div class="tooltip">oas_macroAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find unknown macro viruses</span></div></li>
+    <li><div class="tooltip">oas_program<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find potentially unwanted programs</span></div></li>
+    <li><div class="tooltip">oas_scanMaxTmo<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner maximum scan time must not be less than 45 seconds</span></div></li>
+    <li><div class="tooltip">oas_scanNWFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be enabled to scan mounted volumes when mounted volumes point to a network server without an anti-virus solution installed</span></div></li>
+    <li><div class="tooltip">oas_scanOnRead<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan files when being read from disk</span></div></li>
+    <li><div class="tooltip">oas_scanOnWrite<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan files when being written to disk</span></div></li>
+    <li><div class="tooltip">ods_action_app_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Clean as first action when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">ods_action_app_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Quarantine if first action fails when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">ods_action_default_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Clean as first action when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">ods_action_default_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Quarantine if first action fails when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">ods_allFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to scan all file types</span></div></li>
+    <li><div class="tooltip">ods_decompArchive<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to decompress archives when scanning</span></div></li>
+    <li><div class="tooltip">ods_enabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to run a scheduled On-Demand scan at least once a week</span></div></li>
+    <li><div class="tooltip">ods_exclusions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must only be configured with exclusions that are documented and approved by the ISSO/ISSM/AO</span></div></li>
+    <li><div class="tooltip">ods_extensions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to include all local drives and their sub-directories</span></div></li>
+    <li><div class="tooltip">ods_heuristicAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find unknown program viruses</span></div></li>
+    <li><div class="tooltip">ods_macroAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find unknown macro viruses</span></div></li>
+    <li><div class="tooltip">ods_mime<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to decode MIME encoded files.</span></div></li>
+    <li><div class="tooltip">ods_program<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find potentially unwanted programs</span></div></li>
+    <li><div class="tooltip">ods_scanNWFiles_local<span class="tooltiptext"> The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be enabled to scan mounted volumes when mounted volumes point to a network server without an anti-virus solution installed</span></div></li>
+    <li><div class="tooltip">virus_notification<span class="tooltiptext">A notification mechanism or process must be in place to notify Administrators of out of date DAT, detected malware and error codes</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">srg</li>
+  <ul class="content">
+  <li class="collapsible">SRG-APP-000073</li>
+    <ul class="content">
+    <li><div class="tooltip">scanned_media<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must scan all media used for system maintenance prior to use</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000131</li>
+    <ul class="content">
+    <li><div class="tooltip">updates_source<span class="tooltiptext">The McAfee VirusScan Enterprise must be configured to receive all patches, service packs and updates from a DoD-managed source</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000276</li>
+    <ul class="content">
+    <li><div class="tooltip">dats_updated<span class="tooltiptext">The anti-virus signature file age must not exceed 7 days</span></div></li>
+    <li><div class="tooltip">virus_notification<span class="tooltiptext">A notification mechanism or process must be in place to notify Administrators of out of date DAT, detected malware and error codes</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000277</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_action_app_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Clean as first action when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">ods_action_app_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Quarantine if first action fails when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">ods_action_default_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Clean as first action when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">ods_action_default_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Quarantine if first action fails when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">ods_allFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to scan all file types</span></div></li>
+    <li><div class="tooltip">ods_decompArchive<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to decompress archives when scanning</span></div></li>
+    <li><div class="tooltip">ods_enabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to run a scheduled On-Demand scan at least once a week</span></div></li>
+    <li><div class="tooltip">ods_exclusions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must only be configured with exclusions that are documented and approved by the ISSO/ISSM/AO</span></div></li>
+    <li><div class="tooltip">ods_extensions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to include all local drives and their sub-directories</span></div></li>
+    <li><div class="tooltip">ods_heuristicAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find unknown program viruses</span></div></li>
+    <li><div class="tooltip">ods_macroAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find unknown macro viruses</span></div></li>
+    <li><div class="tooltip">ods_mime<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to decode MIME encoded files.</span></div></li>
+    <li><div class="tooltip">ods_program<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find potentially unwanted programs</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000278</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_scanNWFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be enabled to scan mounted volumes when mounted volumes point to a network server without an anti-virus solution installed</span></div></li>
+    <li><div class="tooltip">ods_scanNWFiles_local<span class="tooltiptext"> The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be enabled to scan mounted volumes when mounted volumes point to a network server without an anti-virus solution installed</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000279</li>
+    <ul class="content">
+    <li><div class="tooltip">dats_auto_update<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to receive automatic updates</span></div></li>
+    <li><div class="tooltip">oas_action_app_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Clean as first action when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">oas_action_app_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Quarantine if first action fails when a virus or Trojan is detected</span></div></li>
+    <li><div class="tooltip">oas_action_default_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Clean as first action when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">oas_action_default_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Quarantine if first action fails when programs and jokes are found</span></div></li>
+    <li><div class="tooltip">oas_action_error<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to deny access to the file if an error occurs during scanning</span></div></li>
+    <li><div class="tooltip">oas_action_timeout<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to allow access to files if scanning times out</span></div></li>
+    <li><div class="tooltip">oas_allFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan all file types</span></div></li>
+    <li><div class="tooltip">oas_decompArchive<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to decompress archives when scanning</span></div></li>
+    <li><div class="tooltip">oas_enabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to enable On-Access scanning</span></div></li>
+    <li><div class="tooltip">oas_exclusions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must only be configured with exclusions that are documented and approved by the ISSO/ISSM/AO</span></div></li>
+    <li><div class="tooltip">oas_heuristicAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find unknown program viruses</span></div></li>
+    <li><div class="tooltip">oas_macroAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find unknown macro viruses</span></div></li>
+    <li><div class="tooltip">oas_program<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find potentially unwanted programs</span></div></li>
+    <li><div class="tooltip">oas_scanMaxTmo<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner maximum scan time must not be less than 45 seconds</span></div></li>
+    <li><div class="tooltip">oas_scanOnRead<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan files when being read from disk</span></div></li>
+    <li><div class="tooltip">oas_scanOnWrite<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan files when being written to disk</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000340</li>
+    <ul class="content">
+    <li><div class="tooltip">restricted_user<span class="tooltiptext">The nails user and nailsgroup group must be restricted to the least privilege access required for the intended role</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000380</li>
+    <ul class="content">
+    <li><div class="tooltip">web_client_disabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux Web interface must be disabled unless the system is on a segregated network</span></div></li>
+    <li><div class="tooltip">web_client_firewalled<span class="tooltiptext">Access to the McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x Web UI must be enforced by firewall rules</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">stigid</li>
+  <ul class="content">
+  <li class="collapsible">DTAVSEL-000</li>
+    <ul class="content">
+    <li><div class="tooltip">web_client_disabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux Web interface must be disabled unless the system is on a segregated network</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-001</li>
+    <ul class="content">
+    <li><div class="tooltip">dats_updated<span class="tooltiptext">The anti-virus signature file age must not exceed 7 days</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-002</li>
+    <ul class="content">
+    <li><div class="tooltip">dats_auto_update<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to receive automatic updates</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-003</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_enabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to enable On-Access scanning</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-004</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_decompArchive<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to decompress archives when scanning</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-005</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_heuristicAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find unknown program viruses</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-006</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_macroAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find unknown macro viruses</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-007</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_program<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to find potentially unwanted programs</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-008</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_scanOnWrite<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan files when being written to disk</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-009</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_scanOnRead<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan files when being read from disk</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-010</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_allFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to scan all file types</span></div></li>
+    <li><div class="tooltip">oas_scanMaxTmo<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner maximum scan time must not be less than 45 seconds</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-012</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_exclusions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must only be configured with exclusions that are documented and approved by the ISSO/ISSM/AO</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-013</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_action_app_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Clean as first action when a virus or Trojan is detected</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-014</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_action_app_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Quarantine if first action fails when a virus or Trojan is detected</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-015</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_action_default_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Clean as first action when programs and jokes are found</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-016</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_action_default_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to Quarantine if first action fails when programs and jokes are found</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-017</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_action_error<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to deny access to the file if an error occurs during scanning</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-018</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_action_timeout<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be configured to allow access to files if scanning times out</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-019</li>
+    <ul class="content">
+    <li><div class="tooltip">oas_scanNWFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Access scanner must be enabled to scan mounted volumes when mounted volumes point to a network server without an anti-virus solution installed</span></div></li>
+    <li><div class="tooltip">ods_scanNWFiles_local<span class="tooltiptext"> The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be enabled to scan mounted volumes when mounted volumes point to a network server without an anti-virus solution installed</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-100</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_enabled<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must be configured to run a scheduled On-Demand scan at least once a week</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-101</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_decompArchive<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to decompress archives when scanning</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-102</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_heuristicAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find unknown program viruses</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-103</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_macroAnalysis<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find unknown macro viruses</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-104</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_program<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to find potentially unwanted programs</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-105</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_allFiles<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to scan all file types</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-106</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_action_app_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Clean as first action when a virus or Trojan is detected</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-107</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_action_app_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Quarantine if first action fails when a virus or Trojan is detected</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-108</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_exclusions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must only be configured with exclusions that are documented and approved by the ISSO/ISSM/AO</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-110</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_action_default_primary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Clean as first action when programs and jokes are found</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-111</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_action_default_secondary<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to Quarantine if first action fails when programs and jokes are found</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-112</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_mime<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to decode MIME encoded files.</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-113</li>
+    <ul class="content">
+    <li><div class="tooltip">ods_extensions<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x On-Demand scanner must be configured to include all local drives and their sub-directories</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-200</li>
+    <ul class="content">
+    <li><div class="tooltip">scanned_media<span class="tooltiptext">The McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x must scan all media used for system maintenance prior to use</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-201</li>
+    <ul class="content">
+    <li><div class="tooltip">updates_source<span class="tooltiptext">The McAfee VirusScan Enterprise must be configured to receive all patches, service packs and updates from a DoD-managed source</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-202</li>
+    <ul class="content">
+    <li><div class="tooltip">restricted_user<span class="tooltiptext">The nails user and nailsgroup group must be restricted to the least privilege access required for the intended role</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-205</li>
+    <ul class="content">
+    <li><div class="tooltip">virus_notification<span class="tooltiptext">A notification mechanism or process must be in place to notify Administrators of out of date DAT, detected malware and error codes</span></div></li>
+    </ul>
+  <li class="collapsible">DTAVSEL-301</li>
+    <ul class="content">
+    <li><div class="tooltip">web_client_firewalled<span class="tooltiptext">Access to the McAfee VirusScan Enterprise for Linux 1.9.x/2.0.x Web UI must be enforced by firewall rules</span></div></li>
+    </ul>
+  </ul>
+</ul>  
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
+</body>
+</html>

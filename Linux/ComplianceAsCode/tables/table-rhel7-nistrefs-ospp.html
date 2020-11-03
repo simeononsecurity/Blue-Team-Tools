@@ -1,0 +1,1927 @@
+<html xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>OSPP - Protection Profile for General Purpose Operating Systems v4.2.1</title>
+</head>
+<body>
+<br><br><div style="text-align: center; font-size: x-large; font-weight:bold">OSPP - Protection Profile for General Purpose Operating Systems v4.2.1</div>
+<br><br><style type="text/css">
+		table
+		{
+			border-collapse:collapse;
+		}
+		table, th, td
+		{
+			border: 2px solid #dcdcdc;
+			border-left: none;
+			border-right: none;
+			vertical-align: top;
+			padding: 2px;
+			font-family: verdana,arial,sans-serif;
+			font-size:11px;
+		}
+		pre { 
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap !important;
+			word-wrap:break-word; 
+		}
+		table tr:nth-child(2n+2) { background-color: #f4f4f4; }
+		thead
+		{
+			display: table-header-group;
+			font-weight: bold;
+			background-color: #dedede;
+		}
+	</style>
+<table>
+<thead>
+<td>CCE ID</td>
+<td>Rule Title</td>
+<td>Description</td>
+<td>Rationale</td>
+<td>Variable Setting</td>
+<td>NIST 800-53 Mapping</td>
+</thead>
+<tr>
+<td>CCE-82041-5</td>
+<td>Limit the Number of Concurrent Login Sessions Allowed Per User</td>
+<td xml:lang="en-US">Limiting the number of allowed users and sessions per user can limit risks related to Denial of
+Service attacks. This addresses concurrent sessions for a single account and does not address
+concurrent sessions by a single user via multiple accounts. To set the number of concurrent
+sessions per user add the following line in <code>/etc/security/limits.conf</code> or
+a file under <code>/etc/security/limits.d/</code>:
+<pre>* hard maxlogins <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_max_concurrent_login_sessions"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">Limiting simultaneous user logins can insulate the system from denial of service
+problems caused by excessive logins. Automated login processes operating improperly or
+maliciously may result in an exceptional number of simultaneous login sessions.</td>
+<td></td>
+<td>AC-10<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82049-8</td>
+<td>Set Password Minimum Length in login.defs</td>
+<td xml:lang="en-US">To specify password length requirements for new accounts, edit the file
+<code>/etc/login.defs</code> and add or correct the following line:
+<pre>PASS_MIN_LEN <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_password_minlen_login_defs"></xccdf-1.1:sub></pre>
+<br><br>
+The DoD requirement is <code>15</code>. 
+The FISMA requirement is <code>12</code>.
+The profile requirement is
+<code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_password_minlen_login_defs"></xccdf-1.1:sub></code>.
+If a program consults <code>/etc/login.defs</code> and also another PAM module
+(such as <code>pam_pwquality</code>) during a password change operation, then
+the most restrictive must be satisfied. See PAM section for more
+information about enforcing password quality requirements.</td>
+<td xml:lang="en-US">Requiring a minimum password length makes password
+cracking attacks more difficult by ensuring a larger
+search space. However, any security benefit from an onerous requirement
+must be carefully weighed against usability problems, support costs, or counterproductive
+behavior that may result.</td>
+<td></td>
+<td>IA-5(f)<br>IA-5(1)(a)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27214-6</td>
+<td>Ensure PAM Enforces Password Requirements - Minimum Digit Characters</td>
+<td xml:lang="en-US">The pam_pwquality module's <code>dcredit</code> parameter controls requirements for
+usage of digits in a password. When set to a negative number, any password will be required to
+contain that many digits. When set to a positive number, pam_pwquality will grant +1 additional
+length credit for each digit. Modify the <code>dcredit</code> setting in
+<code>/etc/security/pwquality.conf</code> to require the use of a digit in passwords.</td>
+<td xml:lang="en-US">Use of a complex password helps to increase the time and resources required
+to compromise the password. Password complexity, or strength, is a measure of
+the effectiveness of a password in resisting attempts at guessing and brute-force
+attacks.
+<br><br>
+Password complexity is one factor of several that determines how long it takes
+to crack a password. The more complex the password, the greater the number of
+possible combinations that need to be tested before the password is compromised.
+Requiring digits makes password guessing attacks more difficult by ensuring a larger
+search space.</td>
+<td></td>
+<td>IA-5(c)<br>IA-5(1)(a)<br>CM-6(a)<br>IA-5(4)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82020-9</td>
+<td>Ensure PAM Enforces Password Requirements - Minimum Different Characters</td>
+<td xml:lang="en-US">The pam_pwquality module's <code>difok</code> parameter sets the number of characters
+in a password that must not be present in and old password during a password change.
+<br><br>
+Modify the <code>difok</code> setting in <code>/etc/security/pwquality.conf</code>
+to equal <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_difok"></xccdf-1.1:sub> to require differing characters
+when changing passwords.</td>
+<td xml:lang="en-US">Use of a complex password helps to increase the time and resources
+required to compromise the password. Password complexity, or strength,
+is a measure of the effectiveness of a password in resisting attempts
+at guessing and brute–force attacks.
+<br><br>
+Password complexity is one factor of several that determines how long
+it takes to crack a password. The more complex the password, the
+greater the number of possible combinations that need to be tested
+before the password is compromised.
+<br><br>
+Requiring a minimum number of different characters during password changes ensures that
+newly changed passwords should not resemble previously compromised ones.
+Note that passwords which are changed on compromised systems will still be compromised, however.</td>
+<td></td>
+<td>IA-5(c)<br>IA-5(1)(b)<br>CM-6(a)<br>IA-5(4)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27345-8</td>
+<td>Ensure PAM Enforces Password Requirements - Minimum Lowercase Characters</td>
+<td xml:lang="en-US">The pam_pwquality module's <code>lcredit</code> parameter controls requirements for
+usage of lowercase letters in a password. When set to a negative number, any password will be required to
+contain that many lowercase characters. When set to a positive number, pam_pwquality will grant +1 additional
+length credit for each lowercase character. Modify the <code>lcredit</code> setting in
+<code>/etc/security/pwquality.conf</code> to require the use of a lowercase character in passwords.</td>
+<td xml:lang="en-US">Use of a complex password helps to increase the time and resources required
+to compromise the password. Password complexity, or strength, is a measure of
+the effectiveness of a password in resisting attempts at guessing and brute-force
+attacks.
+<br><br>
+Password complexity is one factor of several that determines how long it takes
+to crack a password. The more complex the password, the greater the number of
+possble combinations that need to be tested before the password is compromised.
+Requiring a minimum number of lowercase characters makes password guessing attacks
+more difficult by ensuring a larger search space.</td>
+<td></td>
+<td>IA-5(c)<br>IA-5(1)(a)<br>CM-6(a)<br>IA-5(4)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27512-3</td>
+<td>Ensure PAM Enforces Password Requirements - Maximum Consecutive Repeating Characters from Same Character Class</td>
+<td xml:lang="en-US">The pam_pwquality module's <code>maxclassrepeat</code> parameter controls requirements for
+consecutive repeating characters from the same character class. When set to a positive number, it will reject passwords
+which contain more than that number of consecutive characters from the same character class. Modify the
+<code>maxclassrepeat</code> setting in <code>/etc/security/pwquality.conf</code> to equal <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_maxclassrepeat"></xccdf-1.1:sub>
+to prevent a run of (<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_maxclassrepeat"></xccdf-1.1:sub> + 1) or more identical characters.</td>
+<td xml:lang="en-US">Use of a complex password helps to increase the time and resources required to comrpomise the password.
+Password complexity, or strength, is a measure of the effectiveness of a password in resisting
+attempts at guessing and brute-force attacks.
+<br>
+Password complexity is one factor of several that determines how long it takes to crack a password. The
+more complex a password, the greater the number of possible combinations that need to be tested before the
+password is compromised.</td>
+<td></td>
+<td>IA-5(c)<br>IA-5(1)(a)<br>CM-6(a)<br>IA-5(4)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82055-5</td>
+<td>Set Password Maximum Consecutive Repeating Characters</td>
+<td xml:lang="en-US">The pam_pwquality module's <code>maxrepeat</code> parameter controls requirements for
+consecutive repeating characters. When set to a positive number, it will reject passwords
+which contain more than that number of consecutive characters. Modify the <code>maxrepeat</code> setting
+in <code>/etc/security/pwquality.conf</code> to equal <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_maxrepeat"></xccdf-1.1:sub> to prevent a
+run of (<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_maxrepeat"></xccdf-1.1:sub> + 1) or more identical characters.</td>
+<td xml:lang="en-US">Use of a complex password helps to increase the time and resources required to compromise the password.
+Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at
+guessing and brute-force attacks.
+<br><br>
+Password complexity is one factor of several that determines how long it takes to crack a password. The more
+complex the password, the greater the number of possible combinations that need to be tested before the
+password is compromised.
+<br><br>
+Passwords with excessive repeating characters may be more vulnerable to password-guessing attacks.</td>
+<td></td>
+<td>IA-5(c)<br>CM-6(a)<br>IA-5(4)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27293-0</td>
+<td>Ensure PAM Enforces Password Requirements - Minimum Length</td>
+<td xml:lang="en-US">The pam_pwquality module's <code>minlen</code> parameter controls requirements for
+minimum characters required in a password. Add <code>minlen=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_minlen"></xccdf-1.1:sub></code>
+after pam_pwquality to set minimum password length requirements.</td>
+<td xml:lang="en-US">The shorter the password, the lower the number of possible combinations
+that need to be tested before the password is compromised.
+<br>
+Password complexity, or strength, is a measure of the effectiveness of a
+password in resisting attempts at guessing and brute-force attacks.
+Password length is one factor of several that helps to determine strength
+and how long it takes to crack a password. Use of more characters in a password
+helps to exponentially increase the time and/or resources required to
+compromose the password.</td>
+<td></td>
+<td>IA-5(c)<br>IA-5(1)(a)<br>CM-6(a)<br>IA-5(4)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27360-7</td>
+<td>Ensure PAM Enforces Password Requirements - Minimum Special Characters</td>
+<td xml:lang="en-US">The pam_pwquality module's <code>ocredit=</code> parameter controls requirements for
+usage of special (or "other") characters in a password. When set to a negative number,
+any password will be required to contain that many special characters.
+When set to a positive number, pam_pwquality will grant +1
+additional length credit for each special character. Modify the <code>ocredit</code> setting
+in <code>/etc/security/pwquality.conf</code> to equal <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_ocredit"></xccdf-1.1:sub>
+to require use of a special character in passwords.</td>
+<td xml:lang="en-US">Use of a complex password helps to increase the time and resources required
+to compromise the password. Password complexity, or strength, is a measure of
+the effectiveness of a password in resisting attempts at guessing and brute-force
+attacks.
+<br><br>
+Password complexity is one factor of several that determines how long it takes
+to crack a password. The more complex the password, the greater the number of
+possble combinations that need to be tested before the password is compromised.
+Requiring a minimum number of special characters makes password guessing attacks
+more difficult by ensuring a larger search space.</td>
+<td></td>
+<td>IA-5(c)<br>IA-5(1)(a)<br>CM-6(a)<br>IA-5(4)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27200-5</td>
+<td>Ensure PAM Enforces Password Requirements - Minimum Uppercase Characters</td>
+<td xml:lang="en-US">The pam_pwquality module's <code>ucredit=</code> parameter controls requirements for
+usage of uppercase letters in a password. When set to a negative number, any password will be required to
+contain that many uppercase characters. When set to a positive number, pam_pwquality will grant +1 additional
+length credit for each uppercase character. Modify the <code>ucredit</code> setting in
+<code>/etc/security/pwquality.conf</code> to require the use of an uppercase character in passwords.</td>
+<td xml:lang="en-US">Use of a complex password helps to increase the time and resources reuiqred to compromise the password.
+Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts
+at guessing and brute-force attacks.
+<br><br>
+Password complexity is one factor of several that determines how long it takes to crack a password. The more
+complex the password, the greater the number of possible combinations that need to be tested before
+the password is compromised.</td>
+<td></td>
+<td>IA-5(c)<br>IA-5(1)(a)<br>CM-6(a)<br>IA-5(4)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82030-8</td>
+<td>Limit Password Reuse</td>
+<td xml:lang="en-US">Do not allow users to reuse recent passwords. This can be
+accomplished by using the <code>remember</code> option for the <code>pam_unix</code>
+or <code>pam_pwhistory</code> PAM modules.
+<br><br>
+In the file <code>/etc/pam.d/system-auth</code>, append <code>remember=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_unix_remember"></xccdf-1.1:sub></code>
+to the line which refers to the <code>pam_unix.so</code> or <code>pam_pwhistory.so</code>module, as shown below:
+<ul>
+<li>for the <code>pam_unix.so</code> case:
+<pre>password sufficient pam_unix.so <i>...existing_options...</i> remember=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_unix_remember"></xccdf-1.1:sub></pre>
+</li>
+<li>for the <code>pam_pwhistory.so</code> case:
+<pre>password requisite pam_pwhistory.so <i>...existing_options...</i> remember=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_unix_remember"></xccdf-1.1:sub></pre>
+</li>
+</ul>
+The DoD STIG requirement is 5 passwords.</td>
+<td xml:lang="en-US">Preventing re-use of previous passwords helps ensure that a compromised password is not re-used by a user.</td>
+<td></td>
+<td>IA-5(f)<br>IA-5(1)(e)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27350-8</td>
+<td>Set Deny For Failed Password Attempts</td>
+<td xml:lang="en-US">To configure the system to lock out accounts after a number of incorrect login
+attempts using <code>pam_faillock.so</code>, modify the content of both
+<code>/etc/pam.d/system-auth</code> and <code>/etc/pam.d/password-auth</code> as follows:
+<br><br>
+<ul>
+<li> add the following line immediately <code>before</code> the <code>pam_unix.so</code> statement in the <code>AUTH</code> section:
+<pre>auth required pam_faillock.so preauth silent deny=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_deny"></xccdf-1.1:sub> unlock_time=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_unlock_time"></xccdf-1.1:sub> fail_interval=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_fail_interval"></xccdf-1.1:sub></pre>
+</li>
+<li> add the following line immediately <code>after</code> the <code>pam_unix.so</code> statement in the <code>AUTH</code> section:
+<pre>auth [default=die] pam_faillock.so authfail deny=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_deny"></xccdf-1.1:sub> unlock_time=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_unlock_time"></xccdf-1.1:sub> fail_interval=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_fail_interval"></xccdf-1.1:sub></pre>
+</li>
+<li> add the following line immediately <code>before</code> the <code>pam_unix.so</code> statement in the <code>ACCOUNT</code> section:
+<pre>account required pam_faillock.so</pre>
+</li>
+</ul>
+</td>
+<td xml:lang="en-US">Locking out user accounts after a number of incorrect attempts
+prevents direct password guessing attacks.</td>
+<td></td>
+<td>CM-6(a)<br>AC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27297-1</td>
+<td>Set Interval For Counting Failed Password Attempts</td>
+<td xml:lang="en-US">Utilizing <code>pam_faillock.so</code>, the <code>fail_interval</code> directive
+configures the system to lock out an account after a number of incorrect
+login attempts within a specified time period. Modify the content of both
+<code>/etc/pam.d/system-auth</code> and <code>/etc/pam.d/password-auth</code>
+as follows:
+<br><br>
+<ul>
+<li>Add the following line immediately <code>before</code> the
+    <code>pam_unix.so</code> statement in the <code>AUTH</code> section:
+<pre>auth required pam_faillock.so preauth silent deny=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_deny"></xccdf-1.1:sub> unlock_time=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_unlock_time"></xccdf-1.1:sub> fail_interval=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_fail_interval"></xccdf-1.1:sub></pre>
+</li>
+<li>Add the following line immediately <code>after</code> the
+    <code>pam_unix.so</code> statement in the <code>AUTH</code> section:
+<pre>auth [default=die] pam_faillock.so authfail deny=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_deny"></xccdf-1.1:sub> unlock_time=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_unlock_time"></xccdf-1.1:sub> fail_interval=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_fail_interval"></xccdf-1.1:sub>
+</pre>
+</li>
+<li>Add the following line immediately <code>before</code> the
+    <code>pam_unix.so</code> statement in the <code>ACCOUNT</code> section:
+<pre>account required pam_faillock.so</pre>
+</li>
+</ul>
+</td>
+<td xml:lang="en-US">By limiting the number of failed logon attempts the risk of unauthorized system
+access via user password guessing, otherwise known as brute-forcing, is reduced.
+Limits are imposed by locking the account.</td>
+<td></td>
+<td>CM-6(a)<br>AC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-26884-7</td>
+<td>Set Lockout Time for Failed Password Attempts</td>
+<td xml:lang="en-US">To configure the system to lock out accounts after a number of incorrect login
+attempts and require an administrator to unlock the account using <code>pam_faillock.so</code>,
+modify the content of both <code>/etc/pam.d/system-auth</code> and <code>/etc/pam.d/password-auth</code> as follows:
+<br><br>
+<ul>
+<li> add the following line immediately <code>before</code> the <code>pam_unix.so</code> statement in the <code>AUTH</code> section:
+<pre>auth required pam_faillock.so preauth silent deny=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_deny"></xccdf-1.1:sub> unlock_time=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_unlock_time"></xccdf-1.1:sub> fail_interval=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_fail_interval"></xccdf-1.1:sub></pre>
+</li>
+<li> add the following line immediately <code>after</code> the <code>pam_unix.so</code> statement in the <code>AUTH</code> section:
+<pre>auth [default=die] pam_faillock.so authfail deny=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_deny"></xccdf-1.1:sub> unlock_time=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_unlock_time"></xccdf-1.1:sub> fail_interval=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_fail_interval"></xccdf-1.1:sub></pre>
+</li>
+<li> add the following line immediately <code>before</code> the <code>pam_unix.so</code> statement in the <code>ACCOUNT</code> section:
+<pre>account required pam_faillock.so</pre>
+</li>
+</ul>
+If <code>unlock_time</code> is set to <code>0</code>, manual intervention by an administrator is required to unlock a user.</td>
+<td xml:lang="en-US">Locking out user accounts after a number of incorrect attempts
+prevents direct password guessing attacks. Ensuring that an administrator is
+involved in unlocking locked accounts draws appropriate attention to such
+situations.</td>
+<td></td>
+<td>CM-6(a)<br>AC-7(b)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80202-5</td>
+<td>Ensure the Default Bash Umask is Set Correctly</td>
+<td xml:lang="en-US">To ensure the default umask for users of the Bash shell is set properly,
+add or correct the <code>umask</code> setting in <code>/etc/bashrc</code> to read
+as follows:
+<pre>umask <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_user_umask"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">The umask value influences the permissions assigned to files when they are created.
+A misconfigured umask value could result in files with excessive permissions that can be read or
+written to by unauthorized users.</td>
+<td></td>
+<td>AC-6(1)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80203-3</td>
+<td>Ensure the Default C Shell Umask is Set Correctly</td>
+<td xml:lang="en-US">To ensure the default umask for users of the C shell is set properly,
+add or correct the <code>umask</code> setting in <code>/etc/csh.cshrc</code> to read as follows:
+<pre>umask <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_user_umask"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">The umask value influences the permissions assigned to files when they are created.
+A misconfigured umask value could result in files with excessive permissions that can be read or
+written to by unauthorized users.</td>
+<td></td>
+<td>AC-6(1)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80204-1</td>
+<td>Ensure the Default Umask is Set Correctly in /etc/profile</td>
+<td xml:lang="en-US">To ensure the default umask controlled by <code>/etc/profile</code> is set properly,
+add or correct the <code>umask</code> setting in <code>/etc/profile</code> to read as follows:
+<pre>umask <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_user_umask"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">The umask value influences the permissions assigned to files when they are created.
+A misconfigured umask value could result in files with excessive permissions that can be read or
+written to by unauthorized users.</td>
+<td></td>
+<td>AC-6(1)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82370-8</td>
+<td>Configure audit according to OSPP requirements</td>
+<td xml:lang="en-US">Configure audit to meet requirements for Operating System Protection Profile (OSPP) v4.2.1.
+
+Audit defines groups of rules in <code>/usr/share/doc/audit/rules</code> to satisfy specific policies.
+
+To fulfill requirements for compliance with OSPP v4.2.1, the following files are necessary:
+<ul>
+<li>/usr/share/doc/audit-VERSION/rules/10-base-config.rules</li>
+<li>/usr/share/doc/audit-VERSION/rules/11-loginuid.rules</li>
+<li>/usr/share/doc/audit-VERSION/rules/30-ospp-v42.rules</li>
+<li>/usr/share/doc/audit-VERSION/rules/43-module-load.rules</li>
+</ul>
+
+Copy the files from <code>/usr/share/doc/audit/rules</code> to <code>/etc/audit/rules.d</code>:
+<pre>
+cp /usr/share/doc/audit*/rules/{10-base-config,11-loginuid,30-ospp-v42,43-module-load}.rules /etc/audit/rules.d/
+</pre>
+</td>
+<td xml:lang="en-US">The audit rules defined in <code>/usr/share/doc/audit/rules</code> are the recommended way to meet compliance with OSPP v4.2.1.</td>
+<td></td>
+<td>NONE<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27331-8</td>
+<td>Configure auditd flush priority</td>
+<td xml:lang="en-US">The <code>auditd</code> service can be configured to
+synchronously write audit event data to disk. Add or correct the following
+line in <code>/etc/audit/auditd.conf</code> to ensure that audit event data is
+fully synchronized with the log files on the disk:
+<pre>flush = <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_auditd_flush"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">Audit data should be synchronously written to disk to ensure
+log integrity. These parameters assure that all audit event data is fully
+synchronized with the log files on the disk.</td>
+<td></td>
+<td>AU-11<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80449-2</td>
+<td>Disable Ctrl-Alt-Del Burst Action</td>
+<td xml:lang="en-US">By default, <code>SystemD</code> will reboot the system if the <code>Ctrl-Alt-Del</code>
+key sequence is pressed Ctrl-Alt-Delete more than 7 times in 2 seconds.
+<br><br>
+To configure the system to ignore the <code>CtrlAltDelBurstAction</code>
+setting, add or modify the following to <code>/etc/systemd/system.conf</code>:
+<pre>CtrlAltDelBurstAction=none</pre>
+</td>
+<td xml:lang="en-US">A locally logged-in user who presses Ctrl-Alt-Del, when at the console,
+can reboot the system. If accidentally pressed, as could happen in
+the case of mixed OS environment, this can create the risk of short-term
+loss of availability of systems due to unintentional reboot.</td>
+<td></td>
+<td>CM-6(a)<br>AC-6(1)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27511-5</td>
+<td>Disable Ctrl-Alt-Del Reboot Activation</td>
+<td xml:lang="en-US">
+By default, <code>SystemD</code> will reboot the system if the <code>Ctrl-Alt-Del</code>
+key sequence is pressed.
+<br><br>
+To configure the system to ignore the <code>Ctrl-Alt-Del</code> key sequence from the
+command line instead of rebooting the system, do either of the following:
+<pre>ln -sf /dev/null /etc/systemd/system/ctrl-alt-del.target</pre>
+or
+<pre>systemctl mask ctrl-alt-del.target</pre>
+<br><br>
+Do not simply delete the <code>/usr/lib/systemd/system/ctrl-alt-del.service</code> file,
+as this file may be restored during future system updates.</td>
+<td xml:lang="en-US">A locally logged-in user who presses Ctrl-Alt-Del, when at the console,
+can reboot the system. If accidentally pressed, as could happen in
+the case of mixed OS environment, this can create the risk of short-term
+loss of availability of systems due to unintentional reboot.</td>
+<td></td>
+<td>CM-6(a)<br>AC-6(1)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27413-4</td>
+<td>Disable Host-Based Authentication</td>
+<td xml:lang="en-US">SSH's cryptographic host-based authentication is
+more secure than <code>.rhosts</code> authentication. However, it is
+not recommended that hosts unilaterally trust one another, even
+within an organization.
+<br><br>
+To disable host-based authentication, add or correct the
+following line in <code>/etc/ssh/sshd_config</code>:
+<pre>HostbasedAuthentication no</pre>
+</td>
+<td xml:lang="en-US">SSH trust relationships mean a compromise on one host
+can allow an attacker to move trivially to other hosts.</td>
+<td></td>
+<td>AC-3<br>AC-17(a)<br>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80169-6</td>
+<td>Disable Core Dumps for All Users</td>
+<td xml:lang="en-US">To disable core dumps for all users, add the following line to
+<code>/etc/security/limits.conf</code>, or to a file within the
+<code>/etc/security/limits.d/</code> directory:
+<pre>*     hard   core    0</pre>
+</td>
+<td xml:lang="en-US">A core dump includes a memory image taken at the time the operating system
+terminates an application. The memory image could contain sensitive data and is generally useful
+only for developers trying to debug problems.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-26989-4</td>
+<td>Ensure gpgcheck Enabled In Main yum Configuration</td>
+<td xml:lang="en-US">The <code>gpgcheck</code> option controls whether
+RPM packages' signatures are always checked prior to installation.
+To configure yum to check package signatures before installing
+them, ensure the following line appears in <code>/etc/yum.conf</code> in
+the <code>[main]</code> section:
+<pre>gpgcheck=1</pre>
+</td>
+<td xml:lang="en-US">Changes to any software components can have significant effects on the
+overall security of the operating system. This requirement ensures the
+software has not been tampered with and that it has been provided by a
+trusted vendor.
+<br>
+Accordingly, patches, service packs, device drivers, or operating system
+components must be signed with a certificate recognized and approved by the
+organization.
+<br>Verifying the authenticity of the software prior to installation
+validates the integrity of the patch or upgrade received from a vendor.
+This ensures the software has not been tampered with and that it has been
+provided by a trusted vendor. Self-signed certificates are disallowed by
+this requirement. Certificates used to verify the software must be from an
+approved Certificate Authority (CA).</td>
+<td></td>
+<td>CM-5(3)<br>SI-7<br>SC-12<br>SC-12(3)<br>CM-6(a)<br>SA-12<br>SA-12(10)<br>CM-11(a)<br>CM-11(b)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80347-8</td>
+<td>Ensure gpgcheck Enabled for Local Packages</td>
+<td xml:lang="en-US">
+<code>yum</code> should be configured to verify the signature(s) of local packages
+prior to installation. To configure <code>yum</code> to verify signatures of local
+packages, set the <code>localpkg_gpgcheck</code> to <code>1</code> in <code>/etc/yum.conf</code>.</td>
+<td xml:lang="en-US">Changes to any software components can have significant effects to the overall security
+of the operating system. This requirement ensures the software has not been tampered and
+has been provided by a trusted vendor.
+<br><br>
+Accordingly, patches, service packs, device drivers, or operating system components must
+be signed with a certificate recognized and approved by the organization.</td>
+<td></td>
+<td>CM-11(a)<br>CM-11(b)<br>CM-6(a)<br>CM-5(3)<br>SA-12<br>SA-12(10)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-26876-3</td>
+<td>Ensure gpgcheck Enabled for All yum Package Repositories</td>
+<td xml:lang="en-US">To ensure signature checking is not disabled for
+any repos, remove any lines from files in <code>/etc/yum.repos.d</code> of the form:
+<pre>gpgcheck=0</pre>
+</td>
+<td xml:lang="en-US">Verifying the authenticity of the software prior to installation validates
+the integrity of the patch or upgrade received from a vendor. This ensures
+the software has not been tampered with and that it has been provided by a
+trusted vendor. Self-signed certificates are disallowed by this
+requirement. Certificates used to verify the software must be from an
+approved Certificate Authority (CA)."</td>
+<td></td>
+<td>CM-5(3)<br>SI-7<br>SC-12<br>SC-12(3)<br>CM-6(a)<br>SA-12<br>SA-12(10)<br>CM-11(a)<br>CM-11(b)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-26957-1</td>
+<td>Ensure Red Hat GPG Key Installed</td>
+<td xml:lang="en-US">To ensure the system can cryptographically verify base software packages
+come from Red Hat (and to connect to the Red Hat Network to receive them),
+the Red Hat GPG key must properly be installed. To install the Red Hat GPG
+key, run:
+<pre>$ sudo subscription-manager register</pre>
+
+If the system is not connected to the Internet or an RHN Satellite, then
+install the Red Hat GPG key from trusted media such as the Red Hat
+installation CD-ROM or DVD. Assuming the disc is mounted in
+<code>/media/cdrom</code>, use the following command as the root user to import
+it into the keyring:
+<pre>$ sudo rpm --import /media/cdrom/RPM-GPG-KEY</pre>
+
+Alternatively, the key may be pre-loaded during the RHEL installation. In
+such cases, the key can be installed by running the following command:
+<pre>sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release</pre>
+</td>
+<td xml:lang="en-US">Changes to software components can have significant effects on the overall
+security of the operating system. This requirement ensures the software has
+not been tampered with and that it has been provided by a trusted vendor.
+The Red Hat GPG key is necessary to cryptographically verify packages are
+from Red Hat.</td>
+<td></td>
+<td>CM-5(3)<br>SI-7<br>SC-12<br>SC-12(3)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27212-0</td>
+<td>Enable Auditing for Processes Which Start Prior to the Audit Daemon</td>
+<td xml:lang="en-US">To ensure all processes can be audited, even those which start
+prior to the audit daemon, add the argument <code>audit=1</code> to the default
+GRUB 2 command line for the Linux operating system in
+
+<code>/etc/default/grub</code>, so that the line looks similar to
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+In case the <code>GRUB_DISABLE_RECOVERY</code> is set to true, then the parameter should be added to the <code>GRUB_CMDLINE_LINUX_DEFAULT</code> instead.</td>
+<td xml:lang="en-US">Each process on the system carries an "auditable" flag which indicates whether
+its activities can be audited. Although <code>auditd</code> takes care of enabling
+this for all processes which launch after it does, adding the kernel argument
+ensures it is set for every process during boot.</td>
+<td></td>
+<td>AC-17(1)<br>AU-14(1)<br>AU-10<br>CM-6(a)<br>IR-5(1)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82156-1</td>
+<td>Extend Audit Backlog Limit for the Audit Daemon</td>
+<td xml:lang="en-US">To improve the kernel capacity to queue all log events, even those which occurred
+prior to the audit daemon, add the argument <code>audit_backlog_limit=8192</code> to the default
+GRUB 2 command line for the Linux operating system in
+<code>/etc/default/grub</code>, in the manner below:
+<pre>GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=VolGroup/LogVol06 rd.lvm.lv=VolGroup/lv_swap rhgb quiet rd.shell=0 audit=1 audit_backlog_limit=8192"</pre>
+</td>
+<td xml:lang="en-US">audit_backlog_limit sets the queue length for audit events awaiting transfer
+to the audit daemon. Until the audit daemon is up and running, all log messages
+are stored in this queue.  If the queue is overrun during boot process, the action
+defined by audit failure flag is taken.</td>
+<td></td>
+<td>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27335-9</td>
+<td>Verify that Interactive Boot is Disabled</td>
+<td xml:lang="en-US">Red Hat Enterprise Linux 7 systems support an "interactive boot" option that can
+be used to prevent services from being started. On a Red Hat Enterprise Linux 7
+system, interactive boot can be enabled by providing a <code>1</code>,
+<code>yes</code>, <code>true</code>, or <code>on</code> value to the
+<code>systemd.confirm_spawn</code> kernel argument in <code>/etc/default/grub</code>.
+Remove any instance of <pre>systemd.confirm_spawn=(1|yes|true|on)</pre> from
+the kernel arguments in that file to disable interactive boot. It is also
+required to change the runtime configuration, run:
+<pre>/sbin/grubby --update-kernel=ALL --remove-args="systemd.confirm_spawn"</pre>
+</td>
+<td xml:lang="en-US">Using interactive boot, the console user could disable auditing, firewalls,
+or other services, weakening system security.</td>
+<td></td>
+<td>SC-2(1)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80359-3</td>
+<td>Enable FIPS Mode in GRUB2</td>
+<td xml:lang="en-US">To ensure FIPS mode is enabled, install package <code>dracut-fips</code>, and rebuild <code>initramfs</code> by running the following commands:
+<pre>
+$ sudo yum install dracut-fips
+dracut -f</pre>
+After the <code>dracut</code> command has been run, add the argument <code>fips=1</code> to the default
+GRUB 2 command line for the Linux operating system in
+<code>/etc/default/grub</code>, in the manner below:
+<pre>GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=VolGroup/LogVol06 rd.lvm.lv=VolGroup/lv_swap rhgb quiet rd.shell=0 fips=1"</pre>
+Finally, rebuild the <code>grub.cfg</code> file by using the
+<pre>grub2-mkconfig -o</pre> command as follows:
+<ul>
+<li>On BIOS-based machines, issue the following command as <code>root</code>:
+<pre>~]# grub2-mkconfig -o /boot/grub2/grub.cfg</pre>
+</li>
+<li>On UEFI-based machines, issue the following command as <code>root</code>:
+<pre>~]# grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg</pre>
+</li>
+</ul>
+</td>
+<td xml:lang="en-US">Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to
+protect data. The operating system must implement cryptographic modules adhering to the higher
+standards approved by the federal government since this provides assurance they have been tested
+and validated.</td>
+<td></td>
+<td>SC-12(2)<br>SC-12(3)<br>IA-7<br>SC-13<br>CM-6(a)<br>SC-12<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82158-7</td>
+<td>Enable page allocator poisoning</td>
+<td xml:lang="en-US">To enable poisoning of free pages,
+add the argument <code>page_poison=1</code> to the default
+GRUB 2 command line for the Linux operating system in
+<code>/etc/default/grub</code>, in the manner below:
+<pre>GRUB_CMDLINE_LINUX="page_poison=1"</pre>
+</td>
+<td xml:lang="en-US">Poisoning writes an arbitrary value to freed pages, so any modification or
+reference to that page after being freed or before being initialized will be
+detected and prevented.
+This prevents many types of use-after-free vulnerabilities at little performance cost.
+Also prevents leak of data and detection of corrupted memory.</td>
+<td></td>
+<td>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82157-9</td>
+<td>Enable SLUB/SLAB allocator poisoning</td>
+<td xml:lang="en-US">To enable poisoning of SLUB/SLAB objects,
+add the argument <code>slub_debug=P</code> to the default
+GRUB 2 command line for the Linux operating system in
+<code>/etc/default/grub</code>, in the manner below:
+<pre>GRUB_CMDLINE_LINUX="slub_debug=P"</pre>
+</td>
+<td xml:lang="en-US">Poisoning writes an arbitrary value to freed objects, so any modification or
+reference to that object after being freed or before being initialized will be
+detected and prevented.
+This prevents many types of use-after-free vulnerabilities at little performance cost.
+Also prevents leak of data and detection of corrupted memory.</td>
+<td></td>
+<td>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80354-4</td>
+<td>Set the UEFI Boot Loader Password</td>
+<td xml:lang="en-US">The grub2 boot loader should have a superuser account and password
+protection enabled to protect boot-time settings.
+<br><br>
+Since plaintext passwords are a security risk, generate a hash for the password
+by running the following command:
+<pre>$ grub2-setpassword</pre>
+When prompted, enter the password that was selected.
+<br><br>
+Once the superuser password has been added,
+update the
+<code>grub.cfg</code> file by running:
+<pre>grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg</pre>
+</td>
+<td xml:lang="en-US">Password protection on the boot loader configuration ensures
+users with physical access cannot trivially alter
+important bootloader settings. These include which kernel to use,
+and whether to enter single-user mode.</td>
+<td></td>
+<td>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82159-5</td>
+<td>Disable vsyscalls</td>
+<td xml:lang="en-US">To disable use of virtual syscalls,
+add the argument <code>vsyscall=none</code> to the default
+GRUB 2 command line for the Linux operating system in
+<code>/etc/default/grub</code>, in the manner below:
+<pre>GRUB_CMDLINE_LINUX="vsyscall=none"</pre>
+</td>
+<td xml:lang="en-US">Virtual Syscalls provide an opportunity of attack for a user who has control
+of the return instruction pointer.</td>
+<td></td>
+<td>CM-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27327-6</td>
+<td>Disable Bluetooth Kernel Module</td>
+<td xml:lang="en-US">The kernel's module loading system can be configured to prevent
+loading of the Bluetooth module. Add the following to
+the appropriate <code>/etc/modprobe.d</code> configuration file
+to prevent the loading of the Bluetooth module:
+<pre>install bluetooth /bin/true</pre>
+</td>
+<td xml:lang="en-US">If Bluetooth functionality must be disabled, preventing the kernel
+from loading the kernel module provides an additional safeguard against its
+activation.</td>
+<td></td>
+<td>AC-18(a)<br>AC-18(3)<br>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80137-3</td>
+<td>Disable Mounting of cramfs</td>
+<td xml:lang="en-US">
+To configure the system to prevent the <code>cramfs</code>
+kernel module from being loaded, add the following line to a file in the directory <code>/etc/modprobe.d</code>:
+<pre>install cramfs /bin/true</pre>
+This effectively prevents usage of this uncommon filesystem.
+
+The <code>cramfs</code> filesystem type is a compressed read-only
+Linux filesystem embedded in small footprint systems. A
+<code>cramfs</code> image can be used without having to first
+decompress the image.</td>
+<td xml:lang="en-US">Removing support for unneeded filesystem types reduces the local attack surface
+of the server.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82024-1</td>
+<td>Disable DCCP Support</td>
+<td xml:lang="en-US">The Datagram Congestion Control Protocol (DCCP) is a
+relatively new transport layer protocol, designed to support
+streaming media and telephony.
+
+To configure the system to prevent the <code>dccp</code>
+kernel module from being loaded, add the following line to a file in the directory <code>/etc/modprobe.d</code>:
+<pre>install dccp /bin/true</pre>
+</td>
+<td xml:lang="en-US">Disabling DCCP protects
+the system against exploitation of any flaws in its implementation.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-82044-9</td>
+<td>Disable SCTP Support</td>
+<td xml:lang="en-US">The Stream Control Transmission Protocol (SCTP) is a
+transport layer protocol, designed to support the idea of
+message-oriented communication, with several streams of messages
+within one connection.
+
+To configure the system to prevent the <code>sctp</code>
+kernel module from being loaded, add the following line to a file in the directory <code>/etc/modprobe.d</code>:
+<pre>install sctp /bin/true</pre>
+</td>
+<td xml:lang="en-US">Disabling SCTP protects
+the system against exploitation of any flaws in its implementation.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27277-3</td>
+<td>Disable Modprobe Loading of USB Storage Driver</td>
+<td xml:lang="en-US">To prevent USB storage devices from being used, configure the kernel module loading system
+to prevent automatic loading of the USB storage driver.
+
+To configure the system to prevent the <code>usb-storage</code>
+kernel module from being loaded, add the following line to a file in the directory <code>/etc/modprobe.d</code>:
+<pre>install usb-storage /bin/true</pre>
+This will prevent the <code>modprobe</code> program from loading the <code>usb-storage</code>
+module, but will not prevent an administrator (or another program) from using the
+<code>insmod</code> program to load the module manually.</td>
+<td xml:lang="en-US">USB storage devices such as thumb drives can be used to introduce
+malicious software.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80152-2</td>
+<td>Add nodev Option to /dev/shm</td>
+<td xml:lang="en-US">The <code>nodev</code> mount option can be used to prevent creation of device
+files in <code>/dev/shm</code>. Legitimate character and block devices should
+not exist within temporary directories like <code>/dev/shm</code>.
+Add the <code>nodev</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/dev/shm</code>.</td>
+<td xml:lang="en-US">The only legitimate location for device files is the <code>/dev</code> directory
+located on the root partition. The only exception to this is chroot jails.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>AC-6<br>AC-6(1)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80153-0</td>
+<td>Add noexec Option to /dev/shm</td>
+<td xml:lang="en-US">The <code>noexec</code> mount option can be used to prevent binaries
+from being executed out of <code>/dev/shm</code>.
+It can be dangerous to allow the execution of binaries
+from world-writable temporary storage directories such as <code>/dev/shm</code>.
+Add the <code>noexec</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/dev/shm</code>.</td>
+<td xml:lang="en-US">Allowing users to execute binaries from world-writable directories
+such as <code>/dev/shm</code> can expose the system to potential compromise.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>AC-6<br>AC-6(1)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80154-8</td>
+<td>Add nosuid Option to /dev/shm</td>
+<td xml:lang="en-US">The <code>nosuid</code> mount option can be used to prevent execution
+of setuid programs in <code>/dev/shm</code>.  The SUID and SGID permissions should not
+be required in these world-writable directories.
+Add the <code>nosuid</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/dev/shm</code>.</td>
+<td xml:lang="en-US">The presence of SUID and SGID executables should be tightly controlled. Users
+should not be able to execute SUID or SGID binaries from temporary storage partitions.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>AC-6<br>AC-6(1)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-81047-3</td>
+<td>Add nodev Option to /home</td>
+<td xml:lang="en-US">The <code>nodev</code> mount option can be used to prevent device files from
+being created in <code>/home</code>.
+Legitimate character and block devices should exist only in
+the <code>/dev</code> directory on the root partition or within chroot
+jails built for system services.
+Add the <code>nodev</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/home</code>.</td>
+<td xml:lang="en-US">The only legitimate location for device files is the <code>/dev</code> directory
+located on the root partition. The only exception to this is chroot jails.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-81153-9</td>
+<td>Add nosuid Option to /home</td>
+<td xml:lang="en-US">The <code>nosuid</code> mount option can be used to prevent
+execution of setuid programs in <code>/home</code>. The SUID and SGID permissions
+should not be required in these user data directories.
+Add the <code>nosuid</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/home</code>.</td>
+<td xml:lang="en-US">The presence of SUID and SGID executables should be tightly controlled. Users
+should not be able to execute SUID or SGID binaries from user home directory partitions.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>AC-6<br>AC-6(1)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80149-8</td>
+<td>Add nodev Option to /tmp</td>
+<td xml:lang="en-US">The <code>nodev</code> mount option can be used to prevent device files from
+being created in <code>/tmp</code>. Legitimate character and block devices
+should not exist within temporary directories like <code>/tmp</code>.
+Add the <code>nodev</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/tmp</code>.</td>
+<td xml:lang="en-US">The only legitimate location for device files is the <code>/dev</code> directory
+located on the root partition. The only exception to this is chroot jails.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>AC-6<br>AC-6(1)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80150-6</td>
+<td>Add noexec Option to /tmp</td>
+<td xml:lang="en-US">The <code>noexec</code> mount option can be used to prevent binaries
+from being executed out of <code>/tmp</code>.
+Add the <code>noexec</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/tmp</code>.</td>
+<td xml:lang="en-US">Allowing users to execute binaries from world-writable directories
+such as <code>/tmp</code> should never be necessary in normal operation and
+can expose the system to potential compromise.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>AC-6<br>AC-6(1)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80151-4</td>
+<td>Add nosuid Option to /tmp</td>
+<td xml:lang="en-US">The <code>nosuid</code> mount option can be used to prevent
+execution of setuid programs in <code>/tmp</code>. The SUID and SGID permissions
+should not be required in these world-writable directories.
+Add the <code>nosuid</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/tmp</code>.</td>
+<td xml:lang="en-US">The presence of SUID and SGID executables should be tightly controlled. Users
+should not be able to execute SUID or SGID binaries from temporary storage partitions.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>AC-6<br>AC-6(1)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-81052-3</td>
+<td>Add nodev Option to /var/tmp</td>
+<td xml:lang="en-US">The <code>nodev</code> mount option can be used to prevent device files from
+being created in <code>/var/tmp</code>. Legitimate character and block devices
+should not exist within temporary directories like <code>/var/tmp</code>.
+Add the <code>nodev</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/var/tmp</code>.</td>
+<td xml:lang="en-US">The only legitimate location for device files is the <code>/dev</code> directory
+located on the root partition. The only exception to this is chroot jails.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-82150-4</td>
+<td>Add noexec Option to /var/tmp</td>
+<td xml:lang="en-US">The <code>noexec</code> mount option can be used to prevent binaries
+from being executed out of <code>/var/tmp</code>.
+Add the <code>noexec</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/var/tmp</code>.</td>
+<td xml:lang="en-US">Allowing users to execute binaries from world-writable directories
+such as <code>/var/tmp</code> should never be necessary in normal operation and
+can expose the system to potential compromise.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-82153-8</td>
+<td>Add nosuid Option to /var/tmp</td>
+<td xml:lang="en-US">The <code>nosuid</code> mount option can be used to prevent
+execution of setuid programs in <code>/var/tmp</code>. The SUID and SGID permissions
+should not be required in these world-writable directories.
+Add the <code>nosuid</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/var/tmp</code>.</td>
+<td xml:lang="en-US">The presence of SUID and SGID executables should be tightly controlled. Users
+should not be able to execute SUID or SGID binaries from temporary storage partitions.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-27286-4</td>
+<td>Prevent Login to Accounts With Empty Password</td>
+<td xml:lang="en-US">If an account is configured for password authentication
+but does not have an assigned password, it may be possible to log
+into the account without authentication. Remove any instances of the <code>nullok</code>
+option in <code>/etc/pam.d/system-auth</code> to
+prevent logins with empty passwords.</td>
+<td xml:lang="en-US">If an account has an empty password, anyone could log in and
+run commands with the privileges of that account. Accounts with
+empty passwords should never be used in operational environments.</td>
+<td></td>
+<td>IA-5(1)(a)<br>IA-5(c)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-81040-8</td>
+<td>Uninstall Automatic Bug Reporting Tool (abrt)</td>
+<td xml:lang="en-US">The Automatic Bug Reporting Tool (<code>abrt</code>) collects
+and reports crash data when an application crash is detected. Using a variety
+of plugins, abrt can email crash reports to system administrators, log crash
+reports to files, or forward crash reports to a centralized issue tracking
+system such as RHTSupport.
+The <code>abrt</code> package can be removed with the following command:
+<pre>
+$ sudo yum erase abrt</pre>
+</td>
+<td xml:lang="en-US">Mishandling crash data could expose sensitive information about
+vulnerabilities in software executing on the system, as well as sensitive
+information from within a process's address space or registers.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-80358-5</td>
+<td>Install the dracut-fips Package</td>
+<td xml:lang="en-US">To enable FIPS, the system requires that the <code>dracut-fips</code>
+package be installed.
+The <code>dracut-fips</code> package can be installed with the following command:
+<pre>
+$ sudo yum install dracut-fips</pre>
+</td>
+<td xml:lang="en-US">Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to
+protect data. The operating system must implement cryptographic modules adhering to the higher
+standards approved by the federal government since this provides assurance they have been tested
+and validated.</td>
+<td></td>
+<td>SC-12(2)<br>SC-12(3)<br>IA-7<br>SC-13<br>CM-6(a)<br>SC-12<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27351-6</td>
+<td>Install the screen Package</td>
+<td xml:lang="en-US">To enable console screen locking, install the <code>screen</code> package.
+The <code>screen</code> package can be installed with the following command:
+<pre>
+$ sudo yum install screen</pre>
+Instruct users to begin new terminal sessions with the following command:
+<pre>$ screen</pre>
+The console can now be locked with the following key combination:
+<pre>ctrl+a x</pre>
+</td>
+<td xml:lang="en-US">A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate
+physical vicinity of the information system but does not logout because of the temporary nature of the absence.
+Rather than relying on the user to manually lock their operation system session prior to vacating the vicinity,
+operating systems need to be able to identify when a user's session has idled and take action to initiate the
+session lock.
+<br><br>
+The <code>screen</code> package allows for a session lock to be implemented and configured.</td>
+<td></td>
+<td>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27287-2</td>
+<td>Require Authentication for Single User Mode</td>
+<td xml:lang="en-US">Single-user mode is intended as a system recovery
+method, providing a single user root access to the system by
+providing a boot option at startup. By default, no authentication
+is performed if single-user mode is selected.
+<br><br>
+
+By default, single-user mode is protected by requiring a password and is set
+in <code>/usr/lib/systemd/system/rescue.service</code>.</td>
+<td xml:lang="en-US">This prevents attackers with physical access from trivially bypassing security
+on the machine and gaining root access. Such accesses are further prevented
+by configuring the bootloader password.</td>
+<td></td>
+<td>IA-2<br>AC-3<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27318-5</td>
+<td>Restrict Virtual Console Root Logins</td>
+<td xml:lang="en-US">To restrict root logins through the (deprecated) virtual console devices,
+ensure lines of this form do not appear in <code>/etc/securetty</code>:
+<pre>vc/1
+vc/2
+vc/3
+vc/4</pre>
+</td>
+<td xml:lang="en-US">Preventing direct root login to virtual console devices
+helps ensure accountability for actions taken on the system
+using the root account.</td>
+<td></td>
+<td>AC-6<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27279-9</td>
+<td>Configure SELinux Policy</td>
+<td xml:lang="en-US">The SELinux <code>targeted</code> policy is appropriate for
+general-purpose desktops and servers, as well as systems in many other roles.
+To configure the system to use this policy, add or correct the following line
+in <code>/etc/selinux/config</code>:
+<pre>SELINUXTYPE=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_selinux_policy_name"></xccdf-1.1:sub></pre>
+Other policies, such as <code>mls</code>, provide additional security labeling
+and greater confinement but are not compatible with many general-purpose
+use cases.</td>
+<td xml:lang="en-US">Setting the SELinux policy to <code>targeted</code> or a more specialized policy
+ensures the system will confine processes that are likely to be
+targeted for exploitation, such as network or system services.
+<br><br>
+Note: During the development or debugging of SELinux modules, it is common to
+temporarily place non-production systems in <code>permissive</code> mode. In such
+temporary cases, SELinux policies should be developed, and once work
+is completed, the system should be reconfigured to
+<code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_selinux_policy_name"></xccdf-1.1:sub></code>.</td>
+<td></td>
+<td>AC-3<br>AC-3(3)(a)<br>AU-9<br>SC-7(21)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27334-2</td>
+<td>Ensure SELinux State is Enforcing</td>
+<td xml:lang="en-US">The SELinux state should be set to <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_selinux_state"></xccdf-1.1:sub></code> at
+system boot time.  In the file <code>/etc/selinux/config</code>, add or correct the
+following line to configure the system to boot into enforcing mode:
+<pre>SELINUX=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_selinux_state"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">Setting the SELinux state to enforcing ensures SELinux is able to confine
+potentially compromised processes to the security policy, which is designed to
+prevent them from causing damage to the system or further elevating their
+privileges.</td>
+<td></td>
+<td>AC-3<br>AC-3(3)(a)<br>AU-9<br>SC-7(21)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27407-6</td>
+<td>Enable auditd Service</td>
+<td xml:lang="en-US">The <code>auditd</code> service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The <code>auditd</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable auditd.service</pre>
+</td>
+<td xml:lang="en-US">Without establishing what type of events occurred, it would be difficult
+to establish, correlate, and investigate the events leading up to an outage or attack.
+Ensuring the <code>auditd</code> service is active ensures audit records
+generated by the kernel are appropriately recorded.
+<br><br>
+Additionally, a properly configured audit subsystem ensures that actions of
+individual system users can be uniquely traced to those users so they
+can be held accountable for their actions.</td>
+<td></td>
+<td>AC-2(g)<br>AU-3<br>AU-10<br>AU-2(d)<br>AU-12(c)<br>AU-14(1)<br>AC-6(9)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27498-5</td>
+<td>Disable the Automounter</td>
+<td xml:lang="en-US">The <code>autofs</code> daemon mounts and unmounts filesystems, such as user
+home directories shared via NFS, on demand. In addition, autofs can be used to handle
+removable media, and the default configuration provides the cdrom device as <code>/misc/cd</code>.
+However, this method of providing access to removable media is not common, so autofs
+can almost always be disabled if NFS is not in use. Even if NFS is required, it may be
+possible to configure filesystem mounts statically by editing <code>/etc/fstab</code>
+rather than relying on the automounter.
+<br><br>
+
+The <code>autofs</code> service can be disabled with the following command:
+<pre>$ sudo systemctl disable autofs.service</pre>
+The <code>autofs</code> service can be masked with the following command:
+<pre>$ sudo systemctl mask autofs.service</pre>
+</td>
+<td xml:lang="en-US">Disabling the automounter permits the administrator to
+statically control filesystem mounting through <code>/etc/fstab</code>.
+<br><br>
+Additionally, automatically mounting filesystems permits easy introduction of
+unknown devices, thereby facilitating malicious activity.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>MP-7<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80206-6</td>
+<td>Disable debug-shell SystemD Service</td>
+<td xml:lang="en-US">SystemD's <code>debug-shell</code> service is intended to
+diagnose SystemD related boot issues with various <code>systemctl</code>
+commands. Once enabled and following a system reboot, the root shell
+will be available on <code>tty9</code> which is access by pressing
+<code>CTRL-ALT-F9</code>. The <code>debug-shell</code> service should only be used
+for SystemD related issues and should otherwise be disabled.
+<br><br>
+By default, the <code>debug-shell</code> SystemD service is already disabled.
+
+The <code>debug-shell</code> service can be disabled with the following command:
+<pre>$ sudo systemctl disable debug-shell.service</pre>
+The <code>debug-shell</code> service can be masked with the following command:
+<pre>$ sudo systemctl mask debug-shell.service</pre>
+</td>
+<td xml:lang="en-US">This prevents attackers with physical access from trivially bypassing security
+on the machine through valid troubleshooting configurations and gaining root
+access when the system is rebooted.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-80998-8</td>
+<td>Verify firewalld Enabled</td>
+<td xml:lang="en-US"> The <code>firewalld</code> service can be enabled with the following command: <pre>$ sudo systemctl enable firewalld.service</pre>
+</td>
+<td xml:lang="en-US">Access control methods provide the ability to enhance system security posture
+by restricting services and known good IP addresses and address ranges. This
+prevents connections from unknown hosts and protocols.</td>
+<td></td>
+<td>AC-4<br>CM-7(b)<br>CA-3(5)<br>SC-7(21)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80258-7</td>
+<td>Disable KDump Kernel Crash Analyzer (kdump)</td>
+<td xml:lang="en-US">The <code>kdump</code> service provides a kernel crash dump analyzer. It uses the <code>kexec</code>
+system call to boot a secondary kernel ("capture" kernel) following a system
+crash, which can load information from the crashed kernel for analysis.
+
+The <code>kdump</code> service can be disabled with the following command:
+<pre>$ sudo systemctl disable kdump.service</pre>
+The <code>kdump</code> service can be masked with the following command:
+<pre>$ sudo systemctl mask kdump.service</pre>
+</td>
+<td xml:lang="en-US">Kernel core dumps may contain the full contents of system memory at the
+time of the crash. Kernel core dumps consume a considerable amount of disk
+space and may result in denial of service by exhausting the available space
+on the target file system partition. Unless the system is used for kernel
+development or testing, there is little need to run the kdump service.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80230-6</td>
+<td>Disable rpcbind Service</td>
+<td xml:lang="en-US">The rpcbind utility maps RPC services to the ports on which they listen.
+RPC processes notify rpcbind when they start, registering the ports they
+are listening on and the RPC program numbers they expect to serve. The
+rpcbind service redirects the client to the proper port number so it can
+communicate with the requested service. If the system does not require RPC
+(such as for NFS servers) then this service should be disabled.
+
+The <code>rpcbind</code> service can be disabled with the following command:
+<pre>$ sudo systemctl disable rpcbind.service</pre>
+The <code>rpcbind</code> service can be masked with the following command:
+<pre>$ sudo systemctl mask rpcbind.service</pre>
+</td>
+<td xml:lang="en-US">If the system does not require rpc based services, it is recommended that
+rpcbind be disabled to reduce the attack surface.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-27471-2</td>
+<td>Disable SSH Access via Empty Passwords</td>
+<td xml:lang="en-US">To explicitly disallow SSH login from accounts with
+empty passwords, add or correct the following line in <code>/etc/ssh/sshd_config</code>:
+<br>
+<pre>PermitEmptyPasswords no</pre>
+<br>
+Any accounts with empty passwords should be disabled immediately, and PAM configuration
+should prevent users from being able to assign themselves empty passwords.</td>
+<td xml:lang="en-US">Configuring this setting for the SSH daemon provides additional assurance
+that remote login via SSH will require a password, even in the event of
+misconfiguration elsewhere.</td>
+<td></td>
+<td>AC-17(a)<br>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80220-7</td>
+<td>Disable GSSAPI Authentication</td>
+<td xml:lang="en-US">Unless needed, SSH should not permit extraneous or unnecessary
+authentication mechanisms like GSSAPI. To disable GSSAPI authentication, add or
+correct the following line in the <code>/etc/ssh/sshd_config</code> file:
+<pre>GSSAPIAuthentication no</pre>
+</td>
+<td xml:lang="en-US">GSSAPI authentication is used to provide additional authentication mechanisms to
+applications. Allowing GSSAPI authentication through SSH exposes the system's
+GSSAPI to remote hosts, increasing the attack surface of the system.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>AC-17(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80221-5</td>
+<td>Disable Kerberos Authentication</td>
+<td xml:lang="en-US">Unless needed, SSH should not permit extraneous or unnecessary
+authentication mechanisms like Kerberos. To disable Kerberos authentication, add
+or correct the following line in the <code>/etc/ssh/sshd_config</code> file:
+<pre>KerberosAuthentication no</pre>
+</td>
+<td xml:lang="en-US">Kerberos authentication for SSH is often implemented using GSSAPI. If Kerberos
+is enabled through SSH, the SSH daemon provides a means of access to the
+system's Kerberos implementation. Vulnerabilities in the system's Kerberos
+implementations may be subject to exploitation.</td>
+<td></td>
+<td>AC-17(a)<br>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80373-4</td>
+<td>Disable SSH Support for Rhosts RSA Authentication</td>
+<td xml:lang="en-US">SSH can allow authentication through the obsolete rsh
+command through the use of the authenticating user's SSH keys. This should be disabled.
+<br><br>
+To ensure this behavior is disabled, add or correct the
+following line in <code>/etc/ssh/sshd_config</code>:
+<pre>RhostsRSAAuthentication no</pre>
+</td>
+<td xml:lang="en-US">Configuring this setting for the SSH daemon provides additional
+assurance that remote login via SSH will require a password, even
+in the event of misconfiguration elsewhere.</td>
+<td></td>
+<td>AC-17(a)<br>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27445-6</td>
+<td>Disable SSH Root Login</td>
+<td xml:lang="en-US">The root user should never be allowed to login to a
+system directly over a network.
+To disable root login via SSH, add or correct the following line
+in <code>/etc/ssh/sshd_config</code>:
+<pre>PermitRootLogin no</pre>
+</td>
+<td xml:lang="en-US">Even though the communications channel may be encrypted, an additional layer of
+security is gained by extending the policy of not logging directly on as root.
+In addition, logging in with a user-specific account provides individual
+accountability of actions performed on the system and also helps to minimize
+direct attack attempts on root's password.</td>
+<td></td>
+<td>AC-6(2)<br>AC-17(a)<br>IA-2<br>IA-2(5)<br>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80222-3</td>
+<td>Enable Use of Strict Mode Checking</td>
+<td xml:lang="en-US">SSHs <code>StrictModes</code> option checks file and ownership permissions in
+the user's home directory <code>.ssh</code> folder before accepting login. If world-
+writable permissions are found, logon is rejected. To enable <code>StrictModes</code> in SSH,
+add or correct the following line in the <code>/etc/ssh/sshd_config</code> file:
+<pre>StrictModes yes</pre>
+</td>
+<td xml:lang="en-US">If other users have access to modify user-specific SSH configuration files, they
+may be able to log into the system as another user.</td>
+<td></td>
+<td>AC-6<br>AC-17(a)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27314-4</td>
+<td>Enable SSH Warning Banner</td>
+<td xml:lang="en-US">To enable the warning banner and ensure it is consistent
+across the system, add or correct the following line in <code>/etc/ssh/sshd_config</code>:
+<pre>Banner /etc/issue</pre>
+Another section contains information on how to create an
+appropriate system-wide warning banner.</td>
+<td xml:lang="en-US">The warning message reinforces policy awareness during the logon process and
+facilitates possible legal action against attackers. Alternatively, systems
+whose ownership should not be obvious should ensure usage of a banner that does
+not provide easy attribution.</td>
+<td></td>
+<td>AC-8(a)<br>AC-8(c)<br>AC-17(a)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27433-2</td>
+<td>Set SSH Idle Timeout Interval</td>
+<td xml:lang="en-US">SSH allows administrators to set an idle timeout interval. After this interval
+has passed, the idle user will be automatically logged out.
+<br><br>
+To set an idle timeout interval, edit the following line in <code>/etc/ssh/sshd_config</code> as
+follows:
+<pre>ClientAliveInterval <b><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="sshd_idle_timeout_value"></xccdf-1.1:sub></b></pre>
+<br><br>
+The timeout <b>interval</b> is given in seconds. For example, have a timeout
+of 10 minutes, set <b>interval</b> to 600.
+<br><br>
+If a shorter timeout has already been set for the login shell, that value will
+preempt any SSH setting made in <code>/etc/ssh/sshd_config</code>. Keep in mind that
+some processes may stop SSH  from correctly detecting that the user is idle.</td>
+<td xml:lang="en-US">Terminating an idle ssh session within a short time period reduces the window of
+opportunity for unauthorized personnel to take control of a management session
+enabled on the console or console port that has been let unattended.</td>
+<td></td>
+<td>CM-6(a)<br>AC-17(a)<br>AC-2(5)<br>AC-12<br>AC-17(a)<br>SC-10<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27082-7</td>
+<td>Set SSH Client Alive Max Count</td>
+<td xml:lang="en-US">To ensure the SSH idle timeout occurs precisely when the <code>ClientAliveInterval</code> is set,
+edit <code>/etc/ssh/sshd_config</code> as follows:
+<pre>ClientAliveCountMax <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_sshd_set_keepalive"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">This ensures a user login will be terminated as soon as the <code>ClientAliveInterval</code>
+is reached.</td>
+<td></td>
+<td>AC-2(5)<br>AC-12<br>AC-17(a)<br>SC-10<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27295-5</td>
+<td>Use Only FIPS 140-2 Validated Ciphers</td>
+<td xml:lang="en-US">Limit the ciphers to those algorithms which are FIPS-approved.
+Counter (CTR) mode is also preferred over cipher-block chaining (CBC) mode.
+The following line in <code>/etc/ssh/sshd_config</code>
+demonstrates use of FIPS-approved ciphers:
+<pre>Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc</pre>
+The man page <code>sshd_config(5)</code> contains a list of supported ciphers.
+
+<br><br>
+Only the following ciphers are FIPS 140-2 certified on Red Hat Enterprise Linux 7:
+<br>- aes128-ctr
+<br>- aes192-ctr
+<br>- aes256-ctr
+<br>- aes128-cbc
+<br>- aes192-cbc
+<br>- aes256-cbc
+<br>- 3des-cbc
+<br>- rijndael-cbc@lysator.liu.se
+<br><br>
+Any combination of the above ciphers will pass this check.
+Official FIPS 140-2 paperwork for Red Hat Enterprise Linux 7 can be found at
+
+
+    <a href="http://csrc.nist.gov/groups/STM/cmvp/documents/140-1/140sp/140sp2630.pdf">http://csrc.nist.gov/groups/STM/cmvp/documents/140-1/140sp/140sp2630.pdf</a>
+
+
+The rule is parametrized to use the following ciphers: <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="sshd_approved_ciphers"></xccdf-1.1:sub></code>.</td>
+<td xml:lang="en-US">Unapproved mechanisms that are used for authentication to the cryptographic module are not verified and therefore
+cannot be relied upon to provide confidentiality or integrity, and system data may be compromised.
+<br>
+Operating systems utilizing encryption are required to use FIPS-compliant mechanisms for authenticating to
+cryptographic modules.
+<br>
+FIPS 140-2 is the current standard for validating that mechanisms used to access cryptographic modules
+utilize authentication that meets industry and government requirements. For government systems, this allows
+Security Levels 1, 2, 3, or 4 for use on Red Hat Enterprise Linux 7.</td>
+<td></td>
+<td>CM-6(a)<br>AC-17(a)<br>AC-17(2)<br>SC-13<br>MA-4(6)<br>IA-5(1)(c)<br>SC-12(2)<br>SC-12(3)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27455-5</td>
+<td>Use Only FIPS 140-2 Validated MACs</td>
+<td xml:lang="en-US">Limit the MACs to those hash algorithms which are FIPS-approved.
+The following line in <code>/etc/ssh/sshd_config</code>
+demonstrates use of FIPS-approved MACs:
+
+<pre>MACs hmac-sha2-512,hmac-sha2-256,hmac-sha1</pre>
+
+The man page <code>sshd_config(5)</code> contains a list of supported MACs.
+
+<br><br>
+Only the following message authentication codes are FIPS 140-2 certified on Red Hat Enterprise Linux 7:
+<br>- hmac-sha1
+<br>- hmac-sha2-256
+<br>- hmac-sha2-512
+<br>- hmac-sha1-etm@openssh.com
+<br>- hmac-sha2-256-etm@openssh.com
+<br>- hmac-sha2-512-etm@openssh.com
+<br><br>
+Any combination of the above MACs will pass this check. Official FIPS 140-2 paperwork for
+Red Hat Enterprise Linux 7 can be found at
+
+
+    <a href="http://csrc.nist.gov/groups/STM/cmvp/documents/140-1/140sp/140sp2630.pdf">http://csrc.nist.gov/groups/STM/cmvp/documents/140-1/140sp/140sp2630.pdf</a>
+
+
+The rule is parametrized to use the following MACs: <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="sshd_approved_macs"></xccdf-1.1:sub></code>.</td>
+<td xml:lang="en-US">DoD Information Systems are required to use FIPS-approved cryptographic hash
+functions. The only SSHv2 hash algorithms meeting this requirement is SHA2.</td>
+<td></td>
+<td>CM-6(a)<br>AC-17(a)<br>AC-17(2)<br>SC-13<br>MA-4(6)<br>SC-12(2)<br>SC-12(3)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-81026-7</td>
+<td>Enable Kernel Parameter to Enforce DAC on Hardlinks</td>
+<td xml:lang="en-US">To set the runtime status of the <code>fs.protected_hardlinks</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w fs.protected_hardlinks=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>fs.protected_hardlinks = 1</pre>
+</td>
+<td xml:lang="en-US">By enabling this kernel parameter, users can no longer create soft or hard links to
+files which they do not own. Disallowing such hardlinks mitigate vulnerabilities
+based on insecure file system accessed by privileged programs, avoiding an
+exploitation vector exploiting unsafe use of <code>open()</code> or <code>creat()</code>.</td>
+<td></td>
+<td>CM-6(a)<br>AC-6(1)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-81029-1</td>
+<td>Enable Kernel Parameter to Enforce DAC on Symlinks</td>
+<td xml:lang="en-US">To set the runtime status of the <code>fs.protected_symlinks</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w fs.protected_symlinks=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>fs.protected_symlinks = 1</pre>
+</td>
+<td xml:lang="en-US">By enabling this kernel parameter, symbolic links are permitted to be followed
+only when outside a sticky world-writable directory, or when the UID of the
+link and follower match, or when the directory owner matches the symlink's owner.
+Disallowing such symlinks helps mitigate vulnerabilities based on insecure file system
+accessed by privileged programs, avoiding an exploitation vector exploiting unsafe use of
+<code>open()</code> or <code>creat()</code>.</td>
+<td></td>
+<td>CM-6(a)<br>AC-6(1)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27050-4</td>
+<td>Restrict Access to Kernel Message Buffer</td>
+<td xml:lang="en-US">To set the runtime status of the <code>kernel.dmesg_restrict</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.dmesg_restrict=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>kernel.dmesg_restrict = 1</pre>
+</td>
+<td xml:lang="en-US">Unprivileged access to the kernel syslog can expose sensitive kernel
+address information.</td>
+<td></td>
+<td>SI-11(a)<br>SI-11(b)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-81056-4</td>
+<td>Disable Kernel Image Loading</td>
+<td xml:lang="en-US">To set the runtime status of the <code>kernel.kexec_load_disabled</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.kexec_load_disabled=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>kernel.kexec_load_disabled = 1</pre>
+</td>
+<td xml:lang="en-US">Disabling kexec_load allows greater control of the kernel memory.
+It makes it impossible to load another kernel image after it has been disabled.
+</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-80659-6</td>
+<td>Restrict Exposed Kernel Pointer Addresses Access</td>
+<td xml:lang="en-US">To set the runtime status of the <code>kernel.kptr_restrict</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.kptr_restrict=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>kernel.kptr_restrict = 1</pre>
+</td>
+<td xml:lang="en-US">Exposing kernel pointers (through procfs or <code>seq_printf()</code>) exposes
+kernel writeable structures that can contain functions pointers. If a write vulnereability occurs
+in the kernel allowing a write access to any of this structure, the kernel can be compromise. This
+option disallow any program withtout the CAP_SYSLOG capability from getting the kernel pointers addresses,
+replacing them with 0.</td>
+<td></td>
+<td>SC-30<br>SC-30(2)<br>SC-30(5)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-81058-0</td>
+<td>Restrict usage of ptrace to descendant processes</td>
+<td xml:lang="en-US">To set the runtime status of the <code>kernel.yama.ptrace_scope</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.yama.ptrace_scope=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>kernel.yama.ptrace_scope = 1</pre>
+</td>
+<td xml:lang="en-US">Unrestricted usage of ptrace allows compromised binaries to run ptrace
+on another processes of the user. Like this, the attacker can steal
+sensitive information from the target processes (e.g. SSH sessions, web browser, ...)
+without any additional assistance from the user (i.e. without resorting to phishing).
+</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCE-80158-9</td>
+<td>Disable Accepting ICMP Redirects for All IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.accept_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.accept_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.accept_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">ICMP redirect messages are used by routers to inform hosts that a more
+direct route exists for a particular destination. These messages modify the
+host's route table and are unauthenticated. An illicit ICMP redirect
+message could result in a man-in-the-middle attack.
+<br>
+This feature of the IPv4 protocol has few legitimate uses. It should be
+disabled unless absolutely required."</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27434-0</td>
+<td>Disable Kernel Parameter for Accepting Source-Routed Packets on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.accept_source_route</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.accept_source_route=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.accept_source_route = 0</pre>
+</td>
+<td xml:lang="en-US">Source-routed packets allow the source of the packet to suggest routers
+forward the packet along a different path than configured on the router,
+which can be used to bypass network security measures. This requirement
+applies only to the forwarding of source-routerd traffic, such as when IPv4
+forwarding is enabled and the system is functioning as a router.
+<br><br>
+Accepting source-routed packets in the IPv4 protocol has few legitimate
+uses. It should be disabled unless it is absolutely required.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5CM-6(a)<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80160-5</td>
+<td>Enable Kernel Parameter to Log Martian Packets on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.log_martians</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.log_martians=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.log_martians = 1</pre>
+</td>
+<td xml:lang="en-US">The presence of "martian" packets (which have impossible addresses)
+as well as spoofed packets, source-routed packets, and redirects could be a
+sign of nefarious network activity. Logging these packets enables this activity
+to be detected.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5(3)(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80167-0</td>
+<td>Enable Kernel Parameter to Use Reverse Path Filtering on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.rp_filter</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.rp_filter=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.rp_filter = 1</pre>
+</td>
+<td xml:lang="en-US">Enabling reverse path filtering drops packets with source addresses
+that should not have been able to be received on the interface they were
+received on. It should not be used on systems which are routers for
+complicated networks, but is helpful for end hosts and routers serving small
+networks.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80159-7</td>
+<td>Disable Kernel Parameter for Accepting Secure ICMP Redirects on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.secure_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.secure_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.secure_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">Accepting "secure" ICMP redirects (from those gateways listed as
+default gateways) has few legitimate uses. It should be disabled unless it is
+absolutely required.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80156-3</td>
+<td>Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.send_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.send_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.send_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">ICMP redirect messages are used by routers to inform hosts that a more
+direct route exists for a particular destination. These messages contain information
+from the system's route table possibly revealing portions of the network topology.
+<br>
+The ability to send ICMP redirects is only appropriate for systems acting as routers.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5CM-6(a)<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80163-9</td>
+<td>Disable Kernel Parameter for Accepting ICMP Redirects by Default on IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.accept_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.accept_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.accept_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">ICMP redirect messages are used by routers to inform hosts that a more
+direct route exists for a particular destination. These messages modify the
+host's route table and are unauthenticated. An illicit ICMP redirect
+message could result in a man-in-the-middle attack.
+<br>This feature of the IPv4 protocol has few legitimate uses. It should
+be disabled unless absolutely required.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80162-1</td>
+<td>Disable Kernel Parameter for Accepting Source-Routed Packets on IPv4 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.accept_source_route</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.accept_source_route=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.accept_source_route = 0</pre>
+</td>
+<td xml:lang="en-US">Source-routed packets allow the source of the packet to suggest routers
+forward the packet along a different path than configured on the router,
+which can be used to bypass network security measures.
+<br>
+Accepting source-routed packets in the IPv4 protocol has few legitimate
+uses. It should be disabled unless it is absolutely required, such as when
+IPv4 forwarding is enabled and the system is legitimately functioning as a
+router.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80161-3</td>
+<td>Enable Kernel Paremeter to Log Martian Packets on all IPv4 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.log_martians</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.log_martians=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.log_martians = 1</pre>
+</td>
+<td xml:lang="en-US">The presence of "martian" packets (which have impossible addresses)
+as well as spoofed packets, source-routed packets, and redirects could be a
+sign of nefarious network activity. Logging these packets enables this activity
+to be detected.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5(3)(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80168-8</td>
+<td>Enable Kernel Parameter to Use Reverse Path Filtering on all IPv4 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.rp_filter</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.rp_filter=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.rp_filter = 1</pre>
+</td>
+<td xml:lang="en-US">Enabling reverse path filtering drops packets with source addresses
+that should not have been able to be received on the interface they were
+received on. It should not be used on systems which are routers for
+complicated networks, but is helpful for end hosts and routers serving small
+networks.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80164-7</td>
+<td>Configure Kernel Parameter for Accepting Secure Redirects By Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.secure_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.secure_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.secure_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">Accepting "secure" ICMP redirects (from those gateways listed as
+default gateways) has few legitimate uses. It should be disabled unless it is
+absolutely required.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80999-6</td>
+<td>Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.send_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.send_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.send_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">ICMP redirect messages are used by routers to inform hosts that a more
+direct route exists for a particular destination. These messages contain information
+from the system's route table possibly revealing portions of the network topology.
+<br>
+The ability to send ICMP redirects is only appropriate for systems acting as routers.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5CM-6(a)<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80165-4</td>
+<td>Enable Kernel Parameter to Ignore ICMP Broadcast Echo Requests on IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.icmp_echo_ignore_broadcasts</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.icmp_echo_ignore_broadcasts = 1</pre>
+</td>
+<td xml:lang="en-US">Responding to broadcast (ICMP) echoes facilitates network mapping
+and provides a vector for amplification attacks.
+<br>
+Ignoring ICMP echo requests (pings) sent to broadcast or multicast
+addresses makes the system slightly more difficult to enumerate on the network.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80166-2</td>
+<td>Enable Kernel Parameter to Ignore Bogus ICMP Error Responses on IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.icmp_ignore_bogus_error_responses</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.icmp_ignore_bogus_error_responses = 1</pre>
+</td>
+<td xml:lang="en-US">Ignoring bogus ICMP error responses reduces
+log size, although some activity would not be logged.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80157-1</td>
+<td>Disable Kernel Parameter for IP Forwarding on IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.ip_forward</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.ip_forward=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.ip_forward = 0</pre>
+</td>
+<td xml:lang="en-US">Routing protocol daemons are typically used on routers to exchange
+network topology information with other routers. If this capability is used when
+not required, system network information may be unnecessarily transmitted across
+the network.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5CM-6(a)<br>SC-7(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-27495-1</td>
+<td>Enable Kernel Parameter to Use TCP Syncookies on IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.tcp_syncookies</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.tcp_syncookies=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.tcp_syncookies = 1</pre>
+</td>
+<td xml:lang="en-US">A TCP SYN flood attack can cause a denial of service by filling a
+system's TCP connection table with connections in the SYN_RCVD state.
+Syncookies can be used to track a connection when a subsequent ACK is received,
+verifying the initiator is attempting a valid connection and is not a flood
+source. This feature is activated when a flood condition is detected, and
+enables the system to continue servicing valid connection requests.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>SC-5(1)<br>SC-5(2)<br>SC-5(3)(a)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80180-3</td>
+<td>Configure Accepting Router Advertisements on All IPv6 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.all.accept_ra</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.all.accept_ra=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.all.accept_ra = 0</pre>
+</td>
+<td xml:lang="en-US">An illicit router advertisement message could result in a man-in-the-middle attack.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80182-9</td>
+<td>Disable Accepting ICMP Redirects for All IPv6 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.all.accept_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.all.accept_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.all.accept_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">An illicit ICMP redirect message could result in a man-in-the-middle attack.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80179-5</td>
+<td>Disable Kernel Parameter for Accepting Source-Routed Packets on all IPv6 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.all.accept_source_route</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.all.accept_source_route=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.all.accept_source_route = 0</pre>
+</td>
+<td xml:lang="en-US">Source-routed packets allow the source of the packet to suggest routers
+forward the packet along a different path than configured on the router, which can
+be used to bypass network security measures. This requirement applies only to the
+forwarding of source-routerd traffic, such as when IPv6 forwarding is enabled and
+the system is functioning as a router.
+<br><br>
+Accepting source-routed packets in the IPv6 protocol has few legitimate
+uses. It should be disabled unless it is absolutely required.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80181-1</td>
+<td>Disable Accepting Router Advertisements on all IPv6 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.default.accept_ra</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.default.accept_ra=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.default.accept_ra = 0</pre>
+</td>
+<td xml:lang="en-US">An illicit router advertisement message could result in a man-in-the-middle attack.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80183-7</td>
+<td>Disable Kernel Parameter for Accepting ICMP Redirects by Default on IPv6 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.default.accept_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.default.accept_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.default.accept_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">An illicit ICMP redirect message could result in a man-in-the-middle attack.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+<tr>
+<td>CCE-80355-1</td>
+<td>Disable Kernel Parameter for Accepting Source-Routed Packets on IPv6 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.default.accept_source_route</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.default.accept_source_route=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.default.accept_source_route = 0</pre>
+</td>
+<td xml:lang="en-US">Source-routed packets allow the source of the packet to suggest routers
+forward the packet along a different path than configured on the router, which can
+be used to bypass network security measures. This requirement applies only to the
+forwarding of source-routerd traffic, such as when IPv6 forwarding is enabled and
+the system is functioning as a router.
+
+Accepting source-routed packets in the IPv6 protocol has few legitimate
+uses. It should be disabled unless it is absolutely required.</td>
+<td></td>
+<td>CM-7(a)<br>CM-7(b)<br>CM-6(a)<br>
+</td>
+</tr>
+</table>
+</body>
+</html>

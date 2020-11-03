@@ -1,0 +1,2933 @@
+<html xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:ocil2="http://scap.nist.gov/schema/ocil/2.0">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>SRGs from Application Server Security Requirements Guide Mapped to STIG for JBoss Enterprise Application Platform 6</title>
+</head>
+<body>
+<br><br><div style="text-align: center; font-size: x-large; font-weight:bold">
+			SRGs from Application Server Security Requirements Guide Mapped to STIG for JBoss Enterprise Application Platform 6</div>
+<br><br><style type="text/css">
+		table
+		{
+			border-collapse:collapse;
+		}
+		table, th, td
+		{
+			border: 2px solid #dcdcdc;
+			border-left: none;
+			border-right: none;
+			vertical-align: top;
+			padding: 2px;
+			font-family: verdana,arial,sans-serif;
+			font-size:11px;
+		}
+		pre { 
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap !important;
+			word-wrap:break-word; 
+		}
+		table tr:nth-child(2n+2) { background-color: #f4f4f4; }
+		thead
+		{
+			display: table-header-group;
+			font-weight: bold;
+			background-color: #dedede;
+		}
+	</style>
+<table>
+<thead>
+<td>CCI</td>
+<td>SRGID</td>
+<td>STIGID</td>
+<td>SRG Requirement</td>
+<td>Requirement</td>
+<td>SRG VulDiscussion</td>
+<td>VulDiscussion</td>
+<td>Status</td>
+<td>SRG Check</td>
+<td>Check</td>
+<td>SRG Fix</td>
+<td>Fix</td>
+<td>Severity</td>
+<td>Mitigation</td>
+<td>Artifact Description</td>
+<td>Status Justification</td>
+</thead>
+<tr>
+<td>CCI-000054</td>
+<td>SRG-APP-000001-AS-000001</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must limit the number of concurrent sessions to an organization-defined number for all accounts and/or account types.</td>
+<td></td>
+<td>Application management includes the ability to control the number of sessions that utilize an application by all accounts and/or account types. Limiting the number of allowed sessions is helpful in limiting risks related to Denial of Service attacks.
+
+Application servers host and expose business logic and application processes.
+
+The application server must possess the capability to limit the maximum number of concurrent sessions in a manner that affects the entire application server or on an individual application basis.
+
+Although there is some latitude concerning the settings themselves, the settings should follow DoD-recommended values, but the settings should be configurable to allow for future DoD direction.
+
+While the DoD will specify recommended values, the values can be adjusted to accommodate the operational requirement of a given system.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000068</td>
+<td>SRG-APP-000014-AS-000009</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must use encryption strength in accordance with the categorization of the management data during remote access management sessions.</td>
+<td></td>
+<td>Remote management access is accomplished by leveraging common communication protocols and establishing a remote connection to the application server via a network for the purposes of managing the application server. If cryptography is not used, then the session data traversing the remote connection could be intercepted and compromised. 
+
+Types of management interfaces utilized by an application server include web-based HTTPS interfaces as well as command line-based management interfaces.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001453</td>
+<td>SRG-APP-000015-AS-000010</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must implement cryptography mechanisms to protect the integrity of the remote access session.</td>
+<td></td>
+<td>Encryption is critical for protection of remote access sessions. If encryption is not being used for integrity, malicious users may gain the ability to modify the application server configuration. The use of cryptography for ensuring integrity of remote access sessions mitigates that risk.
+
+Application servers utilize a web management interface and scripted commands when allowing remote access. Web access requires the use of TLS and scripted access requires using ssh or some other form of approved cryptography. Application servers must have a capability to enable a secure remote admin capability.
+
+FIPS 140-2 approved TLS versions include TLS V1.0 or greater.
+
+FIPS 140-2 approved TLS versions must be enabled and non-FIPS-approved SSL versions must be disabled.
+
+NIST SP 800-52 specifies the preferred configurations for government systems.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000048</td>
+<td>SRG-APP-000068-AS-000035</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server management interface must display the Standard Mandatory DoD Notice and Consent Banner before granting access to the system.</td>
+<td></td>
+<td>Application servers are required to display the Standard Mandatory DoD Notice and Consent Banner before granting access to the system management interface, providing privacy and security notices consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance that states that: 
+
+(i) users are accessing a U.S. Government information system; 
+(ii) system usage may be monitored, recorded, and subject to audit; 
+(iii) unauthorized use of the system is prohibited and subject to criminal and civil penalties; and 
+(iv) the use of the system indicates consent to monitoring and recording.
+
+System use notification messages can be implemented in the form of warning banners displayed when individuals log on to the information system. 
+
+System use notification is intended only for information system access including an interactive logon interface with a human user, and is not required when an interactive interface does not exist. 
+
+Use this banner for desktops, laptops, and other devices accommodating banners of 1300 characters. The banner shall be implemented as a click-through banner at logon (to the extent permitted by the operating system), meaning it prevents further activity on the information system unless and until the user executes a positive action to manifest agreement by clicking on a box indicating "OK".
+
+"You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+-At any time, the USG may inspect and seize data stored on this IS.
+-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details."</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000050</td>
+<td>SRG-APP-000069-AS-000036</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server management interface must retain the Standard Mandatory DoD Notice and Consent Banner on the screen until users acknowledge the usage conditions and take explicit actions to log on for further access.</td>
+<td></td>
+<td>To establish acceptance of system usage policy, a click-through banner at the application server management interface logon is required. The banner shall prevent further activity on the application server unless and until the user executes a positive action to manifest agreement by clicking on a box indicating "OK".</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000166</td>
+<td>SRG-APP-000080-AS-000045</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect against an individual (or process acting on behalf of an individual) falsely denying having performed organization-defined actions to be covered by non-repudiation.</td>
+<td></td>
+<td>Non-repudiation of actions taken is required in order to maintain application integrity. Examples of particular actions taken by individuals include creating information, sending a message, approving information (e.g., indicating concurrence or signing a contract), and receiving a message. 
+
+Non-repudiation protects individuals against later claims by an author of not having authored a particular document, a sender of not having transmitted a message, a receiver of not having received a message, or a signatory of not having signed a document. 
+
+Typical application server actions requiring non-repudiation will be related to application deployment among developers/users and administrative actions taken by admin personnel.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000174</td>
+<td>SRG-APP-000086-AS-000048</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>For application servers providing log record aggregation, the application server must compile log records from organization-defined information system components into a system-wide log trail that is time-correlated with an organization-defined level of tolerance for the relationship between time stamps of individual records in the log trail.</td>
+<td></td>
+<td>Log generation and log records can be generated from various components within the application server. The list of logged events is the set of events for which logs are to be generated. This set of events is typically a subset of the list of all events for which the system is capable of generating log records (e.g., logable events, time stamps, source and destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and access control or flow control rules invoked).
+
+The events occurring must be time-correlated in order to conduct accurate forensic analysis. In addition, the correlation must meet certain tolerance criteria. For instance, DoD may define that the time stamps of different logged events must not differ by any amount greater than ten seconds. It is also acceptable for the application server to utilize an external logging tool that provides this capability.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000169</td>
+<td>SRG-APP-000089-AS-000050</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records for access and authentication events.</td>
+<td></td>
+<td>Log records can be generated from various components within the application server.  From an application server perspective, certain specific application server functionalities may be logged as well.  The application server must allow the definition of what events are to be logged.  As conditions change, the number and types of events to be logged may change, and the application server must be able to facilitate these changes.
+
+The minimum list of logged events should be those pertaining to system startup and shutdown, system access, and system authentication events.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000171</td>
+<td>SRG-APP-000090-AS-000051</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must allow only the ISSM (or individuals or roles appointed by the ISSM) to select which logable events are to be logged.</td>
+<td></td>
+<td>Log records can be generated from various components within the application server, (e.g., httpd, beans, etc.) From an application perspective, certain specific application functionalities may be logged, as well.
+
+The list of logged events is the set of events for which logs are to be generated. This set of events is typically a subset of the list of all events for which the system is capable of generating log records (e.g., logable events, time stamps, source and destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and access control or flow control rules invoked).
+
+
+Application servers utilize role-based access controls in order to specify the individuals who are allowed to configure application component logable events. The application server must be configured to select which personnel are assigned the role of selecting which logable events are to be logged.
+
+The personnel or roles that can select logable events are only the ISSM (or individuals or roles appointed by the ISSM).</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000172</td>
+<td>SRG-APP-000091-AS-000052</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records when successful/unsuccessful attempts to access subject privileges occur.</td>
+<td></td>
+<td>Accessing a subject's privileges can be used to elevate a lower-privileged subject's privileges temporarily in order to cause harm to the application server or to gain privileges to operate temporarily for a designed purpose.  When these actions take place, the event needs to be logged.
+
+Application servers either provide a local user store, or they integrate with enterprise user stores like LDAP.  When the application server provides the user store and enforces authentication, the application server must generate a log record when modification of privileges is successfully or unsuccessfully performed.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001464</td>
+<td>SRG-APP-000092-AS-000053</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must initiate session logging upon startup.</td>
+<td></td>
+<td>Session logging activities are developed, integrated, and used in consultation with legal counsel in accordance with applicable federal laws, Executive Orders, directives, policies, or regulations.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001462</td>
+<td>SRG-APP-000093-AS-000054</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide the capability for authorized users to capture, record, and log all content related to a user session.</td>
+<td></td>
+<td>The application server must be capable of enabling a setting for troubleshooting or debugging purposes which will log all user session information specified by an authorized user.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000130</td>
+<td>SRG-APP-000095-AS-000056</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must produce log records containing information to establish what type of events occurred.</td>
+<td></td>
+<td>Information system logging capability is critical for accurate forensic analysis.  Without being able to establish what type of event occurred, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible. 
+
+Log record content that may be necessary to satisfy the requirement of this control includes time stamps, source and destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and access control or flow control rules invoked.
+
+Application servers must log all relevant log data that pertains to the application server.  Examples of relevant data include, but are not limited to, Java Virtual Machine (JVM) activity, HTTPD/Web server activity, and application server-related system process activity.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000131</td>
+<td>SRG-APP-000096-AS-000059</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must produce log records containing sufficient information to establish when (date and time) the events occurred.</td>
+<td></td>
+<td>Application server logging capability is critical for accurate forensic analysis.  Without sufficient and accurate information, a correct replay of the events cannot be determined.
+
+Ascertaining the correct order of the events that occurred is important during forensic analysis.  Events that appear harmless by themselves might be flagged as a potential threat when properly viewed in sequence.  By also establishing the event date and time, an event can be properly viewed with an enterprise tool to fully see a possible threat in its entirety.
+
+Without sufficient information establishing when the log event occurred, investigation into the cause of event is severely hindered.  Log record content that may be necessary to satisfy the requirement of this control includes, but is not limited to, time stamps, source and destination IP addresses, user/process identifiers, event descriptions, application-specific events, success/fail indications, file names involved, access control, or flow control rules invoked.
+
+In addition to logging event information, application servers must also log the corresponding dates and times of these events. Examples of event data include, but are not limited to, Java Virtual Machine (JVM) activity, HTTPD activity, and application server-related system process activity.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000132</td>
+<td>SRG-APP-000097-AS-000060</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must produce log records containing sufficient information to establish where the events occurred.</td>
+<td></td>
+<td>Application server logging capability is critical for accurate forensic analysis.  Without sufficient and accurate information, a correct replay of the events cannot be determined. 
+
+Ascertaining the correct location or process within the application server where the events occurred is important during forensic analysis.  To determine where an event occurred, the log data must contain data such as application components, modules, session identifiers, filenames, host names, and functionality.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000133</td>
+<td>SRG-APP-000098-AS-000061</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must produce log records containing sufficient information to establish the sources of the events.</td>
+<td></td>
+<td>Application server logging capability is critical for accurate forensic analysis.  Without sufficient and accurate information, a correct replay of the events cannot be determined.
+
+Ascertaining the correct source, e.g., source IP, of the events is important during forensic analysis.  Correctly determining the source will add information to the overall reconstruction of the logable event.  By determining the source of the event correctly, analysis of the enterprise can be undertaken to determine if the event compromised other assets within the enterprise.
+
+Without sufficient information establishing the source of the logged event, investigation into the cause of event is severely hindered.  Log record content that may be necessary to satisfy the requirement of this control includes, but is not limited to, time stamps, source and destination IP addresses, user/process identifiers, event descriptions, application-specific events, success/fail indications, file names involved, access control, or flow control rules invoked.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000134</td>
+<td>SRG-APP-000099-AS-000062</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must produce log records that contain sufficient information to establish the outcome of events.</td>
+<td></td>
+<td>Information system logging capability is critical for accurate forensic analysis. Log record content that may be necessary to satisfy the requirement of this control includes, but is not limited to, time stamps, source and destination IP addresses, user/process identifiers, event descriptions, application-specific events, success/fail indications, filenames involved, access control or flow control rules invoked.
+
+Success and failure indicators ascertain the outcome of a particular application server event or function. As such, they also provide a means to measure the impact of an event and help authorized personnel to determine the appropriate response.  Event outcome may also include event-specific results (e.g., the security state of the information system after the event occurred).</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001487</td>
+<td>SRG-APP-000100-AS-000063</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records containing information that establishes the identity of any individual or process associated with the event.</td>
+<td></td>
+<td>Information system logging capability is critical for accurate forensic analysis. Log record content that may be necessary to satisfy the requirement of this control includes: time stamps, source and destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and access control or flow control rules invoked. 
+
+Application servers have differing levels of logging capabilities that can be specified by setting a verbosity level. The application server must, at a minimum, be capable of establishing the identity of any user or process that is associated with any particular event.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000139</td>
+<td>SRG-APP-000108-AS-000067</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must alert the SA and ISSO, at a minimum, in the event of a log processing failure.</td>
+<td></td>
+<td>Logs are essential to monitor the health of the system, investigate changes that occurred to the system, or investigate a security incident.  When log processing fails, the events during the failure can be lost.  To minimize the timeframe of the log failure, an alert needs to be sent to the SA and ISSO at a minimum.
+
+Log processing failures include, but are not limited to, failures in the application server log capturing mechanisms or log storage capacity being reached or exceeded. In some instances, it is preferred to send alarms to individuals rather than to an entire group. Application servers must be able to trigger an alarm and send an alert to, at a minimum, the SA and ISSO in the event there is an application server log processing failure.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000140</td>
+<td>SRG-APP-000109-AS-000068</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must shut down by default upon log failure (unless availability is an overriding concern).</td>
+<td></td>
+<td>It is critical that, when a system is at risk of failing to process logs, it detects and takes action to mitigate the failure. Log processing failures include software/hardware errors, failures in the log capturing mechanisms, and log storage capacity being reached or exceeded.  During a failure, the application server must be configured to shut down unless the application server is part of a high availability system.
+
+When availability is an overriding concern, other approved actions in response to a log failure are as follows: 
+
+(i) If the failure was caused by the lack of log record storage capacity, the application must continue generating log records if possible (automatically restarting the log service if necessary), overwriting the oldest log records in a first-in-first-out manner.
+
+(ii) If log records are sent to a centralized collection server and communication with this server is lost or the server fails, the application must queue log records locally until communication is restored or until the log records are retrieved manually. Upon restoration of the connection to the centralized collection server, action should be taken to synchronize the local log data with the collection server.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000140</td>
+<td>SRG-APP-000109-AS-000070</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must be configured to fail over to another system in the event of log subsystem failure.</td>
+<td></td>
+<td>This requirement is dependent upon system MAC and availability.  If the system MAC and availability do not specify redundancy requirements, this requirement is NA.
+
+It is critical that, when a system is at risk of failing to process logs as required, it detects and takes action to mitigate the failure.
+ 
+Application servers must be capable of failing over to another system which can handle application and logging functions upon detection of an application log processing failure. This will allow continual operation of the application and logging functions while minimizing the loss of operation for the users and loss of log data.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000159</td>
+<td>SRG-APP-000116-AS-000076</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must use internal system clocks to generate time stamps for log records.</td>
+<td></td>
+<td>Without the use of an approved and synchronized time source configured on the systems, events cannot be accurately correlated and analyzed to determine what is transpiring within the application server.
+
+If an event has been triggered on the network, and the application server is not configured with the correct time, the event may be seen as insignificant, when in reality the events are related and may have a larger impact across the network. Synchronization of system clocks is needed in order to correctly correlate the timing of events that occur across multiple systems. Determining the correct time a particular event occurred on a system, via time stamps, is critical when conducting forensic analysis and investigating system events. 
+
+Application servers must utilize the internal system clock when generating time stamps and log records.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000162</td>
+<td>SRG-APP-000118-AS-000078</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect log information from any type of unauthorized read access.</td>
+<td></td>
+<td>If log data were to become compromised, then competent forensic analysis and discovery of the true source of potentially malicious system activity is difficult, if not impossible, to achieve. In addition, access to log records provides information an attacker could potentially use to his or her advantage.
+
+Application servers contain admin interfaces that allow reading and manipulation of log records. Therefore, these interfaces should not allow unfettered access to those records. Application servers also write log data to log files which are stored on the OS, so appropriate file permissions must also be used to restrict access.
+
+Log information includes all information (e.g., log records, log settings, transaction logs, and log reports) needed to successfully log information system activity. Application servers must protect log information from unauthorized read access.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000164</td>
+<td>SRG-APP-000120-AS-000080</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect log information from unauthorized deletion.</td>
+<td></td>
+<td>If log data were to become compromised, then competent forensic analysis and discovery of the true source of potentially malicious system activity is difficult, if not impossible, to achieve. 
+
+Application servers contain admin interfaces that allow reading and manipulation of log records. Therefore, these interfaces should not allow for unfettered access to those records. Application servers also write log data to log files which are stored on the OS, so appropriate file permissions must also be used to restrict access.
+
+Log information includes all information (e.g., log records, log settings, transaction logs, and log reports) needed to successfully log information system activity. Application servers must protect log information from unauthorized deletion.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001493</td>
+<td>SRG-APP-000121-AS-000081</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect log tools from unauthorized access.</td>
+<td></td>
+<td>Protecting log data also includes identifying and protecting the tools used to view and manipulate log data. 
+
+Depending upon the log format and application, system and application log tools may provide the only means to manipulate and manage application and system log data. 
+
+It is, therefore, imperative that access to log tools be controlled and protected from unauthorized access. 
+
+Application servers provide a web- and/or a command line-based management functionality for managing the application server log capabilities. In addition, subsets of log tool components may be stored on the file system as jar or xml configuration files. The application server must ensure that in addition to protecting any web-based log tools, any file system-based tools are protected as well.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001494</td>
+<td>SRG-APP-000122-AS-000082</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect log tools from unauthorized modification.</td>
+<td></td>
+<td>Protecting log data also includes identifying and protecting the tools used to view and manipulate log data. 
+
+Depending upon the log format and application, system and application log tools may provide the only means to manipulate and manage application and system log data. 
+
+It is, therefore, imperative that access to log tools be controlled and protected from unauthorized modification. If an attacker were to modify log tools, he could also manipulate logs to hide evidence of malicious activity. 
+
+Application servers provide a web- and/or a command line-based management functionality for managing the application server log capabilities. In addition, subsets of log tool components may be stored on the file system as jar or xml configuration files. The application server must ensure that in addition to protecting any web-based log tools, any file system-based tools are protected as well.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001495</td>
+<td>SRG-APP-000123-AS-000083</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect log tools from unauthorized deletion.</td>
+<td></td>
+<td>Protecting log data also includes identifying and protecting the tools used to view and manipulate log data. 
+
+Depending upon the log format and application, system and application log tools may provide the only means to manipulate and manage application and system log data. 
+
+It is, therefore, imperative that access to log tools be controlled and protected from unauthorized modification. If an attacker were to delete log tools, the application server administrator would have no way of managing or viewing the logs. 
+
+Application servers provide a web- and/or a command line-based management functionality for managing the application server log capabilities. In addition, subsets of log tool components may be stored on the file system as jar, class or xml configuration files. The application server must ensure that in addition to protecting any web-based log tools, any file system-based tools are protected from unauthorized deletion as well.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001348</td>
+<td>SRG-APP-000125-AS-000084</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must back up log records at least every seven days onto a different system or system component than the system or component being logged.</td>
+<td></td>
+<td>Protection of log data includes assuring log data is not accidentally lost or deleted. Backing up log records to a different system or onto separate media from the system the application server is actually running on helps to assure that in the event of a catastrophic system failure, the log records will be retained.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001350</td>
+<td>SRG-APP-000126-AS-000085</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must use cryptographic mechanisms to protect the integrity of log information.</td>
+<td></td>
+<td>Protection of log records is of critical importance. Encrypting log records provides a level of protection that does not rely on host-based protections that can be accidentally misconfigured, such as file system permissions. Cryptographic mechanisms are the industry-established standard used to protect the integrity of log data. An example of a cryptographic mechanism is the computation and application of a cryptographic-signed hash using asymmetric cryptography.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001499</td>
+<td>SRG-APP-000133-AS-000092</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must limit privileges to change the software resident within software libraries.</td>
+<td></td>
+<td>Application servers have the ability to specify that the hosted applications utilize shared libraries. The application server must have a capability to divide roles based upon duties wherein one project user (such as a developer) cannot modify the shared library code of another project user. The application server must also be able to specify that non-privileged users cannot modify any shared library code at all.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000381</td>
+<td>SRG-APP-000141-AS-000095</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must adhere to the principles of least functionality by providing only essential capabilities.</td>
+<td></td>
+<td>Application servers provide a myriad of differing processes, features and functionalities. Some of these processes may be deemed to be unnecessary or too unsecure to run on a production DoD system. Application servers must provide the capability to disable or deactivate functionality and services that are deemed to be non-essential to the server mission or can adversely impact server performance, for example, disabling dynamic JSP reloading on production application servers as a best practice.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000764</td>
+<td>SRG-APP-000148-AS-000101</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must use an enterprise user management system to uniquely identify and authenticate users (or processes acting on behalf of organizational users).</td>
+<td></td>
+<td>To assure accountability and prevent unauthorized access, application server users must be uniquely identified and authenticated.  This is typically accomplished via the use of a user store which is either local (OS-based) or centralized (LDAP) in nature.
+
+To ensure support to the enterprise, the authentication must utilize an enterprise solution.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000765</td>
+<td>SRG-APP-000149-AS-000102</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must use multifactor authentication for network access to privileged accounts.</td>
+<td></td>
+<td>Multifactor authentication creates a layered defense and makes it more difficult for an unauthorized person to access the application server.  If one factor is compromised or broken, the attacker still has at least one more barrier to breach before successfully breaking into the target.  Unlike a simple username/password scenario where the attacker could gain access by knowing both the username and password without the user knowing his account was compromised, multifactor authentication adds the requirement that the attacker must have something from the user, such as a token, or to biometrically be the user.
+
+Multifactor authentication is defined as: using two or more factors to achieve authentication. 
+
+Factors include: 
+(i) something a user knows (e.g., password/PIN); 
+(ii) something a user has (e.g., cryptographic identification device, token); or 
+(iii) something a user is (e.g., biometric). A CAC or PKI Hardware Token meets this definition.
+
+A privileged account is defined as an information system account with authorizations of a privileged user.  These accounts would be capable of accessing the web management interface.
+
+When accessing the application server via a network connection, administrative access to the application server must be PKI Hardware Token enabled.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000767</td>
+<td>SRG-APP-000151-AS-000103</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must use multifactor authentication for local access to privileged accounts.</td>
+<td></td>
+<td>Multifactor authentication creates a layered defense and makes it more difficult for an unauthorized person to access the application server.  If one factor is compromised or broken, the attacker still has at least one more barrier to breach before successfully breaking into the target.  Unlike a simple username/password scenario where the attacker could gain access by knowing both the username and password without the user knowing his account was compromised, multifactor authentication adds the requirement that the attacker must have something from the user, such as a token, or to biometrically be the user.
+
+Multifactor authentication is defined as: using two or more factors to achieve authentication. 
+
+Factors include: 
+(i) something a user knows (e.g., password/PIN); 
+(ii) something a user has (e.g., cryptographic identification device, token); or 
+(iii) something a user is (e.g., biometric). A CAC or PKI Hardware Token meets this definition.
+
+A privileged account is defined as an information system account with authorizations of a privileged user.  These accounts would be capable of accessing the command line management interface.
+
+When accessing the application server via a local connection, administrative access to the application server must be PKI hardware token enabled.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000770</td>
+<td>SRG-APP-000153-AS-000104</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must authenticate users individually prior to using a group authenticator.</td>
+<td></td>
+<td>To assure individual accountability and prevent unauthorized access, application server users (and any processes acting on behalf of application server users) must be individually identified and authenticated. 
+
+A group authenticator is a generic account used by multiple individuals. Use of a group authenticator alone does not uniquely identify individual users. 
+
+Application servers must ensure that individual users are authenticated prior to authenticating via role or group authentication. This is to ensure that there is non-repudiation for actions taken.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001941</td>
+<td>SRG-APP-000156-AS-000106</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide security extensions to extend the SOAP protocol and provide secure authentication when accessing sensitive data.</td>
+<td></td>
+<td>Application servers may provide a web services capability that could be leveraged to allow remote access to sensitive application data. A web service, which is a repeatable process used to make data available to remote clients, should not be confused with a web server. 
+
+Many web services utilize SOAP, which in turn utilizes XML and HTTP as a transport. Natively, SOAP does not provide security protections. As such, the application server must provide security extensions to enhance SOAP capabilities to ensure that secure authentication mechanisms are employed to protect sensitive data. The WS_Security suite is a widely used and acceptable SOAP security extension.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000778</td>
+<td>SRG-APP-000158-AS-000108</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must uniquely identify all network-connected endpoint devices before establishing any connection.</td>
+<td></td>
+<td>Without identifying devices, unidentified or unknown devices may be introduced, thereby facilitating malicious activity.
+
+For distributed application servers and components, the decisions regarding the validation of identification claims may be made by services separate from the application server. In such situations, it is necessary to provide the identification decisions (as opposed to the actual identifiers) to the services that need to act on those decisions.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000795</td>
+<td>SRG-APP-000163-AS-000111</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must disable identifiers (individuals, groups, roles, and devices) after 35 days of inactivity.</td>
+<td></td>
+<td>Inactive identifiers pose a risk to systems and applications. Attackers that are able to exploit an inactive identifier can potentially obtain and maintain undetected access to the application. Owners of inactive accounts will not notice if unauthorized access to their user account has been obtained. 
+
+Applications need to track periods of inactivity and disable application identifiers after 35 days of inactivity. 
+
+Management of user identifiers is not applicable to shared information system accounts (e.g., guest and anonymous accounts). It is commonly the case that a user account is the name of an information system account associated with an individual.
+
+To avoid having to build complex user management capabilities directly into their application, wise developers leverage the underlying OS or other user account management infrastructure (AD, LDAP) that is already in place within the organization and meets organizational user account management requirements.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000196</td>
+<td>SRG-APP-000171-AS-000119</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must store only encrypted representations of passwords.</td>
+<td></td>
+<td>Applications must enforce password encryption when storing passwords. Passwords need to be protected at all times and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read and easily compromised. 
+
+Application servers provide either a local user store or they integrate with enterprise user stores like LDAP. When the application server is responsible for creating or storing passwords, the application server must enforce the storage of encrypted representations of passwords.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000197</td>
+<td>SRG-APP-000172-AS-000120</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must transmit only encrypted representations of passwords.</td>
+<td></td>
+<td>Passwords need to be protected at all times, and encryption is the standard method for protecting passwords during transmission.  If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.
+
+Application servers have the capability to utilize either certificates (tokens) or user IDs and passwords in order to authenticate. When the application server transmits or receives passwords, the passwords must be encrypted.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000197</td>
+<td>SRG-APP-000172-AS-000121</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must utilize encryption when using LDAP for authentication.</td>
+<td></td>
+<td>Passwords need to be protected at all times, and encryption is the standard method for protecting passwords during transmission. 
+
+Application servers have the capability to utilize LDAP directories for authentication. If LDAP connections are not protected during transmission, sensitive authentication credentials can be stolen. When the application server utilizes LDAP, the LDAP traffic must be encrypted.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000185</td>
+<td>SRG-APP-000175-AS-000124</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must perform RFC 5280-compliant certification path validation.</td>
+<td></td>
+<td>A certificate's certification path is the path from the end entity certificate to a trusted root certification authority (CA).  Certification path validation is necessary for a relying party to make an informed decision regarding acceptance of an end entity certificate.  Certification path validation includes checks such as certificate issuer trust, time validity and revocation status for each certificate in the certification path.  Revocation status information for CA and subject certificates in a certification path is commonly provided via certificate revocation lists (CRLs) or online certificate status protocol (OCSP) responses.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000186</td>
+<td>SRG-APP-000176-AS-000125</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>Only authenticated system administrators or the designated PKI Sponsor for the application server must have access to the web servers private key.</td>
+<td></td>
+<td>The cornerstone of the PKI is the private key used to encrypt or digitally sign information. 
+
+If the private key is stolen, this will lead to the compromise of the authentication and non-repudiation gained through PKI because the attacker can use the private key to digitally sign documents and can pretend to be the authorized user. 
+
+Both the holders of a digital certificate and the issuing authority must protect the computers, storage devices, or whatever they use to keep the private keys. Java-based application servers utilize the Java keystore, which provides storage for cryptographic keys and certificates. The keystore is usually maintained in a file stored on the file system.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000187</td>
+<td>SRG-APP-000177-AS-000126</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must map the authenticated identity to the individual user or group account for PKI-based authentication.</td>
+<td></td>
+<td>The cornerstone of PKI is the private key used to encrypt or digitally sign information. The key by itself is a cryptographic value that does not contain specific user information, but the key can be mapped to a user.  Without mapping the certificate used to authenticate to the user account, the ability to determine the identity of the individual user or group will not be available for forensic analysis.
+
+Application servers must provide the capability to utilize and meet requirements of the DoD Enterprise PKI infrastructure for application authentication.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000206</td>
+<td>SRG-APP-000178-AS-000127</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must obscure feedback of authentication information during the authentication process to protect the information from possible exploitation/use by unauthorized individuals.</td>
+<td></td>
+<td>To prevent the compromise of authentication information during the authentication process, the application server authentication screens must obfuscate input so an unauthorized user cannot view a password, PIN, or any other authenticator value as it is being typed.
+
+This can occur when a user is authenticating to the application server through the web management interface or command line interface. The application server must obfuscate all passwords, PINs, or other authenticator information when typed. User ID is not required to be obfuscated.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000803</td>
+<td>SRG-APP-000179-AS-000129</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must utilize FIPS 140-2 approved encryption modules when authenticating users and processes.</td>
+<td></td>
+<td>Encryption is only as good as the encryption modules utilized.  Unapproved cryptographic module algorithms cannot be verified and cannot be relied upon to provide confidentiality or integrity, and DoD data may be compromised due to weak algorithms.  The use of TLS provides confidentiality of data in transit between the application server and client.  FIPS 140-2 approved TLS versions include TLS V1.0 or greater. 
+
+TLS must be enabled and non-FIPS-approved SSL versions must be disabled.  NIST SP 800-52 specifies the preferred configurations for government systems.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001082</td>
+<td>SRG-APP-000211-AS-000146</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must separate hosted application functionality from application server management functionality.</td>
+<td></td>
+<td>The application server consists of the management interface and hosted applications.  By separating the management interface from hosted applications, the user must authenticate as a privileged user to the management interface before being presented with management functionality.  This prevents non-privileged users from having visibility to functions not available to the user.  By limiting visibility, a compromised non-privileged account does not offer information to the attacker to functionality and information needed to further the attack on the application server.
+
+Application server management functionality includes functions necessary to administer the application server and requires privileged access via one of the accounts assigned to a management role.  The hosted application and hosted application functionality consists of the assets needed for the application to function, such as the business logic, databases, user authentication, etc.
+
+The separation of application server administration functionality from hosted application functionality is either physical or logical and is accomplished by using different computers, different central processing units, different instances of the operating system, network addresses, network ports, or combinations of these methods, as appropriate.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001184</td>
+<td>SRG-APP-000219-AS-000147</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must ensure authentication of both client and server during the entire session.</td>
+<td></td>
+<td>This control focuses on communications protection at the session, versus packet level.
+
+At the application layer, session IDs are tokens generated by web applications to uniquely identify an application user's session. Web applications utilize session tokens or session IDs in order to establish application user identity. Proper use of session IDs addresses man-in-the-middle attacks, including session hijacking or insertion of false information into a session.
+
+Application servers must provide the capability to perform mutual authentication. Mutual authentication is when both the client and the server authenticate each other.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001185</td>
+<td>SRG-APP-000220-AS-000148</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must invalidate session identifiers upon user logout or other session termination.</td>
+<td></td>
+<td>If communications sessions remain open for extended periods of time even when unused, there is the potential for an adversary to hijack the session and use it to gain access to the device or networks to which it is attached. Terminating sessions after a logout event or after a certain period of inactivity is a method for mitigating the risk of this vulnerability. When a user management session becomes idle, or when a user logs out of the management interface, the application server must terminate the session.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001664</td>
+<td>SRG-APP-000223-AS-000151</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must recognize only system-generated session identifiers.</td>
+<td></td>
+<td>This requirement focuses on communications protection at the application session, versus network packet level. The intent of this control is to establish grounds for confidence at each end of a communications session in the ongoing identity of the other party and in the validity of the information being transmitted.
+
+Unique session IDs are the opposite of sequentially generated session IDs which can be easily guessed by an attacker. Unique session identifiers help to reduce predictability of said identifiers.
+
+Unique session IDs address man-in-the-middle attacks, including session hijacking or insertion of false information into a session. If the attacker is unable to identify or guess the session information related to pending application traffic, they will have more difficulty in hijacking the session or otherwise manipulating valid sessions.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001188</td>
+<td>SRG-APP-000224-AS-000152</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate a unique session identifier using a FIPS 140-2 approved random number generator.</td>
+<td></td>
+<td>The application server will use session IDs to communicate between modules or applications within the application server and between the application server and users.  The session ID allows the application to track the communications along with credentials that may have been used to authenticate users or modules.
+
+Unique session IDs are the opposite of sequentially generated session IDs which can be easily guessed by an attacker.  Unique session identifiers help to reduce predictability of said identifiers.
+
+Unique session IDs address man-in-the-middle attacks, including session hijacking or insertion of false information into a session.  If the attacker is unable to identify or guess the session information related to pending application traffic, they will have more difficulty in hijacking the session or otherwise manipulating valid sessions.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001190</td>
+<td>SRG-APP-000225-AS-000153</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must be configured to perform complete application deployments.</td>
+<td></td>
+<td>Failure to a known secure state helps prevent a loss of confidentiality, integrity, or availability in the event of a failure of the information system or a component of the system.
+
+When an application is deployed to the application server, if the deployment process does not complete properly and without errors, there is the potential that some application files may not be deployed or may be corrupted and an application error may occur during runtime.
+
+The application server must be able to perform complete application deployments. A partial deployment can leave the server in an inconsistent state. Application servers may provide a transaction rollback function to address this issue.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001190</td>
+<td>SRG-APP-000225-AS-000154</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide a clustering capability.</td>
+<td></td>
+<td>This requirement is dependent upon system MAC and confidentiality. If the system MAC and confidentiality levels do not specify redundancy requirements, this requirement is NA.
+
+Failure to a known secure state helps prevent a loss of confidentiality, integrity, or availability in the event of a failure of the information system or a component of the system. When application failure is encountered, preserving application state facilitates application restart and return to the operational mode of the organization with less disruption of mission/business processes.
+
+Clustering of multiple application servers is a common approach to providing fail-safe application availability when system MAC and confidentiality levels require redundancy.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001199</td>
+<td>SRG-APP-000231-AS-000156</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must employ cryptographic mechanisms to ensure confidentiality and integrity of all information at rest when stored off-line.</td>
+<td></td>
+<td>This control is intended to address the confidentiality and integrity of information at rest in non-mobile devices and covers user information and system information. Information at rest refers to the state of information when it is located on a secondary storage device (e.g., disk drive, tape drive) within an organizational information system.
+
+Application servers generate information throughout the course of their use, most notably, log data.  If the data is not encrypted while at rest, the data used later for forensic investigation cannot be guaranteed to be unchanged and cannot be used for prosecution of an attacker.  To accomplish a credible investigation and prosecution, the data integrity and information confidentiality must be guaranteed.
+
+Application servers must provide the capability to protect all data, especially log data, so as to ensure confidentiality and integrity.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001310</td>
+<td>SRG-APP-000251-AS-000165</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must check the validity of all data inputs to the management interface, except those specifically identified by the organization.</td>
+<td></td>
+<td>Invalid user input occurs when a user inserts data or characters into an applications data entry field and the application is unprepared to process that data. This results in unanticipated application behavior potentially leading to an application or information system compromise. Invalid user input is one of the primary methods employed when attempting to compromise an application.
+
+Application servers must ensure their management interfaces perform data input validation checks. Input validation consists of evaluating user input and ensuring that only allowed characters are utilized. An example is ensuring that the interfaces are not susceptible to SQL injection attacks.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001312</td>
+<td>SRG-APP-000266-AS-000169</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must only generate error messages that provide information necessary for corrective actions without revealing sensitive or potentially harmful information in error logs and administrative messages.</td>
+<td></td>
+<td>Any application providing too much information in error logs and in administrative messages to the screen risks compromising the data and security of the application and system. The structure and content of error messages needs to be carefully considered by the organization and development team.
+
+The application server must not log sensitive information such as passwords, private keys, or other sensitive data. This requirement pertains to logs that are generated by the application server and application server processes, not the applications that may reside on the application server. Those errors are out of the scope of these requirements.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001314</td>
+<td>SRG-APP-000267-AS-000170</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must restrict error messages only to authorized users.</td>
+<td></td>
+<td>If the application provides too much information in error logs and administrative messages to the screen, this could lead to compromise. The structure and content of error messages need to be carefully considered by the organization and development team. The extent to which the information system is able to identify and handle error conditions is guided by organizational policy and operational requirements.
+
+Application servers must protect the error messages that are created by the application server. All application server users' accounts are used for the management of the server and the applications residing on the application server. All accounts are assigned to a certain role with corresponding access rights. The application server must restrict access to error messages so only authorized users may view them. Error messages are usually written to logs contained on the file system. The application server will usually create new log files as needed and must take steps to ensure that the proper file permissions are utilized when the log files are created.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001496</td>
+<td>SRG-APP-000290-AS-000174</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must use cryptographic mechanisms to protect the integrity of log tools.</td>
+<td></td>
+<td>Protecting the integrity of the tools used for logging purposes is a critical step in ensuring the integrity of log data. Log data includes all information (e.g., log records, log settings, and log reports) needed to successfully log information system activity. 
+
+It is not uncommon for attackers to replace the log tools or inject code into the existing tools for the purpose of providing the capability to hide or erase system activity from the logs. 
+
+To address this risk, log tools must be cryptographically signed in order to provide the capability to identify when the log tools have been modified, manipulated or replaced. An example is a checksum hash of the file or files.
+
+Application server log tools must use cryptographic mechanisms to protect the integrity of the tools or allow cryptographic protection mechanisms to be applied to their tools.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000213</td>
+<td>SRG-APP-000033-AS-000024</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.</td>
+<td></td>
+<td>Strong access controls are critical to securing the application server. Access control policies (e.g., identity-based policies, role-based policies, attribute-based policies) and access enforcement mechanisms (e.g., access control lists, access control matrices, cryptography) must be employed by the application server to control access between users (or processes acting on behalf of users) and objects (e.g., applications, files, records, processes, application domains) in the application server.
+
+Without stringent logical access and authorization controls, an adversary may have the ability, with very little effort, to compromise the application server and associated supporting infrastructure.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000163</td>
+<td>SRG-APP-000119-AS-000079</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect log information from unauthorized modification.</td>
+<td></td>
+<td>If log data were to become compromised, then competent forensic analysis and discovery of the true source of potentially malicious system activity is difficult, if not impossible, to achieve. In addition, access to log records provides information an attacker could potentially use to his or her advantage.
+
+Application servers contain admin interfaces that allow reading and manipulation of log records. Therefore, these interfaces should not allow unfettered access to those records.  Application servers also write log data to log files which are stored on the OS, so appropriate file permissions must also be used to restrict access.
+
+Log information includes all information (e.g., log records, log settings, transaction logs and log reports) needed to successfully log information system activity.  Application servers must protect log information from unauthorized modification.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002234</td>
+<td>SRG-APP-000343-AS-000030</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide access logging that ensures users who are granted a privileged role (or roles) have their privileged activity logged.</td>
+<td></td>
+<td>In order to be able to provide a forensic history of activity, the application server must ensure users who are granted a privileged role or those who utilize a separate distinct account when accessing privileged functions or data have their actions logged.
+
+If privileged activity is not logged, no forensic logs can be used to establish accountability for privileged actions that occur on the system.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002235</td>
+<td>SRG-APP-000340-AS-000185</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must prevent non-privileged users from executing privileged functions to include disabling, circumventing, or altering implemented security safeguards/countermeasures.</td>
+<td></td>
+<td>Preventing non-privileged users from executing privileged functions mitigates the risk that unauthorized individuals or processes may gain unnecessary access to information or privileges.
+
+Restricting non-privileged users also prevents an attacker, who has gained access to a non-privileged account, from elevating privileges, creating accounts, and performing system checks and maintenance.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002361</td>
+<td>SRG-APP-000295-AS-000263</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must automatically terminate a user session after organization-defined conditions or trigger events requiring a session disconnect.</td>
+<td></td>
+<td>An attacker can take advantage of user sessions that are left open, thus bypassing the user authentication process.
+
+To thwart the vulnerability of open and unused user sessions, the application server must be configured to close the sessions when a configured condition or trigger event is met.
+
+Session termination terminates all processes associated with a user's logical session except those processes that are specifically created by the user (i.e., session owner) to continue after the session is terminated.
+
+Conditions or trigger events requiring automatic session termination can include, for example, periods of user inactivity, targeted responses to certain types of incidents, and time-of-day restrictions on information system use.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002363</td>
+<td>SRG-APP-000296-AS-000201</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server management interface must provide a logout capability for user-initiated communication session.</td>
+<td></td>
+<td>If a user cannot explicitly end an application server management interface session, the session may remain open and be exploited by an attacker; this is referred to as a zombie session.
+
+The attacker will then have access to the application server management functions without going through the user authentication process.
+
+To prevent this type of attack, the application server management interface must close user sessions when defined events are met and provide a logout function for users to explicitly close the session and free resources that were in use by the user.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002364</td>
+<td>SRG-APP-000297-AS-000188</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server management interface must display an explicit logout message to users indicating the reliable termination of authenticated communications sessions.</td>
+<td></td>
+<td>Providing a logout capability to the user allows the user to explicitly close a session and free those resources used during the session.
+
+If a user cannot explicitly end an application session, the session may remain open and be exploited by an attacker; this is referred to as a zombie session.
+
+The attacker will then have access to the application server management functions without going through the user authentication process.
+
+To inform the user that the session has been reliably closed, a logout message must be displayed to the user.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002263</td>
+<td>SRG-APP-000313-AS-000003</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must associate organization-defined types of security attributes having organization-defined security attribute values with information in process.</td>
+<td></td>
+<td>The application server provides a framework for applications to communicate between each other to form an overall well-designed application to perform a task.  As the information traverses the application server and the components, the security attributes must be maintained.  Without the association of security attributes to information, there is no basis for the application server or hosted applications to make security-related access control decisions.  The security attributes are abstractions representing the basic properties or characteristics of an entity (e.g., subjects and objects) with respect to safeguarding information.
+
+One example includes marking data as classified or FOUO. These security attributes may be assigned manually or during data processing, but either way, it is imperative these assignments are maintained while the data is in process. If the security attributes are lost when the data is being processed, there is the risk of a data compromise.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002264</td>
+<td>SRG-APP-000314-AS-000005</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must associate organization-defined types of security attributes having organization-defined security attribute values with information in transmission.</td>
+<td></td>
+<td>The application server provides a framework for applications to communicate between each other to form an overall well-designed application to perform a task.  As the information is transmitted, the security attributes must be maintained.  Without the association of security attributes to information, there is no basis for the application to make security-related access control decisions.
+
+Security attributes are abstractions representing the basic properties or characteristics of an entity (e.g., subjects and objects) with respect to safeguarding information.
+
+One example includes marking data as classified or FOUO. These security attributes may be assigned manually or during data processing, but either way, it is imperative these assignments are maintained while the data is in transmission. If the security attributes are lost when the data is being transmitted, there is the risk of a data compromise.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000067</td>
+<td>SRG-APP-000016-AS-000013</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must ensure remote sessions for accessing security functions and security-relevant information are logged.</td>
+<td></td>
+<td>Logging must be utilized in order to track system activity, assist in diagnosing system issues, and provide evidence needed for forensic investigations post security incident.
+
+Remote access by administrators requires that the admin activity be logged.
+
+Application servers provide a web and command line-based remote management capability for managing the application server. Application servers must ensure that all actions related to administrative functionality such as application server configuration are logged.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002314</td>
+<td>SRG-APP-000315-AS-000094</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must control remote access methods.</td>
+<td></td>
+<td>Application servers provide remote access capability and must be able to enforce remote access policy requirements or work in conjunction with enterprise tools designed to enforce policy requirements.  Automated monitoring and control of remote access sessions allows organizations to detect cyber attacks and also ensure ongoing compliance with remote access policies by logging connection activities of remote users.
+
+Examples of policy requirements include, but are not limited to, authorizing remote access to the information system, limiting access based on authentication credentials, and monitoring for unauthorized access.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002322</td>
+<td>SRG-APP-000316-AS-000199</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide the capability to immediately disconnect or disable remote access to the management interface.</td>
+<td></td>
+<td>Without the ability to immediately disconnect or disable remote access, an attack or other compromise taking progress would not be immediately stopped.
+
+The application server must have the capability to immediately disconnect current users remotely accessing the management interface and/or disable further remote access. The speed of disconnect or disablement varies based on the criticality of missions/business functions and the need to eliminate immediate or future remote access to organizational information systems.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000135</td>
+<td>SRG-APP-000101-AS-000072</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records containing the full-text recording of privileged commands or the individual identities of group account users.</td>
+<td></td>
+<td>Privileged commands are commands that change the configuration or data of the application server.  Since this type of command changes the application server configuration and could possibly change the security posture of the application server, these commands need to be logged to show the full-text of the command executed.  Without the full-text, reconstruction of harmful events or forensic analysis is not possible.
+
+Organizations can consider limiting the additional log information to only that information explicitly needed for specific log requirements.  At a minimum, the organization must log either full-text recording of privileged commands or the individual identities of group users, or both.  The organization must maintain log trails in sufficient detail to reconstruct events to determine the cause and impact of compromise.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001844</td>
+<td>SRG-APP-000356-AS-000202</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide centralized management and configuration of the content to be captured in log records generated by all application components.</td>
+<td></td>
+<td>A clustered application server is made up of several servers working together to provide the user a failover and increased computing capability.  To facilitate uniform logging in the event of an incident and later forensic investigation, the record format and logable events need to be uniform.  This can be managed best from a centralized server.
+
+Without the ability to centrally manage the content captured in the log records, identification, troubleshooting, and correlation of suspicious behavior would be difficult and could lead to a delayed or incomplete analysis of an ongoing attack.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001849</td>
+<td>SRG-APP-000357-AS-000038</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must allocate log record storage capacity in accordance with organization-defined log record storage requirements.</td>
+<td></td>
+<td>The proper management of log records not only dictates proper archiving processes and procedures be established, it also requires allocating enough storage space to maintain the logs online for a defined period of time.
+
+If adequate online log storage capacity is not maintained, intrusion monitoring, security investigations, and forensic analysis can be negatively affected.
+
+It is important to keep a defined amount of logs online and readily available for investigative purposes. The logs may be stored on the application server until they can be archived to a log system or, in some instances, a Storage Area Networks (SAN).  Regardless of the method used, log record storage capacity must be sufficient to store log data when the data cannot be offloaded to a log system or SAN.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001851</td>
+<td>SRG-APP-000358-AS-000064</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must off-load log records onto a different system or media from the system being logged.</td>
+<td></td>
+<td>Information system logging capability is critical for accurate forensic analysis. Log record content that may be necessary to satisfy the requirement of this control includes, but is not limited to, time stamps, source and destination IP addresses, user/process identifiers, event descriptions, application-specific events, success/fail indications, filenames involved, access control or flow control rules invoked.
+
+Off-loading is a common process in information systems with limited log storage capacity.
+
+Centralized management of log records provides for efficiency in maintenance and management of records, as well as the backup and archiving of those records. Application servers and their related components are required to off-load log records onto a different system or media than the system being logged.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001851</td>
+<td>SRG-APP-000515-AS-000203</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must, at a minimum, transfer the logs of interconnected systems in real time, and transfer the logs of standalone systems weekly.</td>
+<td></td>
+<td>Information stored in one location is vulnerable to accidental or incidental deletion or alteration.  Protecting log data is important during a forensic investigation to ensure investigators can track and understand what may have occurred.  Off-loading should be set up as a scheduled task but can be configured to be run manually, if other processes during the off-loading are manual.
+
+Off-loading is a common process in information systems with limited log storage capacity.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001855</td>
+<td>SRG-APP-000359-AS-000065</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide an immediate warning to the SA and ISSO, at a minimum, when allocated log record storage volume reaches 75% of maximum log record storage capacity.</td>
+<td></td>
+<td>It is critical for the appropriate personnel to be aware if a system is at risk of failing to process logs as required.  Log processing failures include software/hardware errors, failures in the log capturing mechanisms, and log storage capacity being reached or exceeded.  Notification of the storage condition will allow administrators to take actions so that logs are not lost.  This requirement can be met by configuring the application server to utilize a dedicated logging tool that meets this requirement.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001858</td>
+<td>SRG-APP-000360-AS-000066</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide an immediate real-time alert to authorized users of all log failure events requiring real-time alerts.</td>
+<td></td>
+<td>It is critical for the appropriate personnel to be aware if a system is at risk of failing to process logs as required.  Log processing failures include software/hardware errors, failures in the log capturing mechanisms, and log storage capacity being reached or exceeded.  Notification of the failure event will allow administrators to take actions so that logs are not lost.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001890</td>
+<td>SRG-APP-000374-AS-000210</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must record time stamps for log records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).</td>
+<td></td>
+<td>If time stamps are not consistently applied and there is no common time reference, it is difficult to perform forensic analysis.
+
+Time stamps generated by the application include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001889</td>
+<td>SRG-APP-000375-AS-000211</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must record time stamps for log records that meet a granularity of one second for a minimum degree of precision.</td>
+<td></td>
+<td>To investigate an incident, the log records should be easily put into chronological order.  Without sufficient granularity of time stamps, the chronological order cannot be determined.
+
+Time stamps generated by the application server include date and time.  Granularity of time measurements refers to the degree of synchronization between information system clocks and reference clocks.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001891</td>
+<td>SRG-APP-000371-AS-000077</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must compare internal application server clocks at least every 24 hours with an authoritative time source.</td>
+<td></td>
+<td>Determining the correct time a particular application event occurred on a system is critical when conducting forensic analysis and investigating system events.
+
+Synchronization of system clocks is needed in order to correctly correlate the timing of events that occur across multiple systems. To meet this requirement, the organization will define an authoritative time source and have each system compare its internal clock at least every 24 hours.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002046</td>
+<td>SRG-APP-000372-AS-000212</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must synchronize internal application server clocks to an authoritative time source when the time difference is greater than the organization-defined time period.</td>
+<td></td>
+<td>Determining the correct time a particular application event occurred on a system is critical when conducting forensic analysis and investigating system events.
+
+Synchronization of internal application server clocks is needed in order to correctly correlate the timing of events that occur across multiple systems. To meet this requirement, the organization will define an authoritative time source and have each system synchronize when the time difference is greater than a defined time period.  The industry standard for the threshold is 1ms.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000172</td>
+<td>SRG-APP-000495-AS-000220</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records when successful/unsuccessful attempts to modify privileges occur.</td>
+<td></td>
+<td>Changing privileges of a subject/object may cause a subject/object to gain or lose capabilities.  When successful/unsuccessful changes are made, the event needs to be logged.  By logging the event, the modification or attempted modification can be investigated to determine if it was performed inadvertently or maliciously.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000172</td>
+<td>SRG-APP-000499-AS-000224</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records when successful/unsuccessful attempts to delete privileges occur.</td>
+<td></td>
+<td>Deleting privileges of a subject/object may cause a subject/object to gain or lose capabilities.  When successful and unsuccessful privilege deletions are made, the events need to be logged.  By logging the event, the modification or attempted modification can be investigated to determine if it was performed inadvertently or maliciously.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000172</td>
+<td>SRG-APP-000503-AS-000228</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records when successful/unsuccessful logon attempts occur.</td>
+<td></td>
+<td>Logging the access to the application server allows the system administrators to monitor user accounts.  By logging successful/unsuccessful logons, the system administrator can determine if an account is compromised (e.g., frequent logons) or is in the process of being compromised (e.g., frequent failed logons) and can take actions to thwart the attack.
+
+Logging successful logons can also be used to determine accounts that are no longer in use.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000172</td>
+<td>SRG-APP-000504-AS-000229</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records for privileged activities.</td>
+<td></td>
+<td>Without generating log records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
+
+Privileged activities would occur through the management interface.  This interface can be web-based or can be command line utilities.  Whichever method is utilized by the application server, these activities must be logged.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000172</td>
+<td>SRG-APP-000505-AS-000230</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application must generate log records showing starting and ending times for user access to the application server management interface.</td>
+<td></td>
+<td>Determining when a user has accessed the management interface is important to determine the timeline of events when a security incident occurs.  Generating these events, especially if the management interface is accessed via a stateless protocol like HTTP, the log events will be generated when the user performs a logon (start) and when the user performs a logoff (end).  Without these events, the user and later investigators cannot determine the sequence of events and therefore cannot determine what may have happened and by whom it may have been done.
+
+The generation of start and end times within log events allow the user to perform their due diligence in the event of a security breach.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000172</td>
+<td>SRG-APP-000506-AS-000231</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records when concurrent logons from different workstations occur to the application server management interface.</td>
+<td></td>
+<td>Being able to work on a system through multiple views into the application allows a user to work more efficiently and more accurately.  Before environments with windowing capabilities or multiple desktops, a user would log onto the application from different workstations or terminals.  With today's workstations, this is no longer necessary and may signal a compromised session or user account.
+
+When concurrent logons are made from different workstations to the management interface, a log record needs to be generated.  This allows the system administrator to investigate the incident and to be aware of the incident.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000172</td>
+<td>SRG-APP-000509-AS-000234</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate log records for all account creations, modifications, disabling, and termination events.</td>
+<td></td>
+<td>The maintenance of user accounts is a key activity within the system to determine access and privileges.  Through changes to accounts, an attacker can create an account for persistent access, modify an account to elevate privileges or terminate/disable an account(s) to cause a DoS for user(s).  To be able to track and investigate these actions, log records must be generated for any account modification functions.
+
+Application servers either provide a local user store, or they can integrate with enterprise user stores like LDAP.  As such, the application server must be able to generate log records on account creation, modification, disabling, and termination.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001914</td>
+<td>SRG-APP-000353-AS-000235</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide the capability for organization-identified individuals or roles to change the logging to be performed on all application components, based on all selectable event criteria within organization-defined time thresholds.</td>
+<td></td>
+<td>Log records can be generated from various components within the application server. The list of logged events is the set of events for which logs are to be generated. This set of events is typically a subset of the list of all events for which the system is capable of generating log records (i.e., logable events).  Application server log events may include, but are not limited to, HTTP, Database, and XML parsing activity.
+
+The application server must be capable of allowing defined individuals or roles to change the logging to be performed on all application server components, based on all selectable event criteria during a defined time threshold.  The time threshold can be defined by such events as a change in the threat environment.  The ability to change logging parameters during the threat would allow important forensic information to be gathered during the time duration of the threat.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001920</td>
+<td>SRG-APP-000355-AS-000055</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide the capability for authorized users to remotely view/hear, in real time, all content related to an established user session.</td>
+<td></td>
+<td>Without the capability to remotely view/hear all content related to a user session, investigations into suspicious user activity would be hampered. Real-time monitoring allows authorized personnel to take action before additional damage is done. The ability to observe user sessions as they are happening allows for interceding in ongoing events that after-the-fact review of captured content would not allow.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001813</td>
+<td>SRG-APP-000380-AS-000088</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must enforce access restrictions associated with changes to application server configuration.</td>
+<td></td>
+<td>When dealing with access restrictions pertaining to change control, it should be noted that any changes to the software, and/or application server configuration can potentially have significant effects on the overall security of the system.
+
+Access restrictions for changes also include application software libraries.
+
+If the application server provides automatic code deployment capability, (where updates to applications hosted on the application server are automatically performed, usually by the developers' IDE tool), it must also provide a capability to restrict the use of automatic application deployment. Automatic code deployments are allowable in a development environment, but not in production.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001814</td>
+<td>SRG-APP-000381-AS-000089</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must log the enforcement actions used to restrict access associated with changes to the application server.</td>
+<td></td>
+<td>Without logging the enforcement of access restrictions against changes to the application server configuration, it will be difficult to identify attempted attacks, and a log trail will not be available for forensic investigation for after-the-fact actions.  Configuration changes may occur to any of the modules within the application server through the management interface, but logging of actions to the configuration of a module outside the application server is not logged.
+
+Enforcement actions are the methods or mechanisms used to prevent unauthorized changes to configuration settings. Enforcement action methods may be as simple as denying access to a file based on the application of file permissions (access restriction). Log items may consist of lists of actions blocked by access restrictions or changes identified after the fact.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001749</td>
+<td>SRG-APP-000131-AS-000002</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must prevent the installation of patches, service packs, or application components without verification the software component has been digitally signed using a certificate that is recognized and approved by the organization.</td>
+<td></td>
+<td>Changes to any software components can have significant effects on the overall security of the application. Verifying software components have been digitally signed using a certificate that is recognized and approved by the organization ensures the software has not been tampered with and that it has been provided by a trusted vendor. 
+
+Accordingly, patches, service packs, or application components must be signed with a certificate recognized and approved by the organization. 
+
+Verifying the authenticity of the software prior to installation validates the integrity of the patch or upgrade received from a vendor. This ensures the software has not been tampered with and that it has been provided by a trusted vendor. Self-signed certificates are disallowed by this requirement. The application should not have to verify the software again. This requirement does not mandate DoD certificates for this purpose; however, the certificate used to verify the software must be from an approved CA.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001499</td>
+<td>SRG-APP-000133-AS-000093</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must be capable of reverting to the last known good configuration in the event of failed installations and upgrades.</td>
+<td></td>
+<td>Any changes to the components of the application server can have significant effects on the overall security of the system.
+
+In order to ensure a prompt response to failed application installations and application server upgrades, the application server must provide an automated rollback capability that allows the system to be restored to a previous known good configuration state prior to the application installation or application server upgrade.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000366</td>
+<td>SRG-APP-000516-AS-000237</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+<td></td>
+<td>Configuring the application to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the application, including the parameters required to satisfy other security control requirements.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-000382</td>
+<td>SRG-APP-000142-AS-000014</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must prohibit or restrict the use of nonsecure ports, protocols, modules, and/or services as defined in the PPSM CAL and vulnerability assessments.</td>
+<td></td>
+<td>Some networking protocols may not meet organizational security requirements to protect data and components.
+
+Application servers natively host a number of various features, such as management interfaces, httpd servers and message queues. These features all run on TCPIP ports. This creates the potential that the vendor may choose to utilize port numbers or network services that have been deemed unusable by the organization. The application server must have the capability to both reconfigure and disable the assigned ports without adversely impacting application server operation capabilities. For a list of approved ports and protocols, reference the DoD ports and protocols web site at https://powhatan.iiie.disa.mil/ports/cal.html.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001953</td>
+<td>SRG-APP-000391-AS-000239</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must accept Personal Identity Verification (PIV) credentials to access the management interface.</td>
+<td></td>
+<td>The use of PIV credentials facilitates standardization and reduces the risk of unauthorized access.
+
+PIV credentials are only used in an unclassified environment.
+
+DoD has mandated the use of the CAC to support identity management and personal authentication for systems covered under HSPD 12, as well as its use as a primary component of layered protection for national security systems.
+
+The application server must support the use of PIV credentials to access the management interface and perform management functions.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001954</td>
+<td>SRG-APP-000392-AS-000240</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must electronically verify Personal Identity Verification (PIV) credentials for access to the management interface.</td>
+<td></td>
+<td>The use of Personal Identity Verification (PIV) credentials facilitates standardization and reduces the risk of unauthorized access.
+
+PIV credentials are only used in an unclassified environment.
+
+DoD has mandated the use of the CAC to support identity management and personal authentication for systems covered under HSPD 12, as well as its use as a primary component of layered protection for national security systems.
+
+The application server must electronically verify the use of PIV credentials to access the management interface and perform management functions.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001958</td>
+<td>SRG-APP-000394-AS-000241</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must authenticate all network-connected endpoint devices before establishing any connection.</td>
+<td></td>
+<td>Device authentication requires unique identification and authentication that may be defined by type, by specific device, or by a combination of type and device.
+
+Device authentication is accomplished via the use of certificates and protocols such as SSL mutual authentication.
+
+Device authentication is performed when the application server is providing web services capabilities and data protection requirements mandate the need to establish the identity of the connecting device before the connection is established.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001967</td>
+<td>SRG-APP-000395-AS-000109</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must authenticate all endpoint devices before establishing a local, remote, and/or network connection using bidirectional authentication that is cryptographically based.</td>
+<td></td>
+<td>Device authentication requires unique identification and authentication that may be defined by type, by specific device, or by a combination of type and device.
+
+Bidirectional authentication provides stronger safeguards to validate the identity of other devices for connections that are of greater risk.
+
+Device authentication is performed when the application server is providing web services capabilities and data protection requirements mandate the need to establish the identity of the connecting device before the connection is established.
+
+Because of the challenges of applying this requirement on a large scale, organizations are encouraged to only apply the requirement to those limited number (and type) of devices that truly need to support this capability.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001991</td>
+<td>SRG-APP-000401-AS-000243</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server, for PKI-based authentication, must implement a local cache of revocation data to support path discovery and validation in case of the inability to access revocation information via the network.</td>
+<td></td>
+<td>The cornerstone of the PKI is the private key used to encrypt or digitally sign information. The key by itself is a cryptographic value that does not contain specific user information.
+
+Application servers must provide the capability to utilize and meet requirements of the DoD Enterprise PKI infrastructure for application authentication, but without configuring a local cache of revocation data, there is the potential to allow access to users who are no longer authorized (users with revoked certificates) when access through the network to the CA is not available.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002007</td>
+<td>SRG-APP-000400-AS-000246</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must prohibit the use of cached authenticators after an organization-defined time period.</td>
+<td></td>
+<td>When the application server is using PKI authentication, a local revocation cache must be stored for instances when the revocation cannot be authenticated through the network, but if cached authentication information is out of date, the validity of the authentication information may be questionable.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002009</td>
+<td>SRG-APP-000402-AS-000247</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must accept Personal Identity Verification (PIV) credentials from other federal agencies to access the management interface.</td>
+<td></td>
+<td>Personal Identity Verification (PIV) credentials are those credentials issued by federal agencies that conform to FIPS Publication 201 and supporting guidance documents. OMB Memorandum 11-11 requires federal agencies to continue implementing the requirements specified in HSPD-12 to enable agency-wide use of PIV credentials.  PIV credentials are only used in an unclassified environment.
+
+Access may be denied to authorized users if federal agency PIV credentials are not accepted to access the management interface.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002010</td>
+<td>SRG-APP-000403-AS-000248</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must electronically verify Personal Identity Verification (PIV) credentials from other federal agencies to access the management interface.</td>
+<td></td>
+<td>Personal Identity Verification (PIV) credentials are those credentials issued by federal agencies that conform to FIPS Publication 201 and supporting guidance documents. OMB Memorandum 11-11 requires federal agencies to continue implementing the requirements specified in HSPD-12 to enable agency-wide use of PIV credentials.  PIV credentials are only used in an unclassified environment.
+
+If PIV credentials are not electronically verified before accessing the management interface, unauthorized users may gain access to the system and data the user has not been granted access to.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002011</td>
+<td>SRG-APP-000404-AS-000249</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must accept FICAM-approved third-party credentials.</td>
+<td></td>
+<td>Access may be denied to legitimate users if FICAM-approved third-party credentials are not accepted.
+
+This requirement typically applies to organizational information systems that are accessible to non-federal government agencies and other partners. This allows federal government relying parties to trust such credentials at their approved assurance levels.
+
+Third-party credentials are those credentials issued by non-federal government entities approved by the Federal Identity, Credential, and Access Management (FICAM) Trust Framework Solutions initiative.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002014</td>
+<td>SRG-APP-000405-AS-000250</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must conform to FICAM-issued profiles.</td>
+<td></td>
+<td>Without conforming to FICAM-issued profiles, the information system may not be interoperable with FICAM-authentication protocols, such as SAML 2.0 and OpenID 2.0.
+
+This requirement addresses open identity management standards.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002038</td>
+<td>SRG-APP-000389-AS-000253</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must require users to re-authenticate when organization-defined circumstances or situations require re-authentication.</td>
+<td></td>
+<td>Without re-authentication, users may access resources or perform tasks for which they do not have authorization.
+
+When applications provide the capability to change security roles or escalate the functional capability of the application, it is critical the user re-authenticate.
+
+In addition to the re-authentication requirements associated with session locks, the application server security model may require re-authentication of individuals in other situations, including (but not limited to) the following circumstances:
+
+(i) When authenticators change; 
+(ii) When roles change; 
+(iii) When security categories of information systems change; 
+(iv) When the execution of privileged functions occurs; 
+(v) After a fixed period of time; or 
+(vi) Periodically.
+
+Within the DoD, the minimum circumstances requiring re-authentication are privilege escalation and role changes.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002039</td>
+<td>SRG-APP-000390-AS-000254</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must require devices to re-authenticate when organization-defined circumstances or situations require re-authentication.</td>
+<td></td>
+<td>Without re-authenticating devices, unidentified or unknown devices may be introduced, thereby facilitating malicious activity.
+
+In addition to the re-authentication requirements associated with session locks, organizations may require re-authentication of devices, including (but not limited to), the following other situations.
+
+(i) When authenticators change; 
+(ii) When roles change; 
+(iii) When security categories of information systems change; 
+(iv) After a fixed period of time; or 
+(v) Periodically.
+
+For distributed architectures (e.g., service-oriented architectures), the decisions regarding the validation of identification claims may be made by services separate from the services acting on those decisions. In such situations, it is necessary to provide the identification decisions (as opposed to the actual identifiers) to the services that need to act on those decisions.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001876</td>
+<td>SRG-APP-000181-AS-000255</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must provide a log reduction capability that supports on-demand reporting requirements.</td>
+<td></td>
+<td>The ability to generate on-demand reports, including after the log data has been subjected to log reduction, greatly facilitates the organization's ability to generate incident reports as needed to better handle larger-scale or more complex security incidents.
+
+Log reduction is a process that manipulates collected log information and organizes such information in a summary format that is more meaningful to analysts. The report generation capability provided by the application must support on-demand (i.e., customizable, ad-hoc, and as-needed) reports.
+
+To fully understand and investigate an incident within the components of the application server, the application server, when providing a reduction capability, must provide an on-demand reporting capability.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002385</td>
+<td>SRG-APP-000435-AS-000163</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect against or limit the effects of all types of Denial of Service (DoS) attacks by employing organization-defined security safeguards.</td>
+<td></td>
+<td>DoS is a condition when a resource is not available for legitimate users.  When this occurs, the organization either cannot accomplish its mission or must operate at degraded capacity.  To reduce the possibility or effect of a DoS, the application server must employ defined security safeguards.  These safeguards will be determined by the placement of the application server and the type of applications being hosted within the application server framework.
+
+There are many examples of technologies that exist to limit or, in some cases, eliminate the effects of DoS attacks (e.g., limiting processes or restricting the number of sessions the application opens at one time). Employing increased capacity and bandwidth, combined with service redundancy or clustering, may reduce the susceptibility to some DoS attacks.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002385</td>
+<td>SRG-APP-000435-AS-000069</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server, when a MAC I system, must be in a high-availability (HA) cluster.</td>
+<td></td>
+<td>A MAC I system is a system that handles data vital to the organization's operational readiness or effectiveness of deployed or contingency forces.  A MAC I system must maintain the highest level of integrity and availability.  By HA clustering the application server, the hosted application and data are given a platform that is load-balanced and provided high-availability.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002418</td>
+<td>SRG-APP-000439-AS-000155</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect the confidentiality and integrity of transmitted information through the use of an approved TLS version.</td>
+<td></td>
+<td>Preventing the disclosure of transmitted information requires that the application server take measures to employ some form of cryptographic mechanism in order to protect the information during transmission.  This is usually achieved through the use of Transport Layer Security (TLS).
+
+Transmission of data can take place between the application server and a large number of devices/applications external to the application server.  Examples are a web client used by a user, a backend database, a log server, or other application servers in an application server cluster.
+
+If data is transmitted unencrypted, the data then becomes vulnerable to disclosure.  The disclosure may reveal user identifier/password combinations, website code revealing business logic, or other user personal information.
+
+FIPS 140-2 approved TLS versions include TLS V1.0 or greater.
+
+TLS must be enabled and non-FIPS-approved SSL versions must be disabled.  NIST SP 800-52 specifies the preferred configurations for government systems.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002421</td>
+<td>SRG-APP-000440-AS-000167</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must employ approved cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission.</td>
+<td></td>
+<td>Preventing the disclosure or modification of transmitted information requires that application servers take measures to employ approved cryptography in order to protect the information during transmission over the network. This is usually achieved through the use of Transport Layer Security (TLS), SSL VPN, or IPSec tunnel.
+
+If data in transit is unencrypted, it is vulnerable to disclosure and modification. If approved cryptographic algorithms are not used, encryption strength cannot be assured.
+
+FIPS 140-2 approved TLS versions include TLS V1.0 or greater.
+
+TLS must be enabled and non-FIPS-approved SSL versions must be disabled.  NIST SP 800-52 specifies the preferred configurations for government systems.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002420</td>
+<td>SRG-APP-000441-AS-000258</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must maintain the confidentiality and integrity of information during preparation for transmission.</td>
+<td></td>
+<td>Information can be either unintentionally or maliciously disclosed or modified during preparation for transmission including, for example, during aggregation, at protocol transformation points, and during packing/unpacking. These unauthorized disclosures or modifications compromise the confidentiality or integrity of the information.
+
+An example of this would be an SMTP queue.  This queue may be part of the application server so error messages from the server can be sent to system administrators, or SMTP functionality can be added to hosted applications by developers.
+
+Any modules used by the application server that queue data before transmission must maintain the confidentiality and integrity of the information before the data is transmitted.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002422</td>
+<td>SRG-APP-000442-AS-000259</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must maintain the confidentiality and integrity of information during reception.</td>
+<td></td>
+<td>Information can be either unintentionally or maliciously disclosed or modified during reception, including, for example, during aggregation, at protocol transformation points, and during packing/unpacking.  These unauthorized disclosures or modifications compromise the confidentiality or integrity of the information.
+
+Protecting the confidentiality and integrity of received information requires that application servers take measures to employ approved cryptography in order to protect the information during transmission over the network. This is usually achieved through the use of Transport Layer Security (TLS), SSL VPN, or IPSEC tunnel.
+
+The application server must utilize approved encryption when receiving transmitted data.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002450</td>
+<td>SRG-APP-000416-AS-000140</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must implement NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.</td>
+<td></td>
+<td>Cryptography is only as strong as the encryption modules/algorithms employed to encrypt the data. Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data.
+
+NSA has developed Type 1 algorithms for protecting classified information. The Committee on National Security Systems (CNSS) National Information Assurance Glossary (CNSS Instruction No. 4009) defines Type 1 products as:
+
+"Cryptographic equipment, assembly or component classified or certified by NSA for encrypting and decrypting classified and sensitive national security information when appropriately keyed. Developed using established NSA business processes and containing NSA-approved algorithms 
+are used to protect systems requiring the most stringent protection mechanisms." 
+
+NSA-approved cryptography is required to be used for classified information system processing.
+
+The application server must utilize NSA-approved encryption modules when protecting classified data. This means using AES and other approved encryption modules.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002450</td>
+<td>SRG-APP-000514-AS-000136</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>Application servers must use NIST-approved or NSA-approved key management technology and processes.</td>
+<td></td>
+<td>An asymmetric encryption key must be protected during transmission. The public portion of an asymmetric key pair can be freely distributed without fear of compromise, and the private portion of the key must be protected. The application server will provide software libraries that applications can programmatically utilize to encrypt and decrypt information. These application server libraries must use NIST-approved or NSA-approved key management technology and processes when producing, controlling, or distributing symmetric and asymmetric keys.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002450</td>
+<td>SRG-APP-000514-AS-000137</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must use DoD- or CNSS-approved PKI Class 3 or Class 4 certificates.</td>
+<td></td>
+<td>Class 3 PKI certificates are used for servers and software signing rather than for identifying individuals. Class 4 certificates are used for business-to-business transactions. Utilizing unapproved certificates not issued or approved by DoD or CNS creates an integrity risk. The application server must utilize approved DoD or CNS Class 3 or Class 4 certificates for software signing and business-to-business transactions.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001166</td>
+<td>SRG-APP-000206-AS-000145</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must identify prohibited mobile code.</td>
+<td></td>
+<td>Mobile code is defined as software modules obtained from remote systems, transferred across a network, and then downloaded and executed on a local system without explicit installation or execution by the recipient.
+
+Mobile code technologies include: Java, JavaScript, ActiveX, PDF, Postscript, Shockwave movies, Flash animations, and VBScript. Usage restrictions and implementation guidance apply to both the selection and use of mobile code installed on organizational servers and mobile code downloaded and executed on individual workstations.
+
+Application servers must meet policy requirements regarding the deployment and/or use of mobile code. This includes digitally signing applets in order to provide a means for the client to establish application authenticity and prohibit unauthorized code from being used.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001664</td>
+<td>SRG-APP-000223-AS-000150</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must generate a unique session identifier for each session.</td>
+<td></td>
+<td>Unique session IDs are the opposite of sequentially generated session IDs, which can be easily guessed by an attacker. Unique session identifiers help to reduce predictability of session identifiers. Unique session IDs address man-in-the-middle attacks, including session hijacking or insertion of false information into a session. If the attacker is unable to identify or guess the session information related to pending application traffic, they will have more difficulty in hijacking the session or otherwise manipulating valid sessions.
+
+Application servers must generate a unique session identifier for each application session so as to prevent session hijacking.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002470</td>
+<td>SRG-APP-000427-AS-000264</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must only allow the use of DoD PKI-established certificate authorities for verification of the establishment of protected sessions.</td>
+<td></td>
+<td>Untrusted Certificate Authorities (CA) can issue certificates, but they may be issued by organizations or individuals that seek to compromise DoD systems or by organizations with insufficient security controls. If the CA used for verifying the certificate is not a DoD-approved CA, trust of this CA has not been established.
+
+The DoD will only accept PKI certificates obtained from a DoD-approved internal or external certificate authority. Reliance on CAs for the establishment of secure sessions includes, for example, the use of SSL/TLS certificates.  The application server must only allow the use of DoD PKI-established certificate authorities for verification.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001190</td>
+<td>SRG-APP-000225-AS-000166</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must fail to a secure state if system initialization fails, shutdown fails, or aborts fail.</td>
+<td></td>
+<td>Fail-secure is a condition achieved by the application server in order to ensure that in the event of an operational failure, the system does not enter into an unsecure state where intended security properties no longer hold.  Preserving information system state information also facilitates system restart and return to the operational mode of the organization with less disruption of mission-essential processes.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001199</td>
+<td>SRG-APP-000231-AS-000133</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must protect the confidentiality and integrity of all information at rest.</td>
+<td></td>
+<td>When data is written to digital media such as hard drives, mobile computers, external/removable hard drives, personal digital assistants, flash/thumb drives, etc., there is risk of data loss and data compromise.
+
+Fewer protection measures are needed for media containing information determined by the organization to be in the public domain, to be publicly releasable, or to have limited or no adverse impact if accessed by other than authorized personnel. In these situations, it is assumed the physical access controls where the media resides provide adequate protection.
+
+As part of a defense-in-depth strategy, data owners and DoD consider routinely encrypting information at rest on selected secondary storage devices. The employment of cryptography is at the discretion of the information owner/steward. The selection of the cryptographic mechanisms used is based upon maintaining the confidentiality and integrity of the information.
+
+The strength of mechanisms is commensurate with the classification and sensitivity of the information.
+
+The application server must directly provide, or provide access to, cryptographic libraries and functionality that allow applications to encrypt data when it is stored.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002475</td>
+<td>SRG-APP-000428-AS-000265</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must implement cryptographic mechanisms to prevent unauthorized modification of organization-defined information at rest on organization-defined information system components.</td>
+<td></td>
+<td>Information at rest refers to the state of information when it is located on a secondary storage device (e.g., disk drive, tape drive) within an application server.  Alternative physical protection measures include protected distribution systems.
+
+In order to prevent unauthorized disclosure or modification of the information, application servers must protect data at rest by using cryptographic mechanisms.
+
+Selection of a cryptographic mechanism is based on the need to protect the integrity of organizational information. The strength of the mechanism is commensurate with the security category and/or classification of the information. Organizations have the flexibility to either encrypt all information on storage devices (i.e., full disk encryption) or encrypt specific data structures (e.g., files, records, or fields).</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002476</td>
+<td>SRG-APP-000429-AS-000157</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application must implement cryptographic mechanisms to prevent unauthorized disclosure of organization-defined information at rest on organization-defined information system components.</td>
+<td></td>
+<td>Information at rest refers to the state of information when it is located on a secondary storage device (e.g., disk drive, tape drive) within an application server.  Alternative physical protection measures include protected distribution systems.
+
+In order to prevent unauthorized disclosure or modification of the information, application servers must protect data at rest by using cryptographic mechanisms.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002605</td>
+<td>SRG-APP-000456-AS-000266</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must install security-relevant software updates within the time period directed by an authoritative source (e.g. IAVM, CTOs, DTMs, and STIGs).</td>
+<td></td>
+<td>Security flaws with software applications are discovered daily. Vendors are constantly updating and patching their products to address newly discovered security vulnerabilities. Organizations (including any contractor to the organization) are required to promptly install security-relevant software updates (e.g., patches, service packs, and hot fixes) to production systems after thorough testing of the patches within a lab environment. Flaws discovered during security assessments, continuous monitoring, incident response activities, or information system error handling must also be addressed expeditiously.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002617</td>
+<td>SRG-APP-000454-AS-000268</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must remove organization-defined software components after updated versions have been installed.</td>
+<td></td>
+<td>Installation of patches and updates is performed when there are errors or security vulnerabilities in the current release of the software.  When previous versions of software components are not removed from the application server after updates have been installed, an attacker may use the older components to exploit the system.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-002754</td>
+<td>SRG-APP-000447-AS-000273</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must behave in a predictable and documented manner that reflects organizational and system objectives when invalid inputs are received.</td>
+<td></td>
+<td>Invalid user input occurs when a user inserts data or characters into an applications data entry field and the application is unprepared to process that data. This results in unanticipated application behavior potentially leading to an application or information system compromise. Invalid user input is one of the primary methods employed when attempting to compromise an application.
+
+Application servers must ensure their management interfaces perform data input validation checks.  When invalid data is entered, the application server must behave in a predictable and documented manner that reflects organizational and system objectives when invalid inputs are received.  An example of a predictable behavior is trapping the data, logging the invalid data for forensic analysis if necessary, and continuing operation in a safe and secure manner.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+<tr>
+<td>CCI-001312</td>
+<td>SRG-APP-000266-AS-000168</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The application server must identify potentially security-relevant error conditions.</td>
+<td></td>
+<td>The structure and content of error messages need to be carefully considered by the organization and development team.  Any application providing too much information in error logs and in administrative messages to the screen risks compromising the data and security of the application and system.  The extent to which the application server is able to identify and handle error conditions is guided by organizational policy and operational requirements. Adequate logging levels and system performance capabilities need to be balanced with data protection requirements.
+
+The structure and content of error messages needs to be carefully considered by the organization and development team.
+
+Application servers must have the capability to log at various levels which can provide log entries for potential security-related error events.
+
+An example is the capability for the application server to assign a criticality level to a failed logon attempt error message, a security-related error message being of a higher criticality.</td>
+<td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</td>
+</tr>
+</table>
+</body>
+</html>

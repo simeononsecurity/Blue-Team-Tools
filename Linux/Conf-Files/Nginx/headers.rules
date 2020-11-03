@@ -1,0 +1,19 @@
+add_header X-Frame-Options DENY;
+add_header X-Content-Type-Options nosniff;
+add_header X-XSS-Protection "1; mode=block";
+
+# HTTP Strict Transport Security: tells browsers to require https:// without first checking
+# the http:// version for a redirect. Warning: it is difficult to change your mind.
+# 
+#    max-age: length of requirement in seconds (31536000 = 1 year)
+#    includeSubdomains: force SSL for *ALL* subdomains (remove if this is not what you want)
+#    preload: indicates you want browsers to ship with HSTS preloaded for your domain.
+# 
+#    Submit your domain for preloading in browsers at: https://hstspreload.appspot.com
+
+add_header Strict-Transport-Security 'max-age=31536000';
+
+# If you can turn on HTTPS for *all* subdomains, use this version
+# and submit your domain for preloading:
+#
+# add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload';

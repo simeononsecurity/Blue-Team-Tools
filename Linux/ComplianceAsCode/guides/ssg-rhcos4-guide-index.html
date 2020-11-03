@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Guide to the Secure Configuration of Red Hat Enterprise Linux CoreOS 4</title>
+		<script>
+			function change_profile(option_element)
+			{
+				var benchmark_id=option_element.getAttribute('data-benchmark-id');
+				var profile_id=option_element.getAttribute('data-profile-id');
+				var eval_snippet=document.getElementById('eval_snippet');
+				var input_path='/usr/share/xml/scap/ssg/content/ssg-rhcos4-ds.xml';
+				if (profile_id == '')
+				{
+					if (benchmark_id == '')
+						eval_snippet.innerHTML='# oscap xccdf eval ' + input_path;
+					else
+						eval_snippet.innerHTML='# oscap xccdf eval --benchmark-id ' + benchmark_id + ' &#92;<br/>' + input_path;
+				}
+				else
+				{
+					if (benchmark_id == '')
+						eval_snippet.innerHTML='# oscap xccdf eval --profile ' + profile_id + ' &#92;<br/>' + input_path;
+					else
+						eval_snippet.innerHTML='# oscap xccdf eval --benchmark-id ' + benchmark_id + ' &#92;<br/>--profile ' + profile_id + ' &#92;<br/>' + input_path;
+				}
+				window.open(option_element.value, 'guide');
+			}
+		</script>
+		<style>
+			html, body { margin: 0; height: 100% }
+			#js_switcher { position: fixed; right: 30px; top: 10px; padding: 2px; background: #ddd; border: 1px solid #999 }
+			#guide_div { margin: auto; width: 99%; height: 99% }
+		</style>
+	</head>
+	<body onload="document.getElementById('js_switcher').style.display = 'block'">
+		<noscript>
+Profiles: <a target="guide" href="ssg-rhcos4-guide-e8.html">Australian Cyber Security Centre (ACSC) Essential Eight in xccdf_org.ssgproject.content_benchmark_RHCOS-4</a>, <a target="guide" href="ssg-rhcos4-guide-moderate.html">NIST 800-53 Moderate-Impact Baseline for Red Hat Enterprise Linux CoreOS in xccdf_org.ssgproject.content_benchmark_RHCOS-4</a>, <a target="guide" href="ssg-rhcos4-guide-ncp.html">NIST National Checklist for Red Hat Enterprise Linux CoreOS in xccdf_org.ssgproject.content_benchmark_RHCOS-4</a>, <a target="guide" href="ssg-rhcos4-guide-default.html">(default) in xccdf_org.ssgproject.content_benchmark_RHCOS-4</a>
+		</noscript>
+		<div id="js_switcher" style="display: none">
+			Profile: 
+			<select style="margin-bottom: 5px" onchange="change_profile(this.options[this.selectedIndex]);">
+
+<option value="ssg-rhcos4-guide-e8.html" data-benchmark-id="" data-profile-id="xccdf_org.ssgproject.content_profile_e8">Australian Cyber Security Centre (ACSC) Essential Eight</option>
+<option value="ssg-rhcos4-guide-moderate.html" data-benchmark-id="" data-profile-id="xccdf_org.ssgproject.content_profile_moderate">NIST 800-53 Moderate-Impact Baseline for Red Hat Enterprise Linux CoreOS</option>
+<option value="ssg-rhcos4-guide-ncp.html" data-benchmark-id="" data-profile-id="xccdf_org.ssgproject.content_profile_ncp">NIST National Checklist for Red Hat Enterprise Linux CoreOS</option>
+<option value="ssg-rhcos4-guide-default.html" data-benchmark-id="" data-profile-id="">(default)</option>
+			</select>
+			<div id='eval_snippet' style='background: #eee; padding: 3px; border: 1px solid #000'>select a profile to display its guide and a command line snippet needed to use it</div>
+		</div>
+		<div id="guide_div">
+			<iframe src="ssg-rhcos4-guide-e8.html" name="guide" width="100%" height="100%">
+			</iframe>
+		</div>
+	</body>
+</html>

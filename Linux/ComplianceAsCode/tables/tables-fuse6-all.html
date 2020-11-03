@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} 
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<h2>References for product fuse6</h2>
+
+<ul>
+<li class="collapsible">nist</li>
+  <ul class="content">
+  <li class="collapsible">AC-1</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-access_control_docs<span class="tooltiptext">Access Control Policy and Procedures</span></div></li>
+    <li><div class="tooltip">jboss_karaf-deployed_apps-java_perm_docs<span class="tooltiptext">Deployed Applications - Java Permission Deployment Docs</span></div></li>
+    </ul>
+  <li class="collapsible">AC-3</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-file_permissions<span class="tooltiptext">Ensure JBoss Files Have Correct Permissions</span></div></li>
+    <li><div class="tooltip">jboss_karaf-files_ownership<span class="tooltiptext">Ensure JBoss Files Are Owned By Appropriate Users</span></div></li>
+    <li><div class="tooltip">jboss_karaf-secure_jmx_access<span class="tooltiptext">Secure or Disable JMX Access</span></div></li>
+    <li><div class="tooltip">jboss_karaf-secure_remote_access<span class="tooltiptext">Disable Or Secure Remote Access</span></div></li>
+    <li><div class="tooltip">jboss_karaf-secure_web_console<span class="tooltiptext">Secure or Remove Web Console</span></div></li>
+    </ul>
+  <li class="collapsible">AC-6</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-deployed_java_file_permissions<span class="tooltiptext">Ensure Deployed Applications Have Restricted File Permissions</span></div></li>
+    <li><div class="tooltip">jboss_karaf-deployed_java_network_permissions<span class="tooltiptext">Ensure Deployed Applications Do Not Have Network Permissions</span></div></li>
+    <li><div class="tooltip">jboss_karaf-deployed_permissions<span class="tooltiptext">Disable All Permission for Deployed Applications</span></div></li>
+    <li><div class="tooltip">jboss_karaf-deployed_runtime_permissions<span class="tooltiptext">Disable Runtime Permissions for Deployed Applications</span></div></li>
+    <li><div class="tooltip">jboss_karaf-deployed_socket_permissions<span class="tooltiptext">Disable Socket Permissions for Deployed Applications</span></div></li>
+    <li><div class="tooltip">jboss_karaf-file_permissions<span class="tooltiptext">Ensure JBoss Files Have Correct Permissions</span></div></li>
+    <li><div class="tooltip">jboss_karaf-process_owner_console_access<span class="tooltiptext">Deny JBoss Process Owner Console Access</span></div></li>
+    <li><div class="tooltip">jboss_karaf-process_owner_permissions<span class="tooltiptext">Ensure JBoss Process Owner Executes with Least Privilege</span></div></li>
+    </ul>
+  <li class="collapsible">AT-2</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-assign_administator<span class="tooltiptext">Assign A JBoss Administrator</span></div></li>
+    </ul>
+  <li class="collapsible">AT-3</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-assign_administator<span class="tooltiptext">Assign A JBoss Administrator</span></div></li>
+    </ul>
+  <li class="collapsible">AT-4</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-assign_administator<span class="tooltiptext">Assign A JBoss Administrator</span></div></li>
+    </ul>
+  <li class="collapsible">AU-1</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-auditing_policy<span class="tooltiptext">Ensure Auditing Policy Exists</span></div></li>
+    </ul>
+  <li class="collapsible">AU-2</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-auditing_policy<span class="tooltiptext">Ensure Auditing Policy Exists</span></div></li>
+    </ul>
+  <li class="collapsible">AU-3</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-auditing_policy<span class="tooltiptext">Ensure Auditing Policy Exists</span></div></li>
+    </ul>
+  <li class="collapsible">AU-5</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-auditing_policy<span class="tooltiptext">Ensure Auditing Policy Exists</span></div></li>
+    </ul>
+  <li class="collapsible">CM-6</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_activemq-java_aaa_service<span class="tooltiptext">Ensure Default System Java Authentication and Authorization
+Service Is In Use</span></div></li>
+    <li><div class="tooltip">jboss_karaf-downloaded_software_valid<span class="tooltiptext">Ensure All Downloaded Software Is Validated</span></div></li>
+    <li><div class="tooltip">jboss_karaf-java_aaa_service<span class="tooltiptext">Ensure Java Authentication and Authorization Service Is Configured</span></div></li>
+    <li><div class="tooltip">jboss_karaf-java_vendor_supported<span class="tooltiptext">Ensure Java Runtime Environment Is A Vendor Supported Version</span></div></li>
+    <li><div class="tooltip">jboss_karaf-vender_supported_version<span class="tooltiptext">Ensure JBoss Fuse Is A Vendor Supported Version</span></div></li>
+    </ul>
+  <li class="collapsible">CM-7</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-disable_hot_deployment<span class="tooltiptext">Disable Hot Deployment</span></div></li>
+    </ul>
+  <li class="collapsible">CP-1</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-disaster_recovery<span class="tooltiptext">Document Disaster Recovery Procedures</span></div></li>
+    </ul>
+  <li class="collapsible">CP-2</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-disaster_recovery<span class="tooltiptext">Document Disaster Recovery Procedures</span></div></li>
+    </ul>
+  <li class="collapsible">CP-4</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-disaster_recovery_exerises<span class="tooltiptext">Perform Periodic Disaster Recovery Exercises</span></div></li>
+    </ul>
+  <li class="collapsible">CP-9</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-backup_schedule<span class="tooltiptext">Ensure Regular Backup Schedule</span></div></li>
+    </ul>
+  <li class="collapsible">IA-5</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_activemq-default_roles_removed<span class="tooltiptext">Ensure No Default Roles Exist</span></div></li>
+    <li><div class="tooltip">jboss_activemq-default_users_removed<span class="tooltiptext">Ensure No Default User Accounts Exist</span></div></li>
+    <li><div class="tooltip">jboss_karaf-dod_hardware_pki_token<span class="tooltiptext">Enable CAC Card Usage for Deployed Applications</span></div></li>
+    <li><div class="tooltip">jboss_karaf-password_complexity_policy<span class="tooltiptext">Define Minimum Password Complexity Requirement</span></div></li>
+    <li><div class="tooltip">jboss_karaf-password_expiration_policy<span class="tooltiptext">Define Minimum Password Expiration Interval</span></div></li>
+    <li><div class="tooltip">jboss_karaf-password_length_policy<span class="tooltiptext">Define Minimum and Maximum Password Length Requirement</span></div></li>
+    <li><div class="tooltip">jboss_karaf-remove_default_roles<span class="tooltiptext">Ensure Default Roles Have Been Removed</span></div></li>
+    <li><div class="tooltip">jboss_karaf-remove_default_users<span class="tooltiptext">Ensure Default User Accounts Have Benn Removed</span></div></li>
+    </ul>
+  <li class="collapsible">IR-1</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-incident_response<span class="tooltiptext">Document Incident Response Procedures</span></div></li>
+    </ul>
+  <li class="collapsible">IR-3</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-incident_response_exercises<span class="tooltiptext">Perform Periodic Incident Response Exercises</span></div></li>
+    </ul>
+  <li class="collapsible">IR-8</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-incident_response<span class="tooltiptext">Document Incident Response Procedures</span></div></li>
+    </ul>
+  <li class="collapsible">PE-1</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-physical_protections<span class="tooltiptext">Ensure Adequate Physical Protections</span></div></li>
+    </ul>
+  <li class="collapsible">PE-18</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-physical_protections<span class="tooltiptext">Ensure Adequate Physical Protections</span></div></li>
+    </ul>
+  <li class="collapsible">PE-2</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-physical_protections<span class="tooltiptext">Ensure Adequate Physical Protections</span></div></li>
+    </ul>
+  <li class="collapsible">PE-3</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-physical_protections<span class="tooltiptext">Ensure Adequate Physical Protections</span></div></li>
+    </ul>
+  <li class="collapsible">PE-7</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-physical_protections<span class="tooltiptext">Ensure Adequate Physical Protections</span></div></li>
+    </ul>
+  <li class="collapsible">SA-13</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-secure_java_security_manager<span class="tooltiptext">Configure Java Security Manager To Use An Environment Policy</span></div></li>
+    </ul>
+  <li class="collapsible">SC-13</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-enable_fips_modules<span class="tooltiptext">Enable FIPS Compliant Modules</span></div></li>
+    </ul>
+  <li class="collapsible">SC-23</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-application_data_flow_docs<span class="tooltiptext">Identify and Document Application Data Flows</span></div></li>
+    </ul>
+  <li class="collapsible">SC-28</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_activemq-cleartext_passwords<span class="tooltiptext">Disable or Remove Clear-Text Passwords</span></div></li>
+    <li><div class="tooltip">jboss_karaf-remove_cleartext_passwords<span class="tooltiptext">Disable and Remove Clear-Text Passwords</span></div></li>
+    </ul>
+  <li class="collapsible">SC-8</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-application_data_flow_docs<span class="tooltiptext">Identify and Document Application Data Flows</span></div></li>
+    <li><div class="tooltip">jboss_karaf-enable_encrypted_passwords<span class="tooltiptext">Enable Encrypted Passwords</span></div></li>
+    </ul>
+  <li class="collapsible">SC-9</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_karaf-application_data_flow_docs<span class="tooltiptext">Identify and Document Application Data Flows</span></div></li>
+    <li><div class="tooltip">jboss_karaf-enable_encrypted_passwords<span class="tooltiptext">Enable Encrypted Passwords</span></div></li>
+    </ul>
+  </ul>
+</ul>  
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
+</body>
+</html>

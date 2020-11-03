@@ -1,0 +1,1407 @@
+<html xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:cci="https://public.cyber.mil/stigs/cci" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:ovalns="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>STIG for JBoss Enterprise Application Platform 6</title>
+</head>
+<body>
+<br><br><div style="text-align: center; font-size: x-large; font-weight:bold">STIG for JBoss Enterprise Application Platform 6</div>
+<div style="text-align: center; font-size: normal ">This is a *draft* profile for STIG. This profile is being developed under the DoD consensus model to become a STIG in coordination with DISA FSO.</div>
+<br><br><style type="text/css">
+		table
+		{
+			border-collapse:collapse;
+		}
+		table, th, td
+		{
+			border: 2px solid #dcdcdc;
+			border-left: none;
+			border-right: none;
+			vertical-align: top;
+			padding: 2px;
+			font-family: verdana,arial,sans-serif;
+			font-size:11px;
+		}
+		pre { 
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap !important;
+			word-wrap:break-word; 
+		}
+		table tr:nth-child(2n+2) { background-color: #f4f4f4; }
+		thead
+		{
+			display: table-header-group;
+			font-weight: bold;
+			background-color: #dedede;
+		}
+	</style>
+<table>
+<thead>
+<td>ID</td>
+<td>Severity</td>
+<td>Title</td>
+<td>Discussion (Rationale)</td>
+<td>Fix Text (Description)</td>
+<td>Check Text (OCIL Check)</td>
+<td>SRG Refs</td>
+<td>CCI Refs</td>
+<td>800-53 Refs</td>
+</thead>
+<tr>
+<td>jboss_eap_audit_privileged_actions</td>
+<td>medium</td>
+<td>Audit JBoss Privileged Actions</td>
+<td xml:lang="en-US">In order to be able to provide a forensic history of activity, the application
+server must ensure users who are granted a privileged role or those who utilize
+a separate distinct account when accessing privileged functions or data have
+their actions logged.
+<br><br>
+If privileged activity is not logged, no forensic logs
+can be used to establish accountability for privileged actions that occur on the
+system.</td>
+<td xml:lang="en-US">Launch the jboss-cli management interface substituting standalone or domain for
+<i>CONFIG</i> based upon the server installation.
+<br><br>
+<pre>&lt;JBOSS_HOME&gt;/<i>CONFIG/</i>/bin/jboss-cli</pre>
+<br><br>
+connect to the server and run the following command:
+<br><br>
+<pre>/core-service=management/access=audit/logger=audit-log:write-attribute(name=enabled,value=true)</pre>
+</td>
+<td></td>
+<td>SRG-OS-000327-GPOS-00127<br>
+</td>
+<td>CCI-002234<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_application_authentication</td>
+<td>high</td>
+<td>Remove Silent Authentication - Application Security Realm</td>
+<td xml:lang="en-US">Silent Authentication is a configuration setting that allows local OS users
+access to the JBoss server and a wide range of operations without specifically
+authenticating on an individual user basis. By default $localuser is a
+Superuser. This introduces an integrity and availability vulnerability and
+violates best practice requirements regarding accountability.</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <code>&lt;JBOSS_HOME&gt;/bin/</code>
+folder.
+Run the <pre>jboss-cli</pre> script.
+Connect to the server and authenticate.
+Remove the local element from the Application Realm.
+For standalone servers, run
+the following command:
+<pre>/core-service=management/securityrealm=ApplicationRealm/authentication=local:remove</pre>
+<br><br>
+For managed domain installations,
+run the following command:
+<pre>/host=HOST_NAME/core-service=management/securityrealm=ApplicationRealm/authentication=local:remove</pre>
+</td>
+<td></td>
+<td>SRG-OS-000080-GPOS-00048<br>
+</td>
+<td>CCI-000213<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_auditing</td>
+<td>medium</td>
+<td>Configure JBoss Auditing and Logging</td>
+<td xml:lang="en-US">Log records can be generated from various components within the JBoss
+application server. The minimum list of logged events should be those
+pertaining to access and authentication events to the management interface as
+well as system startup and shutdown events.
+<br><br>
+By default, JBoss does not log
+management interface access but does provide a default file handler. This
+handler needs to be enabled. Configuring this setting meets several STIG
+auditing requirements.</td>
+<td xml:lang="en-US">Launch the jboss-cli management interface.
+Connect to the server by typing
+<code>connect</code>, authenticate as a user in the Superuser role, and run the
+following command:
+<br><br>
+For a Managed Domain configuration:
+<pre>host=master/server/<i>SERVERNAME</i>/core-service=management/access=audit/logger=audit-log:write-attribute(name=enabled,value=true)</pre>
+<br><br>
+For a Standalone
+configuration:
+<pre>/core-service=management/access=audit/logger=audit-log:write-attribute(name=enabled,value=true)</pre>
+</td>
+<td></td>
+<td>SRG-OS-000037-GPOS-00015<br>SRG-OS-000038-GPOS-00016<br>SRG-OS-000039-GPOS-00017<br>SRG-OS-000040-GPOS-00018<br>SRG-OS-000041-GPOS-00019<br>SRG-OS-000062-GPOS-00031<br>SRG-OS-000477-GPOS-00222<br>SRG-OS-000476-GPOS-00221<br>SRG-OS-000475-GPOS-00220<br>SRG-OS-000474-GPOS-00219<br>SRG-OS-000473-GPOS-00218<br>SRG-OS-000472-GPOS-00217<br>SRG-OS-000471-GPOS-00216<br>SRG-OS-000471-GPOS-00215<br>SRG-OS-000470-GPOS-00214<br>SRG-OS-000468-GPOS-00212<br>SRG-OS-000467-GPOS-00211<br>SRG-OS-000466-GPOS-00210<br>SRG-OS-000465-GPOS-00209<br>SRG-OS-000463-GPOS-00207<br>SRG-OS-000462-GPOS-00206<br>SRG-OS-000064-GPOS-00033<br>SRG-OS-000461-GPOS-00205<br>SRG-OS-000458-GPOS-00203<br>SRG-OS-000254-GPOS-00095<br>
+</td>
+<td>CCI-000130<br>CCI-000131<br>CCI-000132<br>CCI-000133<br>CCI-000134<br>CCI-000169<br>CCI-000172<br>CCI-001464<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_auditor_roles</td>
+<td>medium</td>
+<td>Configure JBoss Auditor Role</td>
+<td xml:lang="en-US">The JBoss server must be configured to select which personnel are assigned the
+role of selecting which loggable events are to be logged.
+In JBoss, the role
+designated for selecting auditable events is the <code>Auditor</code> role.
+The
+personnel or roles that can select loggable events are only the ISSM (or
+individuals or roles appointed by the ISSM).</td>
+<td xml:lang="en-US">Obtain documented approvals from ISSM, and assign the appropriate personnel
+into the <pre>Auditor</pre> role.</td>
+<td></td>
+<td>SRG-OS-000063-GPOS-00032<br>
+</td>
+<td>CCI-000171<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_ha_lb</td>
+<td>medium</td>
+<td>Configure Load Balancing (LB) or High Availability (HA)</td>
+<td xml:lang="en-US">A MAC I system is a system that handles data vital to the organization's
+operational readiness or effectiveness of deployed or contingency forces. A MAC
+I system must maintain the highest level of integrity and availability. By HA
+clustering the application server, the hosted application and data are given a
+platform that is load-balanced and provides high availability.</td>
+<td xml:lang="en-US">Configure the application server to provide LB or HA services for the hosted
+application.</td>
+<td></td>
+<td>SRG-OS-000420-GPOS-00186<br>
+</td>
+<td>CCI-002385<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_host_access_restrictions</td>
+<td>high</td>
+<td>Configure Host Access Restrictions for Applications</td>
+<td xml:lang="en-US">The Java Security Manager is a java class that manages the external boundary of
+the Java Virtual Machine (JVM) sandbox, controlling how code executing within
+the JVM can interact with resources outside the JVM.
+<br><br>
+The JVM requires a
+security policy in order to restrict application access. A properly configured
+security policy will define what rights the application has to the underlying
+system. For example, rights to make changes to files on the host system or to
+initiate network sockets in order to connect to another system.</td>
+<td xml:lang="en-US">Configure the Java security manager to enforce access restrictions to the host
+system resources in accordance with application design and resource
+requirements.</td>
+<td></td>
+<td>SRG-OS-000080-GPOS-00048<br>
+</td>
+<td>CCI-000213<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_https</td>
+<td>medium</td>
+<td>Enable HTTPS for JBoss Web Interface</td>
+<td xml:lang="en-US">Encryption is critical for protection of remote access sessions. If encryption
+is not being used for integrity, malicious users may gain the ability to modify
+the application server configuration. The use of cryptography for ensuring
+integrity of remote access sessions mitigates that risk.
+<br><br>
+Application servers
+utilize a web management interface and scripted commands when allowing remote
+access. Web access requires the use of TLS, and scripted access requires using
+ssh or some other form of approved cryptography. Application servers must have a
+capability to enable a secure remote admin capability.
+<br><br>
+FIPS 140-2 approved TLS
+versions include TLS V1.0 or greater.
+<br><br>
+FIPS 140-2 approved TLS versions must be
+enabled, and non-FIPS-approved SSL versions must be disabled.
+<br><br>
+NIST SP 800-52
+specifies the preferred configurations for government systems.</td>
+<td xml:lang="en-US">Follow procedure "4.4. Configure the JBoss Web Server to use HTTPS."
+The detailed procedure is found in the JBoss EAP 6.3 Security Guide available at
+the vendor's site, RedHat.com. An overview of steps is provided here.
+<br><br>
+1. Obtain or generate DoD-approved SSL certificates.
+2. Configure the SSL certificate using your certificate values.
+3. Set the SSL protocol to TLS V1.1 or V1.2.</td>
+<td></td>
+<td>SRG-OS-000250-GPOS-00093<br>
+</td>
+<td>CCI-001453<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_keystore</td>
+<td>medium</td>
+<td>Enable the JBoss Keystore</td>
+<td xml:lang="en-US">JBoss EAP 6 has a Password Vault to encrypt sensitive strings, store them in an
+encrypted keystore, and decrypt them for applications and verification systems.
+Plain-text configuration files, such as XML deployment descriptors, need to
+specify passwords and other sensitive information. Use the JBoss EAP Password
+Vault to securely store sensitive strings in plain-text files.</td>
+<td xml:lang="en-US">Configure the application server to use the java keystore and JBoss vault as
+per section 11.13.1 -Password Vault System in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.
+<br><br>
+1. Create a java keystore.
+2. Mask the keystore password and initialize the password vault.
+3. Configure JBoss to use the password vault.</td>
+<td></td>
+<td>SRG-OS-000073-GPOS-00041<br>
+</td>
+<td>CCI-000196<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_ldap</td>
+<td>medium</td>
+<td>Configure LDAP</td>
+<td xml:lang="en-US">To assure accountability and prevent unauthorized access, application server
+users must be uniquely identified and authenticated. This is typically
+accomplished via the use of a user store that is either local (OS-based) or
+centralized (Active Directory/LDAP) in nature. It should be noted that JBoss
+does not specifically mention Active Directory since AD is LDAP aware.
+<br><br>
+To
+ensure accountability and prevent unauthorized access, the JBoss Server must be
+configured to utilize a centralized authentication mechanism.</td>
+<td xml:lang="en-US">Follow steps in section 11.8 - Management Interface Security in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.
+<br><br>
+1. Create an outbound connection to the LDAP server.
+2. Create an LDAP-enabled security realm.
+3. Reference the new security domain in the Management Interface.</td>
+<td></td>
+<td>SRG-OS-000104-GPOS-00051<br>
+</td>
+<td>CCI-000764<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_log_permissions</td>
+<td>medium</td>
+<td>Configure JBoss Log Permissions</td>
+<td xml:lang="en-US">If log data were to become compromised, then competent forensic analysis and
+discovery of the true source of potentially malicious system activity is
+difficult, if not impossible, to achieve.
+<br><br>
+When not configured to use a
+centralized logging solution like a syslog server, the JBoss EAP application
+server writes log data to log files that are stored on the OS; appropriate file
+permissions must be used to restrict access.
+<br><br>
+Log information includes all
+information (e.g., log records, log settings, transaction logs, and log reports)
+needed to successfully log information system activity. Application servers must
+protect log information from unauthorized access.</td>
+<td xml:lang="en-US">Configure the OS file permissions on the application server to protect log
+information from unauthorized access.</td>
+<td></td>
+<td>SRG-OS-000057-GPOS-00027<br>SRG-OS-000058-GPOS-00028<br>SRG-OS-000059-GPOS-00029<br>
+</td>
+<td>CCI-000162<br>CCI-000163<br>CCI-000164<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_logging_level</td>
+<td>medium</td>
+<td>Configure JBoss Logging Level</td>
+<td xml:lang="en-US">800 records less data and may result in an insufficient amount of information
+being logged by the ROOT logger. This can result in failed forensic
+investigations. The ROOT logger level must be INFO level or lower to provide
+adequate log information.</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <code>&lt;JBOSS_HOME&gt;/bin/</code>
+folder.
+Run the <pre>jboss-cli</pre> script to start the Command Line Interface (CLI).
+Connect to the server and authenticate.
+<br><br>
+The PROFILE NAMEs included with a
+Managed Domain JBoss configuration are:
+<code>default</code>, <code>full</code>, <code>full-ha</code>, or <code>ha</code>
+For a Managed Domain configuration, you must check
+each profile name:
+<br><br>
+For each PROFILE NAME, run the command:
+<pre>/profile=<i>PROFILE NAME</i>/subsystem=logging/root-logger=ROOT:write-attribute(name=level,value=INFO)</pre>
+<br><br>
+For a Standalone configuration:
+<pre>/subsystem=logging/root-logger=ROOT:write-attribute(name=level,value=INFO)</pre>
+</td>
+<td></td>
+<td>SRG-OS-000255-GPOS-00096<br>
+</td>
+<td>CCI-001487<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_management_authentication</td>
+<td>high</td>
+<td>Remove Silent Authentication - Management Security Realm</td>
+<td xml:lang="en-US">Silent Authentication is a configuration setting that allows local OS users
+access to the JBoss server and a wide range of operations without specifically
+authenticating on an individual user basis. By default $localuser is a
+Superuser. This introduces an integrity and availability vulnerability and
+violates best practice requirements regarding accountability.</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <pre>&lt;JBOSS_HOME&gt;/bin/</pre>
+folder.
+Run the <pre>jboss-cli</pre> script.
+Connect to the server and authenticate.
+Remove the local element from the Management Realm.
+For standalone servers run
+the following command:
+<pre>/core-service=management/securityrealm=ManagementRealm/authentication=local:remove</pre>
+<br><br>
+For managed domain installations run the following command:
+<pre>/host=HOST_NAME/core-service=management/securityrealm=ManagementRealm/authentication=local:remove</pre>
+</td>
+<td></td>
+<td>SRG-OS-000080-GPOS-00048<br>
+</td>
+<td>CCI-000213<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_management_ldap</td>
+<td>medium</td>
+<td>Configure LDAP for Management Interfaces</td>
+<td xml:lang="en-US">JBoss EAP provides a security realm called ManagementRealm. By default, this
+realm uses the mgmt-users.properties file for authentication. Using file-based
+authentication does not allow the JBoss server to be in compliance with a wide
+range of user management requirements such as automatic disabling of inactive
+accounts as per DoD policy. To address this issue, the management interfaces
+used to manage the JBoss server must be associated with a security realm that
+provides centralized authentication management. Examples are AD or LDAP.
+Management of user identifiers is not applicable to shared information system
+accounts (e.g., guest and anonymous accounts). It is commonly the case that a
+user account is the name of an information system account associated with an
+individual.</td>
+<td xml:lang="en-US">Follow steps in section 11.8 - Management Interface Security in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.
+<br><br>
+1. Create an outbound connection to the LDAP server.
+2. Create an LDAP-enabled security realm.
+3. Reference the new security domain in the Management Interface.</td>
+<td></td>
+<td>SRG-OS-000118-GPOS-00060<br>
+</td>
+<td>CCI-000795<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_management_network</td>
+<td>medium</td>
+<td>Separate JBoss Management Network</td>
+<td xml:lang="en-US">JBoss provides multiple interfaces for accessing the system. By default,
+these are called public and management. Allowing non-
+management traffic to access the JBoss management interface increases the
+chances of a security compromise. The JBoss server must be configured to bind
+the management interface to a network that controls access. This is usually a
+network that has been designated as a management network and has restricted
+access. Similarly, the public interface must be bound to a network that is not
+on the same segment as the management interface.</td>
+<td xml:lang="en-US">Refer to Section 4.9 of the JBoss EAP 6.3 Installation guide for detailed
+instructions on how to start JBoss as a service.
+<br><br>
+Use the following command line
+parameters to assign the management interface to a specific management network.
+These command line flags must be added both when starting JBoss as a service and
+when starting from the command line.
+<br><br>
+Substitute your actual network address for
+the 10.x.x.x addresses provided as an example below.
+<br><br>
+For a standalone
+configuration:
+<pre>
+JBOSS_HOME/bin/standalone.sh -bmanagement=10.2.2.1 -b 10.1.1.1
+JBOSS_HOME/bin/domain.sh -bmanagement=10.2.2.1 -b 10.1.1.1
+</pre>
+<br><br>
+If a management
+network is not available, you may substitute localhost/127.0.0.1 for management
+address. This will force you to manage the JBoss server from the local host.</td>
+<td></td>
+<td>SRG-OS-000114-GPOS-00059<br>
+</td>
+<td>CCI-000778<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_multifactor_authentication</td>
+<td>medium</td>
+<td>Configure Multi-Factor Authentication</td>
+<td xml:lang="en-US">Multifactor authentication creates a layered defense and makes it more
+difficult for an unauthorized person to access the application server. If one
+factor is compromised or broken, the attacker still has at least one more
+barrier to breach before successfully breaking into the target. Unlike a simple
+username/password scenario where the attacker could gain access by knowing both
+the username and password without the user knowing his account was compromised,
+multifactor authentication adds the requirement that the attacker must have
+something from the user, such as a token, or to biometrically be the user.
+Multifactor authentication is defined as: using two or more factors to achieve
+authentication.
+<br><br>
+Factors include:
+(i) something a user knows (e.g.,
+password/PIN);
+(ii) something a user has (e.g., cryptographic identification
+device, token); or
+(iii) something a user is (e.g., biometric). A CAC or PKI
+Hardware Token meets this definition.
+<br><br>
+A privileged account is defined as an
+information system account with authorizations of a privileged user. These
+accounts would be capable of accessing the web management interface.
+<br><br>
+When
+accessing the application server via a network connection, administrative access
+to the application server must be PKI Hardware Token enabled or a DoD-approved
+soft certificate.</td>
+<td xml:lang="en-US">Configure the application server to authenticate privileged users via
+multifactor/certificate-based authentication mechanisms when using network
+access to the management interface.</td>
+<td></td>
+<td>SRG-OS-000105-GPOS-00052<br>
+</td>
+<td>CCI-000765<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_offloading_max</td>
+<td>medium</td>
+<td>Configure JBoss Log Off-Loading Frequency</td>
+<td xml:lang="en-US">JBoss logs by default are written to the local file system. A centralized
+logging solution like syslog should be used whenever possible; however, any log
+data stored to the file system needs to be off-loaded. JBoss EAP does not
+provide an automated backup capability. Instead, reliance is placed on OS or
+third-party tools to back up or off-load the log files.
+<br><br>
+Protection of log data
+includes assuring log data is not accidentally lost or deleted. Off-loading log
+records to a different system or onto separate media from the system the
+application server is actually running on helps to assure that, in the event of
+a catastrophic system failure, the log records will be retained.</td>
+<td xml:lang="en-US">Configure the application server to off-load log records every seven days onto
+a different system or media from the system being logged.</td>
+<td></td>
+<td></td>
+<td>CCI-001348<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_ports</td>
+<td>medium</td>
+<td>Configure JBoss Management and Application Ports</td>
+<td xml:lang="en-US">Some networking protocols may not meet organizational security requirements to
+protect data and components.
+<br><br>
+Application servers natively host a number of
+various features, such as management interfaces, httpd servers and message
+queues. These features all run on TCPIP ports. This creates the potential that
+the vendor may choose to utilize port numbers or network services that have been
+deemed unusable by the organization. The application server must have the
+capability to both reconfigure and disable the assigned ports without adversely
+impacting application server operation capabilities.</td>
+<td xml:lang="en-US">Open the EAP web console by pointing a web browser to <pre>HTTPS://<i>Servername</i>:9990</pre>
+Log on to the admin console using admin credentials
+Select the
+<code>Configuration</code> tab
+Expand the <code>General Configuration</code> sub
+system by clicking on the <code>+</code>
+Select <code>Socket Binding</code>
+Select the
+<code>View</code> option next to <code>standard-sockets</code>
+Select
+<code>Inbound</code>
+<br><br>
+Select the port that needs to be reconfigured and select
+<code>Edit</code>.</td>
+<td></td>
+<td>SRG-OS-000096-GPOS-00050<br>
+</td>
+<td>CCI-000382<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_secure_management_access</td>
+<td>medium</td>
+<td>Enable HTTPS for Management Sessions</td>
+<td xml:lang="en-US">Types of management interfaces utilized by the JBoss EAP application server
+include web-based HTTP interfaces as well as command line-based management
+interfaces. In the event remote HTTP management is required, the access must be
+via HTTPS.
+<br><br>
+This requirement is in conjunction with the requirement to isolate
+all management access to a restricted network.</td>
+<td xml:lang="en-US">Follow the specific instructions in the Red Hat Security Guide for EAP version
+6.3 to configure the management console for HTTPS.
+<br><br>
+This involves the following steps.
+1. Create a keystore in JKS format.
+2. Ensure the management console binds to HTTPS.
+3. Create a new Security Realm.
+4. Configure Management Interface to use new security realm.
+5. Configure the management console to use the keystore.
+6. Restart the EAP server.</td>
+<td></td>
+<td>SRG-OS-000033-GPOS-00014<br>
+</td>
+<td>CCI-000068<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_security_manager</td>
+<td>high</td>
+<td>Enable the Java Security Manager</td>
+<td xml:lang="en-US">The Java Security Manager is a java class that manages the external boundary of
+the Java Virtual Machine (JVM) sandbox, controlling how code executing within
+the JVM can interact with resources outside the JVM.
+<br><br>
+The Java Security Manager
+uses a security policy to determine whether a given action will be
+permitted or
+denied.
+<br><br>
+To protect the host system, the JBoss application server must be run
+within the Java Security Manager.</td>
+<td xml:lang="en-US">For a domain installation:
+Enable the respective JAVA_OPTS flag in both the
+domain.conf and the domain.conf.bat files.
+<br><br>
+For a standalone installation:
+Enable the respective JAVA_OPTS flag in both the standalone.conf and the
+standalone.conf.bat files.</td>
+<td></td>
+<td>SRG-OS-000080-GPOS-00048<br>
+</td>
+<td>CCI-000213<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_security_realm</td>
+<td>high</td>
+<td>Secure the JBoss Management Interfaces</td>
+<td xml:lang="en-US">JBoss utilizes the concept of security realms to secure the management
+interfaces used for JBoss server administration. If the security realm
+attribute is omitted or removed from the management interface definition, access
+to that interface is no longer secure. The JBoss management interfaces must be
+secured.</td>
+<td xml:lang="en-US">Identify the security realm used for management of the system. By default,
+this is called <code>Management Realm</code>.
+<br><br>
+If a management security realm is not
+already available, reference the Jboss EAP 6.3 system administration guide for
+instructions on how to create a security realm for management purposes. Create
+the management realm, and assign authentication and authorization access
+restrictions to the management realm.
+<br><br>
+Assign the management interfaces to the management realm.</td>
+<td></td>
+<td>SRG-OS-000080-GPOS-00048<br>
+</td>
+<td>CCI-000213<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_syslog</td>
+<td>medium</td>
+<td>Enable Logging to syslog</td>
+<td xml:lang="en-US">Information system logging capability is critical for accurate forensic
+analysis. Log record content that may be necessary to satisfy the requirement of
+this control includes, but is not limited to, time stamps, source and
+destination IP addresses, user/process identifiers, event descriptions,
+application-specific events, success/fail indications, filenames involved,
+access control or flow control rules invoked.
+<br><br>
+Off-loading is a common process
+in information systems with limited log storage capacity.
+<br><br>
+Centralized
+management of log records provides for efficiency in maintenance and management
+of records, as well as the backup and archiving of those records. Application
+servers and their related components are required to off-load log records onto a
+different system or media than the system being logged.</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <code>&lt;JBOSS_HOME&gt;/bin/</code>
+folder.
+Run the <pre>jboss-cli</pre> script.
+Connect to the server and authenticate.
+Run
+the command:
+<br><br>
+Standalone configuration:
+<pre>ls /subsystem=logging/syslog-handler=</pre>
+<br><br>
+Domain configuration:
+<pre>ls /profile=default/subsystem=logging/syslog-handler=</pre>
+<br><br>
+If no values are returned, this is a finding.</td>
+<td></td>
+<td>SRG-OS-000479-GPOS-00224<br>SRG-OS-000342-GPOS-00133<br>
+</td>
+<td>CCI-001851<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_user_permissions</td>
+<td>medium</td>
+<td>Configure mgmt-users.properties File Permissions</td>
+<td xml:lang="en-US">The mgmt-users.properties file contains the password hashes of all users who
+are in a management role and must be protected. Application servers have the
+ability to specify that the hosted applications utilize shared libraries. The
+application server must have a capability to divide roles based upon duties
+wherein one project user (such as a developer) cannot modify the shared library
+code of another project user. The application server must also be able to
+specify that non-privileged users cannot modify any shared library code at
+all.</td>
+<td xml:lang="en-US">Configure the file permissions to allow access to authorized users only.
+Owner can be full access. Group can be full access. 
+All others must have execute
+permissions only.</td>
+<td></td>
+<td>SRG-OS-000259-GPOS-00100<br>
+</td>
+<td>CCI-001499<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_configure_user_roles</td>
+<td>medium</td>
+<td>Configure JBoss User Roles</td>
+<td xml:lang="en-US">Security realms are a series of mappings between users and passwords and users
+and roles. There are 2 JBoss security realms provided by default; they are
+<code>management realm</code> and <code>application realm</code>.
+<br><br>
+Management realm
+stores authentication information for the management API, which provides
+functionality for the web-based management console and the management command
+line interface (CLI).
+<br><br>
+mgmt-groups.properties stores user to group mapping for
+the ManagementRealm but only when role-based access controls (RBAC) is enabled.
+If management users are not in the appropriate role, unauthorized access to
+JBoss resources can occur.</td>
+<td xml:lang="en-US">Document approved management users and their roles. Configure the application
+server to use RBAC and ensure users are placed into the appropriate roles.</td>
+<td></td>
+<td>SRG-OS-000080-GPOS-00048<br>
+</td>
+<td>CCI-000213<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_disable_analytics</td>
+<td>medium</td>
+<td>Disable Google Analytics</td>
+<td xml:lang="en-US">The Google Analytics feature aims to help Red Hat EAP team understand how
+customers are using the console and which parts of the console matter the most
+to the customers. This information will, in turn, help the team to adapt the
+console design, features, and content to the immediate needs of the customers.
+Sending analytical data to the vendor introduces risk of unauthorized data
+exfiltration. This capability must be disabled.</td>
+<td xml:lang="en-US">Using the EAP web console, log on using admin credentials.
+On the bottom right-hand side of the screen, select <code>Settings</code>,
+uncheck the <code>Enable Data Usage Collection</code> box, and save the
+configuration.</td>
+<td></td>
+<td>SRG-OS-000095-GPOS-00049<br>
+</td>
+<td>CCI-000381<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_disable_automatic_deployment</td>
+<td>medium</td>
+<td>Disable Automatic Deployment</td>
+<td xml:lang="en-US">When dealing with access restrictions pertaining to change control, it should
+be noted that any changes to the software and/or application server
+configuration can potentially have significant effects on the overall security
+of the system.
+<br><br>
+Access restrictions for changes also include application
+software libraries.
+<br><br>
+If the application server provides automatic code
+deployment capability, (where updates to applications hosted on the application
+server are automatically performed, usually by the developers' IDE tool), it
+must also provide a capability to restrict the use of automatic application
+deployment. Automatic code deployments are allowable in a development
+environment, but not in production.</td>
+<td xml:lang="en-US">Determine the JBoss server configuration as being either standalone or domain.
+Launch the relevant jboss-cli management interface substituting standalone or
+domain for <i>CONFIG</i>
+<br><br>
+<pre>&lt;JBOSS_HOME&gt;/<i>CONFIG</i>/bin/jboss-cli</pre>
+<br><br>
+connect to the server and run the command:
+<pre>/subsystem=deployment-scanner/scanner=default:write-attribute(name=scan-enabled,value.)</pre>
+</td>
+<td></td>
+<td>SRG-OS-000364-GPOS-00151<br>
+</td>
+<td>CCI-001813<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_disable_domain_admin_console</td>
+<td>medium</td>
+<td>Disable Network Access to the Admin Console</td>
+<td xml:lang="en-US">When configuring JBoss application servers into a domain configuration, HTTP
+management capabilities are not required on domain member servers as management
+is done via the server that has been designated as the domain controller.
+Leaving HTTP management capabilities enabled on domain member servers increases
+the attack surfaces; therefore, management services on domain member servers
+must be disabled and management services performed via the domain
+controller.</td>
+<td xml:lang="en-US">Run the <pre>&lt;JBOSS_HOME&gt;/bin/jboss-clii</pre> command line interface utility.
+Connect to
+the JBoss server and run the following command.
+<pre>/core-service=management/management-interface=httpinterface/:write-attribute(name=console-enabled,value.)</pre>
+<br><br>
+Successful command execution returns
+<pre>{"outcome" =&gt; success"}</pre>,
+and future attempts to access the management console via web
+browser at <code><i>SERVERNAME</i>:9990</code> will result in no access to the admin console.</td>
+<td></td>
+<td>SRG-OS-000298-GPOS-00116<br>
+</td>
+<td>CCI-002322<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_disable_replace_welcome_page</td>
+<td>low</td>
+<td>Disable or Replace the JBoss Welcome Page</td>
+<td xml:lang="en-US">The Welcome to JBoss web page provides a redirect to the JBoss admin console,
+which, by default, runs on TCP 9990 as well as redirects to the Online User
+Guide and Online User Groups hosted at locations on the Internet. The welcome
+page is unnecessary and should be disabled or replaced with a valid web
+page.</td>
+<td xml:lang="en-US">Use the Management CLI script <pre>$JBOSS_HOME/bin/jboss-cli.sh</pre> to run the following
+command. You may need to change the profile to modify a different managed domain
+profile, or remove the <pre>/profile=default</pre> portion of the command for a
+standalone server.
+<br><br>
+<pre>/profile=default/subsystem=web/virtual-server=default-host:writeattribute(name=enable-welcome-root,value.)</pre>
+<br><br>
+To configure
+your web application to use the root context (/) as its URL address, modify the
+applications jboss-web.xml, which is located in the applications <code>META-INF/</code> or
+<code>WEB-INF/</code> directory. Replace its <code>&lt;context-root&gt;</code> directive with one that looks
+like the following:
+<br><br>
+<pre><xccdf-1.1:jboss-web xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1"><xccdf-1.1:context-root>/</xccdf-1.1:context-root></xccdf-1.1:jboss-web></pre>
+</td>
+<td></td>
+<td>SRG-OS-000095-GPOS-00049<br>
+</td>
+<td>CCI-000381<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_enable_rbac</td>
+<td>high</td>
+<td>Enable Role Based Access Control (RBAC)</td>
+<td xml:lang="en-US">By default, the JBoss server is not configured to utilize role based access
+controls (RBAC). RBAC provides the capability to restrict user access to their
+designated management role, thereby limiting access to only the JBoss
+functionality that they are supposed to have. Without RBAC, the JBoss server is
+not able to enforce authorized access according to role.</td>
+<td xml:lang="en-US">Run the following command.
+<pre>&lt;JBOSS_HOME&gt;/bin/jboss-cli.sh -c -&gt; connect -&gt; cd
+/core-service=management/access-authorization :write-attribute(name=provider,
+value=rbac)</pre>
+<br><br>
+Restart JBoss.
+<br><br>
+Map users to roles by running the following
+command. Upper-case words are variables.
+<br><br>
+<pre>role-mapping=ROLENAME/include=ALIAS:add(name-USERNAME, type=USER ROLE)</pre>
+</td>
+<td></td>
+<td>SRG-OS-000080-GPOS-00048<br>SRG-OS-000324-GPOS-00125<br>
+</td>
+<td>CCI-000213<br>CCI-002235<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_encrypt_keystore_passwords</td>
+<td>medium</td>
+<td>Encrypt JBoss Keystore Passwords</td>
+<td xml:lang="en-US">Access to the JBoss Password Vault must be secured, and the password used to
+access must be encrypted. There is a specific process used to generate the
+encrypted password hash. This process must be followed in order to store the
+password in an encrypted format.
+<br><br>
+The admin must utilize this process in order
+to ensure the Keystore password is encrypted.</td>
+<td xml:lang="en-US">Configure the application server to mask the java keystore password as per the
+procedure described in section 11.13.3 -Password Vault System in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.</td>
+<td></td>
+<td>SRG-OS-000073-GPOS-00041<br>
+</td>
+<td>CCI-000196<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_file_permissions</td>
+<td>medium</td>
+<td>Configure JBoss Application File Permissions</td>
+<td xml:lang="en-US">The JBoss EAP Application Server is a Java-based AS. It is installed on the OS
+file system and depends upon file system access controls to protect application
+data at rest. The file permissions set on the JBoss EAP home folder must be
+configured so as to limit access to only authorized people and processes. The
+account used for operating the JBoss server and any designated administrative or
+operational accounts are the only accounts that should have access.
+<br><br>
+When data
+is written to digital media such as hard drives, mobile computers,
+external/removable hard drives, personal digital assistants, flash/thumb drives,
+etc., there is risk of data loss and data compromise. Steps must be taken to
+ensure data stored on the device is protected.</td>
+<td xml:lang="en-US">Configure file permissions on the JBoss folder to protect from unauthorized
+access.</td>
+<td></td>
+<td>SRG-OS-000185-GPOS-00079<br>
+</td>
+<td>CCI-001199<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_log_deployments</td>
+<td>medium</td>
+<td>Log Application Deployments</td>
+<td xml:lang="en-US">Without logging the enforcement of access restrictions against changes to the
+application server configuration, it will be difficult to identify attempted
+attacks, and a log trail will not be available for forensic investigation for
+after-the-fact actions. Configuration changes may occur to any of the modules
+within the application server through the management interface, but logging of
+actions to the configuration of a module outside the application server is not
+logged.
+<br><br>
+Enforcement actions are the methods or mechanisms used to prevent
+unauthorized changes to configuration settings. Enforcement action methods may
+be as simple as denying access to a file based on the application of file
+permissions (access restriction). Log items may consist of lists of actions
+blocked by access restrictions or changes identified after the fact.</td>
+<td xml:lang="en-US">Launch the jboss-cli management interface substituting standalone or domain for
+<i>CONFIG</i> based upon the server installation.
+<br><br>
+<pre>&lt;JBOSS_HOME&gt;/<i>CONFIG</i>/bin/jboss-cli</pre>
+<br><br>
+connect to the server and run the following command:
+<br><br>
+<pre>/core-service=management/access=audit/logger=audit-log:write-attribute(name=enabled,value=true)</pre>
+</td>
+<td></td>
+<td>SRG-OS-000365-GPOS-00152<br>
+</td>
+<td>CCI-001814<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_logs_permissions</td>
+<td>medium</td>
+<td>Configure JBoss Log Directory Permissions</td>
+<td xml:lang="en-US">If the application provides too much information in error logs and
+administrative messages to the screen, this could lead to compromise. The
+structure and content of error messages need to be carefully considered by the
+organization and development team. The extent to which the information system is
+able to identify and handle error conditions is guided by organizational policy
+and operational requirements.
+<br><br>
+Application servers must protect the error
+messages that are created by the application server. All application server
+users' accounts are used for the management of the server and the applications
+residing on the application server. All accounts are assigned to a certain role
+with corresponding access rights. The application server must restrict access to
+error messages so only authorized users may view them. Error messages are
+usually written to logs contained on the file system. The application server
+will usually create new log files as needed and must take steps to ensure that
+the proper file permissions are utilized when the log files are created.</td>
+<td xml:lang="en-US">Configure file permissions on the JBoss log folder to protect from unauthorized
+access.</td>
+<td></td>
+<td>SRG-OS-000206-GPOS-00084<br>
+</td>
+<td>CCI-001314<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_remove_group_accounts</td>
+<td>medium</td>
+<td>Remove JBoss Group Acount Access</td>
+<td xml:lang="en-US">To assure individual accountability and prevent unauthorized access,
+application server users (and any processes acting on behalf of application
+server users) must be individually identified and authenticated.
+<br><br>
+A group
+authenticator is a generic account used by multiple individuals. Use of a group
+authenticator alone does not uniquely identify individual users.
+<br><br>
+Application
+servers must ensure that individual users are authenticated prior to
+authenticating via role or group authentication. This is to ensure that there is
+non-repudiation for actions taken.</td>
+<td xml:lang="en-US">Configure the application server so required users are individually
+authenticated by creating individual user accounts. Utilize an LDAP server that
+is configured according to DOD policy.</td>
+<td></td>
+<td>SRG-OS-000109-GPOS-00056<br>
+</td>
+<td>CCI-000770<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_remove_jmx</td>
+<td>medium</td>
+<td>Remove the JMX Subsystem</td>
+<td xml:lang="en-US">The JMX subsystem allows you to trigger JDK and application management
+operations remotely. In a managed domain configuration, the JMX subsystem is
+removed by default. For a standalone configuration, it is enabled by default and
+must be removed.</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <code>&lt;JBOSS_HOME&gt;/bin/</code>
+folder.
+Run the <pre>jboss-cli</pre> script to start the Command Line Interface (CLI).
+Connect to the server and authenticate.
+<br><br>
+For a Managed Domain configuration you
+must check each profile name:
+<br><br>
+For each PROFILE NAME, run the command:
+<pre>/profile=<i>PROFILE NAME</i>/subsystem=jmx/remoting-connector=jmx:remove</pre>
+For a Standalone configuration:
+<pre>/subsystem=jmx/remoting-connector=jmx:remove</pre>
+</td>
+<td></td>
+<td>SRG-OS-000095-GPOS-00049<br>
+</td>
+<td>CCI-000381<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_remove_quickstarts</td>
+<td>medium</td>
+<td>Remove JBoss Quickstarts</td>
+<td xml:lang="en-US">JBoss QuickStarts are demo applications that can be deployed quickly. Demo
+applications are not written with security in mind and often open new attack
+vectors. QuickStarts must be removed.</td>
+<td xml:lang="en-US">Delete the QuickStarts folder.</td>
+<td></td>
+<td>SRG-OS-000095-GPOS-00049<br>
+</td>
+<td>CCI-000381<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_remove_unnecessary_apps</td>
+<td>medium</td>
+<td>Remove Unnecessary Applications</td>
+<td xml:lang="en-US">Extraneous services and applications running on an application server expands
+the attack surface and increases risk to the application server. Securing any
+server involves identifying and removing any unnecessary services and, in the
+case of an application server, unnecessary and/or unapproved applications.</td>
+<td xml:lang="en-US">Identify, authorize, and document all applications that are deployed to the
+application server. Remove unauthorized applications.</td>
+<td></td>
+<td>SRG-OS-000095-GPOS-00049<br>
+</td>
+<td>CCI-000381<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_require_password_access</td>
+<td>medium</td>
+<td>Require Password Authentication</td>
+<td xml:lang="en-US">Passwords need to be protected at all times, and encryption is the standard
+method for protecting passwords during transmission. If passwords are not
+encrypted, they can be plainly read (i.e., clear text) and easily compromised.
+Application servers have the capability to utilize either certificates (tokens)
+or user IDs and passwords in order to authenticate. When the application server
+transmits or receives passwords, the passwords must be encrypted.</td>
+<td xml:lang="en-US">Configure the LDAP Security Realm using default settings that sets <code>allow-empty-values</code>
+to <code>..</code> LDAP Security Realm creation is described in
+section 11.9 -Add an LDAP Security Realm in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.</td>
+<td></td>
+<td>SRG-OS-000074-GPOS-00042<br>
+</td>
+<td>CCI-000197<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_restrict_jboss_account</td>
+<td>high</td>
+<td>Restrict the JBoss Account</td>
+<td xml:lang="en-US">JBoss does not require admin rights to operate and should be run as a regular
+user. In addition, if the user account was to be compromised and the account
+was allowed interactive logon rights, this would increase the risk and attack
+surface against the JBoss system. The right to interactively log on to the
+system using the JBoss account should be limited according to the OS
+capabilities.</td>
+<td xml:lang="en-US">Use the relevant OS commands to restrict JBoss user account from interactively
+logging on to the console of the JBoss system.
+<br><br>
+For Windows systems, use GPO.
+For UNIX like systems using ssh DenyUsers <i>account id</i> or follow established
+procedure for restricting access.</td>
+<td></td>
+<td>SRG-OS-000095-GPOS-00049<br>
+</td>
+<td>CCI-000381<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_roll_over_transfer_logs</td>
+<td>medium</td>
+<td>Roll Over and Transfer JBoss Logs</td>
+<td xml:lang="en-US">Information stored in one location is vulnerable to accidental or incidental
+deletion or alteration. Protecting log data is important during a forensic
+investigation to ensure investigators can track and understand what may have
+occurred. Off-loading should be set up as a scheduled task but can be
+configured to be run manually, if other processes during the off-loading are
+manual.
+<br><br>
+Off-loading is a common process in information systems with limited log
+storage capacity.</td>
+<td xml:lang="en-US">Open the web-based management interface by opening a browser and pointing it to
+<code>HTTPS://<i>EAP_SERVER</i>:9990/</code>
+<br><br>
+Authenticate as a user with Admin rights.
+Navigate
+to the <code>Configuration</code> tab.
+Expand <code>+</code> Subsystems.
+Expand <code>+</code> Core.
+Select
+<code>Logging</code>.
+Select the <code>Handler</code> tab.
+Select <code>Periodic</code>.
+<br><br>
+If a
+periodic file handler does not exist, reference JBoss admin guide for
+instructions on how to create a file handler that will rotate logs on a daily
+basis.
+Create scripts that package and off-load log data at least weekly.</td>
+<td></td>
+<td>SRG-OS-000479-GPOS-00224<br>SRG-OS-000342-GPOS-00133<br>
+</td>
+<td>CCI-001851<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_secure_keystore_permissions</td>
+<td>medium</td>
+<td>Restrict Access to the JBoss Keystore</td>
+<td xml:lang="en-US">The cornerstone of the PKI is the private key used to encrypt or digitally sign
+information.
+<br><br>
+If the private key is stolen, this will lead to the compromise of
+the authentication and non-repudiation gained through PKI because the attacker
+can use the private key to digitally sign documents and can pretend to be the
+authorized user.
+<br><br>
+Both the holders of a digital certificate and the issuing
+authority must protect the computers, storage devices, or whatever they use to
+keep the private keys. Java-based application servers utilize the Java keystore,
+which provides storage for cryptographic keys and certificates. The keystore is
+usually maintained in a file stored on the file system.</td>
+<td xml:lang="en-US">Configure the application server OS file permissions on the corresponding
+private key to restrict access to authorized accounts or roles.</td>
+<td></td>
+<td>SRG-OS-000067-GPOS-00035<br>
+</td>
+<td>CCI-000186<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_service_separate_networks</td>
+<td>medium</td>
+<td>Use Separate Management and Application Networks</td>
+<td xml:lang="en-US">The application server consists of the management interface and hosted
+applications. By separating the management interface from hosted applications,
+the user must authenticate as a privileged user to the management interface
+before being presented with management functionality. This prevents non-
+privileged users from having visibility to functions not available to the user.
+By limiting visibility, a compromised non-privileged account does not offer
+information to the attacker or functionality and information needed to further
+the attack on the application server.
+<br><br>
+JBoss is designed to operate with
+separate application and management interfaces.
+The JBoss server is started via
+a script. To start the JBoss server in domain mode, the admin will execute the
+/bin/domain.sh or domain.bat script.
+<br><br>
+To start the JBoss server in standalone
+mode, the admin will execute /bin/standalone.bat or standalone.sh.
+<br><br>
+Command line
+flags are used to specify which network address is used for management and which
+address is used for public/application access.</td>
+<td xml:lang="en-US">Start the application server with a <code>-bmanagement</code> and a <code>-b</code> flag so that admin
+management functionality and hosted applications are separated.
+<br><br>
+Refer to
+section 4.9 in the JBoss EAP 6.3 Installation Guide for specific instructions on
+how to start the JBoss server as a service.</td>
+<td></td>
+<td>SRG-OS-000132-GPOS-00067<br>
+</td>
+<td>CCI-001082<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_system_up_to_date</td>
+<td>high</td>
+<td>JBoss System Is Patched</td>
+<td xml:lang="en-US">The JBoss product is available as Open Source; however, the Red Hat vendor
+provides updates, patches and support for the JBoss product. It is imperative
+that patches and updates be applied to JBoss in a timely manner as many attacks
+against JBoss focus on unpatched systems. It is critical that support be
+obtained and made available.</td>
+<td xml:lang="en-US">Configure the operating system and the application server to use a patch
+management system or process that ensures security-relevant updates are
+installed within the time period directed by the ISSM.</td>
+<td></td>
+<td></td>
+<td>CCI-002605<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_unprivileged_mode</td>
+<td>high</td>
+<td>Restrict JBoss Account</td>
+<td xml:lang="en-US">JBoss EAP application server can be run as the OS admin, which is not advised.
+Running the application server with admin privileges increases the attack
+surface by granting the application server more rights than it requires in order
+to operate. If the server is compromised, the attacker will have the same
+rights as the application server, which in that case would be admin rights. The
+JBoss EAP server must not be run as the admin user.</td>
+<td xml:lang="en-US">Run the JBoss server with non-admin rights.</td>
+<td></td>
+<td>SRG-OS-000095-GPOS-00049<br>
+</td>
+<td>CCI-000381<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_use_approved_ca_cert</td>
+<td>medium</td>
+<td>Use Approved DoD Certificate Authorities</td>
+<td xml:lang="en-US">Untrusted Certificate Authorities (CA) can issue certificates, but they may be
+issued by organizations or individuals that seek to compromise DoD systems or by
+organizations with insufficient security controls. If the CA used for verifying
+the certificate is not a DoD-approved CA, trust of this CA has not been
+established.
+<br><br>
+The DoD will only accept PKI certificates obtained from a DoD-
+approved internal or external certificate authority. Reliance on CAs for the
+establishment of secure sessions includes, for example, the use of SSL/TLS
+certificates. The application server must only allow the use of DoD PKI-
+established certificate authorities for verification.</td>
+<td xml:lang="en-US">Locate the cacerts file for the JVM. This can be done using the appropriate
+find command for the OS and change to the directory where the cacerts file is
+located.
+<br><br>
+Remove the certificates that have a CA that is non-DoD approved, and
+import DoD CA-approved certificates.</td>
+<td></td>
+<td>SRG-OS-000403-GPOS-00182<br>
+</td>
+<td>CCI-002470<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_use_approved_ciphers</td>
+<td>medium</td>
+<td>Use Approved Ciphers</td>
+<td xml:lang="en-US">Preventing the disclosure or modification of transmitted information requires
+that application servers take measures to employ approved cryptography in order
+to protect the information during transmission over the network. This is usually
+achieved through the use of Transport Layer Security (TLS), SSL VPN, or IPSec
+tunnel.
+<br><br>
+If data in transit is unencrypted, it is vulnerable to disclosure and
+modification. If approved cryptographic algorithms are not used, encryption
+strength cannot be assured.
+<br><br>
+FIPS 140-2 approved TLS versions include TLS V1.0
+or greater.
+<br><br>
+TLS must be enabled, and non-FIPS-approved SSL versions must be
+disabled. NIST SP 800-52 specifies the preferred configurations for government
+systems.</td>
+<td xml:lang="en-US">Reference section 4.6 of the JBoss EAP 6.3 Security Guide located on the Red
+Hat vendor's website for step-by-step instructions on establishing SSL
+encryption on JBoss.
+<br><br>
+The overall steps include:
+<br><br>
+1. Add an HTTPS connector.
+2. Configure the SSL encryption certificate and keys.
+3. Set the Cipher to an approved algorithm.</td>
+<td></td>
+<td>SRG-OS-000424-GPOS-00188<br>
+</td>
+<td>CCI-002421<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_use_dod_approved_certs</td>
+<td>medium</td>
+<td>Use DoD Approved Certificates</td>
+<td xml:lang="en-US">Class 3 PKI certificates are used for servers and software signing rather than
+for identifying individuals. Class 4 certificates are used for business-to-
+business transactions. Utilizing unapproved certificates not issued or approved
+by DoD or CNS creates an integrity risk. The application server must utilize
+approved DoD or CNS Class 3 or Class 4 certificates for software signing and
+business-to-business transactions.</td>
+<td xml:lang="en-US">Configure the application server to use DoD- or CNSS-approved Class 3 or Class
+4 PKI certificates.</td>
+<td></td>
+<td>SRG-OS-000478-GPOS-00223<br>SRG-OS-000396-GPOS-00176<br>
+</td>
+<td>CCI-002450<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_use_secure_ldap_port</td>
+<td>medium</td>
+<td>Use Secure Standard LDAP Port</td>
+<td xml:lang="en-US">Passwords need to be protected at all times, and encryption is the standard
+method for protecting passwords during transmission.
+<br><br>
+Application servers have
+the capability to utilize LDAP directories for authentication. If LDAP
+connections are not protected during transmission, sensitive authentication
+credentials can be stolen. When the application server utilizes LDAP, the LDAP
+traffic must be encrypted.</td>
+<td xml:lang="en-US">Follow steps in section 11.8 - Management Interface Security in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.
+<br><br>
+1. Create an outbound connection to the LDAP server.
+2. Create an LDAP-enabled security realm.
+3. Reference the new security domain in the Management Interface.</td>
+<td></td>
+<td>SRG-OS-000074-GPOS-00042<br>
+</td>
+<td>CCI-000197<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_use_tls</td>
+<td>medium</td>
+<td>Use Approves TLS version</td>
+<td xml:lang="en-US">Preventing the disclosure of transmitted information requires that the
+application server take measures to employ some form of cryptographic mechanism
+in order to protect the information during transmission. This is usually
+achieved through the use of Transport Layer Security (TLS).
+<br><br>
+JBoss relies on
+the underlying SSL implementation running on the OS. This can be either Java
+based or OpenSSL. The SSL protocol setting determines which SSL protocol is
+used. SSL has known security vulnerabilities, so TLS should be used instead.
+If data is transmitted unencrypted, the data then becomes vulnerable to
+disclosure. The disclosure may reveal user identifier/password combinations,
+website code revealing business logic, or other user personal information.
+<br><br>
+FIPS 140-2 approved TLS versions include TLS V1.0 or greater.
+<br><br>
+TLS must be enabled,
+and non-FIPS-approved SSL versions must be disabled. NIST SP 800-52 specifies
+the preferred configurations for government systems.</td>
+<td xml:lang="en-US">Reference section 4.6 of the JBoss EAP 6.3 Security Guide located on the Red
+Hat vendor's web site for step-by-step instructions on establishing SSL
+encryption on JBoss.
+<br><br>
+The overall steps include:
+<br><br>
+1. Add an HTTPS connector.
+2. Configure the SSL encryption certificate and keys.
+3. Set the protocol to TLS V1.1 or V1.2.</td>
+<td></td>
+<td>SRG-OS-000423-GPOS-00187<br>SRG-OS-000481-GPOS-000481<br>
+</td>
+<td>CCI-002418<br>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>jboss_eap_vendor_supported</td>
+<td>high</td>
+<td>JBoss Version Is Vendor Supported</td>
+<td xml:lang="en-US">The JBoss product is available as Open Source; however, the Red Hat vendor
+provides updates, patches and support for the JBoss product. It is imperative
+that patches and updates be applied to JBoss in a timely manner as many attacks
+against JBoss focus on unpatched systems. It is critical that support be
+obtained and made available.</td>
+<td xml:lang="en-US">Obtain vendor support from Red Hat.</td>
+<td></td>
+<td></td>
+<td>CCI-002605<br>
+</td>
+<td></td>
+</tr>
+</table>
+</body>
+</html>

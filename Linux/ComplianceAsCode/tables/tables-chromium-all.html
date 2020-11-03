@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} 
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<h2>References for product chromium</h2>
+
+<ul>
+<li class="collapsible">stigid</li>
+  <ul class="content">
+  <li class="collapsible">DTBC0001</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_firewall_traversal<span class="tooltiptext">Disable Chromium's Ability to Traverse Firewalls</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0002</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disallow_location_tracking<span class="tooltiptext">Disable Location Tracking</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0003</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_block_desktop_notifications<span class="tooltiptext">Prevent Desktop Notifications</span></div></li>
+    <li><div class="tooltip">chromium_extension_whitelist<span class="tooltiptext">Enable Only Approved Extensions</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0004</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_popups<span class="tooltiptext">Disable Popups</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0006</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_blacklist_extension_installation<span class="tooltiptext">Disable All Extensions by Default</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0007</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_default_search_provider_name<span class="tooltiptext">Set the Default Search Provider's URL</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0008</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_enable_encrypted_searching<span class="tooltiptext">Enable Encrypted Searching</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0009</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_default_search_provider<span class="tooltiptext">Enable the Default Search Provider</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0010</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_cleartext_passwords<span class="tooltiptext">Disable Use of Cleartext Passwords</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0011</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_password_manager<span class="tooltiptext">Disable Chromium Password Manager</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0012</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_http_authentication<span class="tooltiptext">Set Chromium's HTTP Authentication Scheme</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0013</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_outdated_plugins<span class="tooltiptext">Disable Outdated Plugins</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0014</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_plugins_require_authorization<span class="tooltiptext">Require Outdated Plugins to be Authorized</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0015</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_thirdparty_cookies<span class="tooltiptext">Disable 3rd Party Cookies</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0017</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_background_processing<span class="tooltiptext">Disable Background Processing</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0019</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_3d_graphics_api<span class="tooltiptext">Disable the 3D Graphics APIs</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0020</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_google_sync<span class="tooltiptext">Disable Data Synchronization to Google</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0021</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_protocol_schemas<span class="tooltiptext">Disable Insecure And Obsolete Protocol Schemas</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0022</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_autocomplete<span class="tooltiptext">Disable the AutoFill Feature</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0023</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_cloud_print_sharing<span class="tooltiptext">Disable Cloud Print Sharing</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0025</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_network_prediction<span class="tooltiptext">Disable Network Prediction</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0026</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_metrics_reporting<span class="tooltiptext">Disable Metrics Reporting</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0027</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_search_suggestions<span class="tooltiptext">Disable Search Suggestion</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0029</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_saved_passwords<span class="tooltiptext">Disable Saved Passwords</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0030</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_incognito_mode<span class="tooltiptext">Disable Incognito Mode</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0034</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_plugin_blacklist<span class="tooltiptext">Disable All Plugins by Default</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0035</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_enable_approved_plugins<span class="tooltiptext">Enable Only Approved Plugins</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0036</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_automatic_installation<span class="tooltiptext">Disable Automatic Search And Installation of Plugins</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0037</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_check_cert_revocation<span class="tooltiptext">Enable Online OCSP/CRL Certificate Checks</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0038</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_enable_safe_browsing<span class="tooltiptext">Enable the Safe Browsing Feature</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0039</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_enable_browser_history<span class="tooltiptext">Enable Saving the Browser History</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0040</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_default_block_plugins<span class="tooltiptext">Block Plugins by Default</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0045</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_disable_session_cookies<span class="tooltiptext">Disable Session Cookies</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0048</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_trusted_home_page<span class="tooltiptext">Set the Default Home Page</span></div></li>
+    </ul>
+  <li class="collapsible">DTBC0051</li>
+    <ul class="content">
+    <li><div class="tooltip">chromium_whitelist_plugin_urls<span class="tooltiptext">Enable Plugins for Only Approved URLs</span></div></li>
+    </ul>
+  </ul>
+</ul>  
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
+</body>
+</html>

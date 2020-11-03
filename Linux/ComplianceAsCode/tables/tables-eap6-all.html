@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} 
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<h2>References for product eap6</h2>
+
+<ul>
+<li class="collapsible">disa</li>
+  <ul class="content">
+  <li class="collapsible">CCI-000068</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_secure_management_access<span class="tooltiptext">Enable HTTPS for Management Sessions</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000130</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000131</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000132</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000133</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000134</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000162</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_log_permissions<span class="tooltiptext">Configure JBoss Log Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000163</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_log_permissions<span class="tooltiptext">Configure JBoss Log Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000164</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_log_permissions<span class="tooltiptext">Configure JBoss Log Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000169</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000171</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditor_roles<span class="tooltiptext">Configure JBoss Auditor Role</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000172</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000186</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_secure_keystore_permissions<span class="tooltiptext">Restrict Access to the JBoss Keystore</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000196</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_keystore<span class="tooltiptext">Enable the JBoss Keystore</span></div></li>
+    <li><div class="tooltip">jboss_eap_encrypt_keystore_passwords<span class="tooltiptext">Encrypt JBoss Keystore Passwords</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000197</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_require_password_access<span class="tooltiptext">Require Password Authentication</span></div></li>
+    <li><div class="tooltip">jboss_eap_use_secure_ldap_port<span class="tooltiptext">Use Secure Standard LDAP Port</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000213</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_application_authentication<span class="tooltiptext">Remove Silent Authentication - Application Security Realm</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_host_access_restrictions<span class="tooltiptext">Configure Host Access Restrictions for Applications</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_management_authentication<span class="tooltiptext">Remove Silent Authentication - Management Security Realm</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_security_manager<span class="tooltiptext">Enable the Java Security Manager</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_security_realm<span class="tooltiptext">Secure the JBoss Management Interfaces</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_user_roles<span class="tooltiptext">Configure JBoss User Roles</span></div></li>
+    <li><div class="tooltip">jboss_eap_enable_rbac<span class="tooltiptext">Enable Role Based Access Control (RBAC)</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000381</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_analytics<span class="tooltiptext">Disable Google Analytics</span></div></li>
+    <li><div class="tooltip">jboss_eap_disable_replace_welcome_page<span class="tooltiptext">Disable or Replace the JBoss Welcome Page</span></div></li>
+    <li><div class="tooltip">jboss_eap_remove_jmx<span class="tooltiptext">Remove the JMX Subsystem</span></div></li>
+    <li><div class="tooltip">jboss_eap_remove_quickstarts<span class="tooltiptext">Remove JBoss Quickstarts</span></div></li>
+    <li><div class="tooltip">jboss_eap_remove_unnecessary_apps<span class="tooltiptext">Remove Unnecessary Applications</span></div></li>
+    <li><div class="tooltip">jboss_eap_restrict_jboss_account<span class="tooltiptext">Restrict the JBoss Account</span></div></li>
+    <li><div class="tooltip">jboss_eap_unprivileged_mode<span class="tooltiptext">Restrict JBoss Account</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000382</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_ports<span class="tooltiptext">Configure JBoss Management and Application Ports</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000764</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_ldap<span class="tooltiptext">Configure LDAP</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000765</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_multifactor_authentication<span class="tooltiptext">Configure Multi-Factor Authentication</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000770</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_remove_group_accounts<span class="tooltiptext">Remove JBoss Group Acount Access</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000778</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_management_network<span class="tooltiptext">Separate JBoss Management Network</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000795</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_management_ldap<span class="tooltiptext">Configure LDAP for Management Interfaces</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001082</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_service_separate_networks<span class="tooltiptext">Use Separate Management and Application Networks</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001199</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_file_permissions<span class="tooltiptext">Configure JBoss Application File Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001314</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_logs_permissions<span class="tooltiptext">Configure JBoss Log Directory Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001348</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_offloading_max<span class="tooltiptext">Configure JBoss Log Off-Loading Frequency</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001453</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_https<span class="tooltiptext">Enable HTTPS for JBoss Web Interface</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001464</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001487</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_logging_level<span class="tooltiptext">Configure JBoss Logging Level</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001499</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_user_permissions<span class="tooltiptext">Configure mgmt-users.properties File Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001813</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_automatic_deployment<span class="tooltiptext">Disable Automatic Deployment</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001814</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_log_deployments<span class="tooltiptext">Log Application Deployments</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001851</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_syslog<span class="tooltiptext">Enable Logging to syslog</span></div></li>
+    <li><div class="tooltip">jboss_eap_roll_over_transfer_logs<span class="tooltiptext">Roll Over and Transfer JBoss Logs</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002234</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_audit_privileged_actions<span class="tooltiptext">Audit JBoss Privileged Actions</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002235</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_enable_rbac<span class="tooltiptext">Enable Role Based Access Control (RBAC)</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002322</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_domain_admin_console<span class="tooltiptext">Disable Network Access to the Admin Console</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002385</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_ha_lb<span class="tooltiptext">Configure Load Balancing (LB) or High Availability (HA)</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002418</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_tls<span class="tooltiptext">Use Approves TLS version</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002421</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_approved_ciphers<span class="tooltiptext">Use Approved Ciphers</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002450</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_dod_approved_certs<span class="tooltiptext">Use DoD Approved Certificates</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002470</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_approved_ca_cert<span class="tooltiptext">Use Approved DoD Certificate Authorities</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002605</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_system_up_to_date<span class="tooltiptext">JBoss System Is Patched</span></div></li>
+    <li><div class="tooltip">jboss_eap_vendor_supported<span class="tooltiptext">JBoss Version Is Vendor Supported</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">srg</li>
+  <ul class="content">
+  <li class="collapsible">SRG-APP-000014-AS-000009</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_secure_management_access<span class="tooltiptext">Enable HTTPS for Management Sessions</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000015-AS-000010</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_https<span class="tooltiptext">Enable HTTPS for JBoss Web Interface</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000033-AS-000024</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_application_authentication<span class="tooltiptext">Remove Silent Authentication - Application Security Realm</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_host_access_restrictions<span class="tooltiptext">Configure Host Access Restrictions for Applications</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_management_authentication<span class="tooltiptext">Remove Silent Authentication - Management Security Realm</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_security_manager<span class="tooltiptext">Enable the Java Security Manager</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_security_realm<span class="tooltiptext">Secure the JBoss Management Interfaces</span></div></li>
+    <li><div class="tooltip">jboss_eap_configure_user_roles<span class="tooltiptext">Configure JBoss User Roles</span></div></li>
+    <li><div class="tooltip">jboss_eap_enable_rbac<span class="tooltiptext">Enable Role Based Access Control (RBAC)</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000089-AS-000050</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000090-AS-000051</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditor_roles<span class="tooltiptext">Configure JBoss Auditor Role</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000092-AS-000053</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000095-AS-000056</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000096-AS-000059</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000096-AS-000060</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000098-AS-000061</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000099-AS-000062</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000100-AS-000063</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_logging_level<span class="tooltiptext">Configure JBoss Logging Level</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000118-AS-000078</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_log_permissions<span class="tooltiptext">Configure JBoss Log Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000119-AS-000079</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_log_permissions<span class="tooltiptext">Configure JBoss Log Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000120-AS-000080</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_log_permissions<span class="tooltiptext">Configure JBoss Log Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000125-AS-000084</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_offloading_max<span class="tooltiptext">Configure JBoss Log Off-Loading Frequency</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000133-AS-000092</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_user_permissions<span class="tooltiptext">Configure mgmt-users.properties File Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000141-AS-000095</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_analytics<span class="tooltiptext">Disable Google Analytics</span></div></li>
+    <li><div class="tooltip">jboss_eap_disable_replace_welcome_page<span class="tooltiptext">Disable or Replace the JBoss Welcome Page</span></div></li>
+    <li><div class="tooltip">jboss_eap_remove_jmx<span class="tooltiptext">Remove the JMX Subsystem</span></div></li>
+    <li><div class="tooltip">jboss_eap_remove_quickstarts<span class="tooltiptext">Remove JBoss Quickstarts</span></div></li>
+    <li><div class="tooltip">jboss_eap_remove_unnecessary_apps<span class="tooltiptext">Remove Unnecessary Applications</span></div></li>
+    <li><div class="tooltip">jboss_eap_restrict_jboss_account<span class="tooltiptext">Restrict the JBoss Account</span></div></li>
+    <li><div class="tooltip">jboss_eap_unprivileged_mode<span class="tooltiptext">Restrict JBoss Account</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000142-AS-000014</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_ports<span class="tooltiptext">Configure JBoss Management and Application Ports</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000148-AS-000101</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_ldap<span class="tooltiptext">Configure LDAP</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000149-AS-000102</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_multifactor_authentication<span class="tooltiptext">Configure Multi-Factor Authentication</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000153-AS-000104</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_remove_group_accounts<span class="tooltiptext">Remove JBoss Group Acount Access</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000158-AS-000108</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_management_network<span class="tooltiptext">Separate JBoss Management Network</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000163-AS-000111</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_management_ldap<span class="tooltiptext">Configure LDAP for Management Interfaces</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000171-AS-000119</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_keystore<span class="tooltiptext">Enable the JBoss Keystore</span></div></li>
+    <li><div class="tooltip">jboss_eap_encrypt_keystore_passwords<span class="tooltiptext">Encrypt JBoss Keystore Passwords</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000172-AS-000120</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_require_password_access<span class="tooltiptext">Require Password Authentication</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000172-AS-000121</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_secure_ldap_port<span class="tooltiptext">Use Secure Standard LDAP Port</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000176-AS-000125</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_secure_keystore_permissions<span class="tooltiptext">Restrict Access to the JBoss Keystore</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000211-AS-000146</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_service_separate_networks<span class="tooltiptext">Use Separate Management and Application Networks</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000231-AS-000133</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_file_permissions<span class="tooltiptext">Configure JBoss Application File Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000267-AS-000170</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_logs_permissions<span class="tooltiptext">Configure JBoss Log Directory Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000316-AS-000199</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_domain_admin_console<span class="tooltiptext">Disable Network Access to the Admin Console</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000340-AS-000185</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_enable_rbac<span class="tooltiptext">Enable Role Based Access Control (RBAC)</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000343-AS-000030</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_audit_privileged_actions<span class="tooltiptext">Audit JBoss Privileged Actions</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000358-AS-000064</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_syslog<span class="tooltiptext">Enable Logging to syslog</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000380-AS-000088</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_automatic_deployment<span class="tooltiptext">Disable Automatic Deployment</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000381-AS-000089</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_log_deployments<span class="tooltiptext">Log Application Deployments</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000427-AS-000264</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_approved_ca_cert<span class="tooltiptext">Use Approved DoD Certificate Authorities</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000435-AS-000069</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_ha_lb<span class="tooltiptext">Configure Load Balancing (LB) or High Availability (HA)</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000439-AS-000155</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_tls<span class="tooltiptext">Use Approves TLS version</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000440-AS-000167</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_approved_ciphers<span class="tooltiptext">Use Approved Ciphers</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000456-AS-000266</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_system_up_to_date<span class="tooltiptext">JBoss System Is Patched</span></div></li>
+    <li><div class="tooltip">jboss_eap_vendor_supported<span class="tooltiptext">JBoss Version Is Vendor Supported</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000495-AS-000220</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000499-AS-000224</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000503-AS-000228</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000504-AS-000229</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000505-AS-000230</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000506-AS-000231</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000509-AS-000234</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000514-AS-000137</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_dod_approved_certs<span class="tooltiptext">Use DoD Approved Certificates</span></div></li>
+    </ul>
+  <li class="collapsible">SRG-APP-000515-AS-000203</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_roll_over_transfer_logs<span class="tooltiptext">Roll Over and Transfer JBoss Logs</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">stigid</li>
+  <ul class="content">
+  <li class="collapsible">JBOS-AS-000010</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_secure_management_access<span class="tooltiptext">Enable HTTPS for Management Sessions</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000015</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_https<span class="tooltiptext">Enable HTTPS for JBoss Web Interface</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000025</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_host_access_restrictions<span class="tooltiptext">Configure Host Access Restrictions for Applications</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000030</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_security_manager<span class="tooltiptext">Enable the Java Security Manager</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000035</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_enable_rbac<span class="tooltiptext">Enable Role Based Access Control (RBAC)</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000040</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_user_roles<span class="tooltiptext">Configure JBoss User Roles</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000045</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_application_authentication<span class="tooltiptext">Remove Silent Authentication - Application Security Realm</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000050</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_management_authentication<span class="tooltiptext">Remove Silent Authentication - Management Security Realm</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000075</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_security_realm<span class="tooltiptext">Secure the JBoss Management Interfaces</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000080</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditing<span class="tooltiptext">Configure JBoss Auditing and Logging</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000085</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_auditor_roles<span class="tooltiptext">Configure JBoss Auditor Role</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000135</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_logging_level<span class="tooltiptext">Configure JBoss Logging Level</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000165</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_log_permissions<span class="tooltiptext">Configure JBoss Log Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000195</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_offloading_max<span class="tooltiptext">Configure JBoss Log Off-Loading Frequency</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000210</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_user_permissions<span class="tooltiptext">Configure mgmt-users.properties File Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000220</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_restrict_jboss_account<span class="tooltiptext">Restrict the JBoss Account</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000225</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_analytics<span class="tooltiptext">Disable Google Analytics</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000230</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_unprivileged_mode<span class="tooltiptext">Restrict JBoss Account</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000235</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_remove_quickstarts<span class="tooltiptext">Remove JBoss Quickstarts</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000240</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_remove_jmx<span class="tooltiptext">Remove the JMX Subsystem</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000245</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_replace_welcome_page<span class="tooltiptext">Disable or Replace the JBoss Welcome Page</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000250</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_remove_unnecessary_apps<span class="tooltiptext">Remove Unnecessary Applications</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000255</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_ports<span class="tooltiptext">Configure JBoss Management and Application Ports</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000260</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_ldap<span class="tooltiptext">Configure LDAP</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000265</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_multifactor_authentication<span class="tooltiptext">Configure Multi-Factor Authentication</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000275</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_remove_group_accounts<span class="tooltiptext">Remove JBoss Group Acount Access</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000285</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_management_network<span class="tooltiptext">Separate JBoss Management Network</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000290</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_management_ldap<span class="tooltiptext">Configure LDAP for Management Interfaces</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000295</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_keystore<span class="tooltiptext">Enable the JBoss Keystore</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000300</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_encrypt_keystore_passwords<span class="tooltiptext">Encrypt JBoss Keystore Passwords</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000305</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_require_password_access<span class="tooltiptext">Require Password Authentication</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000310</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_secure_ldap_port<span class="tooltiptext">Use Secure Standard LDAP Port</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000320</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_secure_keystore_permissions<span class="tooltiptext">Restrict Access to the JBoss Keystore</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000355</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_service_separate_networks<span class="tooltiptext">Use Separate Management and Application Networks</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000400</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_file_permissions<span class="tooltiptext">Configure JBoss Application File Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000425</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_logs_permissions<span class="tooltiptext">Configure JBoss Log Directory Permissions</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000470</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_domain_admin_console<span class="tooltiptext">Disable Network Access to the Admin Console</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000480</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_audit_privileged_actions<span class="tooltiptext">Audit JBoss Privileged Actions</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000505</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_syslog<span class="tooltiptext">Enable Logging to syslog</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000545</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_disable_automatic_deployment<span class="tooltiptext">Disable Automatic Deployment</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000550</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_log_deployments<span class="tooltiptext">Log Application Deployments</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000625</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_approved_ca_cert<span class="tooltiptext">Use Approved DoD Certificate Authorities</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000640</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_configure_ha_lb<span class="tooltiptext">Configure Load Balancing (LB) or High Availability (HA)</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000650</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_tls<span class="tooltiptext">Use Approves TLS version</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000655</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_approved_ciphers<span class="tooltiptext">Use Approved Ciphers</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000680</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_vendor_supported<span class="tooltiptext">JBoss Version Is Vendor Supported</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000685</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_system_up_to_date<span class="tooltiptext">JBoss System Is Patched</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000730</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_use_dod_approved_certs<span class="tooltiptext">Use DoD Approved Certificates</span></div></li>
+    </ul>
+  <li class="collapsible">JBOS-AS-000735</li>
+    <ul class="content">
+    <li><div class="tooltip">jboss_eap_roll_over_transfer_logs<span class="tooltiptext">Roll Over and Transfer JBoss Logs</span></div></li>
+    </ul>
+  </ul>
+</ul>  
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
+</body>
+</html>

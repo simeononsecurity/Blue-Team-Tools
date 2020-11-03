@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} 
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<h2>References for product rhosp10</h2>
+
+<ul>
+<li class="collapsible">cui</li>
+  <ul class="content">
+  <li class="collapsible">13</li>
+    <ul class="content">
+    <li><div class="tooltip">neutron_use_https<span class="tooltiptext">Check-Neutron-04: Is secure protocol used for authentication?</span></div></li>
+    </ul>
+  <li class="collapsible">3</li>
+    <ul class="content">
+    <li><div class="tooltip">neutron_use_https<span class="tooltiptext">Check-Neutron-04: Is secure protocol used for authentication?</span></div></li>
+    </ul>
+  <li class="collapsible">3.1.1</li>
+    <ul class="content">
+    <li><div class="tooltip">horizon_csrf_cookie_secure<span class="tooltiptext">Cross-Site Request Forgery Prevention: Enable CSRF_COOKIE_SECURE (non-containerized deployments)</span></div></li>
+    <li><div class="tooltip">keystone_disable_user_account_days_inactive<span class="tooltiptext">Set Maximum Inactivity Period</span></div></li>
+    </ul>
+  <li class="collapsible">3.1.11</li>
+    <ul class="content">
+    <li><div class="tooltip">keystone_algorithm_hashing<span class="tooltiptext">Check-Identity-04: Does Identity use strong hashing algorithms for PKI tokens?</span></div></li>
+    </ul>
+  <li class="collapsible">3.1.2</li>
+    <ul class="content">
+    <li><div class="tooltip">horizon_csrf_cookie_secure<span class="tooltiptext">Cross-Site Request Forgery Prevention: Enable CSRF_COOKIE_SECURE (non-containerized deployments)</span></div></li>
+    <li><div class="tooltip">keystone_disable_user_account_days_inactive<span class="tooltiptext">Set Maximum Inactivity Period</span></div></li>
+    <li><div class="tooltip">keystone_lockout_duration<span class="tooltiptext">Set Account Lockout Duration</span></div></li>
+    </ul>
+  <li class="collapsible">3.1.5</li>
+    <ul class="content">
+    <li><div class="tooltip">cinder_conf_file_perms<span class="tooltiptext">Check-Block-02: Are strict permissions set for cinder config files?</span></div></li>
+    <li><div class="tooltip">cinder_file_ownership<span class="tooltiptext">Check-Block-01: Is user/group ownership of config files set to root/cinder?</span></div></li>
+    <li><div class="tooltip">cinder_nas_secure_file_permissions<span class="tooltiptext">Check-Block-07: Is NAS operating in secure enviornment?</span></div></li>
+    <li><div class="tooltip">horizon_file_ownership<span class="tooltiptext">Check-Dashboard-01: Is user/group of config files set to root/horizon?</span></div></li>
+    <li><div class="tooltip">horizon_file_perms<span class="tooltiptext">Check-Dashboard-02: Are strict permissions set for horizon configuration files?</span></div></li>
+    <li><div class="tooltip">keystone_disable_admin_token<span class="tooltiptext">Check-Identity-06: Disable admin token in /etc/keystone/keystone.conf</span></div></li>
+    <li><div class="tooltip">keystone_file_ownership<span class="tooltiptext">Check-Identity-01: Is user/group ownership of config files set to keystone?</span></div></li>
+    <li><div class="tooltip">keystone_file_perms<span class="tooltiptext">Check-Identity-02: Are strict permissions set for Identity configuration files?</span></div></li>
+    <li><div class="tooltip">neutron_file_ownership<span class="tooltiptext">Check-Neutron-01: Is user/group ownership of config files set to root/neutron?</span></div></li>
+    <li><div class="tooltip">neutron_file_perms<span class="tooltiptext">Check-Neutron-02: Are strict permissions set for Compute configuration files?</span></div></li>
+    <li><div class="tooltip">nova_file_ownership<span class="tooltiptext">Check-Compute-01: Is user/group ownership of config files set to root/nova?</span></div></li>
+    <li><div class="tooltip">nova_file_perms<span class="tooltiptext">Check-Compute-02: Are strict permissions set for Compute configuration files?</span></div></li>
+    <li><div class="tooltip">nova_use_keystone<span class="tooltiptext">Check-Compute-03: Is keystone used for authentication?</span></div></li>
+    </ul>
+  <li class="collapsible">3.1.7</li>
+    <ul class="content">
+    <li><div class="tooltip">cinder_osapi_max_request_body<span class="tooltiptext">Check-Block-08: Is max size for the body of a request set to default (114688)?</span></div></li>
+    </ul>
+  <li class="collapsible">3.1.8</li>
+    <ul class="content">
+    <li><div class="tooltip">keystone_lockout_failure_attempts<span class="tooltiptext">Set Maximum Number of Failed Authentication Attempts</span></div></li>
+    </ul>
+  <li class="collapsible">3.13.8</li>
+    <ul class="content">
+    <li><div class="tooltip">cinder_glance_tls<span class="tooltiptext">Check-Block-06: Does cinder communicates with glance over TLS?</span></div></li>
+    <li><div class="tooltip">cinder_nova_tls<span class="tooltiptext">Check-Block-05: Does cinder communicates with nova over TLS?</span></div></li>
+    <li><div class="tooltip">cinder_tls_enabled<span class="tooltiptext">Check-Block-04: Is TLS enabled for authentication?</span></div></li>
+    <li><div class="tooltip">horizon_disable_password_reveal<span class="tooltiptext">Check-Dashboard-08: Is disable_password_reveal set to True?</span></div></li>
+    <li><div class="tooltip">horizon_password_autocomplete<span class="tooltiptext">Check-Dashboard-07: Is password_autocomplete set to False?</span></div></li>
+    <li><div class="tooltip">horizon_session_cookie_httponly<span class="tooltiptext">Check-Dashboard-06: Is SESSION_COOKIE_HTTPONLY parameter set to True?</span></div></li>
+    <li><div class="tooltip">horizon_session_cookie_secure<span class="tooltiptext">Check-Dashboard-05: Is SESSION_COOKIE_SECURE parameter set to True?</span></div></li>
+    <li><div class="tooltip">horizon_use_ssl<span class="tooltiptext">Check-Dashboard-03: Is USE_SSL parameter set to True?</span></div></li>
+    <li><div class="tooltip">keystone_use_ssl<span class="tooltiptext">Check-Identity-03: is SSL enabled for Identity?</span></div></li>
+    <li><div class="tooltip">neutron_api_use_ssl<span class="tooltiptext">Check-Neutron-05: Is SSL enabled on Neutron API server?</span></div></li>
+    <li><div class="tooltip">neutron_use_keystone<span class="tooltiptext">Check-Neutron-03: Is keystone used for authentication?</span></div></li>
+    <li><div class="tooltip">nova_secure_authentication<span class="tooltiptext">Check-Compute-04: Is secure protocol used for authentication?</span></div></li>
+    <li><div class="tooltip">nova_secure_glance<span class="tooltiptext">Check-Compute-05: Does Nova communicates with Glance securely?</span></div></li>
+    </ul>
+  <li class="collapsible">3.5.2</li>
+    <ul class="content">
+    <li><div class="tooltip">cinder_using_keystone<span class="tooltiptext">Check-Block-03: Is keystone used for authentication?</span></div></li>
+    </ul>
+  <li class="collapsible">8</li>
+    <ul class="content">
+    <li><div class="tooltip">neutron_use_https<span class="tooltiptext">Check-Neutron-04: Is secure protocol used for authentication?</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">nist</li>
+  <ul class="content">
+  <li class="collapsible">AC-2(3)</li>
+    <ul class="content">
+    <li><div class="tooltip">container_keystone_disable_user_account_days_inactive<span class="tooltiptext">Set Maximum Inactivity Period</span></div></li>
+    <li><div class="tooltip">keystone_disable_user_account_days_inactive<span class="tooltiptext">Set Maximum Inactivity Period</span></div></li>
+    </ul>
+  <li class="collapsible">AC-7</li>
+    <ul class="content">
+    <li><div class="tooltip">container_keystone_lockout_duration<span class="tooltiptext">Set Account Lockout Duration</span></div></li>
+    <li><div class="tooltip">container_keystone_lockout_failure_attempts<span class="tooltiptext">Set Maximum Number of Failed Authentication Attempts</span></div></li>
+    <li><div class="tooltip">keystone_lockout_duration<span class="tooltiptext">Set Account Lockout Duration</span></div></li>
+    <li><div class="tooltip">keystone_lockout_failure_attempts<span class="tooltiptext">Set Maximum Number of Failed Authentication Attempts</span></div></li>
+    </ul>
+  <li class="collapsible">FOO-1(a)</li>
+    <ul class="content">
+    <li><div class="tooltip">cinder_file_ownership<span class="tooltiptext">Check-Block-01: Is user/group ownership of config files set to root/cinder?</span></div></li>
+    <li><div class="tooltip">cinder_file_perms<span class="tooltiptext">Check-Block-02: Are strict permissions set for cinder config files?</span></div></li>
+    <li><div class="tooltip">cinder_glance_tls<span class="tooltiptext">Check-Block-06: Does cinder communicates with glance over TLS?</span></div></li>
+    <li><div class="tooltip">cinder_nas_secure_file_permissions<span class="tooltiptext">Check-Block-07: Is NAS operating in secure enviornment?</span></div></li>
+    <li><div class="tooltip">cinder_nova_tls<span class="tooltiptext">Check-Block-05: Does cinder communicates with nova over TLS?</span></div></li>
+    <li><div class="tooltip">cinder_osapi_max_request_body<span class="tooltiptext">Check-Block-08: Is max size for the body of a request set to default (114688)?</span></div></li>
+    <li><div class="tooltip">cinder_tls_enabled<span class="tooltiptext">Check-Block-04: Is TLS enabled for authentication?</span></div></li>
+    <li><div class="tooltip">cinder_using_keystone<span class="tooltiptext">Check-Block-03: Is keystone used for authentication?</span></div></li>
+    </ul>
+  <li class="collapsible">SC-5</li>
+    <ul class="content">
+    <li><div class="tooltip">horizon_csrf_cookie_secure<span class="tooltiptext">Cross-Site Request Forgery Prevention: Enable CSRF_COOKIE_SECURE (non-containerized deployments)</span></div></li>
+    </ul>
+  </ul>
+</ul>  
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
+</body>
+</html>

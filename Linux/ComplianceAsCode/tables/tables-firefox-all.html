@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} 
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<h2>References for product firefox</h2>
+
+<ul>
+<li class="collapsible">disa</li>
+  <ul class="content">
+  <li class="collapsible">CCI-000054</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-dod_root_certificate_installed<span class="tooltiptext">The DoD Root Certificate Exists</span></div></li>
+    <li><div class="tooltip">firefox_preferences-enable_ca_trust<span class="tooltiptext">Enable Shared System Certificates</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000366</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-lock_settings_config_file<span class="tooltiptext">Set Firefox Configuration File Location</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-000381</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-addons_plugin_updates<span class="tooltiptext">Disable Addons Plugin Updates</span></div></li>
+    <li><div class="tooltip">firefox_preferences-autofill_forms<span class="tooltiptext">Disable Autofill Form Assistance</span></div></li>
+    <li><div class="tooltip">firefox_preferences-autofill_passwords<span class="tooltiptext">Disable User Ability To Autofill Passwords</span></div></li>
+    <li><div class="tooltip">firefox_preferences-background_data<span class="tooltiptext">Disable Background Information Submission</span></div></li>
+    <li><div class="tooltip">firefox_preferences-install_extensions<span class="tooltiptext">Disable Extension Installation</span></div></li>
+    <li><div class="tooltip">firefox_preferences-javascript_context_menus<span class="tooltiptext">Disable JavaScript Context Menus</span></div></li>
+    <li><div class="tooltip">firefox_preferences-javascript_window_changes<span class="tooltiptext">Disable JavaScript's Raise Or Lower Windows Capability</span></div></li>
+    <li><div class="tooltip">firefox_preferences-javascript_window_resizing<span class="tooltiptext">Disable JavaScript's Moving Or Resizing Windows Capability</span></div></li>
+    <li><div class="tooltip">firefox_preferences-password_store<span class="tooltiptext">Disable the Firefox Password Store</span></div></li>
+    <li><div class="tooltip">firefox_preferences-pop-up_windows<span class="tooltiptext">Enable Firefox Pop-up Blocker</span></div></li>
+    <li><div class="tooltip">firefox_preferences-search_update<span class="tooltiptext">Disable Installed Search Plugins Update Checking</span></div></li>
+    <li><div class="tooltip">firefox_preferences-shell_protocol<span class="tooltiptext">Disable Firefox Access to Shell Protocols</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001242</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-auto-download_actions<span class="tooltiptext">Disable Automatic Downloads of MIME Types</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001243</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-open_confirmation<span class="tooltiptext">Enable Downloading and Opening File Confirmation</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001274</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-verification<span class="tooltiptext">Enable Certificate Verification</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-001312</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-development_tools<span class="tooltiptext">Disable Firefox Development Tools</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-002450</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-ssl_protocol_tls<span class="tooltiptext">Enable TLS Usage in Firefox</span></div></li>
+    </ul>
+  <li class="collapsible">CCI-003376</li>
+    <ul class="content">
+    <li><div class="tooltip">installed_firefox_version_supported<span class="tooltiptext">Supported Version of Firefox Installed</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">nist</li>
+  <ul class="content">
+  <li class="collapsible">AC-10</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-dod_root_certificate_installed<span class="tooltiptext">The DoD Root Certificate Exists</span></div></li>
+    <li><div class="tooltip">firefox_preferences-enable_ca_trust<span class="tooltiptext">Enable Shared System Certificates</span></div></li>
+    </ul>
+  <li class="collapsible">CM-6</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-lock_settings_config_file<span class="tooltiptext">Set Firefox Configuration File Location</span></div></li>
+    </ul>
+  <li class="collapsible">CM-7</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-addons_plugin_updates<span class="tooltiptext">Disable Addons Plugin Updates</span></div></li>
+    <li><div class="tooltip">firefox_preferences-autofill_forms<span class="tooltiptext">Disable Autofill Form Assistance</span></div></li>
+    <li><div class="tooltip">firefox_preferences-autofill_passwords<span class="tooltiptext">Disable User Ability To Autofill Passwords</span></div></li>
+    <li><div class="tooltip">firefox_preferences-background_data<span class="tooltiptext">Disable Background Information Submission</span></div></li>
+    <li><div class="tooltip">firefox_preferences-install_extensions<span class="tooltiptext">Disable Extension Installation</span></div></li>
+    <li><div class="tooltip">firefox_preferences-javascript_context_menus<span class="tooltiptext">Disable JavaScript Context Menus</span></div></li>
+    <li><div class="tooltip">firefox_preferences-javascript_window_changes<span class="tooltiptext">Disable JavaScript's Raise Or Lower Windows Capability</span></div></li>
+    <li><div class="tooltip">firefox_preferences-javascript_window_resizing<span class="tooltiptext">Disable JavaScript's Moving Or Resizing Windows Capability</span></div></li>
+    <li><div class="tooltip">firefox_preferences-password_store<span class="tooltiptext">Disable the Firefox Password Store</span></div></li>
+    <li><div class="tooltip">firefox_preferences-pop-up_windows<span class="tooltiptext">Enable Firefox Pop-up Blocker</span></div></li>
+    <li><div class="tooltip">firefox_preferences-search_update<span class="tooltiptext">Disable Installed Search Plugins Update Checking</span></div></li>
+    <li><div class="tooltip">firefox_preferences-shell_protocol<span class="tooltiptext">Disable Firefox Access to Shell Protocols</span></div></li>
+    </ul>
+  <li class="collapsible">ECSC-1</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-auto-update_of_firefox<span class="tooltiptext">Disable Firefox Auto-Update Capability</span></div></li>
+    <li><div class="tooltip">firefox_preferences-cookies_clear<span class="tooltiptext">Clear Data When Firefox Closes</span></div></li>
+    <li><div class="tooltip">firefox_preferences-cookies_user_notice<span class="tooltiptext">Disable User Prompt When Data Is Cleared</span></div></li>
+    <li><div class="tooltip">firefox_preferences-home_page<span class="tooltiptext">Default Firefox Home Page Configured</span></div></li>
+    <li><div class="tooltip">firefox_preferences-javascript_status_bar_changes<span class="tooltiptext">Disable JavaScript's Ability To Change The Status Bar</span></div></li>
+    <li><div class="tooltip">firefox_preferences-javascript_status_bar_text<span class="tooltiptext">Disable JavaScript's Ability To Modify The Browser Appearance</span></div></li>
+    <li><div class="tooltip">firefox_preferences-lock_settings_obscure<span class="tooltiptext">Disable Firefox Configuration File ROT-13 Encoding</span></div></li>
+    <li><div class="tooltip">firefox_preferences-non-secure_page_warning<span class="tooltiptext">Enable Non-Secure Page Warnings</span></div></li>
+    <li><div class="tooltip">firefox_preferences-ssl_version_2<span class="tooltiptext">Disable SSL Version 2.0 in Firefox</span></div></li>
+    <li><div class="tooltip">firefox_preferences-ssl_version_3<span class="tooltiptext">Disable SSL Version 3.0 in Firefox</span></div></li>
+    </ul>
+  <li class="collapsible">SA-22</li>
+    <ul class="content">
+    <li><div class="tooltip">installed_firefox_version_supported<span class="tooltiptext">Supported Version of Firefox Installed</span></div></li>
+    </ul>
+  <li class="collapsible">SC-13</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-ssl_protocol_tls<span class="tooltiptext">Enable TLS Usage in Firefox</span></div></li>
+    </ul>
+  <li class="collapsible">SI-11</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-development_tools<span class="tooltiptext">Disable Firefox Development Tools</span></div></li>
+    </ul>
+  <li class="collapsible">SI-3</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-auto-download_actions<span class="tooltiptext">Disable Automatic Downloads of MIME Types</span></div></li>
+    <li><div class="tooltip">firefox_preferences-open_confirmation<span class="tooltiptext">Enable Downloading and Opening File Confirmation</span></div></li>
+    </ul>
+  <li class="collapsible">SI-4(12)</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-verification<span class="tooltiptext">Enable Certificate Verification</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">stigid</li>
+  <ul class="content">
+  <li class="collapsible">DTBF003</li>
+    <ul class="content">
+    <li><div class="tooltip">installed_firefox_version_supported<span class="tooltiptext">Supported Version of Firefox Installed</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF010</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-ssl_version_2<span class="tooltiptext">Disable SSL Version 2.0 in Firefox</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF017</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-home_page<span class="tooltiptext">Default Firefox Home Page Configured</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF020</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-ssl_version_3<span class="tooltiptext">Disable SSL Version 3.0 in Firefox</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF030</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-ssl_protocol_tls<span class="tooltiptext">Enable TLS Usage in Firefox</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF050</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-verification<span class="tooltiptext">Enable Certificate Verification</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF070</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-lock_settings_config_file<span class="tooltiptext">Set Firefox Configuration File Location</span></div></li>
+    <li><div class="tooltip">firefox_preferences-lock_settings_obscure<span class="tooltiptext">Disable Firefox Configuration File ROT-13 Encoding</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF080</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-auto-update_of_firefox<span class="tooltiptext">Disable Firefox Auto-Update Capability</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF085</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-search_update<span class="tooltiptext">Disable Installed Search Plugins Update Checking</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF090</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-addons_plugin_updates<span class="tooltiptext">Disable Addons Plugin Updates</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF100</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-auto-download_actions<span class="tooltiptext">Disable Automatic Downloads of MIME Types</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF105</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-shell_protocol<span class="tooltiptext">Disable Firefox Access to Shell Protocols</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF110</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-open_confirmation<span class="tooltiptext">Enable Downloading and Opening File Confirmation</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF130</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-non-secure_page_warning<span class="tooltiptext">Enable Non-Secure Page Warnings</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF140</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-autofill_forms<span class="tooltiptext">Disable Autofill Form Assistance</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF150</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-autofill_passwords<span class="tooltiptext">Disable User Ability To Autofill Passwords</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF160</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-password_store<span class="tooltiptext">Disable the Firefox Password Store</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF170</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-cookies_clear<span class="tooltiptext">Clear Data When Firefox Closes</span></div></li>
+    <li><div class="tooltip">firefox_preferences-cookies_user_notice<span class="tooltiptext">Disable User Prompt When Data Is Cleared</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF180</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-pop-up_windows<span class="tooltiptext">Enable Firefox Pop-up Blocker</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF181</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-javascript_window_resizing<span class="tooltiptext">Disable JavaScript's Moving Or Resizing Windows Capability</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF182</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-javascript_window_changes<span class="tooltiptext">Disable JavaScript's Raise Or Lower Windows Capability</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF183</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-javascript_context_menus<span class="tooltiptext">Disable JavaScript Context Menus</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF184</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-javascript_status_bar_changes<span class="tooltiptext">Disable JavaScript's Ability To Change The Status Bar</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF185</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-javascript_status_bar_text<span class="tooltiptext">Disable JavaScript's Ability To Modify The Browser Appearance</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF186</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-install_extensions<span class="tooltiptext">Disable Extension Installation</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF190</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-background_data<span class="tooltiptext">Disable Background Information Submission</span></div></li>
+    </ul>
+  <li class="collapsible">DTBF195</li>
+    <ul class="content">
+    <li><div class="tooltip">firefox_preferences-development_tools<span class="tooltiptext">Disable Firefox Development Tools</span></div></li>
+    </ul>
+  </ul>
+</ul>  
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
+</body>
+</html>

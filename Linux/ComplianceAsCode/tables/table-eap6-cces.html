@@ -1,0 +1,599 @@
+<html xmlns:cce="http://cce.mitre.org" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title> CCE Identifiers in Guide to the Secure Configuration of JBoss EAP 6</title>
+</head>
+<body>
+<br><br><div style="text-align: center; font-size: x-large; font-weight:bold">
+			CCE Identifiers in Guide to the Secure Configuration of JBoss EAP 6</div>
+<br><br><style type="text/css">
+		table
+		{
+			border-collapse:collapse;
+		}
+		table, th, td
+		{
+			border: 2px solid #dcdcdc;
+			border-left: none;
+			border-right: none;
+			vertical-align: top;
+			padding: 2px;
+			font-family: verdana,arial,sans-serif;
+			font-size:11px;
+		}
+		pre { 
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap !important;
+			word-wrap:break-word; 
+		}
+		table tr:nth-child(2n+2) { background-color: #f4f4f4; }
+		thead
+		{
+			display: table-header-group;
+			font-weight: bold;
+			background-color: #dedede;
+		}
+	</style>
+<table>
+<thead>
+<td>CCE ID</td>
+<td>Rule Title</td>
+<td>Description</td>
+</thead>
+<tr>
+<td>CCE-80463-3</td>
+<td>Configure JBoss Log Off-Loading Frequency</td>
+<td xml:lang="en-US">Configure the application server to off-load log records every seven days onto
+a different system or media from the system being logged.</td>
+</tr>
+<tr>
+<td>CCE-80487-2</td>
+<td>Audit JBoss Privileged Actions</td>
+<td xml:lang="en-US">Launch the jboss-cli management interface substituting standalone or domain for
+<i>CONFIG</i> based upon the server installation.
+<br><br>
+<pre>&lt;JBOSS_HOME&gt;/<i>CONFIG/</i>/bin/jboss-cli</pre>
+<br><br>
+connect to the server and run the following command:
+<br><br>
+<pre>/core-service=management/access=audit/logger=audit-log:write-attribute(name=enabled,value=true)</pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80466-6</td>
+<td>Disable Google Analytics</td>
+<td xml:lang="en-US">Using the EAP web console, log on using admin credentials.
+On the bottom right-hand side of the screen, select <code>Settings</code>,
+uncheck the <code>Enable Data Usage Collection</code> box, and save the
+configuration.</td>
+</tr>
+<tr>
+<td>CCE-80479-9</td>
+<td>Encrypt JBoss Keystore Passwords</td>
+<td xml:lang="en-US">Configure the application server to mask the java keystore password as per the
+procedure described in section 11.13.3 -Password Vault System in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.</td>
+</tr>
+<tr>
+<td>CCE-80475-7</td>
+<td>Remove JBoss Group Acount Access</td>
+<td xml:lang="en-US">Configure the application server so required users are individually
+authenticated by creating individual user accounts. Utilize an LDAP server that
+is configured according to DOD policy.</td>
+</tr>
+<tr>
+<td>CCE-80467-4</td>
+<td>Restrict JBoss Account</td>
+<td xml:lang="en-US">Run the JBoss server with non-admin rights.</td>
+</tr>
+<tr>
+<td>CCE-80459-1</td>
+<td>Configure JBoss Auditing and Logging</td>
+<td xml:lang="en-US">Launch the jboss-cli management interface.
+Connect to the server by typing
+<code>connect</code>, authenticate as a user in the Superuser role, and run the
+following command:
+<br><br>
+For a Managed Domain configuration:
+<pre>host=master/server/<i>SERVERNAME</i>/core-service=management/access=audit/logger=audit-log:write-attribute(name=enabled,value=true)</pre>
+<br><br>
+For a Standalone
+configuration:
+<pre>/core-service=management/access=audit/logger=audit-log:write-attribute(name=enabled,value=true)</pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80476-5</td>
+<td>Separate JBoss Management Network</td>
+<td xml:lang="en-US">Refer to Section 4.9 of the JBoss EAP 6.3 Installation guide for detailed
+instructions on how to start JBoss as a service.
+<br><br>
+Use the following command line
+parameters to assign the management interface to a specific management network.
+These command line flags must be added both when starting JBoss as a service and
+when starting from the command line.
+<br><br>
+Substitute your actual network address for
+the 10.x.x.x addresses provided as an example below.
+<br><br>
+For a standalone
+configuration:
+<pre>
+JBOSS_HOME/bin/standalone.sh -bmanagement=10.2.2.1 -b 10.1.1.1
+JBOSS_HOME/bin/domain.sh -bmanagement=10.2.2.1 -b 10.1.1.1
+</pre>
+<br><br>
+If a management
+network is not available, you may substitute localhost/127.0.0.1 for management
+address. This will force you to manage the JBoss server from the local host.</td>
+</tr>
+<tr>
+<td>CCE-80498-9</td>
+<td>Roll Over and Transfer JBoss Logs</td>
+<td xml:lang="en-US">Open the web-based management interface by opening a browser and pointing it to
+<code>HTTPS://<i>EAP_SERVER</i>:9990/</code>
+<br><br>
+Authenticate as a user with Admin rights.
+Navigate
+to the <code>Configuration</code> tab.
+Expand <code>+</code> Subsystems.
+Expand <code>+</code> Core.
+Select
+<code>Logging</code>.
+Select the <code>Handler</code> tab.
+Select <code>Periodic</code>.
+<br><br>
+If a
+periodic file handler does not exist, reference JBoss admin guide for
+instructions on how to create a file handler that will rotate logs on a daily
+basis.
+Create scripts that package and off-load log data at least weekly.</td>
+</tr>
+<tr>
+<td>CCE-80485-6</td>
+<td>Configure JBoss Log Directory Permissions</td>
+<td xml:lang="en-US">Configure file permissions on the JBoss log folder to protect from unauthorized
+access.</td>
+</tr>
+<tr>
+<td>CCE-80465-8</td>
+<td>Restrict the JBoss Account</td>
+<td xml:lang="en-US">Use the relevant OS commands to restrict JBoss user account from interactively
+logging on to the console of the JBoss system.
+<br><br>
+For Windows systems, use GPO.
+For UNIX like systems using ssh DenyUsers <i>account id</i> or follow established
+procedure for restricting access.</td>
+</tr>
+<tr>
+<td>CCE-80468-2</td>
+<td>Remove JBoss Quickstarts</td>
+<td xml:lang="en-US">Delete the QuickStarts folder.</td>
+</tr>
+<tr>
+<td>CCE-80460-9</td>
+<td>Configure JBoss Auditor Role</td>
+<td xml:lang="en-US">Obtain documented approvals from ISSM, and assign the appropriate personnel
+into the <pre>Auditor</pre> role.</td>
+</tr>
+<tr>
+<td>CCE-80471-6</td>
+<td>Remove Unnecessary Applications</td>
+<td xml:lang="en-US">Identify, authorize, and document all applications that are deployed to the
+application server. Remove unauthorized applications.</td>
+</tr>
+<tr>
+<td>CCE-80482-3</td>
+<td>Restrict Access to the JBoss Keystore</td>
+<td xml:lang="en-US">Configure the application server OS file permissions on the corresponding
+private key to restrict access to authorized accounts or roles.</td>
+</tr>
+<tr>
+<td>CCE-80457-5</td>
+<td>Remove Silent Authentication - Management Security Realm</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <pre>&lt;JBOSS_HOME&gt;/bin/</pre>
+folder.
+Run the <pre>jboss-cli</pre> script.
+Connect to the server and authenticate.
+Remove the local element from the Management Realm.
+For standalone servers run
+the following command:
+<pre>/core-service=management/securityrealm=ManagementRealm/authentication=local:remove</pre>
+<br><br>
+For managed domain installations run the following command:
+<pre>/host=HOST_NAME/core-service=management/securityrealm=ManagementRealm/authentication=local:remove</pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80454-2</td>
+<td>Enable Role Based Access Control (RBAC)</td>
+<td xml:lang="en-US">Run the following command.
+<pre>&lt;JBOSS_HOME&gt;/bin/jboss-cli.sh -c -&gt; connect -&gt; cd
+/core-service=management/access-authorization :write-attribute(name=provider,
+value=rbac)</pre>
+<br><br>
+Restart JBoss.
+<br><br>
+Map users to roles by running the following
+command. Upper-case words are variables.
+<br><br>
+<pre>role-mapping=ROLENAME/include=ALIAS:add(name-USERNAME, type=USER ROLE)</pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80494-8</td>
+<td>Use Approved Ciphers</td>
+<td xml:lang="en-US">Reference section 4.6 of the JBoss EAP 6.3 Security Guide located on the Red
+Hat vendor's website for step-by-step instructions on establishing SSL
+encryption on JBoss.
+<br><br>
+The overall steps include:
+<br><br>
+1. Add an HTTPS connector.
+2. Configure the SSL encryption certificate and keys.
+3. Set the Cipher to an approved algorithm.</td>
+</tr>
+<tr>
+<td>CCE-80486-4</td>
+<td>Disable Network Access to the Admin Console</td>
+<td xml:lang="en-US">Run the <pre>&lt;JBOSS_HOME&gt;/bin/jboss-clii</pre> command line interface utility.
+Connect to
+the JBoss server and run the following command.
+<pre>/core-service=management/management-interface=httpinterface/:write-attribute(name=console-enabled,value.)</pre>
+<br><br>
+Successful command execution returns
+<pre>{"outcome" =&gt; success"}</pre>,
+and future attempts to access the management console via web
+browser at <code><i>SERVERNAME</i>:9990</code> will result in no access to the admin console.</td>
+</tr>
+<tr>
+<td>CCE-80470-8</td>
+<td>Disable or Replace the JBoss Welcome Page</td>
+<td xml:lang="en-US">Use the Management CLI script <pre>$JBOSS_HOME/bin/jboss-cli.sh</pre> to run the following
+command. You may need to change the profile to modify a different managed domain
+profile, or remove the <pre>/profile=default</pre> portion of the command for a
+standalone server.
+<br><br>
+<pre>/profile=default/subsystem=web/virtual-server=default-host:writeattribute(name=enable-welcome-root,value.)</pre>
+<br><br>
+To configure
+your web application to use the root context (/) as its URL address, modify the
+applications jboss-web.xml, which is located in the applications <code>META-INF/</code> or
+<code>WEB-INF/</code> directory. Replace its <code>&lt;context-root&gt;</code> directive with one that looks
+like the following:
+<br><br>
+<pre><xccdf-1.1:jboss-web xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1"><xccdf-1.1:context-root>/</xccdf-1.1:context-root></xccdf-1.1:jboss-web></pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80483-1</td>
+<td>Use Separate Management and Application Networks</td>
+<td xml:lang="en-US">Start the application server with a <code>-bmanagement</code> and a <code>-b</code> flag so that admin
+management functionality and hosted applications are separated.
+<br><br>
+Refer to
+section 4.9 in the JBoss EAP 6.3 Installation Guide for specific instructions on
+how to start the JBoss server as a service.</td>
+</tr>
+<tr>
+<td>CCE-80484-9</td>
+<td>Configure JBoss Application File Permissions</td>
+<td xml:lang="en-US">Configure file permissions on the JBoss folder to protect from unauthorized
+access.</td>
+</tr>
+<tr>
+<td>CCE-80477-3</td>
+<td>Configure LDAP for Management Interfaces</td>
+<td xml:lang="en-US">Follow steps in section 11.8 - Management Interface Security in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.
+<br><br>
+1. Create an outbound connection to the LDAP server.
+2. Create an LDAP-enabled security realm.
+3. Reference the new security domain in the Management Interface.</td>
+</tr>
+<tr>
+<td>CCE-80497-1</td>
+<td>Use DoD Approved Certificates</td>
+<td xml:lang="en-US">Configure the application server to use DoD- or CNSS-approved Class 3 or Class
+4 PKI certificates.</td>
+</tr>
+<tr>
+<td>CCE-80488-0</td>
+<td>Enable Logging to syslog</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <code>&lt;JBOSS_HOME&gt;/bin/</code>
+folder.
+Run the <pre>jboss-cli</pre> script.
+Connect to the server and authenticate.
+Run
+the command:
+<br><br>
+Standalone configuration:
+<pre>ls /subsystem=logging/syslog-handler=</pre>
+<br><br>
+Domain configuration:
+<pre>ls /profile=default/subsystem=logging/syslog-handler=</pre>
+<br><br>
+If no values are returned, this is a finding.</td>
+</tr>
+<tr>
+<td>CCE-80458-3</td>
+<td>Secure the JBoss Management Interfaces</td>
+<td xml:lang="en-US">Identify the security realm used for management of the system. By default,
+this is called <code>Management Realm</code>.
+<br><br>
+If a management security realm is not
+already available, reference the Jboss EAP 6.3 system administration guide for
+instructions on how to create a security realm for management purposes. Create
+the management realm, and assign authentication and authorization access
+restrictions to the management realm.
+<br><br>
+Assign the management interfaces to the management realm.</td>
+</tr>
+<tr>
+<td>CCE-80464-1</td>
+<td>Configure mgmt-users.properties File Permissions</td>
+<td xml:lang="en-US">Configure the file permissions to allow access to authorized users only.
+Owner can be full access. Group can be full access. 
+All others must have execute
+permissions only.</td>
+</tr>
+<tr>
+<td>CCE-80491-4</td>
+<td>Use Approved DoD Certificate Authorities</td>
+<td xml:lang="en-US">Locate the cacerts file for the JVM. This can be done using the appropriate
+find command for the OS and change to the directory where the cacerts file is
+located.
+<br><br>
+Remove the certificates that have a CA that is non-DoD approved, and
+import DoD CA-approved certificates.</td>
+</tr>
+<tr>
+<td>CCE-80480-7</td>
+<td>Require Password Authentication</td>
+<td xml:lang="en-US">Configure the LDAP Security Realm using default settings that sets <code>allow-empty-values</code>
+to <code>..</code> LDAP Security Realm creation is described in
+section 11.9 -Add an LDAP Security Realm in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.</td>
+</tr>
+<tr>
+<td>CCE-80472-4</td>
+<td>Configure JBoss Management and Application Ports</td>
+<td xml:lang="en-US">Open the EAP web console by pointing a web browser to <pre>HTTPS://<i>Servername</i>:9990</pre>
+Log on to the admin console using admin credentials
+Select the
+<code>Configuration</code> tab
+Expand the <code>General Configuration</code> sub
+system by clicking on the <code>+</code>
+Select <code>Socket Binding</code>
+Select the
+<code>View</code> option next to <code>standard-sockets</code>
+Select
+<code>Inbound</code>
+<br><br>
+Select the port that needs to be reconfigured and select
+<code>Edit</code>.</td>
+</tr>
+<tr>
+<td>CCE-80492-2</td>
+<td>Configure Load Balancing (LB) or High Availability (HA)</td>
+<td xml:lang="en-US">Configure the application server to provide LB or HA services for the hosted
+application.</td>
+</tr>
+<tr>
+<td>CCE-80496-3</td>
+<td>JBoss System Is Patched</td>
+<td xml:lang="en-US">Configure the operating system and the application server to use a patch
+management system or process that ensures security-relevant updates are
+installed within the time period directed by the ISSM.</td>
+</tr>
+<tr>
+<td>CCE-80451-8</td>
+<td>Enable HTTPS for JBoss Web Interface</td>
+<td xml:lang="en-US">Follow procedure "4.4. Configure the JBoss Web Server to use HTTPS."
+The detailed procedure is found in the JBoss EAP 6.3 Security Guide available at
+the vendor's site, RedHat.com. An overview of steps is provided here.
+<br><br>
+1. Obtain or generate DoD-approved SSL certificates.
+2. Configure the SSL certificate using your certificate values.
+3. Set the SSL protocol to TLS V1.1 or V1.2.</td>
+</tr>
+<tr>
+<td>CCE-80481-5</td>
+<td>Use Secure Standard LDAP Port</td>
+<td xml:lang="en-US">Follow steps in section 11.8 - Management Interface Security in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.
+<br><br>
+1. Create an outbound connection to the LDAP server.
+2. Create an LDAP-enabled security realm.
+3. Reference the new security domain in the Management Interface.</td>
+</tr>
+<tr>
+<td>CCE-80495-5</td>
+<td>JBoss Version Is Vendor Supported</td>
+<td xml:lang="en-US">Obtain vendor support from Red Hat.</td>
+</tr>
+<tr>
+<td>CCE-80462-5</td>
+<td>Configure JBoss Log Permissions</td>
+<td xml:lang="en-US">Configure the OS file permissions on the application server to protect log
+information from unauthorized access.</td>
+</tr>
+<tr>
+<td>CCE-80453-4</td>
+<td>Enable the Java Security Manager</td>
+<td xml:lang="en-US">For a domain installation:
+Enable the respective JAVA_OPTS flag in both the
+domain.conf and the domain.conf.bat files.
+<br><br>
+For a standalone installation:
+Enable the respective JAVA_OPTS flag in both the standalone.conf and the
+standalone.conf.bat files.</td>
+</tr>
+<tr>
+<td>CCE-80489-8</td>
+<td>Disable Automatic Deployment</td>
+<td xml:lang="en-US">Determine the JBoss server configuration as being either standalone or domain.
+Launch the relevant jboss-cli management interface substituting standalone or
+domain for <i>CONFIG</i>
+<br><br>
+<pre>&lt;JBOSS_HOME&gt;/<i>CONFIG</i>/bin/jboss-cli</pre>
+<br><br>
+connect to the server and run the command:
+<pre>/subsystem=deployment-scanner/scanner=default:write-attribute(name=scan-enabled,value.)</pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80478-1</td>
+<td>Enable the JBoss Keystore</td>
+<td xml:lang="en-US">Configure the application server to use the java keystore and JBoss vault as
+per section 11.13.1 -Password Vault System in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.
+<br><br>
+1. Create a java keystore.
+2. Mask the keystore password and initialize the password vault.
+3. Configure JBoss to use the password vault.</td>
+</tr>
+<tr>
+<td>CCE-80450-0</td>
+<td>Enable HTTPS for Management Sessions</td>
+<td xml:lang="en-US">Follow the specific instructions in the Red Hat Security Guide for EAP version
+6.3 to configure the management console for HTTPS.
+<br><br>
+This involves the following steps.
+1. Create a keystore in JKS format.
+2. Ensure the management console binds to HTTPS.
+3. Create a new Security Realm.
+4. Configure Management Interface to use new security realm.
+5. Configure the management console to use the keystore.
+6. Restart the EAP server.</td>
+</tr>
+<tr>
+<td>CCE-80461-7</td>
+<td>Configure JBoss Logging Level</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <code>&lt;JBOSS_HOME&gt;/bin/</code>
+folder.
+Run the <pre>jboss-cli</pre> script to start the Command Line Interface (CLI).
+Connect to the server and authenticate.
+<br><br>
+The PROFILE NAMEs included with a
+Managed Domain JBoss configuration are:
+<code>default</code>, <code>full</code>, <code>full-ha</code>, or <code>ha</code>
+For a Managed Domain configuration, you must check
+each profile name:
+<br><br>
+For each PROFILE NAME, run the command:
+<pre>/profile=<i>PROFILE NAME</i>/subsystem=logging/root-logger=ROOT:write-attribute(name=level,value=INFO)</pre>
+<br><br>
+For a Standalone configuration:
+<pre>/subsystem=logging/root-logger=ROOT:write-attribute(name=level,value=INFO)</pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80490-6</td>
+<td>Log Application Deployments</td>
+<td xml:lang="en-US">Launch the jboss-cli management interface substituting standalone or domain for
+<i>CONFIG</i> based upon the server installation.
+<br><br>
+<pre>&lt;JBOSS_HOME&gt;/<i>CONFIG</i>/bin/jboss-cli</pre>
+<br><br>
+connect to the server and run the following command:
+<br><br>
+<pre>/core-service=management/access=audit/logger=audit-log:write-attribute(name=enabled,value=true)</pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80493-0</td>
+<td>Use Approves TLS version</td>
+<td xml:lang="en-US">Reference section 4.6 of the JBoss EAP 6.3 Security Guide located on the Red
+Hat vendor's web site for step-by-step instructions on establishing SSL
+encryption on JBoss.
+<br><br>
+The overall steps include:
+<br><br>
+1. Add an HTTPS connector.
+2. Configure the SSL encryption certificate and keys.
+3. Set the protocol to TLS V1.1 or V1.2.</td>
+</tr>
+<tr>
+<td>CCE-80474-0</td>
+<td>Configure Multi-Factor Authentication</td>
+<td xml:lang="en-US">Configure the application server to authenticate privileged users via
+multifactor/certificate-based authentication mechanisms when using network
+access to the management interface.</td>
+</tr>
+<tr>
+<td>CCE-80456-7</td>
+<td>Remove Silent Authentication - Application Security Realm</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <code>&lt;JBOSS_HOME&gt;/bin/</code>
+folder.
+Run the <pre>jboss-cli</pre> script.
+Connect to the server and authenticate.
+Remove the local element from the Application Realm.
+For standalone servers, run
+the following command:
+<pre>/core-service=management/securityrealm=ApplicationRealm/authentication=local:remove</pre>
+<br><br>
+For managed domain installations,
+run the following command:
+<pre>/host=HOST_NAME/core-service=management/securityrealm=ApplicationRealm/authentication=local:remove</pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80473-2</td>
+<td>Configure LDAP</td>
+<td xml:lang="en-US">Follow steps in section 11.8 - Management Interface Security in the
+JBoss_Enterprise_Application_Platform-6.3
+-Administration_and_Configuration_Guide-en-US document.
+<br><br>
+1. Create an outbound connection to the LDAP server.
+2. Create an LDAP-enabled security realm.
+3. Reference the new security domain in the Management Interface.</td>
+</tr>
+<tr>
+<td>CCE-80455-9</td>
+<td>Configure JBoss User Roles</td>
+<td xml:lang="en-US">Document approved management users and their roles. Configure the application
+server to use RBAC and ensure users are placed into the appropriate roles.</td>
+</tr>
+<tr>
+<td>CCE-80469-0</td>
+<td>Remove the JMX Subsystem</td>
+<td xml:lang="en-US">Log on to the OS of the JBoss server with OS permissions that allow access to
+JBoss.
+Using the relevant OS commands and syntax, cd to the <code>&lt;JBOSS_HOME&gt;/bin/</code>
+folder.
+Run the <pre>jboss-cli</pre> script to start the Command Line Interface (CLI).
+Connect to the server and authenticate.
+<br><br>
+For a Managed Domain configuration you
+must check each profile name:
+<br><br>
+For each PROFILE NAME, run the command:
+<pre>/profile=<i>PROFILE NAME</i>/subsystem=jmx/remoting-connector=jmx:remove</pre>
+For a Standalone configuration:
+<pre>/subsystem=jmx/remoting-connector=jmx:remove</pre>
+</td>
+</tr>
+<tr>
+<td>CCE-80452-6</td>
+<td>Configure Host Access Restrictions for Applications</td>
+<td xml:lang="en-US">Configure the Java security manager to enforce access restrictions to the host
+system resources in accordance with application design and resource
+requirements.</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,1699 @@
+<html xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title> Rules with
+			anssi
+			Reference in Guide to the Secure Configuration of Red Hat Enterprise Linux 7</title>
+</head>
+<body>
+<br><br><div style="text-align: center; font-size: x-large; font-weight:bold">
+			Rules with  anssi Reference in Guide to the Secure Configuration of Red Hat Enterprise Linux 7</div>
+<br><br><style type="text/css">
+		table
+		{
+			border-collapse:collapse;
+		}
+		table, th, td
+		{
+			border: 2px solid #dcdcdc;
+			border-left: none;
+			border-right: none;
+			vertical-align: top;
+			padding: 2px;
+			font-family: verdana,arial,sans-serif;
+			font-size:11px;
+		}
+		pre { 
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap !important;
+			word-wrap:break-word; 
+		}
+		table tr:nth-child(2n+2) { background-color: #f4f4f4; }
+		thead
+		{
+			display: table-header-group;
+			font-weight: bold;
+			background-color: #dedede;
+		}
+	</style>
+<table>
+<thead>
+<td>Reference (anssi)</td>
+<td>Rule Title</td>
+<td>Description</td>
+<td>Rationale</td>
+<td>Variable Setting</td>
+</thead>
+<tr>
+<td>NT007(R1)</td>
+<td>Allow Only SSH Protocol 2</td>
+<td xml:lang="en-US">Only SSH protocol version 2 connections should be
+permitted. The default setting in
+<code>/etc/ssh/sshd_config</code> is correct, and can be
+verified by ensuring that the following
+line appears:
+<pre>Protocol 2</pre>
+</td>
+<td xml:lang="en-US">SSH protocol version 1 is an insecure implementation of the SSH protocol and
+has many well-known vulnerability exploits. Exploits of the SSH daemon could provide
+immediate root access to the system.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT007(R02)</td>
+<td>Uninstall the ssl compliant telnet server</td>
+<td xml:lang="en-US">The <code>telnet</code> daemon, even with ssl support, should be uninstalled.</td>
+<td xml:lang="en-US">
+<code>telnet</code>, even with ssl support, should not be installed.
+When remote shell is required, up-to-date ssh daemon can be used.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT007(R03)</td>
+<td>Uninstall the inet-based telnet server</td>
+<td xml:lang="en-US">The inet-based telnet daemon should be uninstalled.</td>
+<td xml:lang="en-US">
+<code>telnet</code> allows clear text communications, and does not protect any
+data transmission between client and server. Any confidential data can be
+listened and no integrity checking is made.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT007(R17)</td>
+<td>Disable SSH Access via Empty Passwords</td>
+<td xml:lang="en-US">To explicitly disallow SSH login from accounts with
+empty passwords, add or correct the following line in <code>/etc/ssh/sshd_config</code>:
+<br>
+<pre>PermitEmptyPasswords no</pre>
+<br>
+Any accounts with empty passwords should be disabled immediately, and PAM configuration
+should prevent users from being able to assign themselves empty passwords.</td>
+<td xml:lang="en-US">Configuring this setting for the SSH daemon provides additional assurance
+that remote login via SSH will require a password, even in the event of
+misconfiguration elsewhere.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT012(R03)</td>
+<td>Install the ntp service</td>
+<td xml:lang="en-US">The ntpd service should be installed.</td>
+<td xml:lang="en-US">Time synchronization (using NTP) is required by almost all network and administrative tasks (syslog, cryptographic based services (authentication, etc.), etc.). Ntpd is regulary maintained and updated, supporting security features such as RFC 5906.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT012(R03)</td>
+<td>Enable the NTP Daemon</td>
+<td xml:lang="en-US"> The <code>ntpd</code> service can be enabled with the following command: <pre>$ sudo systemctl enable ntpd.service</pre>
+</td>
+<td xml:lang="en-US">Enabling the <code>ntpd</code> service ensures that the <code>ntpd</code>
+service will be running and that the system will synchronize its time to
+any servers specified. This is important whether the system is configured to be
+a client (and synchronize only its own clock) or it is also acting as an NTP
+server to other systems.  Synchronizing time is essential for authentication
+services such as Kerberos, but it is also important for maintaining accurate
+logs and auditing possible security breaches.
+<br><br>
+The NTP daemon offers all of the functionality of <code>ntpdate</code>, which is now
+deprecated.  Additional information on this is available at
+
+    <a href="http://support.ntp.org/bin/view/Dev/DeprecatingNtpdate">http://support.ntp.org/bin/view/Dev/DeprecatingNtpdate</a>.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT12(R5)</td>
+<td>Ensure Logs Sent To Remote Host</td>
+<td xml:lang="en-US">To configure rsyslog to send logs to a remote log server,
+open <code>/etc/rsyslog.conf</code> and read and understand the last section of the file,
+which describes the multiple directives necessary to activate remote
+logging.
+Along with these other directives, the system can be configured
+to forward its logs to a particular log server by
+adding or correcting one of the following lines,
+substituting <code><i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></code> appropriately.
+The choice of protocol depends on the environment of the system;
+although TCP and RELP provide more reliable message delivery,
+they may not be supported in all environments.
+<br>
+To use UDP for log message delivery:
+<pre>*.* @<i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></pre>
+<br>
+To use TCP for log message delivery:
+<pre>*.* @@<i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></pre>
+<br>
+To use RELP for log message delivery:
+<pre>*.* :omrelp:<i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></pre>
+<br>
+There must be a resolvable DNS CNAME or Alias record set to "<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub>" for logs to be sent correctly to the centralized logging utility.</td>
+<td xml:lang="en-US">A log server (loghost) receives syslog messages from one or more
+systems. This data can be used as an additional log source in the event a
+system is compromised and its local logs are suspect. Forwarding log messages
+to a remote loghost also provides system administrators with a centralized
+place to view the status of multiple hosts within the enterprise.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT12(R18)</td>
+<td>Ensure Logrotate Runs Periodically</td>
+<td xml:lang="en-US">The <code>logrotate</code> utility allows for the automatic rotation of
+log files.  The frequency of rotation is specified in <code>/etc/logrotate.conf</code>,
+which triggers a cron task.  To configure logrotate to run daily, add or correct
+the following line in <code>/etc/logrotate.conf</code>:
+<pre># rotate log files <i>frequency</i>
+daily</pre>
+</td>
+<td xml:lang="en-US">Log files that are not properly rotated run the risk of growing so large
+that they fill up the /var/log partition. Valuable logging information could be lost
+if the /var/log partition becomes full.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R1)</td>
+<td>Uninstall the telnet server</td>
+<td xml:lang="en-US">The telnet daemon should be uninstalled.</td>
+<td xml:lang="en-US">
+<code>telnet</code> allows clear text communications, and does not protect
+any data transmission between client and server. Any confidential data
+can be listened and no integrity checking is made.'</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R1)</td>
+<td>Uninstall Sendmail Package</td>
+<td xml:lang="en-US">Sendmail is not the default mail transfer agent and is
+not installed by default.
+The <code>sendmail</code> package can be removed with the following command:
+<pre>
+$ sudo yum erase sendmail</pre>
+</td>
+<td xml:lang="en-US">The sendmail software was not developed with security in mind and
+its design prevents it from being effectively contained by SELinux.  Postfix
+should be used instead.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R1)</td>
+<td>Uninstall DHCP Server Package</td>
+<td xml:lang="en-US">If the system does not need to act as a DHCP server,
+the dhcp package can be uninstalled.
+The <code>dhcp</code> package can be removed with the following command:
+<pre>
+$ sudo yum erase dhcp</pre>
+</td>
+<td xml:lang="en-US">Removing the DHCP server ensures that it cannot be easily or
+accidentally reactivated and disrupt network operation.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R4)</td>
+<td>Ensure SELinux State is Enforcing</td>
+<td xml:lang="en-US">The SELinux state should be set to <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_selinux_state"></xccdf-1.1:sub></code> at
+system boot time.  In the file <code>/etc/selinux/config</code>, add or correct the
+following line to configure the system to boot into enforcing mode:
+<pre>SELINUX=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_selinux_state"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">Setting the SELinux state to enforcing ensures SELinux is able to confine
+potentially compromised processes to the security policy, which is designed to
+prevent them from causing damage to the system or further elevating their
+privileges.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)</td>
+<td>Ensure Users Re-Authenticate for Privilege Escalation - sudo !authenticate</td>
+<td xml:lang="en-US">The sudo <code>!authenticate</code> option, when specified, allows a user to execute commands using
+sudo without having to authenticate. This should be disabled by making sure that the
+<code>!authenticate</code> option does not exist in <code>/etc/sudoers</code> configuration file or
+any sudo configuration snippets in <code>/etc/sudoers.d/</code>.</td>
+<td xml:lang="en-US">Without re-authentication, users may access resources or perform tasks for which they
+do not have authorization.
+<br><br>
+When operating systems provide the capability to escalate a functional capability, it
+is critical that the user re-authenticate.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)</td>
+<td>Ensure Users Re-Authenticate for Privilege Escalation - sudo NOPASSWD</td>
+<td xml:lang="en-US">The sudo <code>NOPASSWD</code> tag, when specified, allows a user to execute
+commands using sudo without having to authenticate. This should be disabled
+by making sure that the <code>NOPASSWD</code> tag does not exist in
+<code>/etc/sudoers</code> configuration file or any sudo configuration snippets
+in <code>/etc/sudoers.d/</code>.</td>
+<td xml:lang="en-US">Without re-authentication, users may access resources or perform tasks for which they
+do not have authorization.
+<br><br>
+When operating systems provide the capability to escalate a functional capability, it
+is critical that the user re-authenticate.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)</td>
+<td>Ensure rsyslog is Installed</td>
+<td xml:lang="en-US">Rsyslog is installed by default. The <code>rsyslog</code> package can be installed with the following command: <pre> $ sudo yum install rsyslog</pre>
+</td>
+<td xml:lang="en-US">The rsyslog package provides the rsyslog daemon, which provides
+system logging services.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)</td>
+<td>Enable rsyslog Service</td>
+<td xml:lang="en-US">The <code>rsyslog</code> service provides syslog-style logging by default on Red Hat Enterprise Linux 7.
+
+The <code>rsyslog</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable rsyslog.service</pre>
+</td>
+<td xml:lang="en-US">The <code>rsyslog</code> service must be running in order to provide
+logging services, which are essential to system administration.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)</td>
+<td>Ensure Log Files Are Owned By Appropriate User</td>
+<td xml:lang="en-US">The owner of all log files written by
+<code>rsyslog</code> should be <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_owner_logfiles_value"></xccdf-1.1:sub></code>.
+These log files are determined by the second part of each Rule line in
+<code>/etc/rsyslog.conf</code> and typically all appear in <code>/var/log</code>.
+For each log file <i>LOGFILE</i> referenced in <code>/etc/rsyslog.conf</code>,
+run the following command to inspect the file's owner:
+<pre>$ ls -l <i>LOGFILE</i></pre>
+If the owner is not <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_owner_logfiles_value"></xccdf-1.1:sub></code>, run the following command to
+correct this:
+<pre>$ sudo chown <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_owner_logfiles_value"></xccdf-1.1:sub> <i>LOGFILE</i></pre>
+</td>
+<td xml:lang="en-US">The log files generated by rsyslog contain valuable information regarding system
+configuration, user authentication, and other such information. Log files should be
+protected from unauthorized access.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)</td>
+<td>Ensure Log Files Are Owned By Appropriate Group</td>
+<td xml:lang="en-US">The group-owner of all log files written by
+<code>rsyslog</code> should be <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_groupowner_logfiles_value"></xccdf-1.1:sub></code>.
+These log files are determined by the second part of each Rule line in
+<code>/etc/rsyslog.conf</code> and typically all appear in <code>/var/log</code>.
+For each log file <i>LOGFILE</i> referenced in <code>/etc/rsyslog.conf</code>,
+run the following command to inspect the file's group owner:
+<pre>$ ls -l <i>LOGFILE</i></pre>
+If the owner is not <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_groupowner_logfiles_value"></xccdf-1.1:sub></code>, run the following command to
+correct this:
+<pre>$ sudo chgrp <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_groupowner_logfiles_value"></xccdf-1.1:sub> <i>LOGFILE</i></pre>
+</td>
+<td xml:lang="en-US">The log files generated by rsyslog contain valuable information regarding system
+configuration, user authentication, and other such information. Log files should be
+protected from unauthorized access.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)</td>
+<td>Ensure syslog-ng is Installed</td>
+<td xml:lang="en-US">syslog-ng can be installed in replacement of rsyslog.
+The <code>syslog-ng-core</code> package can be installed with the following command:
+<pre>
+$ sudo yum install syslog-ng-core</pre>
+</td>
+<td xml:lang="en-US">The syslog-ng-core package provides the syslog-ng daemon, which provides
+system logging services.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)</td>
+<td>Enable syslog-ng Service</td>
+<td xml:lang="en-US">The <code>syslog-ng</code> service (in replacement of rsyslog) provides syslog-style logging by default on Debian 8.
+
+The <code>syslog-ng</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable syslog-ng.service</pre>
+</td>
+<td xml:lang="en-US">The <code>syslog-ng</code> service must be running in order to provide
+logging services, which are essential to system administration.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R7)</td>
+<td>Ensure Logs Sent To Remote Host</td>
+<td xml:lang="en-US">To configure rsyslog to send logs to a remote log server,
+open <code>/etc/rsyslog.conf</code> and read and understand the last section of the file,
+which describes the multiple directives necessary to activate remote
+logging.
+Along with these other directives, the system can be configured
+to forward its logs to a particular log server by
+adding or correcting one of the following lines,
+substituting <code><i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></code> appropriately.
+The choice of protocol depends on the environment of the system;
+although TCP and RELP provide more reliable message delivery,
+they may not be supported in all environments.
+<br>
+To use UDP for log message delivery:
+<pre>*.* @<i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></pre>
+<br>
+To use TCP for log message delivery:
+<pre>*.* @@<i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></pre>
+<br>
+To use RELP for log message delivery:
+<pre>*.* :omrelp:<i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></pre>
+<br>
+There must be a resolvable DNS CNAME or Alias record set to "<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub>" for logs to be sent correctly to the centralized logging utility.</td>
+<td xml:lang="en-US">A log server (loghost) receives syslog messages from one or more
+systems. This data can be used as an additional log source in the event a
+system is compromised and its local logs are suspect. Forwarding log messages
+to a remote loghost also provides system administrators with a centralized
+place to view the status of multiple hosts within the enterprise.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R08)</td>
+<td>Ensure Software Patches Installed</td>
+<td xml:lang="en-US">
+If the system is joined to the Red Hat Network, a Red Hat Satellite Server,
+or a yum server, run the following command to install updates:
+<pre>$ sudo yum update</pre>
+If the system is not configured to use one of these sources, updates (in the form of RPM packages)
+can be manually downloaded from the Red Hat Network and installed using <code>rpm</code>.
+
+<br><br>
+NOTE: U.S. Defense systems are required to be patched within 30 days or sooner as local policy
+dictates.</td>
+<td xml:lang="en-US">Installing software updates is a fundamental mitigation against
+the exploitation of publicly-known vulnerabilities. If the most
+recent security patches and updates are not installed, unauthorized
+users may take advantage of weaknesses in the unpatched software. The
+lack of prompt attention to patching could result in a system compromise.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R11)</td>
+<td>IOMMU configuration directive</td>
+<td xml:lang="en-US">On x86 architecture supporting VT-d, the IOMMU manages the access control policy between the hardware devices and some
+    of the system critical units such as the memory.</td>
+<td xml:lang="en-US">On x86 architectures, activating the I/OMMU prevents the system from arbritrary accesses potentially made by
+    hardware devices.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Ensure /var Located On Separate Partition</td>
+<td xml:lang="en-US">The <code>/var</code> directory is used by daemons and other system
+services to store frequently-changing data. Ensure that <code>/var</code> has its own partition
+or logical volume at installation time, or migrate it using LVM.</td>
+<td xml:lang="en-US">Ensuring that <code>/var</code> is mounted on its own partition enables the
+setting of more restrictive mount options. This helps protect
+system services such as daemons or other programs which use it.
+It is not uncommon for the <code>/var</code> directory to contain
+world-writable directories installed by other software packages.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Ensure /home Located On Separate Partition</td>
+<td xml:lang="en-US">If user home directories will be stored locally, create a separate partition
+for <code>/home</code> at installation time (or migrate it later using LVM). If
+<code>/home</code> will be mounted from another system such as an NFS server, then
+creating a separate partition is not necessary at installation time, and the
+mountpoint can instead be configured later.</td>
+<td xml:lang="en-US">Ensuring that <code>/home</code> is mounted on its own partition enables the
+setting of more restrictive mount options, and also helps ensure that
+users cannot trivially fill partitions used for log or audit data storage.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Ensure /var/tmp Located On Separate Partition</td>
+<td xml:lang="en-US">The <code>/var/tmp</code> directory is a world-writable directory used
+for temporary file storage. Ensure it has its own partition or
+logical volume at installation time, or migrate it using LVM.</td>
+<td xml:lang="en-US">The <code>/var/tmp</code> partition is used as temporary storage by many programs.
+Placing <code>/var/tmp</code> in its own partition enables the setting of more
+restrictive mount options, which can help protect programs which use it.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Ensure /var/log Located On Separate Partition</td>
+<td xml:lang="en-US">System logs are stored in the <code>/var/log</code> directory.
+Ensure that it has its own partition or logical
+volume at installation time, or migrate it using LVM.</td>
+<td xml:lang="en-US">Placing <code>/var/log</code> in its own partition
+enables better separation between log files
+and other files in <code>/var/</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Ensure /tmp Located On Separate Partition</td>
+<td xml:lang="en-US">The <code>/tmp</code> directory is a world-writable directory used
+for temporary file storage. Ensure it has its own partition or
+logical volume at installation time, or migrate it using LVM.</td>
+<td xml:lang="en-US">The <code>/tmp</code> partition is used as temporary storage by many programs.
+Placing <code>/tmp</code> in its own partition enables the setting of more
+restrictive mount options, which can help protect programs which use it.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Ensure /srv Located On Separate Partition</td>
+<td xml:lang="en-US">If a file server (FTP, TFTP...) is hosted locally, create a separate partition
+for <code>/srv</code> at installation time (or migrate it later using LVM). If
+<code>/srv</code> will be mounted from another system such as an NFS server, then
+creating a separate partition is not necessary at installation time, and the
+mountpoint can instead be configured later.</td>
+<td xml:lang="en-US">Srv deserves files for local network file server such as FTP. Ensuring
+that <code>/srv</code> is mounted on its own partition enables the setting of
+more restrictive mount options, and also helps ensure that
+users cannot trivially fill partitions used for log or audit data storage.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Add nosuid Option to /tmp</td>
+<td xml:lang="en-US">The <code>nosuid</code> mount option can be used to prevent
+execution of setuid programs in <code>/tmp</code>. The SUID and SGID permissions
+should not be required in these world-writable directories.
+Add the <code>nosuid</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/tmp</code>.</td>
+<td xml:lang="en-US">The presence of SUID and SGID executables should be tightly controlled. Users
+should not be able to execute SUID or SGID binaries from temporary storage partitions.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Add noexec Option to /var/tmp</td>
+<td xml:lang="en-US">The <code>noexec</code> mount option can be used to prevent binaries
+from being executed out of <code>/var/tmp</code>.
+Add the <code>noexec</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/var/tmp</code>.</td>
+<td xml:lang="en-US">Allowing users to execute binaries from world-writable directories
+such as <code>/var/tmp</code> should never be necessary in normal operation and
+can expose the system to potential compromise.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Add nodev Option to /tmp</td>
+<td xml:lang="en-US">The <code>nodev</code> mount option can be used to prevent device files from
+being created in <code>/tmp</code>. Legitimate character and block devices
+should not exist within temporary directories like <code>/tmp</code>.
+Add the <code>nodev</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/tmp</code>.</td>
+<td xml:lang="en-US">The only legitimate location for device files is the <code>/dev</code> directory
+located on the root partition. The only exception to this is chroot jails.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Add nosuid Option to /home</td>
+<td xml:lang="en-US">The <code>nosuid</code> mount option can be used to prevent
+execution of setuid programs in <code>/home</code>. The SUID and SGID permissions
+should not be required in these user data directories.
+Add the <code>nosuid</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/home</code>.</td>
+<td xml:lang="en-US">The presence of SUID and SGID executables should be tightly controlled. Users
+should not be able to execute SUID or SGID binaries from user home directory partitions.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Add nodev Option to /var/tmp</td>
+<td xml:lang="en-US">The <code>nodev</code> mount option can be used to prevent device files from
+being created in <code>/var/tmp</code>. Legitimate character and block devices
+should not exist within temporary directories like <code>/var/tmp</code>.
+Add the <code>nodev</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/var/tmp</code>.</td>
+<td xml:lang="en-US">The only legitimate location for device files is the <code>/dev</code> directory
+located on the root partition. The only exception to this is chroot jails.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Add nodev Option to /home</td>
+<td xml:lang="en-US">The <code>nodev</code> mount option can be used to prevent device files from
+being created in <code>/home</code>.
+Legitimate character and block devices should exist only in
+the <code>/dev</code> directory on the root partition or within chroot
+jails built for system services.
+Add the <code>nodev</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/home</code>.</td>
+<td xml:lang="en-US">The only legitimate location for device files is the <code>/dev</code> directory
+located on the root partition. The only exception to this is chroot jails.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Add nosuid Option to /var/tmp</td>
+<td xml:lang="en-US">The <code>nosuid</code> mount option can be used to prevent
+execution of setuid programs in <code>/var/tmp</code>. The SUID and SGID permissions
+should not be required in these world-writable directories.
+Add the <code>nosuid</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/var/tmp</code>.</td>
+<td xml:lang="en-US">The presence of SUID and SGID executables should be tightly controlled. Users
+should not be able to execute SUID or SGID binaries from temporary storage partitions.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R12)</td>
+<td>Add noexec Option to /tmp</td>
+<td xml:lang="en-US">The <code>noexec</code> mount option can be used to prevent binaries
+from being executed out of <code>/tmp</code>.
+Add the <code>noexec</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/tmp</code>.</td>
+<td xml:lang="en-US">Allowing users to execute binaries from world-writable directories
+such as <code>/tmp</code> should never be necessary in normal operation and
+can expose the system to potential compromise.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R13)</td>
+<td>Verify that local System.map file (if exists) is readable only by root</td>
+<td xml:lang="en-US">Files containing sensitive informations should be protected by restrictive
+  permissions. Most of the time, there is no need that these files need to be read by any non-root user
+
+To properly set the permissions of <code>/boot/System.map-*</code>, run the command:
+<pre>$ sudo chmod 0600 /boot/System.map-*</pre>
+</td>
+<td xml:lang="en-US">The <code>System.map</code> file contains information about kernel symbols and
+  can give some hints to generate local exploitation.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R15)</td>
+<td>Ensure gpgcheck Enabled for All yum Package Repositories</td>
+<td xml:lang="en-US">To ensure signature checking is not disabled for
+any repos, remove any lines from files in <code>/etc/yum.repos.d</code> of the form:
+<pre>gpgcheck=0</pre>
+</td>
+<td xml:lang="en-US">Verifying the authenticity of the software prior to installation validates
+the integrity of the patch or upgrade received from a vendor. This ensures
+the software has not been tampered with and that it has been provided by a
+trusted vendor. Self-signed certificates are disallowed by this
+requirement. Certificates used to verify the software must be from an
+approved Certificate Authority (CA)."</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R15)</td>
+<td>Ensure gpgcheck Enabled In Main yum Configuration</td>
+<td xml:lang="en-US">The <code>gpgcheck</code> option controls whether
+RPM packages' signatures are always checked prior to installation.
+To configure yum to check package signatures before installing
+them, ensure the following line appears in <code>/etc/yum.conf</code> in
+the <code>[main]</code> section:
+<pre>gpgcheck=1</pre>
+</td>
+<td xml:lang="en-US">Changes to any software components can have significant effects on the
+overall security of the operating system. This requirement ensures the
+software has not been tampered with and that it has been provided by a
+trusted vendor.
+<br>
+Accordingly, patches, service packs, device drivers, or operating system
+components must be signed with a certificate recognized and approved by the
+organization.
+<br>Verifying the authenticity of the software prior to installation
+validates the integrity of the patch or upgrade received from a vendor.
+This ensures the software has not been tampered with and that it has been
+provided by a trusted vendor. Self-signed certificates are disallowed by
+this requirement. Certificates used to verify the software must be from an
+approved Certificate Authority (CA).</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R15)</td>
+<td>Ensure gpgcheck Enabled for Local Packages</td>
+<td xml:lang="en-US">
+<code>yum</code> should be configured to verify the signature(s) of local packages
+prior to installation. To configure <code>yum</code> to verify signatures of local
+packages, set the <code>localpkg_gpgcheck</code> to <code>1</code> in <code>/etc/yum.conf</code>.</td>
+<td xml:lang="en-US">Changes to any software components can have significant effects to the overall security
+of the operating system. This requirement ensures the software has not been tampered and
+has been provided by a trusted vendor.
+<br><br>
+Accordingly, patches, service packs, device drivers, or operating system components must
+be signed with a certificate recognized and approved by the organization.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R15)</td>
+<td>Ensure Red Hat GPG Key Installed</td>
+<td xml:lang="en-US">To ensure the system can cryptographically verify base software packages
+come from Red Hat (and to connect to the Red Hat Network to receive them),
+the Red Hat GPG key must properly be installed. To install the Red Hat GPG
+key, run:
+<pre>$ sudo subscription-manager register</pre>
+
+If the system is not connected to the Internet or an RHN Satellite, then
+install the Red Hat GPG key from trusted media such as the Red Hat
+installation CD-ROM or DVD. Assuming the disc is mounted in
+<code>/media/cdrom</code>, use the following command as the root user to import
+it into the keyring:
+<pre>$ sudo rpm --import /media/cdrom/RPM-GPG-KEY</pre>
+
+Alternatively, the key may be pre-loaded during the RHEL installation. In
+such cases, the key can be installed by running the following command:
+<pre>sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release</pre>
+</td>
+<td xml:lang="en-US">Changes to software components can have significant effects on the overall
+security of the operating system. This requirement ensures the software has
+not been tampered with and that it has been provided by a trusted vendor.
+The Red Hat GPG key is necessary to cryptographically verify packages are
+from Red Hat.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R17)</td>
+<td>Set the UEFI Boot Loader Admin Username to a Non-Default Value</td>
+<td xml:lang="en-US">The grub2 boot loader should have a superuser account and password
+protection enabled to protect boot-time settings.
+<br><br>
+To maximize the protection, select a password-protected superuser account with unique name, and modify the
+<code>/etc/grub.d/01_users</code> configuration file to reflect the account name change.
+<br><br>
+It is highly suggested not to use common administrator account names like root,
+admin, or administrator for the grub2 superuser account.
+<br><br>
+Change the superuser to a different username (The default is 'root').
+<pre>$ sed -i 's/\(set superuser=\).*/\1"&lt;unique user ID&gt;"/g' /etc/grub.d/01_users</pre>
+<br><br>
+Once the superuser account has been added,
+update the
+<code>grub.cfg</code> file by running:
+<pre>grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg</pre>
+</td>
+<td xml:lang="en-US">Having a non-default grub superuser username makes password-guessing attacks less effective.
+
+For more information on how to configure the grub2 superuser account and password,
+please refer to
+<ul>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-working_with_the_grub_2_boot_loader#sec-Protecting_GRUB_2_with_a_Password">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-working_with_the_grub_2_boot_loader#sec-Protecting_GRUB_2_with_a_Password</a></li>.
+</ul>
+</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R17)</td>
+<td>Set the Boot Loader Admin Username to a Non-Default Value</td>
+<td xml:lang="en-US">The grub2 boot loader should have a superuser account and password
+protection enabled to protect boot-time settings.
+<br><br>
+To maximize the protection, select a password-protected superuser account with unique name, and modify the
+<code>/etc/grub.d/01_users</code> configuration file to reflect the account name change.
+<br><br>
+Do not to use common administrator account names like root,
+admin, or administrator for the grub2 superuser account.
+<br><br>
+Change the superuser to a different username (The default is 'root').
+<pre>$ sed -i 's/\(set superuser=\).*/\1"&lt;unique user ID&gt;"/g' /etc/grub.d/01_users</pre>
+<br><br>
+Once the superuser account has been added,
+update the
+<code>grub.cfg</code> file by running:
+<pre>grub2-mkconfig -o /boot/grub2/grub.cfg</pre>
+</td>
+<td xml:lang="en-US">Having a non-default grub superuser username makes password-guessing attacks less effective.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R17)</td>
+<td>Set Boot Loader Password in grub2</td>
+<td xml:lang="en-US">The grub2 boot loader should have a superuser account and password
+protection enabled to protect boot-time settings.
+<br><br>
+Since plaintext passwords are a security risk, generate a hash for the password
+by running the following command:
+<pre>$ grub2-setpassword</pre>
+When prompted, enter the password that was selected.
+<br><br>
+Once the superuser password has been added,
+update the
+<code>grub.cfg</code> file by running:
+<pre>grub2-mkconfig -o /boot/grub2/grub.cfg</pre>
+</td>
+<td xml:lang="en-US">Password protection on the boot loader configuration ensures
+users with physical access cannot trivially alter
+important bootloader settings. These include which kernel to use,
+and whether to enter single-user mode.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R17)</td>
+<td>Set the UEFI Boot Loader Password</td>
+<td xml:lang="en-US">The grub2 boot loader should have a superuser account and password
+protection enabled to protect boot-time settings.
+<br><br>
+Since plaintext passwords are a security risk, generate a hash for the password
+by running the following command:
+<pre>$ grub2-setpassword</pre>
+When prompted, enter the password that was selected.
+<br><br>
+Once the superuser password has been added,
+update the
+<code>grub.cfg</code> file by running:
+<pre>grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg</pre>
+</td>
+<td xml:lang="en-US">Password protection on the boot loader configuration ensures
+users with physical access cannot trivially alter
+important bootloader settings. These include which kernel to use,
+and whether to enter single-user mode.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R19)</td>
+<td>Direct root Logins Not Allowed</td>
+<td xml:lang="en-US">To further limit access to the <code>root</code> account, administrators
+can disable root logins at the console by editing the <code>/etc/securetty</code> file.
+This file lists all devices the root user is allowed to login to. If the file does
+not exist at all, the root user can login through any communication device on the
+system, whether via the console or via a raw network interface. This is dangerous
+as user can login to the system as root via Telnet, which sends the password in
+plain text over the network. By default, Red Hat Enterprise Linux 7's
+<code>/etc/securetty</code> file only allows the root user to login at the console
+physically attached to the system. To prevent root from logging in, remove the
+contents of this file. To prevent direct root logins, remove the contents of this
+file by typing the following command:
+<pre>
+$ sudo echo &gt; /etc/securetty
+</pre>
+</td>
+<td xml:lang="en-US">Disabling direct root logins ensures proper accountability and multifactor
+authentication to privileged accounts. Users will first login, then escalate
+to privileged (root) access via su / sudo. This is required for FISMA Low
+and FISMA Moderate systems.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R19)</td>
+<td>Disable SSH Root Login</td>
+<td xml:lang="en-US">The root user should never be allowed to login to a
+system directly over a network.
+To disable root login via SSH, add or correct the following line
+in <code>/etc/ssh/sshd_config</code>:
+<pre>PermitRootLogin no</pre>
+</td>
+<td xml:lang="en-US">Even though the communications channel may be encrypted, an additional layer of
+security is gained by extending the policy of not logging directly on as root.
+In addition, logging in with a user-specific account provides individual
+accountability of actions performed on the system and also helps to minimize
+direct attack attempts on root's password.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Accepting ICMP Redirects for All IPv6 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.all.accept_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.all.accept_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.all.accept_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">An illicit ICMP redirect message could result in a man-in-the-middle attack.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for Accepting Source-Routed Packets on IPv6 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.default.accept_source_route</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.default.accept_source_route=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.default.accept_source_route = 0</pre>
+</td>
+<td xml:lang="en-US">Source-routed packets allow the source of the packet to suggest routers
+forward the packet along a different path than configured on the router, which can
+be used to bypass network security measures. This requirement applies only to the
+forwarding of source-routerd traffic, such as when IPv6 forwarding is enabled and
+the system is functioning as a router.
+
+Accepting source-routed packets in the IPv6 protocol has few legitimate
+uses. It should be disabled unless it is absolutely required.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for Accepting ICMP Redirects by Default on IPv6 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.default.accept_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.default.accept_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.default.accept_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">An illicit ICMP redirect message could result in a man-in-the-middle attack.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for Accepting Source-Routed Packets on all IPv6 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv6.conf.all.accept_source_route</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv6.conf.all.accept_source_route=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv6.conf.all.accept_source_route = 0</pre>
+</td>
+<td xml:lang="en-US">Source-routed packets allow the source of the packet to suggest routers
+forward the packet along a different path than configured on the router, which can
+be used to bypass network security measures. This requirement applies only to the
+forwarding of source-routerd traffic, such as when IPv6 forwarding is enabled and
+the system is functioning as a router.
+<br><br>
+Accepting source-routed packets in the IPv6 protocol has few legitimate
+uses. It should be disabled unless it is absolutely required.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Configure Kernel Parameter for Accepting Secure Redirects By Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.secure_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.secure_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.secure_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">Accepting "secure" ICMP redirects (from those gateways listed as
+default gateways) has few legitimate uses. It should be disabled unless it is
+absolutely required.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for Accepting Secure ICMP Redirects on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.secure_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.secure_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.secure_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">Accepting "secure" ICMP redirects (from those gateways listed as
+default gateways) has few legitimate uses. It should be disabled unless it is
+absolutely required.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Enable Kernel Parameter to Use Reverse Path Filtering on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.rp_filter</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.rp_filter=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.rp_filter = 1</pre>
+</td>
+<td xml:lang="en-US">Enabling reverse path filtering drops packets with source addresses
+that should not have been able to be received on the interface they were
+received on. It should not be used on systems which are routers for
+complicated networks, but is helpful for end hosts and routers serving small
+networks.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Enable Kernel Parameter to Log Martian Packets on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.log_martians</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.log_martians=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.log_martians = 1</pre>
+</td>
+<td xml:lang="en-US">The presence of "martian" packets (which have impossible addresses)
+as well as spoofed packets, source-routed packets, and redirects could be a
+sign of nefarious network activity. Logging these packets enables this activity
+to be detected.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for Accepting Source-Routed Packets on IPv4 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.accept_source_route</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.accept_source_route=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.accept_source_route = 0</pre>
+</td>
+<td xml:lang="en-US">Source-routed packets allow the source of the packet to suggest routers
+forward the packet along a different path than configured on the router,
+which can be used to bypass network security measures.
+<br>
+Accepting source-routed packets in the IPv4 protocol has few legitimate
+uses. It should be disabled unless it is absolutely required, such as when
+IPv4 forwarding is enabled and the system is legitimately functioning as a
+router.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Enable Kernel Parameter to Use TCP Syncookies on IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.tcp_syncookies</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.tcp_syncookies=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.tcp_syncookies = 1</pre>
+</td>
+<td xml:lang="en-US">A TCP SYN flood attack can cause a denial of service by filling a
+system's TCP connection table with connections in the SYN_RCVD state.
+Syncookies can be used to track a connection when a subsequent ACK is received,
+verifying the initiator is attempting a valid connection and is not a flood
+source. This feature is activated when a flood condition is detected, and
+enables the system to continue servicing valid connection requests.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for Accepting ICMP Redirects by Default on IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.accept_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.accept_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.accept_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">ICMP redirect messages are used by routers to inform hosts that a more
+direct route exists for a particular destination. These messages modify the
+host's route table and are unauthenticated. An illicit ICMP redirect
+message could result in a man-in-the-middle attack.
+<br>This feature of the IPv4 protocol has few legitimate uses. It should
+be disabled unless absolutely required.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for Accepting Source-Routed Packets on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.accept_source_route</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.accept_source_route=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.accept_source_route = 0</pre>
+</td>
+<td xml:lang="en-US">Source-routed packets allow the source of the packet to suggest routers
+forward the packet along a different path than configured on the router,
+which can be used to bypass network security measures. This requirement
+applies only to the forwarding of source-routerd traffic, such as when IPv4
+forwarding is enabled and the system is functioning as a router.
+<br><br>
+Accepting source-routed packets in the IPv4 protocol has few legitimate
+uses. It should be disabled unless it is absolutely required.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Accepting ICMP Redirects for All IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.accept_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.accept_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.accept_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">ICMP redirect messages are used by routers to inform hosts that a more
+direct route exists for a particular destination. These messages modify the
+host's route table and are unauthenticated. An illicit ICMP redirect
+message could result in a man-in-the-middle attack.
+<br>
+This feature of the IPv4 protocol has few legitimate uses. It should be
+disabled unless absolutely required."</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Enable Kernel Parameter to Ignore Bogus ICMP Error Responses on IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.icmp_ignore_bogus_error_responses</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.icmp_ignore_bogus_error_responses = 1</pre>
+</td>
+<td xml:lang="en-US">Ignoring bogus ICMP error responses reduces
+log size, although some activity would not be logged.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Enable Kernel Parameter to Use Reverse Path Filtering on all IPv4 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.rp_filter</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.rp_filter=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.rp_filter = 1</pre>
+</td>
+<td xml:lang="en-US">Enabling reverse path filtering drops packets with source addresses
+that should not have been able to be received on the interface they were
+received on. It should not be used on systems which are routers for
+complicated networks, but is helpful for end hosts and routers serving small
+networks.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces by Default</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.default.send_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.default.send_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.default.send_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">ICMP redirect messages are used by routers to inform hosts that a more
+direct route exists for a particular destination. These messages contain information
+from the system's route table possibly revealing portions of the network topology.
+<br>
+The ability to send ICMP redirects is only appropriate for systems acting as routers.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for IP Forwarding on IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.ip_forward</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.ip_forward=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.ip_forward = 0</pre>
+</td>
+<td xml:lang="en-US">Routing protocol daemons are typically used on routers to exchange
+network topology information with other routers. If this capability is used when
+not required, system network information may be unnecessarily transmitted across
+the network.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R22)</td>
+<td>Disable Kernel Parameter for Sending ICMP Redirects on all IPv4 Interfaces</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.ipv4.conf.all.send_redirects</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.ipv4.conf.all.send_redirects=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.ipv4.conf.all.send_redirects = 0</pre>
+</td>
+<td xml:lang="en-US">ICMP redirect messages are used by routers to inform hosts that a more
+direct route exists for a particular destination. These messages contain information
+from the system's route table possibly revealing portions of the network topology.
+<br>
+The ability to send ICMP redirects is only appropriate for systems acting as routers.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R23)</td>
+<td>Disallow kernel profiling by unprivileged users</td>
+<td xml:lang="en-US">To set the runtime status of the <code>kernel.perf_event_paranoid</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.perf_event_paranoid=2</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>kernel.perf_event_paranoid = 2</pre>
+</td>
+<td xml:lang="en-US">Kernel profiling can reveal sensitive information about kernel behaviour.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R23)</td>
+<td>Restrict Access to Kernel Message Buffer</td>
+<td xml:lang="en-US">To set the runtime status of the <code>kernel.dmesg_restrict</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.dmesg_restrict=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>kernel.dmesg_restrict = 1</pre>
+</td>
+<td xml:lang="en-US">Unprivileged access to the kernel syslog can expose sensitive kernel
+address information.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R23)</td>
+<td>Disable Core Dumps for SUID programs</td>
+<td xml:lang="en-US">To set the runtime status of the <code>fs.suid_dumpable</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w fs.suid_dumpable=0</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>fs.suid_dumpable = 0</pre>
+</td>
+<td xml:lang="en-US">The core dump of a setuid program is more likely to contain
+sensitive data, as the program itself runs with greater privileges than the
+user who initiated execution of the program.  Disabling the ability for any
+setuid program to write a core file decreases the risk of unauthorized access
+of such data.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R23)</td>
+<td>Restrict Exposed Kernel Pointer Addresses Access</td>
+<td xml:lang="en-US">To set the runtime status of the <code>kernel.kptr_restrict</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.kptr_restrict=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>kernel.kptr_restrict = 1</pre>
+</td>
+<td xml:lang="en-US">Exposing kernel pointers (through procfs or <code>seq_printf()</code>) exposes
+kernel writeable structures that can contain functions pointers. If a write vulnereability occurs
+in the kernel allowing a write access to any of this structure, the kernel can be compromise. This
+option disallow any program withtout the CAP_SYSLOG capability from getting the kernel pointers addresses,
+replacing them with 0.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R23)</td>
+<td>Enable Randomized Layout of Virtual Address Space</td>
+<td xml:lang="en-US">To set the runtime status of the <code>kernel.randomize_va_space</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.randomize_va_space=2</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>kernel.randomize_va_space = 2</pre>
+</td>
+<td xml:lang="en-US">Address space layout randomization (ASLR) makes it more difficult for an
+attacker to predict the location of attack code they have introduced into a
+process's address space during an attempt at exploitation.  Additionally,
+ASLR makes it more difficult for an attacker to know the location of
+existing code in order to re-purpose it using return oriented programming
+(ROP) techniques.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R23)</td>
+<td>Enable Kernel Parameter to Enforce DAC on Symlinks</td>
+<td xml:lang="en-US">To set the runtime status of the <code>fs.protected_symlinks</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w fs.protected_symlinks=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>fs.protected_symlinks = 1</pre>
+</td>
+<td xml:lang="en-US">By enabling this kernel parameter, symbolic links are permitted to be followed
+only when outside a sticky world-writable directory, or when the UID of the
+link and follower match, or when the directory owner matches the symlink's owner.
+Disallowing such symlinks helps mitigate vulnerabilities based on insecure file system
+accessed by privileged programs, avoiding an exploitation vector exploiting unsafe use of
+<code>open()</code> or <code>creat()</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R23)</td>
+<td>Enable Kernel Parameter to Enforce DAC on Hardlinks</td>
+<td xml:lang="en-US">To set the runtime status of the <code>fs.protected_hardlinks</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w fs.protected_hardlinks=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>fs.protected_hardlinks = 1</pre>
+</td>
+<td xml:lang="en-US">By enabling this kernel parameter, users can no longer create soft or hard links to
+files which they do not own. Disallowing such hardlinks mitigate vulnerabilities
+based on insecure file system accessed by privileged programs, avoiding an
+exploitation vector exploiting unsafe use of <code>open()</code> or <code>creat()</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R25)</td>
+<td>Restrict usage of ptrace to descendant processes</td>
+<td xml:lang="en-US">To set the runtime status of the <code>kernel.yama.ptrace_scope</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w kernel.yama.ptrace_scope=1</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>kernel.yama.ptrace_scope = 1</pre>
+</td>
+<td xml:lang="en-US">Unrestricted usage of ptrace allows compromised binaries to run ptrace
+on another processes of the user. Like this, the attacker can steal
+sensitive information from the target processes (e.g. SSH sessions, web browser, ...)
+without any additional assistance from the user (i.e. without resorting to phishing).
+</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R29)</td>
+<td>Set Interactive Session Timeout</td>
+<td xml:lang="en-US">Setting the <code>TMOUT</code> option in <code>/etc/profile</code> ensures that
+all user sessions will terminate based on inactivity. The <code>TMOUT</code>
+setting in <code>/etc/profile</code> should read as follows:
+<pre>TMOUT=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_tmout"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">Terminating an idle session within a short time period reduces
+the window of opportunity for unauthorized personnel to take control of a
+management session enabled on the console or console port that has been
+left unattended.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R29)</td>
+<td>Set SSH Idle Timeout Interval</td>
+<td xml:lang="en-US">SSH allows administrators to set an idle timeout interval. After this interval
+has passed, the idle user will be automatically logged out.
+<br><br>
+To set an idle timeout interval, edit the following line in <code>/etc/ssh/sshd_config</code> as
+follows:
+<pre>ClientAliveInterval <b><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="sshd_idle_timeout_value"></xccdf-1.1:sub></b></pre>
+<br><br>
+The timeout <b>interval</b> is given in seconds. For example, have a timeout
+of 10 minutes, set <b>interval</b> to 600.
+<br><br>
+If a shorter timeout has already been set for the login shell, that value will
+preempt any SSH setting made in <code>/etc/ssh/sshd_config</code>. Keep in mind that
+some processes may stop SSH  from correctly detecting that the user is idle.</td>
+<td xml:lang="en-US">Terminating an idle ssh session within a short time period reduces the window of
+opportunity for unauthorized personnel to take control of a management session
+enabled on the console or console port that has been let unattended.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R32)</td>
+<td>Set Password Hashing Algorithm in /etc/login.defs</td>
+<td xml:lang="en-US">In <code>/etc/login.defs</code>, add or correct the following line to ensure
+the system will use SHA-512 as the hashing algorithm:
+<pre>ENCRYPT_METHOD SHA512</pre>
+</td>
+<td xml:lang="en-US">Passwords need to be protected at all times, and encryption is the standard method for protecting passwords.
+If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised. Passwords
+that are encrypted with a weak algorithm are no more protected than if they are kept in plain text.
+<br><br>
+Using a stronger hashing algorithm makes password cracking attacks more difficult.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R35)</td>
+<td>Ensure the Default Umask is Set Correctly in /etc/profile</td>
+<td xml:lang="en-US">To ensure the default umask controlled by <code>/etc/profile</code> is set properly,
+add or correct the <code>umask</code> setting in <code>/etc/profile</code> to read as follows:
+<pre>umask <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_user_umask"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">The umask value influences the permissions assigned to files when they are created.
+A misconfigured umask value could result in files with excessive permissions that can be read or
+written to by unauthorized users.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R35)</td>
+<td>Ensure the Default Umask is Set Correctly in login.defs</td>
+<td xml:lang="en-US">To ensure the default umask controlled by <code>/etc/login.defs</code> is set properly,
+add or correct the <code>UMASK</code> setting in <code>/etc/login.defs</code> to read as follows:
+<pre>UMASK <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_user_umask"></xccdf-1.1:sub></pre>
+</td>
+<td xml:lang="en-US">The umask value influences the permissions assigned to files when they are created.
+A misconfigured umask value could result in files with excessive permissions that can be read and
+written to by unauthorized users.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R36)</td>
+<td>Verify Permissions on shadow File</td>
+<td xml:lang="en-US">
+To properly set the permissions of <code>/etc/shadow</code>, run the command:
+<pre>$ sudo chmod 0000 /etc/shadow</pre>
+</td>
+<td xml:lang="en-US">The <code>/etc/shadow</code> file contains the list of local
+system accounts and stores password hashes. Protection of this file is
+critical for system security. Failure to give ownership of this file
+to root provides the designated owner with access to sensitive information
+which could weaken the system security posture.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R36)</td>
+<td>Verify Permissions on gshadow File</td>
+<td xml:lang="en-US">
+To properly set the permissions of <code>/etc/gshadow</code>, run the command:
+<pre>$ sudo chmod 0000 /etc/gshadow</pre>
+</td>
+<td xml:lang="en-US">The <code>/etc/gshadow</code> file contains group password hashes. Protection of this file
+is critical for system security.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R36)</td>
+<td>Verify User Who Owns gshadow File</td>
+<td xml:lang="en-US"> To properly set the owner of <code>/etc/gshadow</code>, run the command: <pre>$ sudo chown root /etc/gshadow </pre>
+</td>
+<td xml:lang="en-US">The <code>/etc/gshadow</code> file contains group password hashes. Protection of this file
+is critical for system security.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R36)</td>
+<td>Verify User Who Owns shadow File</td>
+<td xml:lang="en-US"> To properly set the owner of <code>/etc/shadow</code>, run the command: <pre>$ sudo chown root /etc/shadow </pre>
+</td>
+<td xml:lang="en-US">The <code>/etc/shadow</code> file contains the list of local
+system accounts and stores password hashes. Protection of this file is
+critical for system security. Failure to give ownership of this file
+to root provides the designated owner with access to sensitive information
+which could weaken the system security posture.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R36)</td>
+<td>Ensure System Log Files Have Correct Permissions</td>
+<td xml:lang="en-US">The file permissions for all log files written by <code>rsyslog</code> should
+be set to 600, or more restrictive. These log files are determined by the
+second part of each Rule line in <code>/etc/rsyslog.conf</code> and typically
+all appear in <code>/var/log</code>. For each log file <i>LOGFILE</i>
+referenced in <code>/etc/rsyslog.conf</code>, run the following command to
+inspect the file's permissions:
+<pre>$ ls -l <i>LOGFILE</i></pre>
+If the permissions are not 600 or more restrictive, run the following
+command to correct this:
+<pre>$ sudo chmod 0600 <i>LOGFILE</i></pre>"</td>
+<td xml:lang="en-US">Log files can contain valuable information regarding system
+configuration. If the system log files are not protected unauthorized
+users could change the logged data, eliminating their forensic value.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R37)</td>
+<td>Ensure All SUID Executables Are Authorized</td>
+<td xml:lang="en-US">The SUID (set user id) bit should be set only on files that were
+installed via authorized means. A straightforward means of identifying
+unauthorized SUID files is determine if any were not installed as part of an
+RPM package, which is cryptographically verified. Investigate the origin
+of any unpackaged SUID files.
+This configuration check considers authorized SUID files which were installed via RPM.
+It is assumed that when an individual has sudo access to install an RPM
+and all packages are signed with an organizationally-recognized GPG key,
+the software should be considered an approved package on the system.
+Any SUID file not deployed through an RPM will be flagged for further review.</td>
+<td xml:lang="en-US">Executable files with the SUID permission run with the privileges of
+the owner of the file. SUID files of uncertain provenance could allow for
+unprivileged users to elevate privileges. The presence of these files should be
+strictly controlled on the system.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R37)</td>
+<td>Ensure All SGID Executables Are Authorized</td>
+<td xml:lang="en-US">The SGID (set group id) bit should be set only on files that were
+installed via authorized means. A straightforward means of identifying
+unauthorized SGID files is determine if any were not installed as part of an
+RPM package, which is cryptographically verified. Investigate the origin
+of any unpackaged SGID files.
+This configuration check considers authorized SGID files which were installed via RPM.
+It is assumed that when an individual has sudo access to install an RPM
+and all packages are signed with an organizationally-recognized GPG key,
+the software should be considered an approved package on the system.
+Any SGID file not deployed through an RPM will be flagged for further review.</td>
+<td xml:lang="en-US">Executable files with the SGID permission run with the privileges of
+the owner of the file. SGID files of uncertain provenance could allow for
+unprivileged users to elevate privileges. The presence of these files should be
+strictly controlled on the system.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R38)</td>
+<td>Ensure All SUID Executables Are Authorized</td>
+<td xml:lang="en-US">The SUID (set user id) bit should be set only on files that were
+installed via authorized means. A straightforward means of identifying
+unauthorized SUID files is determine if any were not installed as part of an
+RPM package, which is cryptographically verified. Investigate the origin
+of any unpackaged SUID files.
+This configuration check considers authorized SUID files which were installed via RPM.
+It is assumed that when an individual has sudo access to install an RPM
+and all packages are signed with an organizationally-recognized GPG key,
+the software should be considered an approved package on the system.
+Any SUID file not deployed through an RPM will be flagged for further review.</td>
+<td xml:lang="en-US">Executable files with the SUID permission run with the privileges of
+the owner of the file. SUID files of uncertain provenance could allow for
+unprivileged users to elevate privileges. The presence of these files should be
+strictly controlled on the system.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R38)</td>
+<td>Ensure All SGID Executables Are Authorized</td>
+<td xml:lang="en-US">The SGID (set group id) bit should be set only on files that were
+installed via authorized means. A straightforward means of identifying
+unauthorized SGID files is determine if any were not installed as part of an
+RPM package, which is cryptographically verified. Investigate the origin
+of any unpackaged SGID files.
+This configuration check considers authorized SGID files which were installed via RPM.
+It is assumed that when an individual has sudo access to install an RPM
+and all packages are signed with an organizationally-recognized GPG key,
+the software should be considered an approved package on the system.
+Any SGID file not deployed through an RPM will be flagged for further review.</td>
+<td xml:lang="en-US">Executable files with the SGID permission run with the privileges of
+the owner of the file. SGID files of uncertain provenance could allow for
+unprivileged users to elevate privileges. The presence of these files should be
+strictly controlled on the system.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R43)</td>
+<td>Ensure Logrotate Runs Periodically</td>
+<td xml:lang="en-US">The <code>logrotate</code> utility allows for the automatic rotation of
+log files.  The frequency of rotation is specified in <code>/etc/logrotate.conf</code>,
+which triggers a cron task.  To configure logrotate to run daily, add or correct
+the following line in <code>/etc/logrotate.conf</code>:
+<pre># rotate log files <i>frequency</i>
+daily</pre>
+</td>
+<td xml:lang="en-US">Log files that are not properly rotated run the risk of growing so large
+that they fill up the /var/log partition. Valuable logging information could be lost
+if the /var/log partition becomes full.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R43)</td>
+<td>Ensure Logs Sent To Remote Host</td>
+<td xml:lang="en-US">To configure rsyslog to send logs to a remote log server,
+open <code>/etc/rsyslog.conf</code> and read and understand the last section of the file,
+which describes the multiple directives necessary to activate remote
+logging.
+Along with these other directives, the system can be configured
+to forward its logs to a particular log server by
+adding or correcting one of the following lines,
+substituting <code><i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></code> appropriately.
+The choice of protocol depends on the environment of the system;
+although TCP and RELP provide more reliable message delivery,
+they may not be supported in all environments.
+<br>
+To use UDP for log message delivery:
+<pre>*.* @<i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></pre>
+<br>
+To use TCP for log message delivery:
+<pre>*.* @@<i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></pre>
+<br>
+To use RELP for log message delivery:
+<pre>*.* :omrelp:<i><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub></i></pre>
+<br>
+There must be a resolvable DNS CNAME or Alias record set to "<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="rsyslog_remote_loghost_address"></xccdf-1.1:sub>" for logs to be sent correctly to the centralized logging utility.</td>
+<td xml:lang="en-US">A log server (loghost) receives syslog messages from one or more
+systems. This data can be used as an additional log source in the event a
+system is compromised and its local logs are suspect. Forwarding log messages
+to a remote loghost also provides system administrators with a centralized
+place to view the status of multiple hosts within the enterprise.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R46)</td>
+<td>Ensure rsyslog is Installed</td>
+<td xml:lang="en-US">Rsyslog is installed by default. The <code>rsyslog</code> package can be installed with the following command: <pre> $ sudo yum install rsyslog</pre>
+</td>
+<td xml:lang="en-US">The rsyslog package provides the rsyslog daemon, which provides
+system logging services.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R46)</td>
+<td>Enable rsyslog Service</td>
+<td xml:lang="en-US">The <code>rsyslog</code> service provides syslog-style logging by default on Red Hat Enterprise Linux 7.
+
+The <code>rsyslog</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable rsyslog.service</pre>
+</td>
+<td xml:lang="en-US">The <code>rsyslog</code> service must be running in order to provide
+logging services, which are essential to system administration.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R46)</td>
+<td>Ensure Log Files Are Owned By Appropriate User</td>
+<td xml:lang="en-US">The owner of all log files written by
+<code>rsyslog</code> should be <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_owner_logfiles_value"></xccdf-1.1:sub></code>.
+These log files are determined by the second part of each Rule line in
+<code>/etc/rsyslog.conf</code> and typically all appear in <code>/var/log</code>.
+For each log file <i>LOGFILE</i> referenced in <code>/etc/rsyslog.conf</code>,
+run the following command to inspect the file's owner:
+<pre>$ ls -l <i>LOGFILE</i></pre>
+If the owner is not <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_owner_logfiles_value"></xccdf-1.1:sub></code>, run the following command to
+correct this:
+<pre>$ sudo chown <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_owner_logfiles_value"></xccdf-1.1:sub> <i>LOGFILE</i></pre>
+</td>
+<td xml:lang="en-US">The log files generated by rsyslog contain valuable information regarding system
+configuration, user authentication, and other such information. Log files should be
+protected from unauthorized access.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R46)</td>
+<td>Ensure Log Files Are Owned By Appropriate Group</td>
+<td xml:lang="en-US">The group-owner of all log files written by
+<code>rsyslog</code> should be <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_groupowner_logfiles_value"></xccdf-1.1:sub></code>.
+These log files are determined by the second part of each Rule line in
+<code>/etc/rsyslog.conf</code> and typically all appear in <code>/var/log</code>.
+For each log file <i>LOGFILE</i> referenced in <code>/etc/rsyslog.conf</code>,
+run the following command to inspect the file's group owner:
+<pre>$ ls -l <i>LOGFILE</i></pre>
+If the owner is not <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_groupowner_logfiles_value"></xccdf-1.1:sub></code>, run the following command to
+correct this:
+<pre>$ sudo chgrp <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="file_groupowner_logfiles_value"></xccdf-1.1:sub> <i>LOGFILE</i></pre>
+</td>
+<td xml:lang="en-US">The log files generated by rsyslog contain valuable information regarding system
+configuration, user authentication, and other such information. Log files should be
+protected from unauthorized access.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R46)</td>
+<td>Ensure syslog-ng is Installed</td>
+<td xml:lang="en-US">syslog-ng can be installed in replacement of rsyslog.
+The <code>syslog-ng-core</code> package can be installed with the following command:
+<pre>
+$ sudo yum install syslog-ng-core</pre>
+</td>
+<td xml:lang="en-US">The syslog-ng-core package provides the syslog-ng daemon, which provides
+system logging services.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R46)</td>
+<td>Enable syslog-ng Service</td>
+<td xml:lang="en-US">The <code>syslog-ng</code> service (in replacement of rsyslog) provides syslog-style logging by default on Debian 8.
+
+The <code>syslog-ng</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable syslog-ng.service</pre>
+</td>
+<td xml:lang="en-US">The <code>syslog-ng</code> service must be running in order to provide
+logging services, which are essential to system administration.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R47)</td>
+<td>Ensure /var/log Located On Separate Partition</td>
+<td xml:lang="en-US">System logs are stored in the <code>/var/log</code> directory.
+Ensure that it has its own partition or logical
+volume at installation time, or migrate it using LVM.</td>
+<td xml:lang="en-US">Placing <code>/var/log</code> in its own partition
+enables better separation between log files
+and other files in <code>/var/</code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R50)</td>
+<td>Ensure the audit Subsystem is Installed</td>
+<td xml:lang="en-US">The audit package should be installed.</td>
+<td xml:lang="en-US">The auditd service is an access monitoring and accounting daemon, watching system calls to audit any access, in comparison with potential local access control policy such as SELinux policy.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R50)</td>
+<td>Install the cron service</td>
+<td xml:lang="en-US">The Cron service should be installed.</td>
+<td xml:lang="en-US">The cron service allow periodic job execution, needed for almost all administrative tasks and services (software update, log rotating, etc.). Access to cron service should be restricted to administrative accounts only.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R51)</td>
+<td>Install AIDE</td>
+<td xml:lang="en-US">The <code>aide</code> package can be installed with the following command:
+<pre>
+$ sudo yum install aide</pre>
+</td>
+<td xml:lang="en-US">The AIDE package must be installed if it is to be available for integrity checking.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R51)</td>
+<td>Build and Test AIDE Database</td>
+<td xml:lang="en-US">Run the following command to generate a new database:
+<pre>$ sudo /usr/sbin/aide --init</pre>
+By default, the database will be written to the file <code>/var/lib/aide/aide.db.new.gz</code>.
+Storing the database, the configuration file <code>/etc/aide.conf</code>, and the binary
+<code>/usr/sbin/aide</code> (or hashes of these files), in a secure location (such as on read-only media) provides additional assurance about their integrity.
+The newly-generated database can be installed as follows:
+<pre>$ sudo cp /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz</pre>
+To initiate a manual check, run the following command:
+<pre>$ sudo /usr/sbin/aide --check</pre>
+If this check produces any unexpected output, investigate.</td>
+<td xml:lang="en-US">For AIDE to be effective, an initial database of "known-good" information about files
+must be captured and it should be able to be verified against the installed files.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R51)</td>
+<td>Configure AIDE to Verify Extended Attributes</td>
+<td xml:lang="en-US">By default, the <code>xattrs</code> option is added to the <code>FIPSR</code> ruleset in AIDE.
+If using a custom ruleset or the <code>xattrs</code> option is missing, add <code>xattrs</code>
+to the appropriate ruleset.
+For example, add <code>xattrs</code> to the following line in <code>/etc/aide.conf</code>:
+<pre>FIPSR = p+i+n+u+g+s+m+c+acl+selinux+xattrs+sha256</pre>
+AIDE rules can be configured in multiple ways; this is merely one example that is already
+configured by default.</td>
+<td xml:lang="en-US">Extended attributes in file systems are used to contain arbitrary data and file metadata
+with security implications.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R51)</td>
+<td>Configure Notification of Post-AIDE Scan Details</td>
+<td xml:lang="en-US">AIDE should notify appropriate personnel of the details of a scan after the scan has been run.
+If AIDE has already been configured for periodic execution in <code>/etc/crontab</code>, append the
+following line to the existing AIDE line:
+<pre> | /bin/mail -s "$(hostname) - AIDE Integrity Check" root@localhost</pre>
+Otherwise, add the following line to <code>/etc/crontab</code>:
+<pre>05 4 * * * root /usr/sbin/aide --check | /bin/mail -s "$(hostname) - AIDE Integrity Check" root@localhost</pre>
+AIDE can be executed periodically through other means; this is merely one example.</td>
+<td xml:lang="en-US">Unauthorized changes to the baseline configuration could make the system vulnerable
+to various attacks or allow unauthorized access to the operating system. Changes to
+operating system configurations can have unintended side effects, some of which may
+be relevant to security.
+<br><br>
+Detecting such changes and providing an automated response can help avoid unintended,
+negative consequences that could ultimately affect the security state of the operating
+system. The operating system's Information Management Officer (IMO)/Information System
+Security Officer (ISSO) and System Administrators (SAs) must be notified via email and/or
+monitoring system trap when there is an unauthorized modification of a configuration item.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R51)</td>
+<td>Configure Periodic Execution of AIDE</td>
+<td xml:lang="en-US">At a minimum, AIDE should be configured to run a weekly scan.
+To implement a daily execution of AIDE at 4:05am using cron, add the following line to <code>/etc/crontab</code>:
+<pre>05 4 * * * root /usr/sbin/aide --check</pre>
+To implement a weekly execution of AIDE at 4:05am using cron, add the following line to <code>/etc/crontab</code>:
+<pre>05 4 * * 0 root /usr/sbin/aide --check</pre>
+AIDE can be executed periodically through other means; this is merely one example.
+The usage of cron's special time codes, such as  <code>@daily</code> and
+<code>@weekly</code> is acceptable.</td>
+<td xml:lang="en-US">By default, AIDE does not install itself for periodic execution. Periodically
+running AIDE is necessary to reveal unexpected changes in installed files.
+<br><br>
+Unauthorized changes to the baseline configuration could make the system vulnerable
+to various attacks or allow unauthorized access to the operating system. Changes to
+operating system configurations can have unintended side effects, some of which may
+be relevant to security.
+<br><br>
+Detecting such changes and providing an automated response can help avoid unintended,
+negative consequences that could ultimately affect the security state of the operating
+system. The operating system's Information Management Officer (IMO)/Information System
+Security Officer (ISSO) and System Administrators (SAs) must be notified via email and/or
+monitoring system trap when there is an unauthorized modification of a configuration item.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R51)</td>
+<td>Configure AIDE to Verify Access Control Lists (ACLs)</td>
+<td xml:lang="en-US">By default, the <code>acl</code> option is added to the <code>FIPSR</code> ruleset in AIDE.
+If using a custom ruleset or the <code>acl</code> option is missing, add <code>acl</code>
+to the appropriate ruleset.
+For example, add <code>acl</code> to the following line in <code>/etc/aide.conf</code>:
+<pre>FIPSR = p+i+n+u+g+s+m+c+acl+selinux+xattrs+sha256</pre>
+AIDE rules can be configured in multiple ways; this is merely one example that is already
+configured by default.</td>
+<td xml:lang="en-US">ACLs can provide permissions beyond those permitted through the file mode and must be
+verified by the file integrity tools.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R59)</td>
+<td>Ensure Users Re-Authenticate for Privilege Escalation - sudo !authenticate</td>
+<td xml:lang="en-US">The sudo <code>!authenticate</code> option, when specified, allows a user to execute commands using
+sudo without having to authenticate. This should be disabled by making sure that the
+<code>!authenticate</code> option does not exist in <code>/etc/sudoers</code> configuration file or
+any sudo configuration snippets in <code>/etc/sudoers.d/</code>.</td>
+<td xml:lang="en-US">Without re-authentication, users may access resources or perform tasks for which they
+do not have authorization.
+<br><br>
+When operating systems provide the capability to escalate a functional capability, it
+is critical that the user re-authenticate.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R59)</td>
+<td>Ensure Users Re-Authenticate for Privilege Escalation - sudo NOPASSWD</td>
+<td xml:lang="en-US">The sudo <code>NOPASSWD</code> tag, when specified, allows a user to execute
+commands using sudo without having to authenticate. This should be disabled
+by making sure that the <code>NOPASSWD</code> tag does not exist in
+<code>/etc/sudoers</code> configuration file or any sudo configuration snippets
+in <code>/etc/sudoers.d/</code>.</td>
+<td xml:lang="en-US">Without re-authentication, users may access resources or perform tasks for which they
+do not have authorization.
+<br><br>
+When operating systems provide the capability to escalate a functional capability, it
+is critical that the user re-authenticate.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R66)</td>
+<td>Configure SELinux Policy</td>
+<td xml:lang="en-US">The SELinux <code>targeted</code> policy is appropriate for
+general-purpose desktops and servers, as well as systems in many other roles.
+To configure the system to use this policy, add or correct the following line
+in <code>/etc/selinux/config</code>:
+<pre>SELINUXTYPE=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_selinux_policy_name"></xccdf-1.1:sub></pre>
+Other policies, such as <code>mls</code>, provide additional security labeling
+and greater confinement but are not compatible with many general-purpose
+use cases.</td>
+<td xml:lang="en-US">Setting the SELinux policy to <code>targeted</code> or a more specialized policy
+ensures the system will confine processes that are likely to be
+targeted for exploitation, such as network or system services.
+<br><br>
+Note: During the development or debugging of SELinux modules, it is common to
+temporarily place non-production systems in <code>permissive</code> mode. In such
+temporary cases, SELinux policies should be developed, and once work
+is completed, the system should be reconfigured to
+<code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_selinux_policy_name"></xccdf-1.1:sub></code>.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R67)</td>
+<td>Disable the ssh_sysadm_login SELinux Boolean</td>
+<td xml:lang="en-US">By default, the SELinux boolean <code>ssh_sysadm_login</code> is disabled.
+If this setting is enabled, it should be disabled.
+
+To disable the <code>ssh_sysadm_login</code> SELinux boolean, run the following command:
+<pre>$ sudo setsebool -P ssh_sysadm_login off</pre>
+</td>
+<td xml:lang="en-US"></td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R67)</td>
+<td>Disable the secure_mode_insmod SELinux Boolean</td>
+<td xml:lang="en-US">By default, the SELinux boolean <code>secure_mode_insmod</code> is disabled.
+If this setting is enabled, it should be disabled.
+
+To disable the <code>secure_mode_insmod</code> SELinux boolean, run the following command:
+<pre>$ sudo setsebool -P secure_mode_insmod off</pre>
+</td>
+<td xml:lang="en-US"></td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R68)</td>
+<td>Uninstall setroubleshoot Package</td>
+<td xml:lang="en-US">The SETroubleshoot service notifies desktop users of SELinux
+denials. The service provides information around configuration errors,
+unauthorized intrusions, and other potential errors.
+The <code>setroubleshoot</code> package can be removed with the following command:
+<pre>
+$ sudo yum erase setroubleshoot</pre>
+</td>
+<td xml:lang="en-US">The SETroubleshoot service is an unnecessary daemon to
+have running on a server, especially if
+X Windows is removed or disabled.</td>
+<td></td>
+</tr>
+</table>
+</body>
+</html>

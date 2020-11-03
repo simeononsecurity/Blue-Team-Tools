@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 7px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} 
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<h2>References for product jre</h2>
+
+<ul>
+<li class="collapsible">nist</li>
+  <ul class="content">
+  <li class="collapsible">DCBP-1</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_deployment_config_exists<span class="tooltiptext">The Java Configuration File Exists</span></div></li>
+    <li><div class="tooltip">java_jre_deployment_config_mandatory<span class="tooltiptext">Configure The Java Deployment Mandatory Setting</span></div></li>
+    <li><div class="tooltip">java_jre_deployment_config_properties<span class="tooltiptext">Configure the deployment.properties File Path</span></div></li>
+    <li><div class="tooltip">java_jre_deployment_properties_exists<span class="tooltiptext">The Java Properties File Exists</span></div></li>
+    <li><div class="tooltip">java_jre_untrusted_sources<span class="tooltiptext">Disable Java Execution From Untrusted Sources</span></div></li>
+    <li><div class="tooltip">java_jre_untrusted_sources_locked<span class="tooltiptext">Disable User Access to Untrusted Sources Settings</span></div></li>
+    <li><div class="tooltip">java_jre_updated<span class="tooltiptext">Ensure Java Patches Installed</span></div></li>
+    <li><div class="tooltip">java_jre_validation_crl<span class="tooltiptext">Enable Revocation Checks for Publisher Certificates</span></div></li>
+    <li><div class="tooltip">java_jre_validation_crl_locked<span class="tooltiptext">Disable User Access to Revocation Check Settings</span></div></li>
+    <li><div class="tooltip">java_jre_validation_ocsp<span class="tooltiptext">Enable Online Certificate Validation</span></div></li>
+    <li><div class="tooltip">java_jre_validation_ocsp_locked<span class="tooltiptext">Disable User Access to Online Certificate Validation Settings</span></div></li>
+    </ul>
+  </ul>
+<li class="collapsible">stigid</li>
+  <ul class="content">
+  <li class="collapsible">JRE0001-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_untrusted_sources<span class="tooltiptext">Disable Java Execution From Untrusted Sources</span></div></li>
+    </ul>
+  <li class="collapsible">JRE0010-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_untrusted_sources_locked<span class="tooltiptext">Disable User Access to Untrusted Sources Settings</span></div></li>
+    </ul>
+  <li class="collapsible">JRE0020-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_validation_crl<span class="tooltiptext">Enable Revocation Checks for Publisher Certificates</span></div></li>
+    </ul>
+  <li class="collapsible">JRE0030-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_validation_crl_locked<span class="tooltiptext">Disable User Access to Revocation Check Settings</span></div></li>
+    </ul>
+  <li class="collapsible">JRE0040-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_validation_ocsp<span class="tooltiptext">Enable Online Certificate Validation</span></div></li>
+    </ul>
+  <li class="collapsible">JRE0050-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_validation_ocsp_locked<span class="tooltiptext">Disable User Access to Online Certificate Validation Settings</span></div></li>
+    </ul>
+  <li class="collapsible">JRE0060-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_deployment_config_mandatory<span class="tooltiptext">Configure The Java Deployment Mandatory Setting</span></div></li>
+    <li><div class="tooltip">java_jre_deployment_config_properties<span class="tooltiptext">Configure the deployment.properties File Path</span></div></li>
+    </ul>
+  <li class="collapsible">JRE0070-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_deployment_config_exists<span class="tooltiptext">The Java Configuration File Exists</span></div></li>
+    </ul>
+  <li class="collapsible">JRE0080-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_deployment_properties_exists<span class="tooltiptext">The Java Properties File Exists</span></div></li>
+    </ul>
+  <li class="collapsible">JRE0090-UX</li>
+    <ul class="content">
+    <li><div class="tooltip">java_jre_updated<span class="tooltiptext">Ensure Java Patches Installed</span></div></li>
+    </ul>
+  </ul>
+</ul>  
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+} 
+</script>
+</body>
+</html>

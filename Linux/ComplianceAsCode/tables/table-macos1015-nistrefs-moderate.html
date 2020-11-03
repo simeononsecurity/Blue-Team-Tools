@@ -1,0 +1,88 @@
+<html xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>NIST 800-53 Moderate-Impact Baseline for Apple macOS 10.15 Catalina</title>
+</head>
+<body>
+<br><br><div style="text-align: center; font-size: x-large; font-weight:bold">NIST 800-53 Moderate-Impact Baseline for Apple macOS 10.15 Catalina</div>
+<br><br><style type="text/css">
+		table
+		{
+			border-collapse:collapse;
+		}
+		table, th, td
+		{
+			border: 2px solid #dcdcdc;
+			border-left: none;
+			border-right: none;
+			vertical-align: top;
+			padding: 2px;
+			font-family: verdana,arial,sans-serif;
+			font-size:11px;
+		}
+		pre { 
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap !important;
+			word-wrap:break-word; 
+		}
+		table tr:nth-child(2n+2) { background-color: #f4f4f4; }
+		thead
+		{
+			display: table-header-group;
+			font-weight: bold;
+			background-color: #dedede;
+		}
+	</style>
+<table>
+<thead>
+<td>CCE ID</td>
+<td>Rule Title</td>
+<td>Description</td>
+<td>Rationale</td>
+<td>Variable Setting</td>
+<td>NIST 800-53 Mapping</td>
+</thead>
+<tr>
+<td></td>
+<td>Shutdown System When Auditing Failures Occur</td>
+<td xml:lang="en-US">The macOS system must shut down by default upon audit
+failure unless availability is an overriding concern.</td>
+<td xml:lang="en-US">The audit service should shut down the computer if it 
+is unable to audit system events. Once audit failure
+occurs, user and system activity is no longer recorded
+and malicious activity could go undetected. Audit
+processing failures include software/hardware errors,
+failures in the audit capturing mechanisms, and audit
+storage capacity being reached or exceeded. Responses
+to audit failure depend on the nature of the failure
+mode.</td>
+<td></td>
+<td>AU-5(b)<br>
+</td>
+</tr>
+<tr>
+<td></td>
+<td>Enable audit Service</td>
+<td xml:lang="en-US">The <code>audit</code> service is an essential userspace component of
+the auditing system, as it is responsible for writing audit records to
+disk.</td>
+<td xml:lang="en-US">Without establishing what type of events occurred, when they
+occurred, and by whom, it would be difficult to establish, correlate,
+and investigate the events leading up to an outage or attack.
+<br><br>
+Audit record content that may be necessary to satisfy this requirement
+includes, for example, time stamps, source and destination addresses,
+user/process identifiers, event descriptions, success/fail indications,
+filenames involved, and access control or flow control rules invoked.
+<br><br>
+Associating event types with detected events in the operating system
+audit logs provides a means of investigating an attack, recognizing
+resource utilization or capacity thresholds, or identifying an
+improperly configured operating system.  </td>
+<td></td>
+<td>AU-3<br>AU-3(1)<br>AU-8(a)<br>AU-8(b)<br>AU-12(3)<br>AU-14(1)<br>
+</td>
+</tr>
+</table>
+</body>
+</html>

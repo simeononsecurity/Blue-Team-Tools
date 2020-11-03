@@ -1,0 +1,263 @@
+<html xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DRAFT - ANSSI DAT-NT28 (minimal)</title>
+</head>
+<body>
+<br><br><div style="text-align: center; font-size: x-large; font-weight:bold">DRAFT - ANSSI DAT-NT28 (minimal)</div>
+<br><br><style type="text/css">
+		table
+		{
+			border-collapse:collapse;
+		}
+		table, th, td
+		{
+			border: 2px solid #dcdcdc;
+			border-left: none;
+			border-right: none;
+			vertical-align: top;
+			padding: 2px;
+			font-family: verdana,arial,sans-serif;
+			font-size:11px;
+		}
+		pre { 
+			white-space: pre-wrap;
+			white-space: -moz-pre-wrap !important;
+			word-wrap:break-word; 
+		}
+		table tr:nth-child(2n+2) { background-color: #f4f4f4; }
+		thead
+		{
+			display: table-header-group;
+			font-weight: bold;
+			background-color: #dedede;
+		}
+	</style>
+<table>
+<thead>
+<td>ANSSI Mapping</td>
+<td>Rule Title</td>
+<td>Description</td>
+<td>Rationale</td>
+<td>Variable Setting</td>
+</thead>
+<tr>
+<td>NT28(R15)<br>
+</td>
+<td>Ensure gpgcheck Enabled In Main yum Configuration</td>
+<td xml:lang="en-US">The <code>gpgcheck</code> option controls whether
+RPM packages' signatures are always checked prior to installation.
+To configure yum to check package signatures before installing
+them, ensure the following line appears in <code>/etc/yum.conf</code> in
+the <code>[main]</code> section:
+<pre>gpgcheck=1</pre>
+</td>
+<td xml:lang="en-US">Changes to any software components can have significant effects on the
+overall security of the operating system. This requirement ensures the
+software has not been tampered with and that it has been provided by a
+trusted vendor.
+<br>
+Accordingly, patches, service packs, device drivers, or operating system
+components must be signed with a certificate recognized and approved by the
+organization.
+<br>Verifying the authenticity of the software prior to installation
+validates the integrity of the patch or upgrade received from a vendor.
+This ensures the software has not been tampered with and that it has been
+provided by a trusted vendor. Self-signed certificates are disallowed by
+this requirement. Certificates used to verify the software must be from an
+approved Certificate Authority (CA).</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R15)<br>
+</td>
+<td>Ensure gpgcheck Enabled for Local Packages</td>
+<td xml:lang="en-US">
+<code>yum</code> should be configured to verify the signature(s) of local packages
+prior to installation. To configure <code>yum</code> to verify signatures of local
+packages, set the <code>localpkg_gpgcheck</code> to <code>1</code> in <code>/etc/yum.conf</code>.</td>
+<td xml:lang="en-US">Changes to any software components can have significant effects to the overall security
+of the operating system. This requirement ensures the software has not been tampered and
+has been provided by a trusted vendor.
+<br><br>
+Accordingly, patches, service packs, device drivers, or operating system components must
+be signed with a certificate recognized and approved by the organization.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R15)<br>
+</td>
+<td>Ensure gpgcheck Enabled for All yum Package Repositories</td>
+<td xml:lang="en-US">To ensure signature checking is not disabled for
+any repos, remove any lines from files in <code>/etc/yum.repos.d</code> of the form:
+<pre>gpgcheck=0</pre>
+</td>
+<td xml:lang="en-US">Verifying the authenticity of the software prior to installation validates
+the integrity of the patch or upgrade received from a vendor. This ensures
+the software has not been tampered with and that it has been provided by a
+trusted vendor. Self-signed certificates are disallowed by this
+requirement. Certificates used to verify the software must be from an
+approved Certificate Authority (CA)."</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R15)<br>
+</td>
+<td>Ensure Red Hat GPG Key Installed</td>
+<td xml:lang="en-US">To ensure the system can cryptographically verify base software packages
+come from Red Hat (and to connect to the Red Hat Network to receive them),
+the Red Hat GPG key must properly be installed. To install the Red Hat GPG
+key, run:
+<pre>$ sudo subscription-manager register</pre>
+
+If the system is not connected to the Internet or an RHN Satellite, then
+install the Red Hat GPG key from trusted media such as the Red Hat
+installation CD-ROM or DVD. Assuming the disc is mounted in
+<code>/media/cdrom</code>, use the following command as the root user to import
+it into the keyring:
+<pre>$ sudo rpm --import /media/cdrom/RPM-GPG-KEY</pre>
+
+Alternatively, the key may be pre-loaded during the RHEL installation. In
+such cases, the key can be installed by running the following command:
+<pre>sudo rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release</pre>
+</td>
+<td xml:lang="en-US">Changes to software components can have significant effects on the overall
+security of the operating system. This requirement ensures the software has
+not been tampered with and that it has been provided by a trusted vendor.
+The Red Hat GPG key is necessary to cryptographically verify packages are
+from Red Hat.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R1)<br>
+</td>
+<td>Uninstall DHCP Server Package</td>
+<td xml:lang="en-US">If the system does not need to act as a DHCP server,
+the dhcp package can be uninstalled.
+The <code>dhcp</code> package can be removed with the following command:
+<pre>
+$ sudo yum erase dhcp</pre>
+</td>
+<td xml:lang="en-US">Removing the DHCP server ensures that it cannot be easily or
+accidentally reactivated and disrupt network operation.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)<br>NT28(R46)<br>
+</td>
+<td>Ensure rsyslog is Installed</td>
+<td xml:lang="en-US">Rsyslog is installed by default. The <code>rsyslog</code> package can be installed with the following command: <pre> $ sudo yum install rsyslog</pre>
+</td>
+<td xml:lang="en-US">The rsyslog package provides the rsyslog daemon, which provides
+system logging services.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R1)<br>
+</td>
+<td>Uninstall Sendmail Package</td>
+<td xml:lang="en-US">Sendmail is not the default mail transfer agent and is
+not installed by default.
+The <code>sendmail</code> package can be removed with the following command:
+<pre>
+$ sudo yum erase sendmail</pre>
+</td>
+<td xml:lang="en-US">The sendmail software was not developed with security in mind and
+its design prevents it from being effectively contained by SELinux.  Postfix
+should be used instead.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R1)<br>
+</td>
+<td>Uninstall the telnet server</td>
+<td xml:lang="en-US">The telnet daemon should be uninstalled.</td>
+<td xml:lang="en-US">
+<code>telnet</code> allows clear text communications, and does not protect
+any data transmission between client and server. Any confidential data
+can be listened and no integrity checking is made.'</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R08)<br>
+</td>
+<td>Ensure Software Patches Installed</td>
+<td xml:lang="en-US">
+If the system is joined to the Red Hat Network, a Red Hat Satellite Server,
+or a yum server, run the following command to install updates:
+<pre>$ sudo yum update</pre>
+If the system is not configured to use one of these sources, updates (in the form of RPM packages)
+can be manually downloaded from the Red Hat Network and installed using <code>rpm</code>.
+
+<br><br>
+NOTE: U.S. Defense systems are required to be patched within 30 days or sooner as local policy
+dictates.</td>
+<td xml:lang="en-US">Installing software updates is a fundamental mitigation against
+the exploitation of publicly-known vulnerabilities. If the most
+recent security patches and updates are not installed, unauthorized
+users may take advantage of weaknesses in the unpatched software. The
+lack of prompt attention to patching could result in a system compromise.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)<br>NT28(R46)<br>
+</td>
+<td>Enable rsyslog Service</td>
+<td xml:lang="en-US">The <code>rsyslog</code> service provides syslog-style logging by default on Red Hat Enterprise Linux 7.
+
+The <code>rsyslog</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable rsyslog.service</pre>
+</td>
+<td xml:lang="en-US">The <code>rsyslog</code> service must be running in order to provide
+logging services, which are essential to system administration.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R32)<br>
+</td>
+<td>Set Password Hashing Algorithm in /etc/login.defs</td>
+<td xml:lang="en-US">In <code>/etc/login.defs</code>, add or correct the following line to ensure
+the system will use SHA-512 as the hashing algorithm:
+<pre>ENCRYPT_METHOD SHA512</pre>
+</td>
+<td xml:lang="en-US">Passwords need to be protected at all times, and encryption is the standard method for protecting passwords.
+If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised. Passwords
+that are encrypted with a weak algorithm are no more protected than if they are kept in plain text.
+<br><br>
+Using a stronger hashing algorithm makes password cracking attacks more difficult.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)<br>NT28(R59)<br>
+</td>
+<td>Ensure Users Re-Authenticate for Privilege Escalation - sudo !authenticate</td>
+<td xml:lang="en-US">The sudo <code>!authenticate</code> option, when specified, allows a user to execute commands using
+sudo without having to authenticate. This should be disabled by making sure that the
+<code>!authenticate</code> option does not exist in <code>/etc/sudoers</code> configuration file or
+any sudo configuration snippets in <code>/etc/sudoers.d/</code>.</td>
+<td xml:lang="en-US">Without re-authentication, users may access resources or perform tasks for which they
+do not have authorization.
+<br><br>
+When operating systems provide the capability to escalate a functional capability, it
+is critical that the user re-authenticate.</td>
+<td></td>
+</tr>
+<tr>
+<td>NT28(R5)<br>NT28(R59)<br>
+</td>
+<td>Ensure Users Re-Authenticate for Privilege Escalation - sudo NOPASSWD</td>
+<td xml:lang="en-US">The sudo <code>NOPASSWD</code> tag, when specified, allows a user to execute
+commands using sudo without having to authenticate. This should be disabled
+by making sure that the <code>NOPASSWD</code> tag does not exist in
+<code>/etc/sudoers</code> configuration file or any sudo configuration snippets
+in <code>/etc/sudoers.d/</code>.</td>
+<td xml:lang="en-US">Without re-authentication, users may access resources or perform tasks for which they
+do not have authorization.
+<br><br>
+When operating systems provide the capability to escalate a functional capability, it
+is critical that the user re-authenticate.</td>
+<td></td>
+</tr>
+</table>
+</body>
+</html>
