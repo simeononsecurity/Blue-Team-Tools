@@ -1,5 +1,6 @@
 # sysmon-config | A Sysmon configuration file for everybody to fork #
 #### https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon
+#### https://www.syspanda.com/index.php/2017/02/28/deploying-sysmon-through-gpo/
 This is a Microsoft Sysinternals Sysmon configuration file template with default high-quality event tracing.
 
 The file provided should function as a great starting point for system change monitoring in a self-contained package. This configuration and results should give you a good idea of what's possible for Sysmon. Note that this does not track things like authentication and other Windows events that are also vital for incident investigation.
