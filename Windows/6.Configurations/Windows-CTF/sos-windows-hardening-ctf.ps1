@@ -24,12 +24,18 @@ $ExecutionContext.SessionState.LanguageMode = "ConstrainedLanguage"
 
 #Disable LLMNR
 #https://www.blackhillsinfosec.com/how-to-disable-llmnr-why-you-want-to/
-REG ADD  “HKLM\Software\policies\Microsoft\Windows NT\DNSClient”
-REG ADD  “HKLM\Software\policies\Microsoft\Windows NT\DNSClient” /v ” EnableMulticast” /t REG_DWORD /d “0” /f
+New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient"
+Set-ItemProperty -Path "HKLM:\Software\policies\Microsoft\Windows NT\DNSClient" -Name "EnableMulticast" -Type "DWORD" -Value 0 -Force
 
 #Enable DEP
 BCDEDIT /set "{current}" nx OptOut
 Set-Processmitigation -System -Enable DEP
+
+#Remove WSMan listeners
+Get-ChildItem WSMan:\Localhost\listener | Where-Object -Property Keys -eq "Transport=HTTP" | Remove-Item -Recurse
+Remove-Item -Path WSMan:\Localhost\listener\listener* -Recurse
+#Disable the WSMan Service
+Set-Service -Name "WinRM" -StartupType Disabled -Status Stopped
 
 #Windows Defender Configuration Files
 mkdir "C:\temp\Windows Defender"; Copy-Item -Path .\Files\"Windows Defender Configuration Files"\* -Destination C:\temp\"Windows Defender"\ -Force -Recurse -ErrorAction SilentlyContinue
