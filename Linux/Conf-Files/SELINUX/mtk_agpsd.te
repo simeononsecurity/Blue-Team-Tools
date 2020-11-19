@@ -1,0 +1,18 @@
+# Add Selinux form system/bin/mtk_agpsd
+# Powered by gesangtome
+
+type mtk_agpsd_exec , exec_type, file_type;
+type mtk_agpsd ,domain;
+
+init_daemon_domain(mtk_agpsd)
+
+net_domain(mtk_agpsd)
+allow mtk_agpsd mnld:unix_dgram_socket sendto;
+allow mtk_agpsd agps_device:chr_file rw_file_perms;
+allow mtk_agpsd agpsd_data_file:dir create_dir_perms;
+allow mtk_agpsd agpsd_data_file:file create_file_perms;
+allow mtk_agpsd agpsd_data_file:sock_file create_file_perms;
+allow mtk_agpsd fuse:dir create_dir_perms;
+allow mtk_agpsd fuse:file create_file_perms;
+allow mtk_agpsd ttySDIO_device:chr_file create_file_perms;
+allow mtk_agpsd eemcs_device:chr_file rw_file_perms;

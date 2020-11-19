@@ -1,0 +1,16 @@
+# Add Selinux form system/bin/akmd09911
+# Powered by gesangtome
+type akmd09911_exec , exec_type, file_type;
+type akmd09911 ,domain;
+
+init_daemon_domain(akmd09911)
+
+allow akmd09911 msensor_device:chr_file { open ioctl read write };
+allow akmd09911 gsensor_device:chr_file { open ioctl read write };
+allow akmd09911 input_device:dir { search open read write };
+allow akmd09911 input_device:file { open read };
+allow akmd09911 akmd8963_access_file1:file { open read write };
+allow akmd09911 akmd8963_access_file2:file { open read write };
+
+allow akmd09911 system_data_file:dir { write add_name create setattr };
+allow akmd09911 system_data_file:file { open write read create setattr};

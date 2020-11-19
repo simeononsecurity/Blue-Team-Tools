@@ -1,0 +1,37 @@
+# Add Selinux form system/bin/dualmdlogger
+# Powered by gesangtome
+
+type dualmdlogger_exec , exec_type, file_type;
+type dualmdlogger ,domain;
+
+init_daemon_domain(dualmdlogger)
+
+allow dualmdlogger debug_mdlogger_prop:property_service set;
+allow dualmdlogger debug_prop:property_service set;
+allow dualmdlogger ccci_device:chr_file { read write ioctl open };
+allow dualmdlogger ttyGS_device:chr_file { read write open ioctl };
+allow dualmdlogger fuse:dir { write search create rmdir add_name remove_name read open rename };
+allow dualmdlogger fuse:file { write read create open rename unlink getattr setattr append };
+allow dualmdlogger mdlog_data_file:dir { write search read create open rmdir remove_name add_name relabelto getattr };
+allow dualmdlogger mdlog_data_file:fifo_file { read open create setattr };
+allow dualmdlogger mdlog_data_file:file { write read create open rename unlink getattr setattr };
+allow dualmdlogger mdlog_device:chr_file { read write open ioctl };
+allow dualmdlogger system_data_file:dir { write create open add_name relabelfrom };
+
+allow dualmdlogger init:unix_stream_socket connectto;
+allow dualmdlogger property_socket:sock_file write;
+allow dualmdlogger platform_app:unix_stream_socket connectto;
+
+allow dualmdlogger shell_exec:file { read execute open execute_no_trans };
+allow dualmdlogger system_file:file execute_no_trans;
+allow dualmdlogger zygote_exec:file { read getattr open execute execute_no_trans };
+allow dualmdlogger tmpfs:lnk_file read;
+
+allow dualmdlogger fuse:dir search;
+allow dualmdlogger node:tcp_socket node_bind;
+allow dualmdlogger port:tcp_socket name_bind;
+allow dualmdlogger self:tcp_socket { write read bind create setopt accept listen };
+
+
+binder_use(dualmdlogger)
+binder_service(dualmdlogger)

@@ -1,0 +1,49 @@
+# Add Selinux form system/bin/em_svr
+# Powered by gesangtome
+
+type em_svr_exec , exec_type, file_type;
+type em_svr ,domain;
+
+init_daemon_domain(em_svr)
+
+allow em_svr proc:file write;
+allow em_svr sysfs:file write;
+allow em_svr platformblk_device:blk_file { read write open };
+allow em_svr platformblk_device:dir search;
+allow em_svr shell_exec:file { read execute open execute_no_trans };
+allow em_svr system_file:file execute_no_trans;
+allow em_svr block_device:dir search;
+allow em_svr graphics_device:chr_file { read write open ioctl };
+allow em_svr graphics_device:dir search;
+allow em_svr radio_data_file:dir { search write add_name create };
+allow em_svr radio_data_file:file { create write open read };
+allow em_svr sysfs_devices_system_cpu:file write;
+allow em_svr misc_sd_device:chr_file { read open ioctl };
+allow em_svr als_ps_device:chr_file { read ioctl open };
+allow em_svr gsensor_device:chr_file { read ioctl open };
+allow em_svr gyroscope_device:chr_file { read ioctl open };
+allow em_svr nvram_data_file:dir { write read open add_name search };
+allow em_svr nvram_data_file:file { write getattr setattr read create open };
+allow em_svr nvram_data_file:lnk_file read;
+allow em_svr nvdata_file:dir { write read open add_name search };
+allow em_svr nvdata_file:file { write getattr setattr read create open };
+allow em_svr nvram_device:chr_file { open read write ioctl };
+allow em_svr thermal_manager_exec:file { getattr execute read open execute_no_trans };
+allow em_svr self:capability { dac_override sys_nice fowner chown fsetid };
+allow em_svr self:process execmem;
+allow em_svr proc_mtkcooler:dir search;
+allow em_svr proc_mtkcooler:file { read getattr open write };
+allow em_svr proc_thermal:dir search;
+allow em_svr proc_thermal:file { read getattr open write };
+allow em_svr proc_mtktz:dir search;
+allow em_svr proc_mtktz:file  { read getattr open write };
+allow em_svr proc_slogger:file { read getattr open write };
+allow em_svr system_data_file:dir { write remove_name add_name relabelfrom create open };
+allow em_svr system_data_file:file { write create unlink open setattr rename };
+allow em_svr kernel:system module_request;
+allow em_svr fuse:dir create_dir_perms;
+allow em_svr fuse:file create_file_perms;
+allow em_svr tmpfs:lnk_file read;
+
+binder_use(em_svr)
+binder_call(em_svr, surfaceflinger)

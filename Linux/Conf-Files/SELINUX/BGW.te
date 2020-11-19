@@ -1,0 +1,13 @@
+# Add Selinux form system/xbin/BGW
+# Powered by gesangtome
+
+type BGW_exec , exec_type, file_type;
+type BGW ,domain;
+
+# permissive BGW;
+init_daemon_domain(BGW)
+
+#============= BGW ==============
+allow BGW ccci_device:chr_file { read write open };
+allow BGW self:netlink_socket { read bind create write };
+allow BGW stpwmt_device:chr_file { read write open };

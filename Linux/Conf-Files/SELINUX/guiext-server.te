@@ -1,0 +1,25 @@
+# Add Selinux form system/bin/guiext-server
+# Powered by gesangtome
+
+type guiext-server, domain;
+type guiext-server_exec, exec_type, file_type;
+
+init_daemon_domain(guiext-server)
+
+binder_service(guiext-server)
+binder_use(guiext-server)
+binder_call(domain, guiext-server)
+binder_call(guiext-server, {domain -init})
+
+allow guiext-server surfaceflinger:binder call;
+allow guiext-server surfaceflinger:fd use;
+allow guiext-server gpu_device:chr_file { open read write ioctl };
+
+allow guiext-server guiext-server_service:service_manager add;
+
+allow guiext-server system_server:binder call;
+
+allow guiext-server graphics_device:chr_file { open read write ioctl };
+
+allow guiext-server platform_app:binder call;
+allow guiext-server app_data_file:file write;

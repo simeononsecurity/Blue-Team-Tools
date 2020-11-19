@@ -1,0 +1,7 @@
+# Add Selinux form system/bin/akmd8975
+# Powered by gesangtome
+
+type akmd8975_exec , exec_type, file_type;
+type akmd8975 ,domain;
+
+init_daemon_domain(akmd8975)

@@ -1,0 +1,7 @@
+# Add Selinux form system/bin/memsicd
+# Powered by gesangtome
+
+type memsicd_exec , exec_type, file_type;
+type memsicd ,domain;
+
+init_daemon_domain(memsicd)

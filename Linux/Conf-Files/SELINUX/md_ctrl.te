@@ -1,0 +1,12 @@
+# Add Selinux form system/bin/md_ctrl
+# Powered by gesangtome
+
+type md_ctrl, domain;
+type md_ctrl_exec, exec_type, file_type;
+
+init_daemon_domain(md_ctrl)
+allow md_ctrl ccci_device:chr_file { read write ioctl open };
+allow md_ctrl devpts:chr_file { read write getattr open ioctl };
+allow md_ctrl muxreport_exec:file { read execute open execute_no_trans };
+allow md_ctrl self:capability dac_override;
+allow md_ctrl emd_device:chr_file { read write open };

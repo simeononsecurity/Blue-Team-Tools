@@ -1,0 +1,147 @@
+# Add Selinux form system/bin/mtkbt
+# Powered by gesangtome
+
+type mtkbt_exec , exec_type, file_type;
+type mtkbt ,domain;
+
+init_daemon_domain(mtkbt)
+
+allow mtkbt platformblk_device:blk_file { read write open };
+allow mtkbt self:udp_socket { create ioctl };
+
+binder_use(mtkbt)
+
+allow mtkbt bluetooth_service:service_manager add;
+
+allow mtkbt nvram_data_file:file { create setattr read write getattr open };
+allow mtkbt nvram_data_file:lnk_file read;
+allow mtkbt nvram_data_file:dir { write add_name search};
+allow mtkbt nvdata_file:file { create setattr read write getattr open };
+allow mtkbt nvdata_file:dir { write add_name search };
+allow mtkbt system_data_file:file create;
+
+allow mtkbt block_device:dir search;
+allow mtkbt bt_data_file:dir search;
+allow mtkbt bt_int_adp_socket:sock_file write;
+allow mtkbt platformblk_device:dir search;
+allow mtkbt self:netlink_socket { write bind create setopt };
+allow mtkbt sn:dir search;
+allow mtkbt sn:file { read getattr open };
+allow mtkbt sysfs_wake_lock:file { read write open };
+allow mtkbt MtkCodecService:dir search;
+allow mtkbt MtkCodecService:file { read getattr open };
+allow mtkbt aal:dir search;
+allow mtkbt aal:file { read getattr open };
+allow mtkbt atci_service:dir search;
+allow mtkbt atci_service:file { read getattr open };
+allow mtkbt atcid:dir search;
+allow mtkbt atcid:file { read getattr open };
+allow mtkbt autokd:dir search;
+allow mtkbt autokd:file { read getattr open };
+allow mtkbt batterywarning:dir search;
+allow mtkbt batterywarning:file { read getattr open };
+allow mtkbt bluetooth:unix_dgram_socket sendto;
+allow mtkbt bt_data_file:dir { write getattr read remove_name open add_name };
+allow mtkbt bt_data_file:file { write getattr read create unlink open append };
+allow mtkbt bluetooth:binder transfer;
+allow mtkbt bt_data_file:dir create;
+allow mtkbt bluetooth_data_file:dir search;
+allow mtkbt system_data_file:dir write;
+allow mtkbt system_data_file:dir add_name;
+allow mtkbt ccci_fsd:dir search;
+allow mtkbt ccci_fsd:file { read getattr open };
+allow mtkbt ccci_mdinit:dir search;
+allow mtkbt ccci_mdinit:file { read getattr open };
+allow mtkbt debuggerd:dir search;
+allow mtkbt debuggerd:file { read getattr open };
+allow mtkbt drmserver:dir search;
+allow mtkbt drmserver:file { read getattr open };
+allow mtkbt em_svr:dir search;
+allow mtkbt em_svr:file { read getattr open };
+allow mtkbt geomagneticd:dir search;
+allow mtkbt geomagneticd:file { read getattr open };
+allow mtkbt guiext-server:dir search;
+allow mtkbt guiext-server:file { read getattr open };
+allow mtkbt healthd:dir search;
+allow mtkbt healthd:file { read getattr open };
+allow mtkbt init:dir search;
+allow mtkbt init:file { read getattr open };
+allow mtkbt init:unix_stream_socket connectto;
+allow mtkbt installd:dir search;
+allow mtkbt installd:file { read getattr open };
+allow mtkbt kernel:dir search;
+allow mtkbt kernel:file { read getattr open };
+allow mtkbt keystore:dir search;
+allow mtkbt keystore:file { read getattr open };
+allow mtkbt lmkd:dir search;
+allow mtkbt lmkd:file { read getattr open };
+allow mtkbt logd:dir search;
+allow mtkbt logd:file { read getattr open };
+allow mtkbt mediaserver:dir search;
+allow mtkbt mediaserver:file { read getattr open };
+allow mtkbt mnld:dir search;
+allow mtkbt mnld:file { read getattr open };
+allow mtkbt mobile_log_d:dir search;
+allow mtkbt mobile_log_d:file { read getattr open };
+allow mtkbt mtk_6620_launcher:dir search;
+allow mtkbt mtk_6620_launcher:file { read getattr open };
+allow mtkbt mtk_agpsd:dir search;
+allow mtkbt mtk_agpsd:file { read getattr open };
+allow mtkbt netd:dir search;
+allow mtkbt netd:file { read getattr open };
+allow mtkbt netdiag:dir search;
+allow mtkbt netdiag:file { read getattr open };
+allow mtkbt nvram_agent_binder:dir search;
+allow mtkbt nvram_agent_binder:file { read getattr open };
+allow mtkbt orientationd:dir search;
+allow mtkbt orientationd:file { read getattr open };
+allow mtkbt ppl_agent:dir search;
+allow mtkbt ppl_agent:file { read getattr open };
+allow mtkbt proc_mtkcooler:dir search;
+allow mtkbt proc_mtktz:dir search;
+allow mtkbt property_socket:sock_file write;
+allow mtkbt resmon:dir search;
+allow mtkbt resmon:file { read getattr open };
+allow mtkbt self:capability net_admin;
+allow mtkbt self:netlink_socket read;
+allow mtkbt self:tun_socket create;
+allow mtkbt servicemanager:dir search;
+allow mtkbt servicemanager:file { read getattr open };
+allow mtkbt shell:dir search;
+allow mtkbt shell:file { read getattr open };
+allow mtkbt stpbt_device:chr_file { read write ioctl open };
+allow mtkbt surfaceflinger:dir search;
+allow mtkbt surfaceflinger:file { read getattr open };
+allow mtkbt system_data_file:file { write open };
+allow mtkbt thermal:dir search;
+allow mtkbt thermal:file { read getattr open };
+allow mtkbt thermald:dir search;
+allow mtkbt thermald:file { read getattr open };
+allow mtkbt tun_device:chr_file { read write ioctl open };
+allow mtkbt ueventd:dir search;
+allow mtkbt ueventd:file { read getattr open };
+allow mtkbt uhid_device:chr_file { read write open };
+allow mtkbt vold:dir search;
+allow mtkbt vold:file { read getattr open };
+allow mtkbt wifi2agps:dir search;
+allow mtkbt wifi2agps:file { read getattr open };
+allow mtkbt zygote:dir search;
+allow mtkbt zygote:file { read getattr open };
+
+userdebug_or_eng(`
+allow mtkbt su:dir search;
+allow mtkbt su:file { read getattr open };
+')
+
+allow mtkbt bt_prop:property_service set;
+allow mtkbt persist_bt_prop:property_service set;
+
+allow mtkbt tmpfs:lnk_file read;
+
+allow mtkbt bluetooth_data_file:file { read open getattr };
+allow mtkbt system_data_file:dir create;
+allow mtkbt fuse:dir { search write add_name write getattr read remove_name open };
+allow mtkbt fuse:file { read open getattr write create unlink };
+
+allow mtkbt system_data_file:dir { read remove_name };
+allow mtkbt nvram_device:chr_file open;

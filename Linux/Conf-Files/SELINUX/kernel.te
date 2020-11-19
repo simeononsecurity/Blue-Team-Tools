@@ -1,0 +1,11 @@
+# Add Selinux form boot/kernel
+# Powered by gesangtome
+
+domain_auto_trans(kernel, aee_core_forwarder_exec, aee_core_forwarder)
+
+allow kernel fuse:dir search;
+
+allow kernel block_device:blk_file { read write };
+allow kernel loop_device:blk_file { read };
+
+allow kernel platformblk_device:blk_file { open read write };

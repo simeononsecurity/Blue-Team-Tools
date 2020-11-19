@@ -1,0 +1,7 @@
+# Add Selinux form system/bin/s62xd
+# Powered by gesangtome
+
+type s62xd_exec , exec_type, file_type;
+type s62xd ,domain;
+
+init_daemon_domain(s62xd)

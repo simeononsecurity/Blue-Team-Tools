@@ -1,0 +1,20 @@
+# Add Selinux form ramdisk/enableswap
+# Powered by gesangtome
+
+type enableswap_exec , exec_type, file_type;
+type enableswap ,domain;
+
+init_daemon_domain(enableswap)
+allow enableswap block_device:dir search;
+allow enableswap self:capability sys_admin;
+allow enableswap shell_exec:file { entrypoint read };
+allow enableswap sysfs:file write;
+allow enableswap tiny_mkswap_exec:file { read getattr open execute execute_no_trans };
+allow enableswap tiny_swapon_exec:file { read getattr open execute execute_no_trans };
+allow enableswap zram0_device:blk_file { read write getattr open ioctl };
+
+allow enableswap proc:file write;
+allow enableswap system_file:file execute_no_trans;
+allow enableswap system_data_file:file { create open write };
+allow enableswap system_data_file:dir { write add_name };
+allow enableswap self:capability dac_override;
