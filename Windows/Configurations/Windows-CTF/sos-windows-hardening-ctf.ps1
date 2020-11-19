@@ -21,6 +21,15 @@ Disable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2
 #Set PowerShell Constrained Language Mode
 #https://devblogs.microsoft.com/powershell/powershell-constrained-language-mode/
 $ExecutionContext.SessionState.LanguageMode = "ConstrainedLanguage"
+Set-Variable -Name "__PSLockdownPolicy" -Value "4"
+
+#Enable PowerShell Logging
+#https://www.digitalshadows.com/blog-and-research/powershell-security-best-practices/
+#https://www.cyber.gov.au/acsc/view-all-content/publications/securing-powershell-enterprise
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\Transcription" -Name "OutputDirectory" -Type "STRING" -Value "C:\PowershellLogs" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging\" -Name "EnableScriptBlockLogging" -Type "DWORD" -Value "1" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription\" -Name "EnableTranscripting" -Type "DWORD" -Value "1" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription\" -Name "EnableInvocationHeader" -Type "DWORD" -Value "1" -Force
 
 #Disable LLMNR
 #https://www.blackhillsinfosec.com/how-to-disable-llmnr-why-you-want-to/
@@ -36,6 +45,14 @@ Get-ChildItem WSMan:\Localhost\listener | Where-Object -Property Keys -eq "Trans
 Remove-Item -Path WSMan:\Localhost\listener\listener* -Recurse
 #Disable the WSMan Service
 Set-Service -Name "WinRM" -StartupType Disabled -Status Stopped
+#Disable Firewall Rule
+Disable-NetFirewallRule -DisplayName “Windows Remote Management (HTTP-In)”
+
+#####SPECTURE MELTDOWN#####
+#https://support.microsoft.com/en-us/help/4073119/protect-against-speculative-execution-side-channel-vulnerabilities-in
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverride -Type DWORD -Value 72 -Force
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverrideMask -Type DWORD -Value 3 -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name MinVmVersionForCpuBasedMitigations -Type String -Value "1.0" -Force
 
 #Windows Defender Configuration Files
 mkdir "C:\temp\Windows Defender"; Copy-Item -Path .\Files\"Windows Defender Configuration Files"\* -Destination C:\temp\"Windows Defender"\ -Force -Recurse -ErrorAction SilentlyContinue
