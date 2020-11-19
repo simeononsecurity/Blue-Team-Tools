@@ -1,4 +1,3 @@
-######SCRIPT FOR FULL INSTALL AND CONFIGURE ON STANDALONE MACHINE#####
 #Continue on error
 $ErrorActionPreference= 'silentlycontinue'
 
