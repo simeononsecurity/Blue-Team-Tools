@@ -13,7 +13,7 @@ msiexec /i "EMET Setup.msi" /qn /norestart
 Copy-Item EMET_Conf.xml "C:\Program Files (x86)\EMET 5.5"
 
 #Conf EMET Extras
-CD "C:\Program Files (x86)\EMET 5.5"
+Set-Location "C:\Program Files (x86)\EMET 5.5"
 .\EMET_Conf.exe --import --force ./EMET_Conf.xml
 .\EMET_Conf.exe --deephooks enabled
 .\EMET_Conf.exe --antidetours enabled
