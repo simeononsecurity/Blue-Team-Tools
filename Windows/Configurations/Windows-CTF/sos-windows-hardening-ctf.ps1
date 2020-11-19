@@ -7,6 +7,19 @@ Requires -RunAsAdministrator
 Write-Output "Elevating priviledges for this process"
 do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
 
+#Unblock all files required for script
+Get-ChildItem ./ -recurse | Unblock-File
+
+#Install PowerShell Modules
+Copy-Item -Path .\Files\"PowerShell Modules"\* -Destination C:\Windows\System32\WindowsPowerShell\v1.0\Modules -Force -Recurse
+#Unblock New PowerShell Modules
+Get-ChildItem C:\Windows\System32\WindowsPowerShell\v1.0\Modules\PSWindowsUpdate\ -recurse | Unblock-File
+#Install PSWindowsUpdate
+Import-Module -Name PSWindowsUpdate -Force -Global
+
+##Install Latest Windows Updates
+start-job -ScriptBlock {Install-WindowsUpdate -MicrosoftUpdate -AcceptAll; Get-WuInstall -AcceptAll -IgnoreReboot; Get-WuInstall -AcceptAll -Install -IgnoreReboot}
+
 #Disable CMD Interactive
 #reg add HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\System /v DisableCMD /t REG_DWORD /d 2 /f
 #Disable CMD Interactive and CMD Inline 
@@ -31,6 +44,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Scr
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription\" -Name "EnableTranscripting" -Type "DWORD" -Value "1" -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription\" -Name "EnableInvocationHeader" -Type "DWORD" -Value "1" -Force
 
+#Windows 10 Kernel (DMA) Protections
+Set-ItemProperty -Path "HKLM:\Software\Policies\Microsoft\Windows\Kernel DMA Protection" -Name "DeviceEnumerationPolicy" -Type "DWORD" -Value "0" -Force
+
 #Disable LLMNR
 #https://www.blackhillsinfosec.com/how-to-disable-llmnr-why-you-want-to/
 New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient"
@@ -48,6 +64,34 @@ Set-Service -Name "WinRM" -StartupType Disabled -Status Stopped
 #Disable Firewall Rule
 Disable-NetFirewallRule -DisplayName “Windows Remote Management (HTTP-In)”
 
+#Disable SMB Compression - CVE-2020-0796
+#https://msrc.microsoft.com/update-guide/en-US/vulnerability/CVE-2020-0796
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" DisableCompression -Type DWORD -Value 1 -Force
+
+#Disable SMB v1
+#https://docs.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3
+Disable-WindowsOptionalFeature -Online -FeatureName smb1protocol
+Set-SmbServerConfiguration -EnableSMB1Protocol $false
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" SMB1 -Type DWORD -Value 0 –Force
+
+#Disable SMB v2
+#https://docs.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3
+Set-SmbServerConfiguration -EnableSMB2Protocol $false
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" SMB2 -Type DWORD -Value 0 –Force
+
+#Enable SMB Encryption
+#https://docs.microsoft.com/en-us/windows-server/storage/file-server/smb-security
+Set-SmbServerConfiguration –EncryptData $true
+Set-SmbServerConfiguration –RejectUnencryptedAccess $false
+
+#Diable SMB Direct 
+#https://docs.microsoft.com/en-us/windows-server/storage/file-server/smb-direct
+Set-NetOffloadGlobalSetting -NetworkDirect Disabled
+
+#Bad Neighbor - CVE-2020-16898 
+#https://blog.rapid7.com/2020/10/14/there-goes-the-neighborhood-dealing-with-cve-2020-16898-a-k-a-bad-neighbor/
+netsh int ipv6 set int *INTERFACENUMBER* rabaseddnsconfig=disable
+
 #####SPECTURE MELTDOWN#####
 #https://support.microsoft.com/en-us/help/4073119/protect-against-speculative-execution-side-channel-vulnerabilities-in
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverride -Type DWORD -Value 72 -Force
@@ -56,6 +100,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtu
 
 #Windows Defender Configuration Files
 mkdir "C:\temp\Windows Defender"; Copy-Item -Path .\Files\"Windows Defender Configuration Files"\* -Destination C:\temp\"Windows Defender"\ -Force -Recurse -ErrorAction SilentlyContinue
+
+#Disable Windows Defender (Do not use)
+#Uninstall-WindowsFeature -Name Windows-Defender
 
 #Enable Windows Defender Exploit Protection
 Set-ProcessMitigation -PolicyFilePath "C:\temp\Windows Defender\DOD_EP_V3.xml"
