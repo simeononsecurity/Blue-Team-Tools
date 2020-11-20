@@ -1,0 +1,16 @@
+# Add Selinux form system/bin/sbchk
+# Powered by gesangtome
+
+type sbchk, domain;
+type sbchk_exec, exec_type, file_type;
+
+init_daemon_domain(sbchk)
+
+allow sbchk misc_sd_device:chr_file { read open };
+allow sbchk platformblk_device:blk_file { read write open };
+allow sbchk platformblk_device:dir search;
+allow sbchk preloader_device:chr_file { read open };
+allow sbchk sec_device:chr_file { read ioctl open };
+allow sbchk seccfg_device:chr_file { read write open };
+allow sbchk sec_ro_device:chr_file { open read };
+allow sbchk block_device:dir search;

@@ -1,0 +1,14 @@
+# Add Selinux form system/bin/pq
+# Powered by gesangtome
+
+type pq_exec , exec_type, file_type;
+type pq ,domain;
+
+init_daemon_domain(pq)
+
+allow pq system_prop:property_service set;
+allow pq graphics_device:chr_file { read write open ioctl };
+
+allow pq init:unix_stream_socket connectto;
+allow pq property_socket:sock_file write;
+allow pq tmpfs:lnk_file read;

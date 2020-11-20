@@ -1,0 +1,6 @@
+# Add Selinux form system/bin/hostapd
+# Powered by gesangtome
+
+allow hostapd system_wpa_socket:sock_file write;
+
+dontaudit hostapd kernel:system module_request;

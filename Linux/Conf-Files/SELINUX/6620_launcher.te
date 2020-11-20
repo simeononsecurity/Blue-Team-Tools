@@ -1,0 +1,13 @@
+# Add Selinux form system/bin/6620_launcher
+# Powered by gesangtome
+
+type 6620_launcher_exec , exec_type, file_type;
+type 6620_launcher ,domain;
+
+allow 6620_launcher wmt_prop:property_service set;
+allow 6620_launcher init:unix_stream_socket connectto;
+allow 6620_launcher property_socket:sock_file write;
+allow 6620_launcher stpwmt_device:chr_file { read write ioctl open };
+allow 6620_launcher devpts:chr_file { read write };
+
+init_daemon_domain(6620_launcher)

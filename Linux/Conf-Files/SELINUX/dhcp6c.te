@@ -1,0 +1,27 @@
+# Add Selinux form system/bin/dhcp6c
+# Powered by gesangtome
+
+type dhcp6c_exec , exec_type, file_type;
+type dhcp6c ,domain;
+
+init_daemon_domain(dhcp6c)
+
+allow dhcp6c self:udp_socket { create setopt write bind ioctl read };
+
+allow dhcp6c node:udp_socket node_bind;
+allow dhcp6c port:udp_socket name_bind;
+allow dhcp6c system_file:file execute_no_trans;
+allow dhcp6c dhcp_prop:property_service set;
+
+allow dhcp6c system_file:file execute_no_trans;
+
+allow dhcp6c dhcp_data_file:dir { write add_name search };
+allow dhcp6c dhcp_data_file:file { read write create open getattr };
+allow dhcp6c init:unix_stream_socket connectto;
+allow dhcp6c property_socket:sock_file write;
+allow dhcp6c self:capability { setuid net_admin net_bind_service setgid };
+allow dhcp6c self:netlink_route_socket { write getattr read bind create nlmsg_read };
+allow dhcp6c shell_exec:file { read execute open };
+allow dhcp6c wide_dhcpv6_data_file:dir { write search add_name };
+allow dhcp6c wide_dhcpv6_data_file:file { read write create open getattr };
+

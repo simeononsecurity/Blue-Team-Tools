@@ -1,0 +1,27 @@
+# Add Selinux form system/bin/aee_core_forwarder
+# Powered by gesangtome
+type aee_core_forwarder_exec , exec_type, file_type;
+type aee_core_forwarder ,domain;
+
+init_daemon_domain(aee_core_forwarder)
+
+allow aee_core_forwarder aee_core_data_file:dir relabelto;
+allow aee_core_forwarder aee_core_data_file:dir create_dir_perms;
+allow aee_core_forwarder aee_core_data_file:file create_file_perms;
+allow aee_core_forwarder system_data_file:dir { write relabelfrom create add_name };
+
+allow aee_core_forwarder fuse:dir create_dir_perms;
+allow aee_core_forwarder fuse:file create_file_perms;
+allow aee_core_forwarder tmpfs:lnk_file read;
+allow aee_core_forwarder self:capability fsetid;
+allow aee_core_forwarder aee_exp_data_file:dir create_dir_perms;
+allow aee_core_forwarder aee_exp_data_file:file create_file_perms;
+
+allow aee_core_forwarder self:capability dac_override;
+
+allow aee_core_forwarder kernel:fifo_file read;
+
+allow aee_core_forwarder domain:dir r_dir_perms;
+allow aee_core_forwarder domain:file r_file_perms;
+
+allow aee_core_forwarder sysfs_wake_lock:file { read write open };

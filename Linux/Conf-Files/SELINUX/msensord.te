@@ -1,0 +1,20 @@
+# Add Selinux form system/bin/msensord
+# Powered by gesangtome
+
+type msensord_exec , exec_type, file_type;
+type msensord ,domain;
+
+init_daemon_domain(msensord)
+
+allow msensord msensord_daemon:file { read open };
+allow msensord msensord_daemon2:file { read open };
+
+allow msensord ctl_msensord_prop:property_service set;
+unix_socket_connect(msensord,property,init)
+
+allow msensord ctl_akmd8963_prop:property_service set;
+allow msensord ctl_akmd09911_prop:property_service set;
+allow msensord ctl_bmm050d_prop:property_service set;
+allow msensord ctl_bmm056d_prop:property_service set;
+allow msensord ctl_geomagneticd_prop:property_service set;
+allow msensord ctl_orientationd_prop:property_service set;

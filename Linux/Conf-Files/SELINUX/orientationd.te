@@ -1,0 +1,11 @@
+# Add Selinux form system/bin/orientationd
+# Powered by gesangtome
+
+type orientationd_exec , exec_type, file_type;
+type orientationd ,domain;
+
+init_daemon_domain(orientationd)
+
+allow orientationd gsensor_device:chr_file { read ioctl open };
+allow orientationd input_device:chr_file { read write ioctl open };
+allow orientationd input_device:dir { read search open };

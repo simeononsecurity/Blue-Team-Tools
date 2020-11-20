@@ -1,0 +1,686 @@
+<EMET Version="5.5.5871.31890">
+  <Settings>
+    <ExploitAction Value="StopProgram" />
+    <AdvancedSettings DeepHooks="True" AntiDetours="True" BannedFunctions="True" />
+    <Reporting Telemetry="True" TrayIcon="True" EventLog="True" />
+    <SystemSettings DEP="Always On" SEHOP="Application Opt Out" ASLR="Application Opt Out" Pinning="Enabled" />
+  </Settings>
+  <EMET_Apps>
+    <AppConfig Path="*\Internet Explorer" Executable="iexplore.exe">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="true">
+        <eaf_modules>mshtml.dll;flash*.ocx;jscript*.dll;vbscript.dll;vgx.dll</eaf_modules>
+      </Mitigation>
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="true">
+        <asr_modules>npjpi*.dll;jp2iexp.dll;vgx.dll;msxml4*.dll;wshom.ocx;scrrun.dll;vbscript.dll</asr_modules>
+        <asr_zones>1;2</asr_zones>
+      </Mitigation>
+    </AppConfig>
+    <AppConfig Path="*\Windows NT\Accessories" Executable="wordpad.exe">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="OUTLOOK.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="WINWORD.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="true">
+        <asr_modules>flash*.ocx</asr_modules>
+      </Mitigation>
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="EXCEL.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="true">
+        <asr_modules>flash*.ocx</asr_modules>
+      </Mitigation>
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="POWERPNT.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="true">
+        <asr_modules>flash*.ocx</asr_modules>
+      </Mitigation>
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="MSACCESS.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="MSPUB.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="INFOPATH.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="VISIO.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="VPREVIEW.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="LYNC.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="PPTVIEW.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\OFFICE1*" Executable="OIS.EXE">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\Adobe\*\Reader" Executable="AcroRd32.exe">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="true">
+        <eaf_modules>AcroRd32.dll;Acrofx32.dll;AcroForm.api</eaf_modules>
+      </Mitigation>
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\Adobe\Acrobat*\Acrobat" Executable="Acrobat.exe">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="true" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="true">
+        <eaf_modules>AcroRd32.dll;Acrofx32.dll;AcroForm.api</eaf_modules>
+      </Mitigation>
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\Java\jre*\bin" Executable="java.exe">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="false" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\Java\jre*\bin" Executable="javaw.exe">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="false" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+    <AppConfig Path="*\Java\jre*\bin" Executable="javaws.exe">
+      <Mitigation Name="DEP" Enabled="true" />
+      <Mitigation Name="SEHOP" Enabled="true" />
+      <Mitigation Name="NullPage" Enabled="true" />
+      <Mitigation Name="HeapSpray" Enabled="false" />
+      <Mitigation Name="EAF" Enabled="true" />
+      <Mitigation Name="EAF+" Enabled="false" />
+      <Mitigation Name="MandatoryASLR" Enabled="true" />
+      <Mitigation Name="BottomUpASLR" Enabled="true" />
+      <Mitigation Name="LoadLib" Enabled="true" />
+      <Mitigation Name="MemProt" Enabled="true" />
+      <Mitigation Name="Caller" Enabled="true" />
+      <Mitigation Name="SimExecFlow" Enabled="true" />
+      <Mitigation Name="StackPivot" Enabled="true" />
+      <Mitigation Name="ASR" Enabled="false" />
+    </AppConfig>
+  </EMET_Apps>
+  <Pinning>
+    <PinRules>
+      <PinRule>
+        <ID>{62a00228-01d1-4c6b-83ea-f1d434b97b66}</ID>
+        <Name>TwitterCA</Name>
+        <ReferencedCertificates>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint DE28F4A4FFE5B92FA3C503D1A349A7F9962A8212</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>DE28F4A4FFE5B92FA3C503D1A349A7F9962A8212</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint A9E9780814375888F20519B06D2B0D2B6016907D</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>A9E9780814375888F20519B06D2B0D2B6016907D</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 323C118E1BF7B8B65254E2E2100DD6029037F096</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>323C118E1BF7B8B65254E2E2100DD6029037F096</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 039EEDB80BE7A03C6953893B20D2D9323A4C2AFD</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>039EEDB80BE7A03C6953893B20D2D9323A4C2AFD</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint E621F3354379059A4B68309D8A2F74221587EC79</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>E621F3354379059A4B68309D8A2F74221587EC79</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 379A197B418545350CA60369F33C2EAF474F2079</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>379A197B418545350CA60369F33C2EAF474F2079</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 204285DCF7EB764195578E136BD4B7D1E98E46A5</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>204285DCF7EB764195578E136BD4B7D1E98E46A5</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 61EF43D77FCAD46151BC98E0C35912AF9FEB6311</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>61EF43D77FCAD46151BC98E0C35912AF9FEB6311</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 85371CA6E550143DCE2803471BDE3A09E8F8770F</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>85371CA6E550143DCE2803471BDE3A09E8F8770F</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 132D0D45534B6997CDB2D5C339E25576609B5CC6</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>132D0D45534B6997CDB2D5C339E25576609B5CC6</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>CN=VeriSign Class 3 Public Primary Certification Authority - G5, OU="(c) 2006 VeriSign, Inc. - For authorized use only", OU=VeriSign Trust Network, O="VeriSign, Inc.", C=US</Issuer>
+            <SerialNumber>18DAD19E267DE8BB4A2158CDCC6B3B4A</SerialNumber>
+            <PublicKeyHash>7FD365A7C2DDECBBF03009F34339FA02AF333133</PublicKeyHash>
+            <Thumbprint>4EB6D578499B1CCF5F581EAD56BE3D9B6744A5E5</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 3679CA35668772304D30A5FB873B0FA77BB70D54</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>3679CA35668772304D30A5FB873B0FA77BB70D54</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint A8985D3A65E5E5C4B2D7D66D40C6DD2FB19C5436</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>A8985D3A65E5E5C4B2D7D66D40C6DD2FB19C5436</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 5FB7EE0633E259DBAD0C4C9AE6D38F1A61C7DC25</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>5FB7EE0633E259DBAD0C4C9AE6D38F1A61C7DC25</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>CN=DigiCert Assured ID Root CA, OU=www.digicert.com, O=DigiCert Inc, C=US</Issuer>
+            <SerialNumber>0CE7E0E517D846FE8FE560FC1BF03039</SerialNumber>
+            <PublicKeyHash>45EBA2AFF492CB82312D518BA7A7219DF36DC80F</PublicKeyHash>
+            <Thumbprint>0563B8630D62D75ABBC8AB1E4BDFB5A899B24D43</Thumbprint>
+          </UniqueCertificateIdentifier>
+        </ReferencedCertificates>
+        <Expiration>09/01/2017 00:00:00</Expiration>
+      </PinRule>
+      <PinRule>
+        <ID>{997293be-08e2-4408-8541-2b1c8265533e}</ID>
+        <Name>MicrosoftAccountCA</Name>
+        <ReferencedCertificates>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint D4DE20D05E66FC53FE1A50882C78DB2852CAE474</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>D4DE20D05E66FC53FE1A50882C78DB2852CAE474</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>CN=VeriSign Class 3 Public Primary Certification Authority - G5, OU="(c) 2006 VeriSign, Inc. - For authorized use only", OU=VeriSign Trust Network, O="VeriSign, Inc.", C=US</Issuer>
+            <SerialNumber>18DAD19E267DE8BB4A2158CDCC6B3B4A</SerialNumber>
+            <PublicKeyHash>7FD365A7C2DDECBBF03009F34339FA02AF333133</PublicKeyHash>
+            <Thumbprint>4EB6D578499B1CCF5F581EAD56BE3D9B6744A5E5</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint B1BC968BD4F49D622AA89A81F2150152A41D829C</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>B1BC968BD4F49D622AA89A81F2150152A41D829C</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>CN=GTE CyberTrust Global Root, OU="GTE CyberTrust Solutions, Inc.", O=GTE Corporation, C=US</Issuer>
+            <SerialNumber>01A5</SerialNumber>
+            <PublicKeyHash>A60C1D9F61FF0717B5BF3846DB4330D58EB05206</PublicKeyHash>
+            <Thumbprint>97817950D81C9670CC34D809CF794431367EF474</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 912198EEF23DCAC40939312FEE97DD560BAE49B1</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>912198EEF23DCAC40939312FEE97DD560BAE49B1</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 5F43E5B1BFF8788CAC1CC7CA4A9AC6222BCC34C6</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>5F43E5B1BFF8788CAC1CC7CA4A9AC6222BCC34C6</Thumbprint>
+          </UniqueCertificateIdentifier>
+        </ReferencedCertificates>
+        <Expiration>09/01/2017 00:00:00</Expiration>
+      </PinRule>
+      <PinRule>
+        <ID>{32b09808-d4f2-448b-a8cb-ae4384d9225b}</ID>
+        <Name>FacebookCA</Name>
+        <ReferencedCertificates>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 5FB7EE0633E259DBAD0C4C9AE6D38F1A61C7DC25</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>5FB7EE0633E259DBAD0C4C9AE6D38F1A61C7DC25</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint D23209AD23D314232174E40D7F9D62139786633A</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>D23209AD23D314232174E40D7F9D62139786633A</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 7E784A101C8265CC2DE1F16D47B440CAD90A1945</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>7E784A101C8265CC2DE1F16D47B440CAD90A1945</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint DE28F4A4FFE5B92FA3C503D1A349A7F9962A8212</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>DE28F4A4FFE5B92FA3C503D1A349A7F9962A8212</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint A9E9780814375888F20519B06D2B0D2B6016907D</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>A9E9780814375888F20519B06D2B0D2B6016907D</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 323C118E1BF7B8B65254E2E2100DD6029037F096</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>323C118E1BF7B8B65254E2E2100DD6029037F096</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 039EEDB80BE7A03C6953893B20D2D9323A4C2AFD</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>039EEDB80BE7A03C6953893B20D2D9323A4C2AFD</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint E621F3354379059A4B68309D8A2F74221587EC79</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>E621F3354379059A4B68309D8A2F74221587EC79</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 91C6D6EE3E8AC86384E548C299295C756C817B81</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>91C6D6EE3E8AC86384E548C299295C756C817B81</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint F18B538D1BE903B6A6F056435B171589CAF36BF2</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>F18B538D1BE903B6A6F056435B171589CAF36BF2</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 85371CA6E550143DCE2803471BDE3A09E8F8770F</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>85371CA6E550143DCE2803471BDE3A09E8F8770F</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 132D0D45534B6997CDB2D5C339E25576609B5CC6</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>132D0D45534B6997CDB2D5C339E25576609B5CC6</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>CN=VeriSign Class 3 Public Primary Certification Authority - G5, OU="(c) 2006 VeriSign, Inc. - For authorized use only", OU=VeriSign Trust Network, O="VeriSign, Inc.", C=US</Issuer>
+            <SerialNumber>18DAD19E267DE8BB4A2158CDCC6B3B4A</SerialNumber>
+            <PublicKeyHash>7FD365A7C2DDECBBF03009F34339FA02AF333133</PublicKeyHash>
+            <Thumbprint>4EB6D578499B1CCF5F581EAD56BE3D9B6744A5E5</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 3679CA35668772304D30A5FB873B0FA77BB70D54</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>3679CA35668772304D30A5FB873B0FA77BB70D54</Thumbprint>
+          </UniqueCertificateIdentifier>
+        </ReferencedCertificates>
+        <Expiration>09/01/2017 00:00:00</Expiration>
+      </PinRule>
+      <PinRule>
+        <ID>{9b1728f9-5482-483b-a9a8-9a07d97b05c1}</ID>
+        <Name>YahooCA</Name>
+        <ReferencedCertificates>
+          <UniqueCertificateIdentifier>
+            <Issuer>CN=GTE CyberTrust Global Root, OU="GTE CyberTrust Solutions, Inc.", O=GTE Corporation, C=US</Issuer>
+            <SerialNumber>01A5</SerialNumber>
+            <PublicKeyHash>A60C1D9F61FF0717B5BF3846DB4330D58EB05206</PublicKeyHash>
+            <Thumbprint>97817950D81C9670CC34D809CF794431367EF474</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 5FB7EE0633E259DBAD0C4C9AE6D38F1A61C7DC25</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>5FB7EE0633E259DBAD0C4C9AE6D38F1A61C7DC25</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint DE28F4A4FFE5B92FA3C503D1A349A7F9962A8212</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>DE28F4A4FFE5B92FA3C503D1A349A7F9962A8212</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint A9E9780814375888F20519B06D2B0D2B6016907D</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>A9E9780814375888F20519B06D2B0D2B6016907D</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 323C118E1BF7B8B65254E2E2100DD6029037F096</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>323C118E1BF7B8B65254E2E2100DD6029037F096</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 039EEDB80BE7A03C6953893B20D2D9323A4C2AFD</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>039EEDB80BE7A03C6953893B20D2D9323A4C2AFD</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint E621F3354379059A4B68309D8A2F74221587EC79</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>E621F3354379059A4B68309D8A2F74221587EC79</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 204285DCF7EB764195578E136BD4B7D1E98E46A5</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>204285DCF7EB764195578E136BD4B7D1E98E46A5</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 61EF43D77FCAD46151BC98E0C35912AF9FEB6311</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>61EF43D77FCAD46151BC98E0C35912AF9FEB6311</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 85371CA6E550143DCE2803471BDE3A09E8F8770F</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>85371CA6E550143DCE2803471BDE3A09E8F8770F</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 132D0D45534B6997CDB2D5C339E25576609B5CC6</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>132D0D45534B6997CDB2D5C339E25576609B5CC6</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>CN=VeriSign Class 3 Public Primary Certification Authority - G5, OU="(c) 2006 VeriSign, Inc. - For authorized use only", OU=VeriSign Trust Network, O="VeriSign, Inc.", C=US</Issuer>
+            <SerialNumber>18DAD19E267DE8BB4A2158CDCC6B3B4A</SerialNumber>
+            <PublicKeyHash>7FD365A7C2DDECBBF03009F34339FA02AF333133</PublicKeyHash>
+            <Thumbprint>4EB6D578499B1CCF5F581EAD56BE3D9B6744A5E5</Thumbprint>
+          </UniqueCertificateIdentifier>
+          <UniqueCertificateIdentifier>
+            <Issuer>Certificate not in current root store</Issuer>
+            <SerialNumber>Thumbprint 3679CA35668772304D30A5FB873B0FA77BB70D54</SerialNumber>
+            <PublicKeyHash>Certificate not in current root store</PublicKeyHash>
+            <Thumbprint>3679CA35668772304D30A5FB873B0FA77BB70D54</Thumbprint>
+          </UniqueCertificateIdentifier>
+        </ReferencedCertificates>
+        <Expiration>09/01/2017 00:00:00</Expiration>
+      </PinRule>
+    </PinRules>
+    <PinnedSites>
+      <PinnedSite>
+        <Domain>login.microsoftonline.com</Domain>
+        <PinRuleMember>{997293be-08e2-4408-8541-2b1c8265533e}</PinRuleMember>
+        <Active>True</Active>
+      </PinnedSite>
+      <PinnedSite>
+        <Domain>secure.skype.com</Domain>
+        <PinRuleMember>{997293be-08e2-4408-8541-2b1c8265533e}</PinRuleMember>
+        <Active>True</Active>
+      </PinnedSite>
+      <PinnedSite>
+        <Domain>www.facebook.com</Domain>
+        <PinRuleMember>{32b09808-d4f2-448b-a8cb-ae4384d9225b}</PinRuleMember>
+        <Active>True</Active>
+      </PinnedSite>
+      <PinnedSite>
+        <Domain>login.yahoo.com</Domain>
+        <PinRuleMember>{9b1728f9-5482-483b-a9a8-9a07d97b05c1}</PinRuleMember>
+        <Active>True</Active>
+      </PinnedSite>
+      <PinnedSite>
+        <Domain>login.live.com</Domain>
+        <PinRuleMember>{997293be-08e2-4408-8541-2b1c8265533e}</PinRuleMember>
+        <Active>True</Active>
+      </PinnedSite>
+      <PinnedSite>
+        <Domain>login.skype.com</Domain>
+        <PinRuleMember>{997293be-08e2-4408-8541-2b1c8265533e}</PinRuleMember>
+        <Active>True</Active>
+      </PinnedSite>
+      <PinnedSite>
+        <Domain>twitter.com</Domain>
+        <PinRuleMember>{62a00228-01d1-4c6b-83ea-f1d434b97b66}</PinRuleMember>
+        <Active>True</Active>
+      </PinnedSite>
+    </PinnedSites>
+  </Pinning>
+</EMET>

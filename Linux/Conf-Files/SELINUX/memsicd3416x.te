@@ -1,0 +1,7 @@
+# Add Selinux form system/bin/memsicd3416x
+# Powered by gesangtome
+
+type memsicd3416x_exec , exec_type, file_type;
+type memsicd3416x ,domain;
+
+init_daemon_domain(memsicd3416x)

@@ -1,0 +1,57 @@
+# Add Selinux form system/bin/netd
+# Powered by gesangtome
+
+type dhcp6s_exec,exec_type,file_type;
+
+allow netd wmtWifi_device:chr_file { write open };
+
+allow netd kernel:system module_request;
+allow netd self:capability sys_module;
+allow netd self:capability fsetid;
+
+allow netd mtk_wifi_prop:property_service set;
+
+allow netd platform_app:fd use;
+allow netd platform_app_tmpfs:file write;
+
+allow netd ppp:process sigkill;
+
+allow netd mdlogger:fd use;
+allow netd mdlogger:tcp_socket { read write };
+allow netd mdlogger:tcp_socket { getopt setopt };
+
+allow netd netdiag:fd use;
+allow netd netdiag:udp_socket { read write getopt setopt };
+
+allow netd dhcp6s_exec:file execute;
+allow netd dhcp_data_file:dir { read search write add_name remove_name };
+allow netd dhcp_data_file:file { read write create open getattr unlink };
+
+allow netd radvd_data_file:dir { read write search add_name remove_name };
+allow netd radvd_data_file:file { read write create open unlink };
+
+allow netd self:capability { setuid net_bind_service setgid };
+allow netd wide_dhcpv6_data_file:dir { read search write add_name remove_name };
+allow netd wide_dhcpv6_data_file:file { read write create open getattr unlink };
+
+allow netd volte_stack:fd use;
+allow netd volte_stack:tcp_socket { read write setopt getopt };
+allow netd volte_stack:udp_socket { read write setopt getopt };
+
+allow netd device:file { open write };
+
+allow netd self:capability { setuid setgid };
+
+allow netd isolated_app_tmpfs:file write;
+
+allow netd ipsec:fd use;
+allow netd ipsec:tcp_socket { read write setopt getopt };
+
+allow netd untrusted_app_tmpfs:file write;
+
+allow netd volte_imcb:fd use;
+allow netd volte_imcb:tcp_socket { read write };
+allow netd volte_imcb:tcp_socket getopt;
+allow netd volte_imcb:tcp_socket setopt;
+
+allow netd untrusted_app:unix_stream_socket { read write getopt setopt };

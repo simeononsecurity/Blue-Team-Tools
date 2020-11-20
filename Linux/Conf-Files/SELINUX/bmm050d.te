@@ -1,0 +1,28 @@
+# Add Selinux form system/bin/bmm050d
+# Powered by gesangtome
+
+type bmm050d_exec , exec_type, file_type;
+type bmm050d ,domain;
+
+init_daemon_domain(bmm050d)
+
+allow bmm050d msensor_device:chr_file { open read write ioctl };
+allow bmm050d msensor_device:chr_file { open read write ioctl };
+allow bmm050d input_device:dir { search open read write };
+allow bmm050d input_device:file { open read write ioctl };
+allow bmm050d mtk_agpsd:dir search;
+allow bmm050d sensor_data_file:dir { search open read write create getattr setattr };
+allow bmm050d sensor_data_file:file { open read write create append unlink ioctl getattr setattr };
+allow bmm050d system_sensor_data_file:dir { search open read create };
+allow bmm050d system_sensor_data_file:file { open read create write };
+allow bmm050d bmm050_sensor_log_file:file { open create read write };
+allow bmm050d sysfs:file write;
+allow bmm050d sysfs_gsensor_file:dir { search open read create };
+allow bmm050d sysfs_gsensor_file:file { open read create write };
+allow bmm050d sysfs_gsensor_file:lnk_file read;
+allow bmm050d sysfs_msensor_file:dir { search open read create };
+allow bmm050d sysfs_msensor_file:file { open read create write };
+allow bmm050d sysfs_msensor_file:lnk_file read;
+
+allow bmm050d system_data_file:dir { write add_name create setattr };
+allow bmm050d system_data_file:file { open create read write setattr };

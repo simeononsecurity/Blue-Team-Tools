@@ -1,0 +1,25 @@
+# Add Selinux form system/bin/gsm0710muxd
+# Powered by gesangtome
+
+type gsm0710muxd_exec , exec_type, file_type;
+type gsm0710muxd ,domain;
+
+init_daemon_domain(gsm0710muxd)
+allow gsm0710muxd gsm0710muxd_device:chr_file open;
+allow gsm0710muxd gsm0710muxd_device:chr_file { read write };
+allow gsm0710muxd ctl_rildaemon_prop:property_service set;
+allow gsm0710muxd ctl_ril-daemon-mtk_prop:property_service set;
+allow gsm0710muxd gsm0710muxd_prop:property_service set;
+allow gsm0710muxd devpts:chr_file setattr;
+allow gsm0710muxd device:dir write;
+allow gsm0710muxd self:capability chown;
+allow gsm0710muxd self:capability fowner;
+allow gsm0710muxd device:dir add_name;
+allow gsm0710muxd device:lnk_file create;
+allow gsm0710muxd init:unix_stream_socket connectto;
+allow gsm0710muxd property_socket:sock_file write;
+allow gsm0710muxd self:capability setuid;
+allow gsm0710muxd device:dir remove_name;
+allow gsm0710muxd device:lnk_file unlink;
+allow gsm0710muxd eemcs_device:chr_file open;
+allow gsm0710muxd eemcs_device:chr_file { read write };

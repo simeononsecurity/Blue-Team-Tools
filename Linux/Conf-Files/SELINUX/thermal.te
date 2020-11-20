@@ -1,0 +1,14 @@
+# Add Selinux form system/bin/thermal
+# Powered by gesangtome
+
+type thermal_exec , exec_type, file_type;
+type thermal ,domain;
+
+init_daemon_domain(thermal)
+
+allow thermal mtkrild:unix_stream_socket connectto;
+allow thermal proc_thermal:dir search;
+allow thermal proc_thermal:file { read write open };
+allow thermal rild_oem_socket:sock_file write;
+allow thermal netd_socket:sock_file write;
+allow thermal netd:unix_stream_socket connectto;

@@ -1,0 +1,8 @@
+# Add Selinux
+# Powered by gesangtome
+
+allow appdomain gpu_device:chr_file rw_file_perms;
+
+allow appdomain custom_file:dir { search getattr open read };
+allow appdomain custom_file:file { read open getattr };
+

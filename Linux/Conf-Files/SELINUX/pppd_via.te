@@ -1,0 +1,20 @@
+# Add Selinux form system/bin/pppd_via
+# Powered by gesangtome
+
+type pppd_via_exec , exec_type, file_type;
+type pppd_via ,domain;
+
+init_daemon_domain(pppd_via)
+
+allow pppd_via self:udp_socket create;
+allow pppd_via system_file:file execute_no_trans;
+allow pppd_via ttySDIO_device:chr_file { read write open setattr getattr ioctl };
+allow pppd_via dnsproxyd_socket:sock_file write;
+allow pppd_via init:unix_stream_socket connectto;
+allow pppd_via netd:unix_stream_socket connectto;
+allow pppd_via ppp_device:chr_file { read write ioctl open };
+allow pppd_via property_socket:sock_file write;
+allow pppd_via self:capability { setuid net_admin dac_override };
+allow pppd_via self:udp_socket ioctl;
+allow pppd_via system_data_file:file open;
+allow pppd_via net_radio_prop:property_service set;

@@ -1,0 +1,15 @@
+# Add Selinux form system/bin/muxreport
+# Powered by gesangtome
+
+type muxreport_exec , exec_type, file_type;
+type muxreport ,domain;
+
+init_daemon_domain(muxreport)
+allow muxreport ccci_device:chr_file { read write ioctl open };
+allow muxreport ril_mux_report_case_prop:property_service set;
+allow muxreport init:unix_stream_socket connectto;
+allow muxreport property_socket:sock_file write;
+allow muxreport devpts:chr_file { read write getattr ioctl };
+allow muxreport self:capability dac_override;
+allow muxreport eemcs_device:chr_file { read write ioctl open };
+allow muxreport emd_device:chr_file { read write open };

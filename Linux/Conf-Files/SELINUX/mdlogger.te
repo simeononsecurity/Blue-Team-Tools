@@ -1,0 +1,36 @@
+# Add Selinux form system/bin/mdlogger
+# Powered by gesangtome
+
+type mdlogger_exec , exec_type, file_type;
+type mdlogger ,domain;
+
+init_daemon_domain(mdlogger)
+
+binder_use(mdlogger)
+binder_service(mdlogger)
+
+allow mdlogger debug_mdlogger_prop:property_service set;
+allow mdlogger debug_prop:property_service set;
+allow mdlogger ccci_device:chr_file { read write ioctl open };
+allow mdlogger ttyGS_device:chr_file { read write open ioctl };
+allow mdlogger fuse:dir { write search create rmdir add_name remove_name read open rename };
+allow mdlogger fuse:file { write read create open rename unlink getattr setattr append };
+allow mdlogger mdlog_data_file:dir { write search read create open rmdir remove_name add_name relabelto getattr };
+allow mdlogger mdlog_data_file:fifo_file { read open create setattr };
+allow mdlogger mdlog_data_file:file { write read create open rename unlink getattr setattr };
+allow mdlogger mdlog_device:chr_file { read write open ioctl };
+allow mdlogger system_data_file:dir { write create open add_name relabelfrom };
+
+allow mdlogger init:unix_stream_socket connectto;
+allow mdlogger property_socket:sock_file write;
+allow mdlogger platform_app:unix_stream_socket connectto;
+
+allow mdlogger shell_exec:file { read execute open execute_no_trans };
+allow mdlogger system_file:file execute_no_trans;
+allow mdlogger zygote_exec:file { read getattr open };
+allow mdlogger tmpfs:lnk_file read;
+
+allow mdlogger fuse:dir search;
+allow mdlogger node:tcp_socket node_bind;
+allow mdlogger port:tcp_socket name_bind;
+allow mdlogger self:tcp_socket { write read bind create setopt accept listen };

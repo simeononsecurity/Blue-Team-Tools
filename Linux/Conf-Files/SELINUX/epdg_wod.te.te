@@ -1,0 +1,40 @@
+# Add Selinux form system/bin/epdg_wod
+# Powered by gesangtome
+
+type epdg_wod_exec , exec_type, file_type;
+type epdg_wod ,domain;
+
+init_daemon_domain(epdg_wod)
+
+domain_auto_trans(epdg_wod, starter_exec, ipsec)
+domain_auto_trans(epdg_wod, charon_exec, ipsec)
+domain_auto_trans(epdg_wod, starter_exec, ipsec)
+domain_auto_trans(epdg_wod, stroke_exec, ipsec)
+
+allow epdg_wod system_file:file { read getattr open execute execute_no_trans };
+allow epdg_wod self:tun_socket { relabelfrom relabelto create };
+allow epdg_wod tun_device:chr_file { read write ioctl open };
+allow epdg_wod self:netlink_route_socket { setopt nlmsg_write read bind create nlmsg_read write getattr };
+allow epdg_wod self:capability { net_admin dac_override kill };
+
+allow epdg_wod ipsec_exec:file { read getattr open execute execute_no_trans };
+
+allow epdg_wod ipsec:process signal;
+
+allow epdg_wod init:unix_stream_socket connectto;
+allow epdg_wod mtk_wod_prop:property_service set;
+allow epdg_wod property_socket:sock_file write;
+
+allow epdg_wod dnsproxyd_socket:sock_file write;
+allow epdg_wod netd:unix_stream_socket connectto;
+
+allow epdg_wod vpn_data_file:dir { search write remove_name };
+allow epdg_wod vpn_data_file:file { read getattr open unlink };
+
+allow epdg_wod wod_apn_conf_file:dir { write read open add_name remove_name search };
+allow epdg_wod wod_apn_conf_file:file { write create unlink open getattr };
+allow epdg_wod wod_ipsec_conf_file:file { write create unlink open getattr };
+allow epdg_wod wod_ipsec_conf_file:dir { write read open add_name remove_name search };
+
+allow epdg_wod shell_exec:file { read execute open execute_no_trans };
+

@@ -1,0 +1,20 @@
+# Add Selinux form system/bin/pppd_dt
+# Powered by gesangtome
+
+type pppd_dt_exec , exec_type, file_type;
+type pppd_dt ,domain;
+
+init_daemon_domain(pppd_dt)
+allow pppd_dt self:capability { setgid setuid net_admin };
+allow pppd_dt property_socket:sock_file write;
+allow pppd_dt dnsproxyd_socket:sock_file write;
+allow pppd_dt init:unix_stream_socket connectto;
+allow pppd_dt self:udp_socket { ioctl create };
+allow pppd_dt netd:unix_stream_socket connectto;
+allow pppd_dt ttyACM_device:chr_file { read write ioctl open getattr };
+allow pppd_dt ppp_device:chr_file { read write ioctl open };
+allow pppd_dt system_file:file execute_no_trans;
+allow pppd_dt shell_exec:file { read open execute };
+allow pppd_dt net_radio_prop:property_service set;
+allow pppd_dt pppoe_ppp0_prop:property_service set;
+allow pppd_dt system_prop:property_service set;

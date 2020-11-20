@@ -1,0 +1,9 @@
+# Add Selinux form system/bin/tiny_mkswap
+# Powered by gesangtome
+
+type tiny_mkswap_exec , exec_type, file_type;
+type tiny_mkswap ,domain;
+
+init_daemon_domain(tiny_mkswap)
+allow tiny_mkswap zram0_device:blk_file { getattr read write open ioctl };
+allow tiny_mkswap enableswap:fd use;

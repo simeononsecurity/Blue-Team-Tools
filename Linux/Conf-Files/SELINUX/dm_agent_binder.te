@@ -1,0 +1,40 @@
+# Add Selinux form system/bin/dm_agent_binder
+# Powered by gesangtome
+
+type dm_agent_binder_exec , exec_type, file_type;
+type dm_agent_binder ,domain;
+
+init_daemon_domain(dm_agent_binder)
+
+allow dm_agent_binder dm_agent_binder_service:service_manager add;
+
+binder_use(dm_agent_binder)
+binder_service(dm_agent_binder)
+
+allow dm_agent_binder nvram_data_file:dir { rw_dir_perms };
+allow dm_agent_binder nvdata_file:dir { rw_dir_perms };
+
+allow dm_agent_binder nvram_data_file:file { create_file_perms };
+allow dm_agent_binder nvram_data_file:lnk_file read;
+allow dm_agent_binder nvdata_file:file { create_file_perms };
+
+allow dm_agent_binder block_device:dir search;
+
+allow dm_agent_binder platformblk_device:dir search;
+
+allow dm_agent_binder misc_device:chr_file { rw_file_perms };
+
+allow dm_agent_binder property_socket:sock_file write;
+
+allow dm_agent_binder init:unix_stream_socket connectto;
+
+allow dm_agent_binder mmcblk_device:blk_file rw_file_perms;
+allow dm_agent_binder platformblk_device:blk_file rw_file_perms;
+
+allow dm_agent_binder persist_dm_prop:property_service set;
+
+allow dm_agent_binder cache_file:dir { w_dir_perms create };
+
+allow dm_agent_binder cache_file:file { create_file_perms };
+
+allow dm_agent_binder nvram_device:chr_file { rw_file_perms };
