@@ -10,9 +10,6 @@ do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
 #Unblock all files required for script
 Get-ChildItem *.ps*1 -recurse | Unblock-File
 
-#Windows Defender Configuration Files
-mkdir "C:\temp\Windows Defender"; Copy-Item -Path .\Files\"Windows Defender Configuration Files"\* -Destination C:\temp\"Windows Defender"\ -Force -Recurse -ErrorAction SilentlyContinue
-
 #Optional Scripts 
 #.\Files\Optional\sos-ssl-hardening.ps1
 # powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
@@ -27,8 +24,24 @@ netsh int tcp set global timestamps=disabled
 #Disable Powershell v2
 Disable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root
 
+#Disable LLMNR
+#https://www.blackhillsinfosec.com/how-to-disable-llmnr-why-you-want-to/
+New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient"
+Set-ItemProperty -Path "HKLM:\Software\policies\Microsoft\Windows NT\DNSClient" -Name "EnableMulticast" -Type "DWORD" -Value 0 -Force
+
 #Enable DEP
 BCDEDIT /set "{current}" nx OptOut
+Set-Processmitigation -System -Enable DEP
+
+#Windows Defender Configuration Files
+mkdir "C:\temp\Windows Defender"; Copy-Item -Path .\Files\"Windows Defender Configuration Files"\* -Destination C:\temp\"Windows Defender"\ -Force -Recurse -ErrorAction SilentlyContinue
+
+#Enable Windows Defender Exploit Protection
+Set-ProcessMitigation -PolicyFilePath "C:\temp\Windows Defender\DOD_EP_V3.xml"
+
+#Enable Windows Defender Application Control
+#https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/select-types-of-rules-to-create
+Set-RuleOption -FilePath "C:\temp\Windows Defender\WDAC_V1_Enforced.xml" -Option 0
 
 #Basic authentication for RSS feeds over HTTP must not be used.
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds" -Name AllowBasicAuthInClear -Type DWORD -Value 0 -Force
@@ -38,13 +51,8 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" -N
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Privacy" -Name ClearBrowsingHistoryOnExit -Type DWORD -Value 0 -Force
 
 #####SPECTURE MELTDOWN#####
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverride -Type DWORD -Value 0 -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverrideMask -Type DWORD -Value 3 -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverride -Type DWORD -Value 8 -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverrideMask -Type DWORD -Value 3 -Force
+#https://support.microsoft.com/en-us/help/4073119/protect-against-speculative-execution-side-channel-vulnerabilities-in
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverride -Type DWORD -Value 72 -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverrideMask -Type DWORD -Value 3 -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverride -Type DWORD -Value 8264 -Force
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverrideMask -Type DWORD -Value 3 -Force
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name MinVmVersionForCpuBasedMitigations -Type String -Value "1.0" -Force
 
@@ -258,8 +266,6 @@ If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v4.0.30319){
 }Else {
     Write-Host ".Net 64-Bit v4.0.30319 Is Not Installed"
 }
-
-FINDSTR /i /s "NetFx40_LegacySecurityPolicy" c:\*.exe.config 
 
 #VM Performance Improvements
 # Apply appearance customizations to default user registry hive, then close hive file
