@@ -1,5 +1,5 @@
 
-**TODO**: Formatting for readability and Index/links, adust order of priority as needed (https://guides.github.com/features/mastering-markdown/)
+**TODO**: Formatting for readability and Index/links, adjust order of priority as needed (https://guides.github.com/features/mastering-markdown/)
 
 1. Enumerate users, services and baseline processes and network connections
 2. Change ALL default passwords but, Lockout Prevention! add backup admin accounts before you Change Passwords -> Notify team whenever you change passwords via team comms
