@@ -1,0 +1,65 @@
+https://www.sans.org/brochure/course/log-management-in-depth/6
+
+GENERAL APPROACH
+
+1. Identify which log sources and automated tools you can use during
+the analysis.
+2. Copy log records to a single location where you will be able to
+review them.
+3. Minimize“noise”by removing routine,repetitive log entries from
+view after confirming that they are benign.
+4. Determine whether you can rely on logs’time stamps; consider time
+zone differences.
+5. Focus on recent changes,failures, errors,status changes, access
+and administration events, and other events unusual for your
+environment.
+6. Go backwards in time from now to reconstruct actions after and
+before the incident.
+7. Correlate activities across different logs to get a comprehensive
+picture.
+8. Develop theories about what occurred; explore logs to confirm or
+disprove them.
+
+
+POTENTIAL SECURITY LOG SOURCES
+Server and workstation operating system logs
+
+• Application logs (e.g.,web server,database server)
+• Security tool logs (e.g., anti-virus, change detection, intrusion
+detection/prevention system)
+• Outbound proxy logs and end-user application logs
+• Remember to consider other, non-log sources for security events.
+
+
+TYPICAL LOG LOCATIONS
+• Linux OS and core applications:/var/log
+• Network devices: usually logged via Syslog;some use proprietary
+  locations and formats
+  
+WHAT TO LOOK FOR ON WEB SERVERS
+
+Excessive access attempts to non-existent files
+• Code (SQL,HTML) seen as part of the URL
+• Access to extensions you have not implemented
+• Web service stopped/started/failed messages
+• Access to“risky”pages that accept user input
+• Look at logs on all servers in the load balancer pool
+• Error code 200 on files that are not yours
+
+Failed user authentication Error code 401, 403
+Invalid request            Error code 400 
+Internal server error      Error code 500
+
+OTHER RESOURCES
+https://www.loganalysis.org/
+https://www.ossec.net/
+
+
+-----
+
+
+watch <command>
+example: watch who
+
+monitor and lockdown egress traffic
+Log SUCESSFUL as well as failed login attempts
