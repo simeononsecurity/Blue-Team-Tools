@@ -1,0 +1,251 @@
+https://www.sans.org/security-resources/posters/intrusion-discovery-cheat-sheet-linux/230/download
+https://zeltser.com/media/docs/security-incident-survey-cheat-sheet.pdf
+https://attack.mitre.org/matrices/enterprise/
+https://www.nist.gov/cyberframework
+
+Key Incident Response Steps
+
+1. Preparation: Gather and learn the necessary tools,
+become familiar with your environment.
+2. Identification: Detect the incident, determine its
+scope, and involve the appropriate parties.
+3. Containment: Contain the incident to minimize its
+effect on neighboring IT resources.
+4. Eradication: Eliminate compromise artifacts, if
+necessary, on the path to recovery.
+5. Recovery: Restore the system to normal
+operations, possibly via reinstall or backup.
+6. Wrap‐up: Document the incident’s details, retail
+collected data, and discuss lessons learned.
+
+TODO---
+	○ .bash_history 
+	○ ~/.ssh/authorized_keys 
+	○ lsof -nPi / netstat -ano 
+	○ know where logs are 
+	○ diff process list 
+	○ fuser -k pts/2
+---TODO
+Unix Initial System Examination
+
+Look at event log files in
+directories (locations vary)
+/var/log,
+/var/adm,
+/var/spool
+
+List recent security events wtmp, who,
+last, lastlog
+
+Examine network
+configuration
+arp –an,
+route print
+
+List network
+connections and
+related details
+netstat –nap (Linux),
+netstat –na (Solaris),
+lsof –i
+
+List users more /etc/passwd
+
+Look at scheduled
+jobs
+more /etc/crontab,
+ls /etc/cron.*,
+ls /var/at/jobs
+
+Check DNS settings
+and the hosts file
+more /etc/resolv.conf,
+more /etc/hosts
+
+Verify integrity of installed
+packages (affects lots of files!)
+
+rpm ‐Va (Linux),
+pkgchk (Solaris)
+
+Look at auto‐
+start services
+chkconfig ‐‐list (Linux),
+ls /etc/rc*.d (Solaris),
+smf (Solaris 10+)
+
+List processes ps aux (Linux, BSD),
+ps ‐ef (Solaris),
+lsof +L1
+
+Find recently‐modified files
+(affects lots of files!)
+ls –lat /,
+find / ‐mtime ‐2d ‐ls
+
+
+Unusual Accounts
+
+Look in /etc/passwd for new accounts in sorted list by
+UID:
+# sort –nk3 –t: /etc/passwd | less
+
+Normal accounts will be there, but look for new,
+unexpected accounts, especially with UID < 500.
+Also, look for unexpected UID 0 accounts:
+
+# egrep ':0+:' /etc/passwd
+On systems that use multiple authentication methods:
+
+# getent passwd | egrep ':0+:'
+
+Look for orphaned files, which could be a sign of an
+attacker's temporary account that has been deleted.
+
+# find / -nouser -print
+
+Unusual Log Entries
+
+Look through your system log files for suspicious
+events, including:
+
+"entered promiscuous mode"
+
+Large number of authentication or login
+failures from either local or remote access
+tools (e.g., telnetd, sshd, etc.)
+
+Remote Procedure Call (rpc) programs with a
+log entry that includes a large number (> 20)
+strange characters (such as ^PM-^PM-^PM-
+^PM-^PM-^PM-^PM-^PM)
+
+For systems running web servers: Larger than
+normal number of Apache logs saying "error"
+Reboots and/or application restarts
+
+Other Unusual Items
+
+Sluggish system performance:
+
+$ uptime – Look at "load average"
+
+Excessive memory use: $ free
+
+Sudden decreases in available disk space:
+$ df
+
+Unusual Processes and Services
+
+Look at all running processes:
+# ps –aux
+
+Get familiar with "normal" processes for the machine.
+Look for unusual processes. Focus on processes with
+root (UID 0) privileges.
+
+If you spot a process that is unfamiliar, investigate in
+more detail using:
+# lsof –p [pid]
+#ps -eaf --forest
+#ls -al /proc/<PID>
+
+This command shows all files and ports used by the
+running process.
+
+If your machine has it installed, run chkconfig to see
+which services are enabled at various runlevels:
+# chkconfig --list
+
+Unusual Files
+
+Look for unusual SUID root files:
+
+# find / -uid 0 –perm -4000 –print
+This requires knowledge of normal SUID files.
+
+Look for unusual large files (greater than 10
+MegaBytes):
+
+# find / -size +10000k –print
+
+This requires knowledge of normal large files.
+
+Look for files named with dots and spaces ("...", ".. ",
+". ", and " ") used to camouflage files:
+# find / -name " " –print
+# find / -name ".. " –print
+# find / -name ". " –print
+# find / -name " " –print
+
+Look for processes running out of or accessing files
+that have been unlinked (i.e., link count is zero). An
+attacker may be hiding data in or running a backdoor
+from such files:
+
+# lsof +L1
+
+On a Linux machine with RPM installed (RedHat,
+Mandrake, etc.), run the RPM tool to verify packages:
+
+# rpm –Va | sort
+
+This checks size, MD5 sum, permissions, type,
+owner, and group of each file with information from
+RPM database to look for changes. Output includes:
+S – File size differs
+M – Mode differs (permissions)
+5 – MD5 sum differs
+D – Device number mismatch
+L – readLink path mismatch
+U – user ownership differs
+G – group ownership differs
+T – modification time differs
+Pay special attention to changes associated with
+items in /sbin, /bin, /usr/sbin, and /usr/bin.
+In some versions of Linux, this analysis is automated
+by the built-in check-packages script.
+
+Unusual Network Usage
+Look for promiscuous mode, which might indicate a
+sniffer:
+
+# ip link | grep PROMISC
+
+Note that the ifconfig doesn’t work reliably for
+detecting promiscuous mode on Linux kernel 2.4, so
+please use "ip link" for detecting it.
+
+Look for unusual port listeners:
+
+# netstat –nap
+
+Get more details about running processes listening
+on ports:
+
+# lsof –i
+
+These commands require knowledge of which TCP
+and UDP ports are normally listening on your
+system. Look for deviations from the norm.
+Look for unusual ARP entries, mapping IP address to
+MAC addresses that aren’t correct for the LAN:
+
+# arp –a
+
+This analysis requires detailed knowledge of which
+addresses are supposed to be on the LAN. On a
+small and/or specialized LAN (such as a DMZ), look
+for unexpected IP addresses.
+
+Unusual Scheduled Tasks
+
+Look for cron jobs scheduled by root and any other
+UID 0 accounts:
+
+# crontab –u root –l
+
+Look for unusual system-wide cron jobs:
+
+# cat /etc/crontab
+# ls /etc/cron.*
