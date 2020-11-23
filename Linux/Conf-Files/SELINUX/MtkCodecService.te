@@ -1,0 +1,14 @@
+# Add Selinux form system/bin/MtkCodecService
+# Powered by gesangtome
+
+type MtkCodecService_exec , exec_type, file_type;
+type MtkCodecService ,domain;
+
+binder_use(MtkCodecService)
+
+init_daemon_domain(MtkCodecService)
+allow MtkCodecService mediaserver:binder call;
+allow MtkCodecService mediaserver:fd use;
+allow MtkCodecService mtk_codec_service_service:service_manager add;
+allow MtkCodecService self:capability{ setuid sys_nice };
+allow MtkCodecService dumpstate:fd use;

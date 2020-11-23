@@ -1,0 +1,124 @@
+# Add Selinux
+# Powered by gesangtome
+
+type custom_file, file_type, data_file_type;
+type lost_found_data_file, file_type, data_file_type;
+type dontpanic_data_file, file_type, data_file_type;
+type resource_cache_data_file, file_type, data_file_type;
+type http_proxy_cfg_data_file, file_type, data_file_type;
+type acdapi_data_file, file_type, data_file_type;
+type ppp_data_file, file_type, data_file_type;
+type wide_dhcpv6_data_file, file_type, data_file_type;
+type wpa_supplicant_data_file, file_type, data_file_type;
+type radvd_data_file, file_type, data_file_type;
+
+type sf_rtt_file, file_type, data_file_type;
+
+type dfo_socket, file_type;
+type rild2_socket, file_type;
+type rild3_socket, file_type;
+type rild4_socket, file_type;
+type rild_ims_socket, file_type;
+type rild_oem_socket, file_type;
+type rild_mtk_ut_socket, file_type;
+type rild_mtk_ut_2_socket, file_type;
+type rild_mtk_modem_socket, file_type;
+type rild_atci_socket, file_type;
+type rild_md2_socket, file_type;
+type rild2_md2_socket, file_type;
+type rild_debug_md2_socket, file_type;
+type rild_oem_md2_socket, file_type;
+type rild_mtk_ut_md2_socket, file_type;
+type rild_mtk_ut_2_md2_socket, file_type;
+type rild_mtk_modem_md2_socket, file_type;
+type rild_atci_md2_socket, file_type;
+type netdiag_socket, file_type;
+type atci_service_socket, file_type;
+type atci_serv_fw_socket, file_type;
+type atci_audio_socket, file_type;
+type wpa_wlan0_socket, file_type;
+type soc_vt_tcv_socket, file_type;
+type soc_vt_stk_socket, file_type;
+type soc_vt_svc_socket, file_type;
+type dbus_bluetooth_socket, file_type;
+type bt_int_adp_socket, file_type;
+type bt_a2dp_stream_socket, file_type;
+type bt_data_file, file_type, data_file_type;
+type proc_thermal, fs_type;
+type proc_mtkcooler, fs_type;
+type proc_mtktz, fs_type;
+type proc_slogger, fs_type;
+type proc_lk_env, fs_type;
+type sysfs_vcorefs_pwrctrl, fs_type, sysfs_type;
+
+type agpsd_socket, file_type;
+type agpsd_data_file, file_type, data_file_type;
+type mnld_socket, file_type;
+type mnld_data_file, file_type, data_file_type;
+type sysctl_socket, file_type;
+
+type backuprestore_socket, file_type;
+type nfc_socket, file_type;
+
+type protect_f_data_file, file_type, data_file_type;
+type protect_s_data_file, file_type, data_file_type;
+type persist_data_file, file_type, data_file_type;
+type nvram_data_file, file_type, data_file_type;
+type nvdata_file, file_type, data_file_type;
+type mediaserver_data_file, file_type, data_file_type;
+
+allow asec_apk_file rootfs:filesystem associate;
+
+allow cache_file rootfs:filesystem associate;
+
+allow custom_file rootfs:filesystem associate;
+
+type mdlog_data_file, file_type, data_file_type;
+
+type logmisc_data_file, file_type, data_file_type;
+
+type logtemp_data_file, file_type, data_file_type;
+
+type aee_core_data_file, file_type, data_file_type;
+
+type aee_exp_data_file, file_type, data_file_type;
+type aee_dumpsys_data_file, file_type, data_file_type;
+
+type sf_bqdump_data_file, file_type, data_file_type;
+
+type rild-dongle_socket, file_type;
+
+type ccci_cfg_file, file_type, data_file_type; 
+
+type msensord_daemon, fs_type,sysfs_type;
+type msensord_daemon2, fs_type,sysfs_type;
+type akmd8963_access_file1, file_type,data_file_type;
+type akmd8963_access_file2, file_type,data_file_type;
+type gyroscope_mpud6050_chipinfo, fs_type,sysfs_type;
+type gyroscope_mpud6050_status, fs_type,sysfs_type;
+type gyroscope_mpud6050_use, fs_type,sysfs_type;
+type gyroscope_mpud6050_file, fs_type,sysfs_type;
+type sensor_data_file, file_type,data_file_type;
+type system_sensor_data_file, file_type;
+type bmm050_sensor_log_file, file_type,data_file_type;
+type sysfs_gsensor_file, file_type,sysfs_type;
+type sysfs_msensor_file, file_type,sysfs_type;
+type sysfs_keypad_file, file_type,sysfs_type;
+
+type rild_via_socket, file_type;
+type rpc_socket, file_type;
+type rild_ctclient_socket, file_type;
+type rild_atci_c2k_socket, file_type;
+type statusd_socket, file_type;
+
+type proc_icusb, fs_type;
+
+type provision_file, file_type, data_file_type;
+
+type wod_ipsec_conf_file, file_type, data_file_type;
+type wod_apn_conf_file, file_type, data_file_type;
+type wod_action_socket, file_type;
+type wod_sim_socket, file_type;
+type wod_ipsec_socket, file_type;
+
+type iso9660, fs_type;

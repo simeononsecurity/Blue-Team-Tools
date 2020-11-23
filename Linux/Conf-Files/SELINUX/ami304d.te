@@ -1,0 +1,7 @@
+# Add Selinux form system/bin/ami304d
+# Powered by gesangtome
+
+type ami304d_exec , exec_type, file_type;
+type ami304d ,domain;
+
+init_daemon_domain(ami304d)

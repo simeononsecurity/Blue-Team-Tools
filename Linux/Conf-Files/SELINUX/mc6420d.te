@@ -1,0 +1,7 @@
+# Add Selinux form system/bin/mc6420d
+# Powered by gesangtome
+
+type mc6420d_exec , exec_type, file_type;
+type mc6420d ,domain;
+
+init_daemon_domain(mc6420d)

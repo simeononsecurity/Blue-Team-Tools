@@ -1,0 +1,40 @@
+# Add Selinux form system/bin/emdlogger1
+# Powered by gesangtome
+
+type emdlogger1_exec , exec_type, file_type;
+type emdlogger1, domain;
+
+init_daemon_domain(emdlogger1)
+
+binder_use(emdlogger1)
+binder_service(emdlogger1)
+
+allow emdlogger1 debug_mdlogger_prop:property_service set;
+allow emdlogger1 debug_prop:property_service set;
+
+allow emdlogger1 ccci_device:chr_file { read write ioctl open };
+
+allow emdlogger1 eemcs_device:chr_file { read write ioctl open };
+
+allow emdlogger1 ttyGS_device:chr_file { read write open ioctl};
+
+allow emdlogger1 fuse:dir { write search create rmdir add_name remove_name read open rename };
+allow emdlogger1 fuse:file { write read create open rename unlink getattr setattr append };
+
+allow emdlogger1 mdlog_data_file:dir { write search read create open rmdir remove_name add_name relabelto getattr };
+allow emdlogger1 mdlog_data_file:fifo_file { read write open create setattr};
+allow emdlogger mdlog_data_file:file { write read create open rename unlink getattr setattr };
+allow emdlogger1 system_data_file:dir { write create open add_name relabelfrom };
+
+allow emdlogger1 mdlog_device:chr_file { read write open ioctl};
+
+allow emdlogger1 property_socket:sock_file write;
+allow emdlogger1 init:unix_stream_socket connectto;
+allow emdlogger1 platform_app:unix_stream_socket connectto;
+
+allow emdlogger1 shell_exec:file { read execute open execute_no_trans };
+allow emdlogger1 system_file:file execute_no_trans;
+allow emdlogger1 zygote_exec:file { read getattr open execute execute_no_trans };
+allow emdlogger1 tmpfs:lnk_file read;
+
+allow emdlogger1 system_radio_prop:property_service set;

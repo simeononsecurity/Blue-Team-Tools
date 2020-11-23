@@ -1,0 +1,13 @@
+# Add Selinux form system/bin/sn
+# Powered by gesangtome
+
+type sn_exec , exec_type, file_type;
+type sn ,domain;
+
+init_daemon_domain(sn)
+
+allow sn sdcard_internal:dir search;
+allow sn fuse:file { read getattr open };
+allow sn sysfs:file write;
+allow sn tmpfs:lnk_file read;
+allow sn self:capability { dac_read_search dac_override };

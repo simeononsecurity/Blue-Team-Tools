@@ -1,0 +1,79 @@
+# Add Selinux form system/bin/mtkrildmd2
+# Powered by gesangtome
+
+type mtkrildmd2_exec , exec_type, file_type;
+type mtkrildmd2 ,domain;
+
+init_daemon_domain(mtkrildmd2)
+net_domain(mtkrildmd2)
+allow mtkrildmd2 self:netlink_route_socket nlmsg_write;
+allow mtkrildmd2 kernel:system module_request;
+unix_socket_connect(mtkrildmd2, property, init)
+
+allow mtkrildmd2 self:capability { setuid net_admin net_raw };
+allow mtkrildmd2 alarm_device:chr_file rw_file_perms;
+allow mtkrildmd2 cgroup:dir create_dir_perms;
+allow mtkrildmd2 radio_device:chr_file rw_file_perms;
+allow mtkrildmd2 radio_device:blk_file r_file_perms;
+allow mtkrildmd2 mtd_device:dir search;
+allow mtkrildmd2 efs_file:dir create_dir_perms;
+allow mtkrildmd2 efs_file:file create_file_perms;
+allow mtkrildmd2 shell_exec:file rx_file_perms;
+allow mtkrildmd2 bluetooth_efs_file:file r_file_perms;
+allow mtkrildmd2 bluetooth_efs_file:dir r_dir_perms;
+allow mtkrildmd2 radio_data_file:dir rw_dir_perms;
+allow mtkrildmd2 radio_data_file:file create_file_perms;
+allow mtkrildmd2 sdcard_type:dir r_dir_perms;
+allow mtkrildmd2 system_data_file:dir r_dir_perms;
+allow mtkrildmd2 system_data_file:file r_file_perms;
+allow mtkrildmd2 system_file:file x_file_perms;
+allow mtkrildmd2 proc:file write;
+allow mtkrildmd2 proc_net:file write;
+allow mtkrildmd2 eemcs_device:chr_file { read write };
+allow mtkrildmd2 eemcs_device:chr_file open;
+allow mtkrildmd2 eemcs_device:chr_file ioctl;
+
+allow mtkrildmd2 radio_prop:property_service set;
+allow mtkrildmd2 net_radio_prop:property_service set;
+allow mtkrildmd2 system_radio_prop:property_service set;
+allow mtkrildmd2 persist_ril_prop:property_service set;
+auditallow mtkrildmd2 net_radio_prop:property_service set;
+auditallow mtkrildmd2 system_radio_prop:property_service set;
+
+
+allow mtkrildmd2 gps_device:chr_file rw_file_perms;
+
+allow mtkrildmd2 tty_device:chr_file rw_file_perms;
+
+allow mtkrildmd2 self:netlink_socket create_socket_perms;
+allow mtkrildmd2 self:netlink_kobject_uevent_socket create_socket_perms;
+
+wakelock_use(mtkrildmd2)
+
+allow mtkrildmd2 self:socket create_socket_perms;
+
+allow mtkrildmd2 Vcodec_device:chr_file { read write open };
+allow mtkrildmd2 devmap_device:chr_file { read ioctl open };
+allow mtkrildmd2 devpts:chr_file { read write open };
+allow mtkrildmd2 self:capability dac_override;
+
+allow mtkrildmd2 ccci_device:chr_file { read write ioctl open };
+allow mtkrildmd2 devpts:chr_file ioctl;
+allow mtkrildmd2 misc_device:chr_file { read write open };
+allow mtkrildmd2 platformblk_device:blk_file { read write open };
+allow mtkrildmd2 proc_lk_env:file rw_file_perms;
+allow mtkrildmd2 sysfs_vcorefs_pwrctrl:file { open write };
+allow mtkrildmd2 ril_active_md_prop:property_service set;
+allow mtkrildmd2 ril_mux_report_case_prop:property_service set;
+allow mtkrildmd2 ctl_muxreport-daemon_prop:property_service set;
+allow mtkrildmd2 persist_service_atci_prop:property_service set;
+allow mtkrildmd2 block_device:dir search;
+allow mtkrildmd2 platformblk_device:dir search;
+allow mtkrildmd2 emd_device:chr_file { read write open };
+allow mtkrildmd2 emd_device:chr_file ioctl;
+
+allow mtkrildmd2 qemu_pipe_device:chr_file { read write };
+allow mtkrildmd2 socket_device:sock_file write;
+
+allow mtkrildmd2 ttyACM_device:chr_file { read write ioctl open };
+allow mtkrildmd2 pppd_gprs_prop:property_service set;

@@ -1,0 +1,17 @@
+# Add Selinux form system/bin/terservice
+# Powered by gesangtome
+
+type terservice_exec , exec_type, file_type;
+type terservice ,domain;
+
+init_daemon_domain(terservice)
+
+allow terservice terservice_service:service_manager add;
+
+unix_socket_connect(terservice, property, init)
+allow terservice terservice_prop:property_service set;
+
+allow terservice ccci_device:chr_file { read write ioctl open };
+
+binder_use(terservice) 
+binder_service(terservice)

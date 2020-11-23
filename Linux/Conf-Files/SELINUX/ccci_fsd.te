@@ -1,0 +1,29 @@
+# Add Selinux form system/bin/ccci_fsd
+# Powered by gesangtome
+
+type ccci_fsd_exec, exec_type, file_type;
+type ccci_fsd, domain;
+
+init_daemon_domain(ccci_fsd)
+
+wakelock_use(ccci_fsd)
+
+allow ccci_fsd nvram_data_file:dir create_dir_perms;
+allow ccci_fsd nvram_data_file:file create_file_perms;
+allow ccci_fsd nvram_data_file:lnk_file read;
+allow ccci_fsd nvdata_file:dir create_dir_perms;
+allow ccci_fsd nvdata_file:file create_file_perms;
+allow ccci_fsd ccci_device:chr_file rw_file_perms;
+allow ccci_fsd ccci_cfg_file:dir create_dir_perms;
+allow ccci_fsd ccci_cfg_file:file create_file_perms;
+
+allow ccci_fsd protect_f_data_file:dir create_dir_perms;
+allow ccci_fsd protect_f_data_file:file create_file_perms;
+
+allow ccci_fsd protect_s_data_file:dir create_dir_perms;
+allow ccci_fsd protect_s_data_file:file create_file_perms;
+
+allow ccci_fsd otp_device:chr_file rw_file_perms;
+allow ccci_fsd block_device:dir search;
+allow ccci_fsd platformblk_device:blk_file { read write open ioctl };
+allow ccci_fsd platformblk_device:dir { search };

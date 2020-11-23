@@ -1,0 +1,40 @@
+# Add Selinux form system/bin/nvram_agent_binder
+# Powered by gesangtome
+
+type nvram_agent_binder_exec , exec_type, file_type;
+type nvram_agent_binder ,domain;
+
+init_daemon_domain(nvram_agent_binder)
+
+binder_use(nvram_agent_binder)
+binder_service(nvram_agent_binder)
+
+allow nvram_agent_binder nvram_agent_service:service_manager add;
+
+allow nvram_agent_binder mmcblk_device:blk_file rw_file_perms;
+allow nvram_agent_binder platformblk_device:blk_file rw_file_perms;
+allow nvram_agent_binder nvram_data_file:dir create_dir_perms;
+allow nvram_agent_binder nvram_data_file:file create_file_perms;
+allow nvram_agent_binder nvram_data_file:lnk_file read;
+allow nvram_agent_binder nvdata_file:dir create_dir_perms;
+allow nvram_agent_binder nvdata_file:file create_file_perms;
+
+allow nvram_agent_binder system_file:file execute_no_trans;
+
+allow nvram_agent_binder als_ps_device:chr_file { read ioctl open };
+allow nvram_agent_binder mtk-adc-cali_device:chr_file { read write ioctl open };
+allow nvram_agent_binder gsensor_device:chr_file { read ioctl open };
+allow nvram_agent_binder gyroscope_device:chr_file { read ioctl open };
+allow nvram_agent_binder init:unix_stream_socket connectto;
+allow nvram_agent_binder platformblk_device:dir search;
+allow nvram_agent_binder property_socket:sock_file write;
+allow nvram_agent_binder sysfs:file write;
+allow nvram_agent_binder system_data_file:file { write open setattr create };
+allow nvram_agent_binder self:capability { fowner chown dac_override fsetid };
+allow nvram_agent_binder system_data_file:dir {create write add_name };
+
+allow nvram_agent_binder nvram_device:chr_file {read write open ioctl };
+allow nvram_agent_binder pro_info_device:chr_file {read write open ioctl };
+allow nvram_agent_binder block_device:dir search;
+
+allow nvram_agent_binder app_data_file:file write;

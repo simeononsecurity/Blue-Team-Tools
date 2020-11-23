@@ -1,0 +1,13 @@
+# Add Selinux form system/bin/geomagneticd
+# Powered by gesangtome
+
+type geomagneticd_exec , exec_type, file_type;
+type geomagneticd ,domain;
+
+init_daemon_domain(geomagneticd)
+
+allow geomagneticd input_device:chr_file { read ioctl open };
+allow geomagneticd input_device:dir { read search open };
+allow geomagneticd sysfs:file write;
+allow geomagneticd system_data_file:dir { write remove_name add_name };
+allow geomagneticd system_data_file:file { rename write setattr create unlink open };

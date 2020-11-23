@@ -1,0 +1,16 @@
+# Add Selinux form system/bin/dmlog
+# Powered by gesangtome
+
+type dmlog_exec , exec_type, file_type;
+type dmlog ,domain;
+
+init_daemon_domain(dmlog)
+
+allow dmlog aed_device:chr_file read;
+allow dmlog debuggerd:fd use;
+allow dmlog debuggerd:unix_stream_socket { read write };
+allow dmlog expdb_device:chr_file { read write };
+allow dmlog fuse:file { write getattr };
+allow dmlog sysfs:file write;
+allow dmlog aee_exp_data_file:file write;
+allow dmlog platformblk_device:blk_file { read write };

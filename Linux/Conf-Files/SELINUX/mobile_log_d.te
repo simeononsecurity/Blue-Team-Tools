@@ -1,0 +1,41 @@
+# Add Selinux form system/bin/mobile_log_d
+# Powered by gesangtome
+
+type mobile_log_d_exec , exec_type, file_type;
+type mobile_log_d ,domain;
+
+init_daemon_domain(mobile_log_d)
+
+allow mobile_log_d kernel:system syslog_mod;
+allow mobile_log_d sdcard_internal:dir create_dir_perms;
+allow mobile_log_d sdcard_internal:file create_file_perms;
+allow mobile_log_d platform_app:fd use;
+allow mobile_log_d platform_app_tmpfs:file write;
+
+dontaudit mobile_log_d untrusted_app:fd use;
+
+allow mobile_log_d sysfs:file write;
+allow mobile_log_d md32_device:chr_file { read open };
+
+allow mobile_log_d debug_prop:property_service set;
+
+allow mobile_log_d fuse:dir create_dir_perms;
+allow mobile_log_d fuse:file create_file_perms;
+allow mobile_log_d init:unix_stream_socket connectto;
+allow mobile_log_d property_socket:sock_file write;
+allow mobile_log_d system_file:file x_file_perms;
+allow mobile_log_d tmpfs:lnk_file read;
+
+allow mobile_log_d logd:unix_stream_socket connectto;
+allow mobile_log_d logdr_socket:sock_file write;
+allow mobile_log_d mtkbt:unix_stream_socket connectto;
+allow mobile_log_d self:capability { setuid setgid  };
+allow mobile_log_d self:capability2 syslog;
+allow mobile_log_d shell_exec:file rx_file_perms;
+
+allow mobile_log_d system_data_file:dir { relabelfrom create_dir_perms  };
+allow mobile_log_d logmisc_data_file:dir { relabelto create_dir_perms   };
+allow mobile_log_d logmisc_data_file:file create_file_perms;
+
+allow mobile_log_d logtemp_data_file:dir { relabelto create_dir_perms   };
+allow mobile_log_d logtemp_data_file:file create_file_perms;

@@ -1,0 +1,28 @@
+# Add Selinux form system/bin/audiocmdservice_atci
+# Powered by gesangtome
+
+type audiocmdservice_atci_exec , exec_type, file_type;
+type audiocmdservice_atci ,domain;
+
+allow audiocmdservice_atci mediaserver:binder call;
+allow audiocmdservice_atci mediaserver:chr_file { read write ioctl open create setattr append };
+allow audiocmdservice_atci mediaserver:dir { write add_name search };
+allow audiocmdservice_atci platformblk_device:blk_file { read write open };
+
+allow audiocmdservice_atci fuse:file { create read write open };
+allow audiocmdservice_atci fuse:dir { search write add_name };
+
+allow audiocmdservice_atci tmpfs:lnk_file read;
+allow audiocmdservice_atci block_device:dir { write search };
+allow audiocmdservice_atci nvram_data_file:dir { add_name write search };
+allow audiocmdservice_atci nvdata_file:dir { add_name write search };
+allow audiocmdservice_atci nvram_device:chr_file { open read write };
+allow audiocmdservice_atci nvram_data_file:file { write getattr setattr read create open };
+allow audiocmdservice_atci nvram_data_file:lnk_file read;
+allow audiocmdservice_atci nvdata_file:file { write getattr setattr read create open };
+allow audiocmdservice_atci self:capability { dac_override };
+
+binder_use(audiocmdservice_atci)
+binder_call(audiocmdservice_atci, mediaserver)
+
+init_daemon_domain(audiocmdservice_atci)

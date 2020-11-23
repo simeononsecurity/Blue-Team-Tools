@@ -1,0 +1,45 @@
+# Add Selinux form system/bin/netdiag
+# Powered by gesangtome
+
+type netdiag_exec , exec_type, file_type;
+type netdiag ,domain;
+
+init_daemon_domain(netdiag)
+
+allow netdiag shell_exec:file execute_no_trans;
+allow netdiag sdcard_internal:dir { write search read create open add_name };
+allow netdiag sdcard_internal:file { write create open getattr };
+allow netdiag self:packet_socket { write ioctl setopt read getopt create };
+allow netdiag fuse:dir { remove_name write search read remove_name open add_name create};
+allow netdiag fuse:file { rename write getattr read create open unlink };
+
+allow netdiag init:unix_stream_socket connectto;
+allow netdiag property_socket:sock_file write;
+allow netdiag self:capability { setuid net_raw setgid };
+allow netdiag shell_exec:file { read execute open };
+allow netdiag tmpfs:lnk_file read;
+allow netdiag domain:dir search;
+allow netdiag domain:file { read open };
+
+allow netdiag qtaguid_proc:file { read getattr open };
+
+allow netdiag self:capability net_admin;
+allow netdiag self:udp_socket create;
+allow netdiag system_file:file execute_no_trans;
+
+allow netdiag aee_exec:file { read getattr open execute execute_no_trans };
+
+allow netdiag dnsproxyd_socket:sock_file write;
+allow netdiag fwmarkd_socket:sock_file write;
+allow netdiag netd:unix_stream_socket connectto;
+
+allow netdiag self:netlink_route_socket { write getattr setopt read bind create nlmsg_read };
+
+allow netdiag net_data_file:file { read getattr open };
+allow netdiag net_data_file:dir search;
+allow netdiag self:rawip_socket { getopt create };
+allow netdiag self:udp_socket ioctl;
+
+allow netdiag debug_netlog_prop:property_service set;
+allow netdiag persist_mtklog_prop:property_service set;
+allow netdiag debug_mtklog_prop:property_service set;

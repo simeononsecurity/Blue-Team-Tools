@@ -1,0 +1,34 @@
+# Add Selinux form system/bin/atcid
+# Powered by gesangtome
+
+type atcid_exec , exec_type, file_type;
+type atcid ,domain;
+
+init_daemon_domain(atcid)
+allow atcid self:capability dac_override;
+allow atcid init:unix_stream_socket connectto;
+allow atcid property_socket:sock_file write;
+allow atcid ttyGS_device:chr_file { read write ioctl open };
+allow atcid atci_service:unix_stream_socket connectto;
+allow atcid atci_service_socket:sock_file write;
+allow atcid mtkrild:unix_stream_socket connectto;
+allow atcid rild_atci_socket:sock_file write;
+allow atcid atci_audio_socket:sock_file write;
+allow atcid audiocmdservice_atci:unix_stream_socket connectto;
+allow atcid system_prop:property_service set;
+allow atcid persist_service_atci_prop:property_service set;
+allow atcid misc2_device:chr_file { read write open };
+allow atcid wmtWifi_device:chr_file { write open };
+allow atcid block_device:dir search;
+allow atcid platformblk_device:blk_file { read write open };
+allow atcid self:capability { net_admin net_raw };
+allow atcid self:udp_socket { create ioctl };
+allow atcid shell_exec:file execute;
+allow atcid socket_device:sock_file write;
+allow atcid shell_exec:file { read open };
+allow atcid statusd:unix_stream_socket connectto;
+allow atcid shell_exec:file execute_no_trans;
+allow atcid system_file:file execute_no_trans;
+allow atcid self:rawip_socket create;
+allow atcid self:rawip_socket getopt;
+allow atcid self:rawip_socket setopt;

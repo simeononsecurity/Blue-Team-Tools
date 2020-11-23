@@ -1,0 +1,9 @@
+# Add Selinux form ramdisk/init
+# Powered by gesangtome
+
+allow init nvram_data_file:dir { write search setattr read create open add_name };
+allow init nvdata_file:dir { write search setattr read create open add_name };
+
+allow init platformblk_device:blk_file setattr;
+
+allow init MtkCodecService_exec:file execute_no_trans;

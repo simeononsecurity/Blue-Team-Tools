@@ -1,0 +1,54 @@
+# Add Selinux form system/bin/atci_service
+# Powered by gesangtome
+
+type atci_service_exec , exec_type, file_type;
+type atci_service ,domain;
+
+init_daemon_domain(atci_service)
+
+binder_use(atci_service)
+binder_call(atci_service, aal)
+binder_service(atci_service)
+allow atci_service block_device:dir search;
+allow atci_service platformblk_device:dir search;
+allow atci_service platformblk_device:blk_file { open read write };
+allow atci_service system_data_file:dir write;
+allow atci_service system_data_file:dir add_name;
+allow atci_service system_data_file:sock_file create;
+allow atci_service system_data_file:sock_file setattr;
+allow atci_service self:capability chown;
+allow atci_service system_data_file:dir remove_name;
+allow atci_service system_data_file:sock_file unlink;
+allow atci_service system_server:unix_dgram_socket sendto;
+allow atci_service system_data_file:file rw_file_perms;
+allow atci_service system_data_file:sock_file write;
+allow atci_service misc2_device:chr_file { open read write };
+allow atci_service mt6605_device:chr_file { read write ioctl open getattr };
+allow atci_service nfc_socket:dir { write add_name remove_name search };
+allow atci_service nfc_socket:sock_file { create write unlink setattr };
+allow atci_service system_file:file execute_no_trans;
+
+allow atci_service self:capability { dac_read_search dac_override net_raw chown fsetid sys_nice net_admin fowner sys_admin };
+allow atci_service camera_isp_device:chr_file { read write ioctl open };
+allow atci_service graphics_device:chr_file { read write ioctl open };
+allow atci_service graphics_device:dir search;
+allow atci_service kd_camera_hw_device:chr_file { read write ioctl open };
+allow atci_service self:capability { sys_nice ipc_lock };
+allow atci_service nvram_data_file:dir { write read open add_name remove_name search create getattr setattr };
+allow atci_service nvram_data_file:file { setattr read create write getattr unlink open append };
+allow atci_service nvram_device:chr_file { read write open ioctl };
+allow atci_service camera_isp_device:chr_file { read write ioctl open };
+allow atci_service camera_sysram_device:chr_file { read ioctl open };
+allow atci_service kd_camera_flashlight_device:chr_file { read write ioctl open };
+allow atci_service MTK_SMI_device:chr_file { open read write ioctl };
+allow atci_service system_server:binder call;
+allow atci_service system_data_file:dir { write remove_name add_name };
+allow atci_service system_data_file:file { write create unlink open };
+allow atci_service DW9714AF_device:chr_file { read write ioctl open };
+allow atci_service devmap_device:chr_file { open read write ioctl };
+allow atci_service fuse:dir { search write read open add_name remove_name create getattr setattr };
+allow atci_service fuse:file { setattr read create write getattr unlink open append };
+allow atci_service mediaserver:binder call;
+allow atci_service sysfs:file write;
+allow atci_service system_server:unix_stream_socket { read write };
+allow atci_service self:capability sys_boot;

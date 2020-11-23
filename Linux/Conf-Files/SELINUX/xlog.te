@@ -1,0 +1,11 @@
+# Add Selinux form system/bin/xlog
+# Powered by gesangtome
+
+type xlog_exec , exec_type, file_type;
+type xlog ,domain;
+
+init_daemon_domain(xlog)
+
+allow xlog self:capability { fowner chown fsetid dac_override };
+allow xlog system_data_file:dir { write add_name };
+allow xlog system_data_file:file { write create open setattr };
