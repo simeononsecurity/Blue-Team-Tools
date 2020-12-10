@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of /open-nogpl/snort-2.9.0/rules</title>
+ </head>
+ <body>
+<h1>Index of /open-nogpl/snort-2.9.0/rules</h1>
+<pre><img src="/icons/blank.gif" alt="Icon "> <a href="?C=N;O=A">Name</a>                                                                   <a href="?C=M;O=A">Last modified</a>      <a href="?C=S;O=D">Size</a>  <a href="?C=D;O=A">Description</a><hr><img src="/icons/back.gif" alt="[PARENTDIR]"> <a href="/open-nogpl/snort-2.9.0/">Parent Directory</a>                                                                            -   
+<img src="/icons/text.gif" alt="[TXT]"> <a href="snort-2.9.0-enhanced-open-nogpl.txt">snort-2.9.0-enhanced-open-nogpl.txt</a>                                    2020-11-30 17:55    0   
+<img src="/icons/text.gif" alt="[TXT]"> <a href="BSD-License.txt">BSD-License.txt</a>                                                        2020-11-30 17:55  1.6K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-pop3.rules">emerging-pop3.rules</a>                                                    2020-11-30 17:55  2.1K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-imap.rules">emerging-imap.rules</a>                                                    2020-11-30 17:55  2.1K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-icmp.rules">emerging-icmp.rules</a>                                                    2020-11-30 17:55  2.1K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-icmp_info.rules">emerging-icmp_info.rules</a>                                               2020-11-30 17:55  2.1K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="LICENSE">LICENSE</a>                                                                2020-11-30 17:55  2.2K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-rpc.rules">emerging-rpc.rules</a>                                                     2020-11-30 17:55  2.2K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="classification.config">classification.config</a>                                                  2020-11-30 17:55  2.6K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-misc.rules">emerging-misc.rules</a>                                                    2020-11-30 17:55  3.0K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-dshield.rules">emerging-dshield.rules</a>                                                 2020-11-30 17:55  3.4K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-sql.rules">emerging-sql.rules</a>                                                     2020-11-30 17:55  3.4K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-tftp.rules">emerging-tftp.rules</a>                                                    2020-11-30 17:55  4.7K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-telnet.rules">emerging-telnet.rules</a>                                                  2020-11-30 17:55  6.3K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-inappropriate.rules">emerging-inappropriate.rules</a>                                           2020-11-30 17:55  7.9K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-voip.rules">emerging-voip.rules</a>                                                    2020-11-30 17:55  8.4K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-smtp.rules">emerging-smtp.rules</a>                                                    2020-11-30 17:55  9.1K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-worm.rules">emerging-worm.rules</a>                                                    2020-11-30 17:55  9.4K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-snmp.rules">emerging-snmp.rules</a>                                                    2020-11-30 17:55  9.6K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-botcc.portgrouped.rules">emerging-botcc.portgrouped.rules</a>                                       2020-11-30 17:55   13K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-ftp.rules">emerging-ftp.rules</a>                                                     2020-11-30 17:55   13K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-scada.rules">emerging-scada.rules</a>                                                   2020-11-30 17:55   13K  
+<img src="/icons/text.gif" alt="[TXT]"> <a href="gpl-2.0.txt">gpl-2.0.txt</a>                                                            2020-11-30 17:55   18K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-chat.rules">emerging-chat.rules</a>                                                    2020-11-30 17:55   24K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-dns.rules">emerging-dns.rules</a>                                                     2020-11-30 17:55   29K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-games.rules">emerging-games.rules</a>                                                   2020-11-30 17:55   30K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-drop.rules">emerging-drop.rules</a>                                                    2020-11-30 17:55   31K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-netbios.rules">emerging-netbios.rules</a>                                                 2020-11-30 17:55   34K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-p2p.rules">emerging-p2p.rules</a>                                                     2020-11-30 17:55   44K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="3coresec.rules">3coresec.rules</a>                                                         2020-11-30 17:55   46K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-dos.rules">emerging-dos.rules</a>                                                     2020-11-30 17:55   60K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-shellcode.rules">emerging-shellcode.rules</a>                                               2020-11-30 17:55   72K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-botcc.rules">emerging-botcc.rules</a>                                                   2020-11-30 17:55  101K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-attack_response.rules">emerging-attack_response.rules</a>                                         2020-11-30 17:55  106K  
+<img src="/icons/text.gif" alt="[TXT]"> <a href="compromised-ips.txt">compromised-ips.txt</a>                                                    2020-11-30 17:55  117K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-scan.rules">emerging-scan.rules</a>                                                    2020-11-30 17:55  128K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-user_agents.rules">emerging-user_agents.rules</a>                                             2020-11-30 17:55  130K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-ciarmy.rules">emerging-ciarmy.rules</a>                                                  2020-11-30 17:55  215K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-web_server.rules">emerging-web_server.rules</a>                                              2020-11-30 17:55  308K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-mobile_malware.rules">emerging-mobile_malware.rules</a>                                          2020-11-30 17:55  366K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-activex.rules">emerging-activex.rules</a>                                                 2020-11-30 17:55  369K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-info.rules">emerging-info.rules</a>                                                    2020-11-30 17:55  376K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-web_client.rules">emerging-web_client.rules</a>                                              2020-11-30 17:55  426K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-exploit.rules">emerging-exploit.rules</a>                                                 2020-11-30 17:55  502K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-compromised.rules">emerging-compromised.rules</a>                                             2020-11-30 17:55  505K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-policy.rules">emerging-policy.rules</a>                                                  2020-11-30 17:55  511K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-malware.rules">emerging-malware.rules</a>                                                 2020-11-30 17:55  549K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-tor.rules">emerging-tor.rules</a>                                                     2020-11-30 17:55  658K  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-deleted.rules">emerging-deleted.rules</a>                                                 2020-11-30 17:55  1.2M  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-current_events.rules">emerging-current_events.rules</a>                                          2020-11-30 17:55  1.5M  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-web_specific_apps.rules">emerging-web_specific_apps.rules</a>                                       2020-11-30 17:55  3.7M  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="sid-msg.map">sid-msg.map</a>                                                            2020-11-30 17:55  3.9M  
+<img src="/icons/unknown.gif" alt="[   ]"> <a href="emerging-trojan.rules">emerging-trojan.rules</a>                                                  2020-11-30 17:55  4.7M  
+<hr></pre>
+<address>Apache/2.4.18 (Ubuntu) Server at rules.emergingthreats.net Port 443</address>
+</body></html>
