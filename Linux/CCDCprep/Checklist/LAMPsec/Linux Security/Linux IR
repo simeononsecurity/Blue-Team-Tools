@@ -249,3 +249,51 @@ Look for unusual system-wide cron jobs:
 
 # cat /etc/crontab
 # ls /etc/cron.*
+
+---------------
+
+
+ip a
+ls -latr /
+ls -latr /tmp
+ls -latr .
+ls -latr ..
+sudo ls -latr /root/
+sudo ps -elfH
+ifconfig
+sudo netstat -auntp
+w
+sudo ls -latr /var/spool/cron
+date -u
+uname -a
+df
+ls -latr /var/acc
+ls -latr /var/log/
+sudo ls -latr /var/log/*
+    cat out relevant files (grep for your logged in user account)
+
+sudo ls -la /etc/syslog 
+    read all the config files 
+for user in $(cut -f1 -d: /etc/passwd); do echo "###### $user crontab is:"; cat /var/spool/cron/{crontabs/$user,$user} 2>/dev/null; done
+cat /etc/crontab 
+ls -la /etc/cron.*
+
+    As needed, examine the files/scripts shown in the directory listing of the cron.* directories
+
+sudo find / ( -path /proc -prune -o -path /sys -prune ) -o -mmin -8 -type f -print0 | sudo xargs -0 /bin/ls -latr 
+    (NOTE there is a "-" a.k.a minus symbol preceding the "<duration since initial connection">
+sestatus OR getenforce
+sudo cat /root/.bash_history
+cat ~/.bash_history
+
+Linux Priv Users Check
+W- who logged in. for how long 
+Who -Ha (PID/
+Netstat -auntp
+Ps -elfH 
+Last 
+Sudo cat /root/.bash_history ( is admin active)
+Cat /etc/sudoers ( sometimes called wheels)
+Cat /etc/group
+Cat /etc/passwd
+Groups <user>
