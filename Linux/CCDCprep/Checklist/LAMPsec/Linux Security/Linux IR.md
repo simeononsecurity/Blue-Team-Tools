@@ -1,9 +1,14 @@
-https://www.sans.org/security-resources/posters/intrusion-discovery-cheat-sheet-linux/230/download
-https://zeltser.com/media/docs/security-incident-survey-cheat-sheet.pdf
+
 https://attack.mitre.org/matrices/enterprise/
 https://www.nist.gov/cyberframework
 
-Key Incident Response Steps
+## Key Incident Response Steps
+(via the following links)
+
+[**intrusion discovery cheatsheet**](https://www.sans.org/security-resources/posters/intrusion-discovery-cheat-sheet-linux/230/download)
+
+[**security incident survey cheatsheet**](https://zeltser.com/media/docs/security-incident-survey-cheat-sheet.pdf)
+
 
 1. Preparation: Gather and learn the necessary tools,
 become familiar with your environment.
@@ -18,14 +23,6 @@ operations, possibly via reinstall or backup.
 6. Wrap‐up: Document the incident’s details, retail
 collected data, and discuss lessons learned.
 
-TODO---
-	○ .bash_history 
-	○ ~/.ssh/authorized_keys 
-	○ lsof -nPi / netstat -ano 
-	○ know where logs are 
-	○ diff process list 
-	○ fuser -k pts/2
----TODO
 Unix Initial System Examination
 
 Look at event log files in
@@ -88,22 +85,24 @@ Unusual Accounts
 
 Look in /etc/passwd for new accounts in sorted list by
 UID:
-# sort –nk3 –t: /etc/passwd | less
-
+```
+sort –nk3 –t: /etc/passwd | less
+```
 Normal accounts will be there, but look for new,
 unexpected accounts, especially with UID < 500.
 Also, look for unexpected UID 0 accounts:
-
-# egrep ':0+:' /etc/passwd
+```
+ egrep ':0+:' /etc/passwd
+``` 
 On systems that use multiple authentication methods:
-
-# getent passwd | egrep ':0+:'
-
+```
+ getent passwd | egrep ':0+:'
+```
 Look for orphaned files, which could be a sign of an
 attacker's temporary account that has been deleted.
-
-# find / -nouser -print
-
+```
+find / -nouser -print
+```
 Unusual Log Entries
 
 Look through your system log files for suspicious
@@ -138,58 +137,63 @@ $ df
 Unusual Processes and Services
 
 Look at all running processes:
-# ps –aux
-
+```
+ps –aux
+```
 Get familiar with "normal" processes for the machine.
 Look for unusual processes. Focus on processes with
 root (UID 0) privileges.
 
 If you spot a process that is unfamiliar, investigate in
 more detail using:
-# lsof –p [pid]
-#ps -eaf --forest
-#ls -al /proc/<PID>
-
+```
+lsof –p [pid]
+ps -eaf --forest
+ls -al /proc/<PID>
+```
 This command shows all files and ports used by the
 running process.
 
 If your machine has it installed, run chkconfig to see
 which services are enabled at various runlevels:
-# chkconfig --list
-
+```
+chkconfig --list
+```
 Unusual Files
 
 Look for unusual SUID root files:
-
-# find / -uid 0 –perm -4000 –print
+```
+find / -uid 0 –perm -4000 –print
+```
 This requires knowledge of normal SUID files.
 
 Look for unusual large files (greater than 10
 MegaBytes):
-
-# find / -size +10000k –print
-
+```
+ find / -size +10000k –print
+```
 This requires knowledge of normal large files.
 
 Look for files named with dots and spaces ("...", ".. ",
 ". ", and " ") used to camouflage files:
-# find / -name " " –print
-# find / -name ".. " –print
-# find / -name ". " –print
-# find / -name " " –print
-
+```
+ find / -name " " –print
+ find / -name ".. " –print
+ find / -name ". " –print
+ find / -name " " –print
+```
 Look for processes running out of or accessing files
 that have been unlinked (i.e., link count is zero). An
 attacker may be hiding data in or running a backdoor
 from such files:
-
-# lsof +L1
-
+```
+ lsof +L1
+```
 On a Linux machine with RPM installed (RedHat,
 Mandrake, etc.), run the RPM tool to verify packages:
-
-# rpm –Va | sort
-
+```
+ rpm –Va | sort
+```
 This checks size, MD5 sum, permissions, type,
 owner, and group of each file with information from
 RPM database to look for changes. Output includes:
@@ -209,29 +213,30 @@ by the built-in check-packages script.
 Unusual Network Usage
 Look for promiscuous mode, which might indicate a
 sniffer:
-
-# ip link | grep PROMISC
-
+```
+ ip link | grep PROMISC
+```
 Note that the ifconfig doesn’t work reliably for
 detecting promiscuous mode on Linux kernel 2.4, so
 please use "ip link" for detecting it.
 
 Look for unusual port listeners:
-
-# netstat –nap
-
+```
+netstat –nap
+```
 Get more details about running processes listening
 on ports:
-
-# lsof –i
-
+```
+lsof –i
+```
 These commands require knowledge of which TCP
 and UDP ports are normally listening on your
 system. Look for deviations from the norm.
 Look for unusual ARP entries, mapping IP address to
 MAC addresses that aren’t correct for the LAN:
-
-# arp –a
+```
+ arp –a
+```
 
 This analysis requires detailed knowledge of which
 addresses are supposed to be on the LAN. On a
@@ -242,14 +247,14 @@ Unusual Scheduled Tasks
 
 Look for cron jobs scheduled by root and any other
 UID 0 accounts:
-
-# crontab –u root –l
-
+```
+crontab –u root –l
+```
 Look for unusual system-wide cron jobs:
-
-# cat /etc/crontab
-# ls /etc/cron.*
-
+```
+ cat /etc/crontab
+ ls /etc/cron.*
+```
 ---------------
 
 ```
@@ -270,38 +275,53 @@ df
 ls -latr /var/acc
 ls -latr /var/log/
 ```
+```
 sudo ls -latr /var/log/*
-    cat out relevant files (grep for your logged in user account)
+```
 
+cat out relevant files (grep for your logged in user account)
+```
 sudo ls -la /etc/syslog 
-    read all the config files 
+```
+ read all the config files 
+```    
 for user in $(cut -f1 -d: /etc/passwd); do echo "###### $user crontab is:"; cat /var/spool/cron/{crontabs/$user,$user} 2>/dev/null; done
-cat /etc/crontab 
-ls -la /etc/cron.*
 
+cat /etc/crontab 
+
+ls -la /etc/cron.*
+```
     As needed, examine the files/scripts shown in the directory listing of the cron.* directories
 
+```
 sudo find / ( -path /proc -prune -o -path /sys -prune ) -o -mmin -8 -type f -print0 | sudo xargs -0 /bin/ls -latr 
-    (NOTE there is a "-" a.k.a minus symbol preceding the "<duration since initial connection">
+```
+   (NOTE there is a "-" a.k.a minus symbol preceding the "<duration since initial connection">
+```
 sestatus OR getenforce
 sudo cat /root/.bash_history
 cat ~/.bash_history
-
-Linux Priv Users Check
+```
+## Linux Priv Users Check
 W- who logged in. for how long 
+
 Who -Ha (PID/
+
 Netstat -auntp
+
 Ps -elfH 
+
 Last 
+
 Sudo cat /root/.bash_history ( is admin active)
+
 Cat /etc/sudoers ( sometimes called wheels)
+
 Cat /etc/group
+
 Cat /etc/passwd
+
 Groups <user>
-
-################
-
-Tools : 
 
 ## Linux Basics
 [**SANS Linux 101 cheatsheet**](https://wiki.sans.blue/Tools/pdfs/LinuxCLI101.pdf)
