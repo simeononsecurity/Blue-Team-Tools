@@ -297,3 +297,144 @@ Cat /etc/sudoers ( sometimes called wheels)
 Cat /etc/group
 Cat /etc/passwd
 Groups <user>
+
+################
+
+Tools : 
+
+## Network
+[**tshark man page**](https://linux.die.net/man/1/tshark)
+
+[**tcpdump docs**](https://www.tcpdump.org/index.html#documentation)
+
+[**BHIS tcpdump tutorial**](https://www.blackhillsinfosec.com/getting-started-with-tcpdump/)
+
+[**tcpdump cheatsheet**](https://packetlife.net/media/library/12/tcpdump.pdf)
+
+[**SANS TCP/IP cheatsheet**](https://www.sans.org/security-resources/tcpip.pdf?msc=Cheat+Sheet+Blog)
+
+[**zeek docs**](https://docs.zeek.org/en/master/)
+
+[**wireshark docs **](https://www.wireshark.org/docs/)
+
+[**palo alto wireshark tutorials**](https://unit42.paloaltonetworks.com/tag/wireshark-tutorial/)
+
+[**nmap cheatsheet**](https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/blte37ba962036d487b/5eb08aae26a7212f2db1c1da/NmapCheatSheetv1.1.pdf)
+
+https://github.com/SekoiaLab/Fastir_Collector_Linux
+
+https://linux.die.net/man/1/strings
+
+https://www.volatilityfoundation.org/
+
+https://digital-forensics.sans.org/media/volatility-memory-forensics-cheat-sheet.pdf?msc=Cheat+Sheet+Blog
+
+
+
+https://digital-forensics.sans.org/media/FOR572HANDOUT_jq_v1.2.pdf?msc=Cheat+Sheet+Blog
+
+https://digital-forensics.sans.org/media/sift_cheat_sheet.pdf?msc=Cheat+Sheet+Blog
+
+https://digital-forensics.sans.org/media/remnux-malware-analysis-tips.pdf?msc=Cheat+Sheet+Blog
+
+https://digital-forensics.sans.org/media/analyzing-malicious-document-files.pdf?msc=Cheat+Sheet+Blog
+
+https://digital-forensics.sans.org/media/malware-analysis-cheat-sheet.pdf?msc=Cheat+Sheet+Blog
+
+https://digital-forensics.sans.org/media/SQlite-PocketReference-final.pdf?msc=Cheat+Sheet+Blog
+
+https://digital-forensics.sans.org/media/windows_to_unix_cheatsheet.pdf?msc=Cheat+Sheet+Blog
+
+https://digital-forensics.sans.org/media/hex_file_and_regex_cheat_sheet.pdf?msc=Cheat+Sheet+Blog
+
+https://digital-forensics.sans.org/media/reverse-engineering-malicious-code-tips.pdf?msc=Cheat+Sheet+Blog
+
+https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/bltea7de5267932e94b/5eb08aafcf88d36e47cf0644/Cheatsheet_SEC301-401_R7.pdf
+
+https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/blt0f228a4b9a1165e4/5ef3d602395b554cb3523e7b/pivot-cheat-sheet-v1.0.pdf
+
+
+
+https://wiki.sans.blue/Tools/pdfs/ScapyCheatSheet_v0.2.pdf
+
+https://www.sans.org/security-resources/posters/cloud-security-devops-cheat-sheet/275/download
+
+https://wiki.sans.blue/Tools/pdfs/LinuxCLI101.pdf
+
+
+Static Properties
+trid
+exiftool
+pyew
+readelf.py
+
+Dissassemble/Decompile
+ghidra
+cutter
+objdump
+r2
+
+Debugging
+edb
+gdb
+
+Behavior Analysis
+ltrace
+strace
+frida
+sysdig
+unhide
+
+Android: apktool, droidlysis3.py, androgui.py,
+baksmali, dex2jar
+
+Java: cfr, procyon, jad, jd-gui, idx_parser.py
+
+Python: pyinstxtractor.py, pycdc
+
+JavaScript: js, js-file, objects.js, box-js
+
+Shellcode: shellcode2exe.bat, scdbg, xorsearch
+
+PowerShell: pwsh, base64dump
+
+Flash: swfdump, flare, flasm, swf_mastah.py, xxxswf
+
+Microsoft Office Files: vmonkey, pcodedmp, olevba,
+xlmdeobfuscator, oledump.py, msoffice-crypt, ssview
+
+RTF Files: rtfobj, rtfdump
+
+Email Messages: emldump, msgconvert
+
+PDF Files: pdfid, pdfparser, pdfextract, pdfdecrypt,
+peepdf, pdftk, pdfresurrect, qpdf, pdfobjflow
+
+General: base64dump, tesseract, exiftool
+
+Monitoring: burpsuite, networkminer, polarproxy,
+mitmproxy, wireshark, tshark, ngrep, tcpxtract, tcpick
+
+Connecting: thug, nc, tor, wget, curl, irc, ssh
+
+Services: fakedns, fakemail, accept-all-ips, nc, httpd,
+
+inetsim, fakenet, sshd, myip
+
+Network: Automater.py, shodan, ipwhois_cli.py,
+pdnstool
+
+Hashes: malwoverview.py, nsrllookup, Automater.py, vt,
+virustotal-search.py
+
+Files: yara, scalpel, bulk_extractor, ioc_writer
+
+Other: dexray, viper, time-decode.py
+
+Memory Forensics: vol.py, vol3, linux_mem_diff.py,
+aeskeyfind, rsakeyfind, bulk_extractor
+
+File Editing: wxHexEditor, scite, code, xpdf, convert
+
+File Extraction: 7z, unzip, unrar, cabextract
+
