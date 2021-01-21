@@ -45,14 +45,14 @@ NOTE: Steps 1 to 3 are scripted [here](https://github.com/WGU-CCDC/Blue-Team-Too
 
 
 
-## Step 2. Get a list of all users
+## Task 2. Get a list of all users
     
     ```
     cat /etc/passwd | cut -d: -f1 > user_list.txt
     ```
 
 
-## Step 3. Change the passwords for all users  
+## Task 3. Change the passwords for all users  
 IMPORTANT: Notify Team via team comms on password changes  
 
 Simple Bash Script to loop through users and change password
@@ -134,7 +134,7 @@ See Appendix
 
 
 
-Close unneeded ports on the firewall
+## Task 4. Close unneeded ports on the firewall
 Step 1: Identify open ports via one of the following commands:
 
 ```
@@ -231,12 +231,14 @@ UFW and Firewalld are built on iptables
 
            
  
-Get a list of services and change default passwords/restrict admin panels to localhost
+## Task 6. Get a list of services and change default passwords/restrict admin panels to localhost
 Step 1: Try one of the following to list services
+```
 service --status-all
 systemctl list-units
 chkconfig --list
 systemctl --type=service
+```
 Step 2: Lookup and change defaults
 
 
@@ -244,86 +246,118 @@ Disable or Uninstall  unneeded services
 
 Disable
 Step 1: Stop the service
+```
 service servicename stop
+```
 OR 
+```
 systemctl stop servicename
+```
 
 Step 2: Disable the service across reboots
+```
 chkconfig servicename off
+```
 OR
+```
 systemctl disable servicename
-
+```
 Uninstall
+```
 apt-get remove service_package_name 
+```
 OR
+```
 yum remove service_package_name 
+```
 OR
+```
 dnf remove service_package_name 
+```
 
 
 
-
-
-
-
-
-
-
-Update services
+update services
 Step 1: Check service version
+```
 service_name --version
+```
 OR
+```
 service_name -version
+```
 OR
+```
 service_name -v
-
+```
 Step 2: Backup configuration file(s)
 Lookup configuration file locations by service version
 Then copy the file to a different location and file name
+```
 cp /path/to/configfile.conf /path/to/backupconfigfile.bak
+```
 
 Step 3: Update repositories to make sure you can get the latest version
+```
 yum -y update
+```
 OR
+```
 apt-get update
-
+```
 Step 4: Upgrade the service package
+```
 yum update service_package_name
+```
 OR
+```
 apt install service_package_name
+```
 
 
 
 
 
 
-
-Patch Kernel
+## Task 7. Patch Kernel
 Step 1: Determine current Kernel version
+```
 uname -a
+```
 OR
+```
 cat /etc/os-release
-
+```
 Step 2: Update repositories
+```
 yum -y update
+```
 OR
+```
 apt-get update
-
+```
 Step 3: Run the upgrade
-
+```
 sudo apt-get dist-upgrade
-
+```
 Step 4: Make sure ssh and or rdp will start on reboot
 
 i. List the services that run on start
+```
 sudo service --status-all
+```
 OR
+```
 sudo systemctl list-unit-files --type=service
+```
 ii. Turn on ssh or rdp if it’s off
+```
 chkconfig servicename on
+```
 OR
+```
 systemctl enable servicename
-
+```
 Step 5: Reboot the system
 sudo reboot
 OR
@@ -333,10 +367,8 @@ sudo shutdown -r
 
 
 
-9...
 
-
-Install Tools
+## Task 8. Install Tools
 Tripwire, rkhunter, clamav, inotify-tools
 
 Step 1:
