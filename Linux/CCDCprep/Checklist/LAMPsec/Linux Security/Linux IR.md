@@ -252,7 +252,7 @@ Look for unusual system-wide cron jobs:
 
 ---------------
 
-
+```
 ip a
 ls -latr /
 ls -latr /tmp
@@ -269,6 +269,7 @@ uname -a
 df
 ls -latr /var/acc
 ls -latr /var/log/
+```
 sudo ls -latr /var/log/*
     cat out relevant files (grep for your logged in user account)
 
@@ -302,6 +303,9 @@ Groups <user>
 
 Tools : 
 
+## Linux Basics
+[**SANS Linux 101 cheatsheet**](https://wiki.sans.blue/Tools/pdfs/LinuxCLI101.pdf)
+
 ## Network
 [**tshark man page**](https://linux.die.net/man/1/tshark)
 
@@ -315,19 +319,35 @@ Tools :
 
 [**zeek docs**](https://docs.zeek.org/en/master/)
 
-[**wireshark docs **](https://www.wireshark.org/docs/)
+[**wireshark docs**](https://www.wireshark.org/docs/)
 
 [**palo alto wireshark tutorials**](https://unit42.paloaltonetworks.com/tag/wireshark-tutorial/)
 
 [**nmap cheatsheet**](https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/blte37ba962036d487b/5eb08aae26a7212f2db1c1da/NmapCheatSheetv1.1.pdf)
 
-https://github.com/SekoiaLab/Fastir_Collector_Linux
+## Enumeration and artifacts
+[**Fastir artifact collector script**](https://github.com/SekoiaLab/Fastir_Collector_Linux)
 
-https://linux.die.net/man/1/strings
+## Binaries and Memory Forensics
+[**Strings manual**](https://linux.die.net/man/1/strings)
+Unless it's obfuscated you should be able to see the contents/commands in a suspicious binary. 
 
-https://www.volatilityfoundation.org/
+[**lime (extract linux memory for Volatility to use)**](https://github.com/504ensicslabs/lime)
 
-https://digital-forensics.sans.org/media/volatility-memory-forensics-cheat-sheet.pdf?msc=Cheat+Sheet+Blog
+[**Install Volatility**](https://github.com/volatilityfoundation/volatility/wiki/Installation)
+
+[**Use Volatility**](https://github.com/volatilityfoundation/volatility/wiki/Volatility-Usage)
+
+[**Volatility commands**](https://github.com/volatilityfoundation/volatility/wiki/Command-Reference)
+
+[**Volatility wiki](https://github.com/volatilityfoundation/volatility/wiki)
+
+[**Volatility wiki linux section**](https://github.com/volatilityfoundation/volatility/wiki/Linux)
+
+[**Volatility wiki links to documentation](https://github.com/volatilityfoundation/volatility/wiki/Volatility-Documentation-Project)
+
+[**SANS Volatility cheatsheet**](https://digital-forensics.sans.org/media/volatility-memory-forensics-cheat-sheet.pdf?msc=Cheat+Sheet+Blog)
+
 
 
 
@@ -359,82 +379,7 @@ https://wiki.sans.blue/Tools/pdfs/ScapyCheatSheet_v0.2.pdf
 
 https://www.sans.org/security-resources/posters/cloud-security-devops-cheat-sheet/275/download
 
-https://wiki.sans.blue/Tools/pdfs/LinuxCLI101.pdf
 
 
-Static Properties
-trid
-exiftool
-pyew
-readelf.py
 
-Dissassemble/Decompile
-ghidra
-cutter
-objdump
-r2
-
-Debugging
-edb
-gdb
-
-Behavior Analysis
-ltrace
-strace
-frida
-sysdig
-unhide
-
-Android: apktool, droidlysis3.py, androgui.py,
-baksmali, dex2jar
-
-Java: cfr, procyon, jad, jd-gui, idx_parser.py
-
-Python: pyinstxtractor.py, pycdc
-
-JavaScript: js, js-file, objects.js, box-js
-
-Shellcode: shellcode2exe.bat, scdbg, xorsearch
-
-PowerShell: pwsh, base64dump
-
-Flash: swfdump, flare, flasm, swf_mastah.py, xxxswf
-
-Microsoft Office Files: vmonkey, pcodedmp, olevba,
-xlmdeobfuscator, oledump.py, msoffice-crypt, ssview
-
-RTF Files: rtfobj, rtfdump
-
-Email Messages: emldump, msgconvert
-
-PDF Files: pdfid, pdfparser, pdfextract, pdfdecrypt,
-peepdf, pdftk, pdfresurrect, qpdf, pdfobjflow
-
-General: base64dump, tesseract, exiftool
-
-Monitoring: burpsuite, networkminer, polarproxy,
-mitmproxy, wireshark, tshark, ngrep, tcpxtract, tcpick
-
-Connecting: thug, nc, tor, wget, curl, irc, ssh
-
-Services: fakedns, fakemail, accept-all-ips, nc, httpd,
-
-inetsim, fakenet, sshd, myip
-
-Network: Automater.py, shodan, ipwhois_cli.py,
-pdnstool
-
-Hashes: malwoverview.py, nsrllookup, Automater.py, vt,
-virustotal-search.py
-
-Files: yara, scalpel, bulk_extractor, ioc_writer
-
-Other: dexray, viper, time-decode.py
-
-Memory Forensics: vol.py, vol3, linux_mem_diff.py,
-aeskeyfind, rsakeyfind, bulk_extractor
-
-File Editing: wxHexEditor, scite, code, xpdf, convert
-
-File Extraction: 7z, unzip, unrar, cabextract
 
