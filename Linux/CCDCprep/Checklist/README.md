@@ -6,11 +6,12 @@ WGU CCDC Basic *Nix Checklist / First Fifteen Minutes guidelines
 
 Notes:
 Run these commands to help gather this information
+```
 uname -a
 lscpu
 lsblk,etc
 ip a, ifconfig, iwconfig
-
+```
 
 
 
@@ -18,16 +19,24 @@ ip a, ifconfig, iwconfig
 
 NOTE: Steps 1 to 3 are scripted [here](https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/Automation/lockdown.sh) and should be tried first.
 
-1)  Create Backup Admins 
+## Task 1.  Create Backup Admins 
 
-    Step 1: adduser --disabled-password --gecos "" nightowl
-    
-    Step 2: usermod -aG sudo nightowl 
-    
-    Step 3: adduser --disabled-password --gecos "" nightowl2
-    
-    Step 4: usermod -aG sudo nightowl2
-    
+    Step 1: 
+    ```
+    adduser --disabled-password --gecos "" nightowl
+    ```
+    Step 2: 
+    ```
+    usermod -aG sudo nightowl 
+    ```
+    Step 3: 
+    ```
+    adduser --disabled-password --gecos "" nightowl2
+    ```
+    Step 4: 
+    ```
+    usermod -aG sudo nightowl2
+    ```
     Step 5: Notify team of usernames and passwords.
 
 
@@ -36,16 +45,18 @@ NOTE: Steps 1 to 3 are scripted [here](https://github.com/WGU-CCDC/Blue-Team-Too
 
 
 
-2) Get a list of all users
+## Step 2. Get a list of all users
+    
+    ```
     cat /etc/passwd | cut -d: -f1 > user_list.txt
+    ```
 
 
-
-3) Change the passwords for all users  
+## Step 3. Change the passwords for all users  
 IMPORTANT: Notify Team via team comms on password changes  
 
 Simple Bash Script to loop through users and change password
-
+```
 #!/bin/bash
 for i in `cat user_list.txt`
 do
@@ -54,8 +65,8 @@ echo "Changing password for $i"
 echo "$i,$PASS" >>  userlist.txt
 echo -e "$PASS\n$PASS" | passwd $i
 done
- 
- 
+```
+
 **OR**
  
  
@@ -66,8 +77,9 @@ Copy this list to your clipboard.
 
 Step 2: 
 Enter the chpasswd command in the terminal
+```
 chpasswd
-
+```
 Step 3: 
 Now that the command is running, paste in a prepared list of usernames and passwords by right clicking on the terminal and selecting paste or the key combo of Ctrl+Shift+v
 
@@ -75,26 +87,39 @@ Step 4:
 Enter Ctrl +D to exit when done 
 
 If chpasswd doesn’t work or to change an individual password:
-Use the command passwd username 
-**OR** simply passwd to change the current user's password 
+Use the command 
+```
+passwd username 
+```
+**OR** simply 
+```
+passwd
+```
+to change the current user's password 
 
 Step 5: 
 Notify the rest of the team of password changes and put it into a report format when you have time since you will need to inform management of any password changes for users.
 
  
-NOTE: you will still need to set the password for root manually
+
  
  
 Subtask (can be performed simultaneously)
 Step 1. Install fail2ban with default settings.
  
+```
 apt install fail2ban 
+```
+
 OR
+```
 yum install fail2ban 
+```
  
 Step 2. Check that fail2ban is running
-            service fail2ban status
-
+```
+  service fail2ban status
+```
 
  
 3b
@@ -111,11 +136,14 @@ See Appendix
 
 Close unneeded ports on the firewall
 Step 1: Identify open ports via one of the following commands:
+
+```
 sudo netstat -tulpn | grep LISTEN 
 ss -tulwn | grep LISTEN
 netstat -tulpn 
 ss -ltup 
 sudo nmap -sTU -O localhost -> requires nmap installed 
+```
 
 Step 2: Using the following sections for the firewall that is installed
 i. View current rules
@@ -127,68 +155,80 @@ Step 3: Document ports that were blocked.
 IPTABLES  
  
 Disabling other firewalls (not recommended -> just use the other firewall if you have it.) 
+```
 systemctl disable --now ufw 
 systemctl disable --now firewalld 
- 
+```
+
 View current rules 
+```
 iptables -S -v 
 Iptables -L -v 
+```
 Flush Current Firewall rules
+```
 sudo iptables -F
- 
+``` 
 Add a rule for a specific port ( example HTTPS) (each line must be added one at a time)   
+```
 iptables –A INPUT –p udp --dport 443 –j ACCEPT 
 iptables –A INPUT –p tcp --dport 443 –j ACCEPT 
 iptables –A OUTPUT –p udp --dport 443 –j ACCEPT 
 iptables –A OUTPUT –p tcp --dport 443 –j ACCEPT 
- 
+``` 
 Block a specific port (example HTTPS) (each line must be added one at a time) 
 Add a rule for a specific port ( example HTTPS) 
+```
 iptables –A INPUT –p udp --dport 443 –j DROP 
 iptables –A INPUT –p tcp --dport 443 –j DROP 
 iptables –A OUTPUT –p udp --dport 443 –j DROP 
-iptables –A OUTPUT –p tcp --dport 443 –j DROP 
- 
+iptables –A OUTPUT –p tcp --dport 443 –j DROP
+```
+
 Enable iptables logging (each line must be added one at a time) 
+```
 iptables -N LOGGING 
 iptables -A INPUT -j LOGGING 
 iptables -A OUTPUT -j LOGGING 
 iptables -A FORWARD -j LOGGING 
 iptables -A LOGGING -j LOG --log-level error --log-prefix "iptables-dropped: " 
 iptables -A LOGGING -j DROP 
- 
+``` 
 Delete Rules by Specification 
 First list rules by specification: 
+```
 iptables -S 
+```
 Then use the -D option (for example a previous HTTPS rule) 
+```
 iptables –D INPUT –p udp --dport 443 -j DROP 
- 
+``` 
 Save changes to iptables  
  
 Ubuntu 
+```
 sudo /sbin/iptables-save
+```
 For the changes to last after restarting the service:
+```
 /sbin/iptables-save > /etc/iptables/rules.v4 
+```
 CentOS/Red Hat 
+```
 /sbin/service iptables save 
+```
 OR 
+```
 /etc/init.d/iptables save 
- 
+```
  
 Reload Rules 
+```
 service iptables restart 
- 
+``` 
 UFW and Firewalld are built on iptables
  
-Subtask (can be performed simultaneously)
-Install IPTSTATE to monitor iptables
-Step 1. Install iptstate with default settings.
- 
-apt install iptstate 
-OR
-yum install iptstate 
- 
-Step 2. Run iptstate in its own terminal or pane and monitor connections to each box (host)
+
            
  
 Get a list of services and change default passwords/restrict admin panels to localhost
