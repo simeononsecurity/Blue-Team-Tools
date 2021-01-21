@@ -340,11 +340,11 @@ Unless it's obfuscated you should be able to see the contents/commands in a susp
 
 [**Volatility commands**](https://github.com/volatilityfoundation/volatility/wiki/Command-Reference)
 
-[**Volatility wiki](https://github.com/volatilityfoundation/volatility/wiki)
+[**Volatility wiki**](https://github.com/volatilityfoundation/volatility/wiki)
 
 [**Volatility wiki linux section**](https://github.com/volatilityfoundation/volatility/wiki/Linux)
 
-[**Volatility wiki links to documentation](https://github.com/volatilityfoundation/volatility/wiki/Volatility-Documentation-Project)
+[**Volatility wiki links to documentation**](https://github.com/volatilityfoundation/volatility/wiki/Volatility-Documentation-Project)
 
 [**SANS Volatility cheatsheet**](https://digital-forensics.sans.org/media/volatility-memory-forensics-cheat-sheet.pdf?msc=Cheat+Sheet+Blog)
 
