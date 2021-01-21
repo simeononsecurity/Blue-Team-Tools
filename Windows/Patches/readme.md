@@ -6,3 +6,11 @@
 ## Specture and Meltdown
 - https://support.microsoft.com/en-us/help/4073757/protect-windows-devices-from-speculative-execution-side-channel-attack
 
+## Eternal Blue
+- 
+
+## ZeroLogin
+- 
+
+
+
