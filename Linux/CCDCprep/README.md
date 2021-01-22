@@ -1,15 +1,15 @@
 # CCDCprep
 
-https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/README.md
+[**Linux first 15 checklist**](https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/README.md)
 
-https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/LAMPsec/Linux%20Security/Linux%20IR
+[**Linux IR and Forensics**](https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/LAMPsec/Linux%20Security/Linux%20IR)
 
-https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/Automation/lockdown.sh
+[**Linux first 15 bash script**](https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/Automation/lockdown.sh)
 
-https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/Automation/changepass.sh
+[**Linux change password standalone bash script**](https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/Automation/changepass.sh)
 
-https://github.com/WGU-CCDC/Blue-Team-Tools/tree/master/Linux/Harden-SSH/
+[**SSH hardening script**](https://github.com/WGU-CCDC/Blue-Team-Tools/tree/master/Linux/Harden-SSH/)
 
-https://github.com/WGU-CCDC/Blue-Team-Tools/tree/master/Linux/Harden-Apache
+[**Apache Hardening script**](https://github.com/WGU-CCDC/Blue-Team-Tools/tree/master/Linux/Harden-Apache)
 
-https://github.com/WGU-CCDC/Blue-Team-Tools/tree/master/Linux/ComplianceAsCode/bash
+[**Hardening sripts by distro**](https://github.com/WGU-CCDC/Blue-Team-Tools/tree/master/Linux/ComplianceAsCode/bash)
