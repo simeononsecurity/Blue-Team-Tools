@@ -1,6 +1,5 @@
 
-https://attack.mitre.org/matrices/enterprise/
-https://www.nist.gov/cyberframework
+
 
 ## Key Incident Response Steps
 (via the following links)
@@ -322,9 +321,16 @@ Cat /etc/group
 Cat /etc/passwd
 
 Groups <user>
-
+## Frameworks
+[**mitre matrices**](https://attack.mitre.org/matrices/enterprise/)
+[**NIST cyberframework**](https://www.nist.gov/cyberframework)
 ## Linux Basics
 [**SANS Linux 101 cheatsheet**](https://wiki.sans.blue/Tools/pdfs/LinuxCLI101.pdf)
+
+[**windows to unix cheatsheet**](https://digital-forensics.sans.org/media/windows_to_unix_cheatsheet.pdf?msc=Cheat+Sheet+Blog)
+
+[**hex and regex cheatsheet**](https://digital-forensics.sans.org/media/hex_file_and_regex_cheat_sheet.pdf?msc=Cheat+Sheet+Blog)
+[**windows and linux cli cheatsheet**](https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/bltea7de5267932e94b/5eb08aafcf88d36e47cf0644/Cheatsheet_SEC301-401_R7.pdf)
 
 ## Network
 [**tshark man page**](https://linux.die.net/man/1/tshark)
@@ -345,12 +351,17 @@ Groups <user>
 
 [**nmap cheatsheet**](https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/blte37ba962036d487b/5eb08aae26a7212f2db1c1da/NmapCheatSheetv1.1.pdf)
 
+[**pivoting cheatsheet**](https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/blt0f228a4b9a1165e4/5ef3d602395b554cb3523e7b/pivot-cheat-sheet-v1.0.pdf)
+
 ## Enumeration and artifacts
 [**Fastir artifact collector script**](https://github.com/SekoiaLab/Fastir_Collector_Linux)
 
 ## Binaries and Memory Forensics
 [**Strings manual**](https://linux.die.net/man/1/strings)
 Unless it's obfuscated you should be able to see the contents/commands in a suspicious binary. 
+[**analyzing malicious documents cheatsheet**](https://digital-forensics.sans.org/media/analyzing-malicious-document-files.pdf?msc=Cheat+Sheet+Blog)
+
+[**malware analysis cheatsheet**](https://digital-forensics.sans.org/media/malware-analysis-cheat-sheet.pdf?msc=Cheat+Sheet+Blog)
 
 [**lime (extract linux memory for Volatility to use)**](https://github.com/504ensicslabs/lime)
 
@@ -369,35 +380,8 @@ Unless it's obfuscated you should be able to see the contents/commands in a susp
 [**SANS Volatility cheatsheet**](https://digital-forensics.sans.org/media/volatility-memory-forensics-cheat-sheet.pdf?msc=Cheat+Sheet+Blog)
 
 
-
-
-https://digital-forensics.sans.org/media/FOR572HANDOUT_jq_v1.2.pdf?msc=Cheat+Sheet+Blog
-
-https://digital-forensics.sans.org/media/sift_cheat_sheet.pdf?msc=Cheat+Sheet+Blog
-
-https://digital-forensics.sans.org/media/remnux-malware-analysis-tips.pdf?msc=Cheat+Sheet+Blog
-
-https://digital-forensics.sans.org/media/analyzing-malicious-document-files.pdf?msc=Cheat+Sheet+Blog
-
-https://digital-forensics.sans.org/media/malware-analysis-cheat-sheet.pdf?msc=Cheat+Sheet+Blog
-
-https://digital-forensics.sans.org/media/SQlite-PocketReference-final.pdf?msc=Cheat+Sheet+Blog
-
-https://digital-forensics.sans.org/media/windows_to_unix_cheatsheet.pdf?msc=Cheat+Sheet+Blog
-
-https://digital-forensics.sans.org/media/hex_file_and_regex_cheat_sheet.pdf?msc=Cheat+Sheet+Blog
-
-https://digital-forensics.sans.org/media/reverse-engineering-malicious-code-tips.pdf?msc=Cheat+Sheet+Blog
-
-https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/bltea7de5267932e94b/5eb08aafcf88d36e47cf0644/Cheatsheet_SEC301-401_R7.pdf
-
-https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/blt0f228a4b9a1165e4/5ef3d602395b554cb3523e7b/pivot-cheat-sheet-v1.0.pdf
-
-
-
-https://wiki.sans.blue/Tools/pdfs/ScapyCheatSheet_v0.2.pdf
-
-https://www.sans.org/security-resources/posters/cloud-security-devops-cheat-sheet/275/download
+## Further Reading/Resources
+[**awesome IR**](https://github.com/meirwah/awesome-incident-response)
 
 
 
