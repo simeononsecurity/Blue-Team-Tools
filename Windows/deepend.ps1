@@ -377,3 +377,42 @@ Write-Output "Disabling SMB Compression for CVE 2020-0796"
 reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v DisableCompression /t REG_DWORD /d 1 /f
 # New-Item -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\" -Name "Parameters"
 # Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" -name "DisableCompression" -Type DWORD -Value 1 -Force
+#put some sweet logos!
+Write-Output ""
+Write-Output " .-/++oossssoo+/:-`              `.--::::::--.`              `-:/+oossssoo++/-." 
+Write-Output "`:ymmmmmmmmmmmmmmmmdhs+:. `-/oydmmmmmmmmmmmmmmmmdyo/-` .:+shdmmmmmmmmmmmmmmmmy:``"
+Write-Output "   .odmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdo."   
+Write-Output "     `/hmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmh/``"     
+Write-Output "        -smmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmms-"        
+Write-Output "          .+dmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmd+."          
+Write-Output "             :ymmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmy:"             
+Write-Output "         ..    .odmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdo.    -+``"        
+Write-Output "        :dmy:     -odmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdo-    `/hmmh."       
+Write-Output "       /mmmmm/   .odmmmmmmmmmmmmmmdo/+sdmmmmmmmmmmmmmmmmmmmmds-   `ymmmmd."      
+Write-Output "      .mmmmm-   +mmmmhs+shdmmmmmmd.    -mmmmmmmmmmmmyo+yhmmmmmms`   smmmmy"      
+Write-Output "      ommmmo   smmmh- +dmmmmmmmmmh      mmmmmmmmmmo``smmmmmmmmmmy`  `hmmmm:"     
+Write-Output "      hmmmm-  -mmmd` -mmmmmmmmymmh      mmmmmmmmm+  +mmmmmmmmdmmm/   +mmmms"     
+Write-Output "      dmmmm.  +mmmo  .dmmmmmmm:mmh      mmmmmmmmm.  :mmmmmmmd+mmms   :mmmmy"     
+Write-Output "      hmmmm-  :mmmh`  .odmmds--mmh      mmmmmmmmm/   :ydmmho.smmm+   /mmmms"     
+Write-Output "      ommmms   ymmmy.    ````  /dmmh      mmmmmmmmmm+``    ```` .smmmh``   hmmmm/"     
+Write-Output "      ``dmmmm/  ``smmmmy+:::/odmmmd:      mmmmmm:hmmmds/:-:+ymmmmy``   ommmmh"     
+Write-Output "       :mmmmm+   -smmmmmmmmmmmd+``       mmmmmm``/hmmmmmmmmmmmy:   `ommmmd."      
+Write-Output "        :dmmmmh:   ``:+syyyyo/-          mmmmmm.   ./osyyyso:`    /hmmmmd-"       
+Write-Output "         .ymmmmmh+.             :.      mmmmmmms/`            -odmmmmms``"        
+Write-Output "           :hmmmmmmdyo+/::://+sdmms.    mmmmmmmmmmhs+//::/+oydmmmmmmy-"          
+Write-Output "             -odmmmmmmmmmmmmmmmmmmmms.  mmmmmmmmmmmmmmmmmmmmmmmmmh+."            
+Write-Output "                ./shdmmmmmmmmmmmmmmmmms.mmmmmmmmmmdmmmmmmmmmdyo/."               
+Write-Output "                     `.-----.`-smmmmmmmmmmmmmmmmd+` `.----.``"                    
+Write-Output "                                .odmmmmmmmmmmmh/"                                
+Write-Output "                                  `+dmmmmmmmy:"                                  
+Write-Output "                                     /hmmms-"                                    
+Write-Output "                                       -+."
+Write-Output "                               Owls Rule the Night!"    
+Write-Output ""                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+"
