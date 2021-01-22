@@ -26,59 +26,74 @@ Unix Initial System Examination
 
 Look at event log files in
 directories (locations vary)
+```
 /var/log,
 /var/adm,
 /var/spool
-
-List recent security events wtmp, who,
-last, lastlog
+```
+List recent security events
+```
+wtmp
+who
+last
+lastlog
+```
 
 Examine network
 configuration
-arp –an,
+```
+arp –an
 route print
-
+```
 List network
 connections and
 related details
+```
 netstat –nap (Linux),
 netstat –na (Solaris),
 lsof –i
-
-List users more /etc/passwd
-
+```
+List users 
+```
+more /etc/passwd
+```
 Look at scheduled
 jobs
+```
 more /etc/crontab,
 ls /etc/cron.*,
 ls /var/at/jobs
-
+```
 Check DNS settings
 and the hosts file
+```
 more /etc/resolv.conf,
 more /etc/hosts
-
+```
 Verify integrity of installed
 packages (affects lots of files!)
-
+```
 rpm ‐Va (Linux),
 pkgchk (Solaris)
-
+```
 Look at auto‐
 start services
+```
 chkconfig ‐‐list (Linux),
 ls /etc/rc*.d (Solaris),
 smf (Solaris 10+)
-
+```
 List processes ps aux (Linux, BSD),
+```
 ps ‐ef (Solaris),
 lsof +L1
-
+```
 Find recently‐modified files
 (affects lots of files!)
-ls –lat /,
+```
+ls –lat /
 find / ‐mtime ‐2d ‐ls
-
+```
 
 Unusual Accounts
 
@@ -125,14 +140,17 @@ Reboots and/or application restarts
 Other Unusual Items
 
 Sluggish system performance:
-
+```
 $ uptime – Look at "load average"
-
-Excessive memory use: $ free
-
+```
+Excessive memory use: 
+```
+$ free
+```
 Sudden decreases in available disk space:
+```
 $ df
-
+```
 Unusual Processes and Services
 
 Look at all running processes:
@@ -284,9 +302,9 @@ sudo ls -la /etc/syslog
 ```
  read all the config files 
 ```    
-for user in $(cut -f1 -d: /etc/passwd); do echo "###### $user crontab is:"; cat /var/spool/cron/{crontabs/$user,$user} 2>/dev/null; done
+for user in $(cut -f1 -d: /etc/passwd); do echo "###### $user crontab is:"; cat -v /var/spool/cron/{crontabs/$user,$user} 2>/dev/null; done
 
-cat /etc/crontab 
+cat -v /etc/crontab 
 
 ls -la /etc/cron.*
 ```
@@ -298,29 +316,33 @@ sudo find / ( -path /proc -prune -o -path /sys -prune ) -o -mmin -8 -type f -pri
    (NOTE there is a "-" a.k.a minus symbol preceding the "<duration since initial connection">
 ```
 sestatus OR getenforce
-sudo cat /root/.bash_history
-cat ~/.bash_history
+sudo cat -v /root/.bash_history
+cat -v ~/.bash_history
+cat -v ~/.ssh/authorized_keys
 ```
 ## Linux Priv Users Check
-W- who logged in. for how long 
+```
+w 
 
-Who -Ha (PID/
+who -Ha (PID)
 
-Netstat -auntp
+netstat -auntp
 
-Ps -elfH 
+ps -elfH 
 
-Last 
+last 
 
-Sudo cat /root/.bash_history ( is admin active)
+sudo cat -v /root/.bash_history ( is admin active)
 
-Cat /etc/sudoers ( sometimes called wheels)
+cat -v /etc/sudoers ( sometimes called wheels)
 
-Cat /etc/group
+cat -v /etc/group
 
-Cat /etc/passwd
+cat -v /etc/passwd
 
-Groups <user>
+groups <user>
+``` 
+ 
 ## Frameworks
 [**mitre matrices**](https://attack.mitre.org/matrices/enterprise/)
 [**NIST cyberframework**](https://www.nist.gov/cyberframework)
