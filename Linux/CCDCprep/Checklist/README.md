@@ -373,27 +373,35 @@ Tripwire, rkhunter, clamav, inotify-tools
 
 Step 1:
 i.
+```
 apt -y install tripwire rkhunter clamav inotify-tools
+```
 OR
+```
 yum -y install tripwire rkhunter clamav inotify-tools
-
+```
 ii. Select yes when/if prompted
 iii. Enter passphrases, record them and notify team of changes
 iv. Configure programs for use
 
 Tripwire
+```
 tripwire --init
 tripwire --check
 tripwire --check >> tripwire_check.txt
-
+```
 rkhunter
+```
 rkhunter -c -sk >> rkhunter_check.txt
-
+```
 clamav
+```
 clamscan -r / >> clamav_check.txt
-
+```
 inotify-tools
+```
 nano watchme.txt
+```
 Enter file locations to watch, one on each line
 For example:
 .bashrc
@@ -406,34 +414,28 @@ Step 2: Monitor logs
 Each log file should have it’s own terminal per host
 
 Tripwire
+```
 tail -f tripwire_check.txt
-
+```
 rkhunter
+```
 tail -f rkhunter_check.txt
-
+```
 clamav
+```
 tail -f clamav_check.txt
-
+```
 inotify-tools
+```
 sudo inotifywait -m --fromfile watchme.txt
-
+```
 MISC
+```
 watch w
 sudo watch -n 10 lsof -i
 tail -f /var/log/auth.log
 sudo watch  ss -tulpn
-
-
-
-
-
-
-
-
-
-
-
-
+```
 
 
 
@@ -443,24 +445,46 @@ Step 1:
 Step 2:
 Step 1: Try a command and if it doesn’t work go to the next one.
 Try first:
+```
 Debian based awk -F: '($3>=1000)&&($1!="nobody"){print $1}' /etc/passwd > user_list.txt
+```
 OR 
+```
 Centos based awk -F: '($3>=500)&&($1!="nobody"){print $1}'/etc/passwd > user_list.txt
+```
 
-Try second: column -nts: /etc/passwd  
-Try third: cat /etc/passwd 
-Try fourth: awk -F: '{ print $1}' /etc/passwd > user_list.txt 
-Try fifth: compgen -u
+Try second: 
+```
+column -nts: /etc/passwd  
+```
+Try third: 
+```
+cat /etc/passwd 
+```
+Try fourth: 
+```
+awk -F: '{ print $1}' /etc/passwd > user_list.txt 
+```
+Try fifth:
+```
+compgen -u
+```
 Step 2: Document the command output for later use
 
 Step 3:
 3b:
 Lockout or Remove Non-essential Users  
 (Since some users are business essential and may be required for scoring, locking users out will be faster) . 
- 
+``` 
 usermod – L username stops an account from logging in. 
+```
 OR
-deluser --remove-home username OR userdel –remove username will delete a user and their home directory. 
+```
+deluser --remove-home username
+```
+OR 
+``` userdel –remove username```
+will delete a user and their home directory. 
 
 Step 4: 
 
@@ -470,38 +494,48 @@ Step 4:
 Step 5:
 UFW 
  
-VIew current rules 
+View current rules 
+```
 sudo ufw status 
- 
+``` 
 Add a rule for a specific port (example HTTPS) 
+```
 sudo ufw allow 443 
- 
+```
 Block a specific port (example HTTPS) 
+```
 sudo ufw deny 443 
- 
+```
+
 Delete a rule (example HTTPS) 
+```
 sudo ufw status numbered 
 sudo ufw delete RuleNumberGoesHere 
- 
+```
 At the Prompt type y and hit Enter 
  
 Reload Rules 
+```
 sudo ufw reload 
- 
+``` 
 Firewalld 
  
 View current rules 
+```
 firewall-cmd --list-all 
- 
+``` 
 Add a rule for a specific port (example HTTPS) 
+```
 firewall-cmd --permanent –add-port=443/TCP 
 firewall-cmd –permanent --add-port=443/UDP 
- 
+```
 Delete a rule (example HTTPS) 
+```
 firewall-cmd --permanent –remove-port=443/TCP 
 firewall-cmd –permanent --remove-port=443/UDP 
- 
+``` 
 Reload Rules 
+```
 firewall-cmd --reload  
-
+```
 
