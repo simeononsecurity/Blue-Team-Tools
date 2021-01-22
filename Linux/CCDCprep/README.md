@@ -12,4 +12,4 @@
 
 [**Apache Hardening script**](https://github.com/WGU-CCDC/Blue-Team-Tools/tree/master/Linux/Harden-Apache)
 
-[**Hardening sripts by distro**](https://github.com/WGU-CCDC/Blue-Team-Tools/tree/master/Linux/ComplianceAsCode/bash)
+[**Hardening scripts by distro**](https://github.com/WGU-CCDC/Blue-Team-Tools/tree/master/Linux/ComplianceAsCode/bash)
