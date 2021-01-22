@@ -1,1 +1,21 @@
+TODO: look at audit daemon and lynis
 
+SETUID (Set user ID upon execution)
+allows non-root users to execute as root.
+
+Check for SETUID outside of bin and sbin
+
+Find SETUID locations
+sudo find / -perm -4000
+
+Find binaries that are specifically SETUID root
+sudo find / -user root -perm -4000
+
+remove access
+sudo chmod o= <filename>
+
+SUID (saved user ID)
+is used when a program with privileges needs to do something as non-root
+
+remove access
+sudo chmod o= <filename>

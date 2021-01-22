@@ -1,15 +1,4 @@
-password change
-
-backup admin user add script
-
-fail2ban install
-
-monitor and logging
-
-ossec install
-
-av and rootkit detection install script
-
-backups script
-
-update kernel
+To quickly run a script:
+1. nano filename.sh
+2. sudo chmod +x filename.sh
+3. sudo ./filename.sh **OR** sudo bash filename.sh
