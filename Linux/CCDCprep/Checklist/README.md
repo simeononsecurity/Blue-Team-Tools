@@ -16,27 +16,26 @@ ip a, ifconfig, iwconfig
 
 
 
-
 NOTE: Steps 1 to 3 are scripted [here](https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Linux/CCDCprep/Checklist/Automation/lockdown.sh) and should be tried first.
 
 ## Task 1.  Create Backup Admins 
 
     Step 1: 
-    ```
+ 
     adduser --disabled-password --gecos "" nightowl
-    ```
+    
     Step 2: 
-    ```
+    
     usermod -aG sudo nightowl 
-    ```
+   
     Step 3: 
-    ```
+   
     adduser --disabled-password --gecos "" nightowl2
-    ```
+   
     Step 4: 
-    ```
+   
     usermod -aG sudo nightowl2
-    ```
+   
     Step 5: Notify team of usernames and passwords.
 
 
