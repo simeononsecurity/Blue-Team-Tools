@@ -46,9 +46,9 @@ NOTE: Steps 1 to 3 are scripted [here](https://github.com/WGU-CCDC/Blue-Team-Too
 
 ## Task 2. Get a list of all users
     
-    ```
+   
     cat /etc/passwd | cut -d: -f1 > user_list.txt
-    ```
+    
 
 
 ## Task 3. Change the passwords for all users  
