@@ -6,4 +6,3 @@ If($ADuser)
 Set-adaccountpassword $userID -reset -newpassword (ConvertTo-SecureString -AsPlainText $password -Force)
 Set-aduser $userID -changepasswordatlogon $true
 }
-#Patrick sent me
