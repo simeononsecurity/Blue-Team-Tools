@@ -41,9 +41,14 @@ Net user accountname /delete
 ```
 
 ## Step 5
-Enable Windows Firewall and allow some ports through
+Enable Windows Firewall and allow some ports through 
+
+**Important:** You only want to run the reset command if you are local to the box
 ```
 netsh advfirewall reset
+```
+
+```
 netsh advfirewall firewall delete rule *
 netsh advfirewall firewall add rule dir=in action=allow protocol=tcp localport=3389 name=”Allow-TCP-3389-RDP”
 ```
