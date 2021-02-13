@@ -178,3 +178,4 @@ Get these tools onto the machine
 * [BlueSpawn](https://bluespawn.cloud/quickstart/)
 * [EMET (If Windows 7)](https://www.microsoft.com/en-us/download/details.aspx?id=50766)
 * [ProcessHacker](https://processhacker.sourceforge.io/)
+* [**Microsoft Security Compliance Toolkit 1.0**](https://www.microsoft.com/en-us/download/details.aspx?id=55319)
