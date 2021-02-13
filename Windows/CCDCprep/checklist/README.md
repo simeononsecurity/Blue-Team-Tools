@@ -1,13 +1,18 @@
 # WGU CCDC Basic Windows Checklist / First Fifteen Minutes guidelines
 
+You may want to pull up the [Windows Command Line Cheat Sheet](https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/blt4e45e00c2973546d/5eb08aae4461f75d77a48fd4/WindowsCommandLineSheetV1.pdf)
+
+You should check if the [Deepend script](https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Windows/deepend.ps1) will take care of the 1st 15 minutes here, if not, then all the steps are listed below.
+
+### Step 1
 Make sure machine is in English
 ```
 Control intl.cpl
 ```
 
 Create backup administrator account
-Name:
-Password:
+<br> Name:
+<br> Password:
 ```
 net user WGU-Admin * /ADD
 net localgroup administrators WGU-Admin /add
@@ -16,10 +21,9 @@ net localgroup administrators WGU-Admin /add
 Change all user passwords to strong passwords
 ```
 Net localgroup administrators >>LocalAdministratorUsers.txt
-Net user usernamehere *
-
+Net user {username_here} *
 Net user >>localUsers.txt
-Net user username *
+Net user {username} *
 ```
 
 Delete or disable any unnecessary accounts
@@ -32,11 +36,6 @@ Delete
 ```
 Net user accountname /delete
 ```
-
-
-
-
-
 
 Enable Windows Firewall and allow some ports through
 ```
@@ -53,7 +52,6 @@ netsh advfirewall set publicprofile firewallpolicy blockinbound,allowoutbound
 netsh advfirewall set allprofile state on
 
 ```
-
 
 Check for any logged on users
 ```
@@ -105,9 +103,8 @@ certlm
 mmc.exe 
 File -> Add / Remove Snap-In -> Certificates -> Click Add->Computer Account->Local Computer->Finish
 File -> Add / Remove Snap-In -> Certificates -> Click Add->My User Account->Finish
-File -> Add / Remove Snap-In -> Certificates -> Click Add->Service Account->Local Computer->Select potential service accounts to review ->Finish
+File -> Add / Remove Snap-In -> Certificates -> Click Add->Service Account->Local Computer->Select potential service accounts to review -> Finish
 ```
-
 
 Check startup & disable unnecessary items via msconfig
 ```
@@ -150,21 +147,15 @@ Enable all for failure and success
         ```
         Then restart
 
-* Disable Netbios  
-https://help.hcltechsw.com/docs/onprem_2.0/2.0_CR3_install_guide/guide/text/disable_netbios_on_windows_servers.html
+* Disable [Netbios](https://help.hcltechsw.com/docs/onprem_2.0/2.0_CR3_install_guide/guide/text/disable_netbios_on_windows_servers.html)
 * Disable Login to Certain accounts
     - This is dependent on the business scenario we're given. So we'll have a snippet of how to perform the disabling but we might need to skip over this step
 
-Get our tooling onto the machine
+Get these tools onto the machine
 * Sysinternals
-    - Sysmon
-    https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon
-    - Process Explorer
-    https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer
-    - AutoRuns
-    https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
-* BlueSpawn 
- https://bluespawn.cloud/quickstart/
-* EMET (If Windows 7)
-* ProcessHacker
-    - https://processhacker.sourceforge.io/
+    - [Sysmon](https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon)
+    - [Process Explorer](https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer)
+    - [AutoRuns](https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns)
+* [BlueSpawn](https://bluespawn.cloud/quickstart/)
+* [EMET (If Windows 7)](https://www.microsoft.com/en-us/download/details.aspx?id=50766)
+* [ProcessHacker](https://processhacker.sourceforge.io/)
