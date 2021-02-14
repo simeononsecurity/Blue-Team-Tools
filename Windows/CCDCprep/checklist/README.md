@@ -2,7 +2,7 @@
 
 You may want to pull up the [Windows Command Line Cheat Sheet](https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/blt4e45e00c2973546d/5eb08aae4461f75d77a48fd4/WindowsCommandLineSheetV1.pdf)
 
-You should check if the [Deepend script](https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Windows/deepend.ps1) will take care of the 1st 15 minutes here, if not, then all the steps are listed below.
+You should check if the [Deepend script](https://github.com/WGU-CCDC/Blue-Team-Tools/blob/master/Windows/deepend.ps1) will take care of the 1st 15 minutes here, if not, then all the steps are listed below. Then come back to the steps here and start at Step 15.
 
 ## Step 1
 Make sure machine is in English
