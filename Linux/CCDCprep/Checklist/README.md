@@ -1,3 +1,11 @@
+You may want to pull up a Linux Command Line Cheatsheet 
+
+[Windows and Linux
+Terminals & Command Lines](https://assets.contentstack.io/v3/assets/blt36c2e63521272fdc/bltea7de5267932e94b/5eb08aafcf88d36e47cf0644/Cheatsheet_SEC301-401_R7.pdf)
+
+[Linux 101 Command Line Cheat Sheet](https://wiki.sans.blue/Tools/pdfs/LinuxCLI101.pdf)
+
+[Linux Command Line Cheat Sheet](https://wiki.sans.blue/Tools/pdfs/LinuxCLI.pdf)
 
 ## Task 1. Prepare JumpBox  
 
