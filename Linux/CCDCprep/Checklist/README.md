@@ -176,7 +176,7 @@ systemctl --type=service
 Make a list of open ports/servicenames and compare it to business requirements.
 If we do not recognize a service or port, make a note and look it up, if it is a business requirement make note of it and put it in a list with the other business required services.
 
-Once we have our list of required services, it should be easy to have a list of un-needed services. Instead of blocking the port on the firewall, we will be stopping the services.
+Once we have our list of required services, it should be easy to have a list of unneeded services. Instead of blocking the port on the firewall, we will be stopping the services.
 
 We can use
 ```
@@ -187,7 +187,7 @@ to find where it's running, since service doesn't always match the service_name
 
 for example ftp but the service_name is vsftpd
 
-Next you will need to Disable or Uninstall the un-needed services
+Next you will need to Disable or Uninstall the unneeded services
 
 ## Disable Non Business Required Services
 
@@ -228,7 +228,7 @@ nmap the box again to check if the service has actually stopped, then rinse and 
 nmap box_ip_goes_here
 ```
 
-## Task 7. Check the business required services for admin panels and default passwords. Check service version and update.
+## Task 7. Check the business required services for admin panels and default passwords. Check the service version and update.
 
 Now that we have a list of services, we can google them.
 
@@ -241,8 +241,10 @@ We need to find out:
 
 Once we have that information, we should:
 
-1. Change the default passwords and turn off any anonamous logins or default users.
+1. Change the default passwords and turn off any anonymous logins or default credentials.
 2. Check the configuration files for anything we might have missed in documentation.
 3. Update the service where possible.
 4. Make note of where the service outputs logs so we can monitor them for potential indicators that something is wrong. If there are no logs by default try and turn some on.
-5. SCP a copy of the logfiles to our JumpBox so we can see if they have been altered later.
+5. SCP a copy of the log files to our JumpBox so we can see if they have been altered later.
+
+
