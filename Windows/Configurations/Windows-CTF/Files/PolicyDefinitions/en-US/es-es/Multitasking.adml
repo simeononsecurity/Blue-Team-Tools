@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>Multitarea</displayName>
+  <description>Administra las opciones de multitarea de Windows</description>
+  <resources>
+    <stringTable>
+      <string id="MULTITASKING">Multitarea</string>
+      <string id="MULTITASKINGHELP">Administra las opciones de multitarea de Windows</string>
+      <string id="BrowserAltTabBlowout">Configurar la inclusión de las pestañas de Microsoft Edge en Alt-Tabulador</string>
+      <string id="BrowserAltTabBlowout_Help">Esta configuración controla la inclusión de las pestañas de Microsoft Edge en Alt+Tabulador.
+
+Se puede establecer para mostrar todas las pestañas, las últimas 3 o 5, o ninguna pestaña de Edge.
+
+Si esta opción está configurada para mostrar "Solo ventanas abiertas", se deshabilitará toda la característica.
+</string>
+      <string id="AltTabFilter_All">Abrir ventanas y todas las pestañas en Microsoft Edge</string>
+      <string id="AltTabFilter_Five">Abra ventanas y las 5 pestañas más recientes en Microsoft Edge</string>
+      <string id="AltTabFilter_Three">Abrir ventanas y las 3 pestañas más recientes en Microsoft Edge</string>
+      <string id="AltTabFilter_None">Abrir solo ventanas</string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="AltTabFilter">
+        <dropdownList refId="AltTabFilterDropdown" noSort="true" defaultItem="0">Presionar Alt + Tabulador muestra</dropdownList>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>
