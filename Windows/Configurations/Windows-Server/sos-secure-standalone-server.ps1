@@ -1,273 +1,92 @@
-﻿######SCRIPT FOR FULL INSTALL AND CONFIGURE ON STANDALONE MACHINE#####
+######SCRIPT FOR FULL INSTALL AND CONFIGURE ON STANDALONE MACHINE#####
 #Continue on error
 $ErrorActionPreference= 'silentlycontinue'
 
 #Require elivation for script run
 #Requires -RunAsAdministrator
-Write-Output "Elevating priviledges for this process"
-do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
 
 #Unblock all files required for script
 Get-ChildItem *.ps*1 -recurse | Unblock-File
 
-#Optional Scripts 
-#.\Files\Optional\sos-ssl-hardening.ps1
-# powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+#Remove and Refresh Local Policies
+Remove-Item -Recurse -Force "$env:WinDir\System32\GroupPolicy" | Out-Null
+Remove-Item -Recurse -Force "$env:WinDir\System32\GroupPolicyUsers" | Out-Null
+secedit /configure /cfg "$env:WinDir\inf\defltbase.inf" /db defltbase.sdb /verbose | Out-Null
 
-#Security Scripts
-Start-Job -ScriptBlock {takeown /f C:\WINDOWS\Policydefinitions /r /a; icacls C:\WINDOWS\PolicyDefinitions /grant "Administrators:(OI)(CI)F" /t}
-Copy-Item -Path .\Files\PolicyDefinitions\* -Destination C:\Windows\PolicyDefinitions -Force -Recurse -ErrorAction SilentlyContinue
+Start-Job -Name "Mitigations" -ScriptBlock {
+    #####SPECTURE MELTDOWN#####
+    #https://support.microsoft.com/en-us/help/4073119/protect-against-speculative-execution-side-channel-vulnerabilities-in
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverride -Type "DWORD" -Value 72 -Force
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverrideMask -Type "DWORD" -Value 3 -Force
+    Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name MinVmVersionForCpuBasedMitigations -Type "String" -Value "1.0" -Force
 
-#Disable TCP Timestamps
-netsh int tcp set global timestamps=disabled
+    #Disable LLMNR
+    #https://www.blackhillsinfosec.com/how-to-disable-llmnr-why-you-want-to/
+    New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient" -Force
+    Set-ItemProperty -Path "HKLM:\Software\policies\Microsoft\Windows NT\DNSClient" -Name "EnableMulticast" -Type "DWORD" -Value 0 -Force
 
-#Disable Powershell v2
-Disable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2Root
+    #Disable TCP Timestamps
+    netsh int tcp set global timestamps=disabled
 
-#Disable LLMNR
-#https://www.blackhillsinfosec.com/how-to-disable-llmnr-why-you-want-to/
-New-Item -Path "HKLM:\Software\policies\Microsoft\Windows NT\" -Name "DNSClient"
-Set-ItemProperty -Path "HKLM:\Software\policies\Microsoft\Windows NT\DNSClient" -Name "EnableMulticast" -Type "DWORD" -Value 0 -Force
+    #Enable DEP
+    BCDEDIT /set "{current}" nx OptOut
+    Set-Processmitigation -System -Enable DEP
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "NoDataExecutionPrevention" -Type "DWORD" -Value 0 -Force
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "DisableHHDEP" -Type "DWORD" -Value 0 -Force
 
-#Enable DEP
-BCDEDIT /set "{current}" nx OptOut
-Set-Processmitigation -System -Enable DEP
+    #Enable SEHOP
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\kernel" -Name "DisableExceptionChainValidation" -Type "DWORD" -Value 0 -Force
 
-#Windows Defender Configuration Files
-mkdir "C:\temp\Windows Defender"; Copy-Item -Path .\Files\"Windows Defender Configuration Files"\* -Destination C:\temp\"Windows Defender"\ -Force -Recurse -ErrorAction SilentlyContinue
+    #Disable NetBIOS by updating Registry
+    #http://blog.dbsnet.fr/disable-netbios-with-powershell#:~:text=Disabling%20NetBIOS%20over%20TCP%2FIP,connection%2C%20then%20set%20NetbiosOptions%20%3D%202
+    $key = "HKLM:SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces"
+    Get-ChildItem $key | ForEach-Object { 
+        Write-Host("Modify $key\$($_.pschildname)")
+        $NetbiosOptions_Value = (Get-ItemProperty "$key\$($_.pschildname)").NetbiosOptions
+        Write-Host("NetbiosOptions updated value is $NetbiosOptions_Value")
+    }
+    
+    #Disable WPAD
+    #https://adsecurity.org/?p=3299
+    New-Item -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\" -Name "Wpad" -Force
+    New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Wpad" -Name "Wpad" -Force
+    Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Wpad" -Name "WpadOverride" -Type "DWORD" -Value 1 -Force
+    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Wpad" -Name "WpadOverride" -Type "DWORD" -Value 1 -Force
 
-#Enable Windows Defender Exploit Protection
-Set-ProcessMitigation -PolicyFilePath "C:\temp\Windows Defender\DOD_EP_V3.xml"
+    #Enable LSA Protection/Auditing
+    #https://adsecurity.org/?p=3299
+    New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\" -Name "LSASS.exe" -Force
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\LSASS.exe" -Name "AuditLevel" -Type "DWORD" -Value 8 -Force
 
-#Enable Windows Defender Application Control
-#https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/select-types-of-rules-to-create
-Set-RuleOption -FilePath "C:\temp\Windows Defender\WDAC_V1_Enforced.xml" -Option 0
+    #Disable Windows Script Host
+    #https://adsecurity.org/?p=3299
+    New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\" -Name "Settings" -Force
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Name "Enabled" -Type "DWORD" -Value 0 -Force
+    
+    #Disable WDigest
+    #https://adsecurity.org/?p=3299
+    Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\SecurityProviders\Wdigest" -Name "UseLogonCredential" -Type "DWORD" -Value 0 -Force
 
+    #Block Untrusted Fonts
+    #https://adsecurity.org/?p=3299
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel\" -Name "MitigationOptions" -Type "QWORD" -Value "1000000000000" -Force
+    
+    #Disable Hibernate
+    powercfg -h off
+}
+
+Start-Job -Name "STIG Addendum" -ScriptBlock {
 #Basic authentication for RSS feeds over HTTP must not be used.
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Internet Explorer\Feeds" -Name AllowBasicAuthInClear -Type DWORD -Value 0 -Force
 #InPrivate browsing in Microsoft Edge must be disabled.
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" -Name AllowInPrivate -Type DWORD -Value 0 -Force
 #Windows 10 must be configured to prevent Microsoft Edge browser data from being cleared on exit.
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Privacy" -Name ClearBrowsingHistoryOnExit -Type DWORD -Value 0 -Force
-
-#####SPECTURE MELTDOWN#####
-#https://support.microsoft.com/en-us/help/4073119/protect-against-speculative-execution-side-channel-vulnerabilities-in
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverride -Type DWORD -Value 72 -Force
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name FeatureSettingsOverrideMask -Type DWORD -Value 3 -Force
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name MinVmVersionForCpuBasedMitigations -Type String -Value "1.0" -Force
-
-#FireFox STIG
-#https://www.itsupportguides.com/knowledge-base/tech-tips-tricks/how-to-customise-firefox-installs-using-mozilla-cfg/
-$firefox64 = "C:\Program Files\Mozilla Firefox"
-$firefox32 = "C:\Program Files (x86)\Mozilla Firefox"
-Write-Output "Installing Firefox Configurations - Please Wait."
-Write-Output "Window will close after install is complete"
-If (Test-Path -Path $firefox64){
-    Copy-Item -Path .\Files\"FireFox Configuration Files"\defaults -Destination $firefox64 -Force -Recurse
-    Copy-Item -Path .\Files\"FireFox Configuration Files"\mozilla.cfg -Destination $firefox64 -Force
-    Copy-Item -Path .\Files\"FireFox Configuration Files"\local-settings.js -Destination $firefox64 -Force 
-    Write-Host "Firefox 64-Bit Configurations Installed"
-}Else {
-    Write-Host "FireFox 64-Bit Is Not Installed"
-}
-If (Test-Path -Path $firefox32){
-    Copy-Item -Path .\Files\"FireFox Configuration Files"\defaults -Destination $firefox32 -Force -Recurse
-    Copy-Item -Path .\Files\"FireFox Configuration Files"\mozilla.cfg -Destination $firefox32 -Force
-    Copy-Item -Path .\Files\"FireFox Configuration Files"\local-settings.js -Destination $firefox32 -Force 
-    Write-Host "Firefox 32-Bit Configurations Installed"
-}Else {
-    Write-Host "FireFox 32-Bit Is Not Installed"
 }
 
-#https://gist.github.com/MyITGuy/9628895
-#http://stu.cbu.edu/java/docs/technotes/guides/deploy/properties.html
-
-#<Windows Directory>\Sun\Java\Deployment\deployment.config
-#- or -
-#<JRE Installation Directory>\lib\deployment.config
-
-If (Test-Path -Path "C:\Windows\Sun\Java\Deployment\deployment.config"){
-    Write-Host "Deployment Config Already Installed"
-}Else {
-    Write-Output "Installing Java Deployment Config...."
-    Mkdir "C:\Windows\Sun\Java\Deployment\"
-    Copy-Item -Path .\Files\"JAVA Configuration Files"\deployment.config -Destination "C:\Windows\Sun\Java\Deployment\" -Force
-    Write-Output "JAVA Configs Installed"
-}
-If (Test-Path -Path "C:\temp\JAVA\"){
-    Write-Host "Configs Already Deployed"
-}Else {
-    Write-Output "Installing Java Configurations...."
-    Mkdir "C:\temp\JAVA"
-    Copy-Item -Path .\Files\"JAVA Configuration Files"\deployment.properties -Destination "C:\temp\JAVA\" -Force
-    Copy-Item -Path .\Files\"JAVA Configuration Files"\exception.sites -Destination "C:\temp\JAVA\" -Force
-    Write-Output "JAVA Configs Installed"
-}
-
-
-# .Net STIG
-
-#SimeonOnSecurity - Microsoft .Net Framework 4 STIG Script
-#https://github.com/simeononsecurity
-#https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_MS_DotNet_Framework_4-0_V1R9_STIG.zip
-#https://docs.microsoft.com/en-us/dotnet/framework/tools/caspol-exe-code-access-security-policy-tool
-
-#Continue on error
-$ErrorActionPreference= 'silentlycontinue'
-
-#Require elivation for script run
-#Requires -RunAsAdministrator
-Write-Output "Elevating priviledges for this process"
-do {} until (Elevate-Privileges SeTakeOwnershipPrivilege)
-
-If (Test-Path -Path "HKLM:\Software\Microsoft\StrongName\Verification"){
-    Remove-Item "HKLM:\Software\Microsoft\StrongName\Verification" -Recurse -Force
-    Write-Host ".Net StrongName Verification Registry Removed"
-}
-
-# .Net 32-Bit
-If (Test-Path -Path C:\Windows\Microsoft.NET\Framework\v2.0.50727){
-    Write-Host ".Net 32-Bit v2.0.50727 Is Installed"
-    C:\Windows\Microsoft.NET\Framework\v2.0.50727\caspol.exe -q -f -pp on 
-    C:\Windows\Microsoft.NET\Framework\v2.0.50727\caspol.exe -m -lg
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass"){
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v2.0.50727\SchUseStrongCrypto"){
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v2.0.50727\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v2.0.50727\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }
-}Else {
-    Write-Host ".Net 32-Bit v2.0.50727 Is Not Installed"
-}
-If (Test-Path -Path C:\Windows\Microsoft.NET\Framework\v3.0){
-    Write-Host ".Net 32-Bit v3.0 Is Installed"
-    C:\Windows\Microsoft.NET\Framework\v3.0\caspol.exe -q -f -pp on 
-    C:\Windows\Microsoft.NET\Framework\v3.0\caspol.exe -m -lg
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass"){
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.0\SchUseStrongCrypto"){
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.0\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.0\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }
-}Else {
-    Write-Host ".Net 32-Bit v3.0 Is Not Installed"
-}
-If (Test-Path -Path C:\Windows\Microsoft.NET\Framework\v3.5){
-    Write-Host ".Net 32-Bit v3.5 Is Installed"
-    C:\Windows\Microsoft.NET\Framework\v3.5\caspol.exe -q -f -pp on 
-    C:\Windows\Microsoft.NET\Framework\v3.5\caspol.exe -m -lg
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass"){
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.5\SchUseStrongCrypto"){
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.5\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v3.5\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }
-}Else {
-    Write-Host ".Net 32-Bit v3.5 Is Not Installed"
-}
-If (Test-Path -Path C:\Windows\Microsoft.NET\Framework\v4.0.30319){
-    Write-Host ".Net 32-Bit v4.0.30319 Is Installed"
-    C:\Windows\Microsoft.NET\Framework\v4.0.30319\caspol.exe -q -f -pp on 
-    C:\Windows\Microsoft.NET\Framework\v4.0.30319\caspol.exe -m -lg
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass"){
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319\SchUseStrongCrypto"){
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\v4.0.30319\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }
-    #Copy-Item -Path .\Files\machine.config -Destination C:\Windows\Microsoft.NET\Framework\v4.0.30319\Config -Force 
-}Else {
-    Write-Host ".Net 32-Bit v4.0.30319 Is Not Installed"
-}
-
-# .Net 64-Bit
-If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v2.0.50727){
-    Write-Host ".Net 64-Bit v2.0.50727 Is Installed"
-    C:\Windows\Microsoft.NET\Framework64\v2.0.50727\caspol.exe -q -f -pp on 
-    C:\Windows\Microsoft.NET\Framework64\v2.0.50727\caspol.exe -m -lg
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass") {
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }
-    If (Test-Path -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v2.0.50727\") {
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v2.0.50727\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v2.0.50727\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }
-}Else {
-    Write-Host ".Net 64-Bit v2.0.50727 Is Not Installed"
-}
-If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v3.0){
-    Write-Host ".Net 64-Bit v3.0 Is Installed"
-    C:\Windows\Microsoft.NET\Framework64\v3.0\caspol.exe -q -f -pp on 
-    C:\Windows\Microsoft.NET\Framework64\v3.0\caspol.exe -m -lg
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass") {
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }
-    If (Test-Path -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.0\") {
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.0\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.0\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }
-}Else {
-    Write-Host ".Net 64-Bit v3.0 Is Not Installed"
-}
-If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v3.5){
-    Write-Host ".Net 64-Bit v3.5 Is Installed"
-    C:\Windows\Microsoft.NET\Framework64\v3.5\caspol.exe -q -f -pp on 
-    C:\Windows\Microsoft.NET\Framework64\v3.5\caspol.exe -m -lg
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass") {
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }
-    If (Test-Path -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.5\") {
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.5\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v3.5\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }
-}Else {
-    Write-Host ".Net 64-Bit v3.5 Is Not Installed"
-}
-If (Test-Path -Path C:\Windows\Microsoft.NET\Framework64\v4.0.30319){
-    Write-Host ".Net 64-Bit v4.0.30319 Is Installed"
-    C:\Windows\Microsoft.NET\Framework64\v4.0.30319\caspol.exe -q -f -pp on 
-    C:\Windows\Microsoft.NET\Framework64\v4.0.30319\caspol.exe -m -lg
-    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass") {
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0"
-    }
-    If (Test-Path -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319\") {
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }Else {
-        New-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\v4.0.30319\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1"
-    }
-    #Copy-Item -Path .\Files\machine.config -Destination C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config -Force 
-}Else {
-    Write-Host ".Net 64-Bit v4.0.30319 Is Not Installed"
-}
-
+Start-Job -Name "VM and VDI Optimizations" -ScriptBlock {
 #VM Performance Improvements
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" -Name VisualFXSetting -Type DWORD -Value 2
 # Apply appearance customizations to default user registry hive, then close hive file
 & REG LOAD HKLM\DEFAULT C:\Users\Default\NTUSER.DAT
 New-ItemProperty -Path "HKLM:\Default\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name IconsOnly -Type DWORD -Value 1 -Force
@@ -323,6 +142,120 @@ Set-ItemProperty -Path "HKLM:\Default\Software\Microsoft\Windows\CurrentVersion\
 Set-ItemProperty -Path "HKLM:\Default\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\Microsoft.YourPhone_8wekyb3d8bbwe" -Name Disabled -Type DWORD -Value 1 -Force
 Set-ItemProperty -Path "HKLM:\Default\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\Microsoft.YourPhone_8wekyb3d8bbwe" -Name DisabledByUser -Type DWORD -Value 1 -Force
 & REG UNLOAD HKLM\DEFAULT
+}
+
+#Windows Defender Configuration Files
+New-Item -Path "C:\" -Name "Temp" -ItemType "directory" -Force | Out-Null; New-Item -Path "C:\temp\" -Name "Windows Defender" -ItemType "directory" -Force | Out-Null; Copy-Item -Path .\Files\"Windows Defender Configuration Files"\* -Destination "C:\temp\Windows Defender\" -Force -Recurse -ErrorAction SilentlyContinue | Out-Null
+
+#Enable Windows Defender Exploit Protection
+Set-ProcessMitigation -PolicyFilePath "C:\temp\Windows Defender\DOD_EP_V3.xml"
+
+#Enable Windows Defender Application Control
+#https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/select-types-of-rules-to-create
+Set-RuleOption -FilePath "C:\temp\Windows Defender\WDAC_V1_Recommended_Enforced.xml" -Option 0
+
+#FireFox STIG
+#https://www.itsupportguides.com/knowledge-base/tech-tips-tricks/how-to-customise-firefox-installs-using-mozilla-cfg/
+$firefox64 = "C:\Program Files\Mozilla Firefox"
+$firefox32 = "C:\Program Files (x86)\Mozilla Firefox"
+Write-Output "Installing Firefox Configurations - Please Wait."
+Write-Output "Window will close after install is complete"
+If (Test-Path -Path $firefox64){
+    Copy-Item -Path .\Files\"FireFox Configuration Files"\defaults -Destination $firefox64 -Force -Recurse
+    Copy-Item -Path .\Files\"FireFox Configuration Files"\mozilla.cfg -Destination $firefox64 -Force
+    Copy-Item -Path .\Files\"FireFox Configuration Files"\local-settings.js -Destination $firefox64 -Force 
+    Write-Host "Firefox 64-Bit Configurations Installed"
+}Else {
+    Write-Host "FireFox 64-Bit Is Not Installed"
+}
+If (Test-Path -Path $firefox32){
+    Copy-Item -Path .\Files\"FireFox Configuration Files"\defaults -Destination $firefox32 -Force -Recurse
+    Copy-Item -Path .\Files\"FireFox Configuration Files"\mozilla.cfg -Destination $firefox32 -Force
+    Copy-Item -Path .\Files\"FireFox Configuration Files"\local-settings.js -Destination $firefox32 -Force 
+    Write-Host "Firefox 32-Bit Configurations Installed"
+}Else {
+    Write-Host "FireFox 32-Bit Is Not Installed"
+}
+
+#https://gist.github.com/MyITGuy/9628895
+#http://stu.cbu.edu/java/docs/technotes/guides/deploy/properties.html
+
+#<Windows Directory>\Sun\Java\Deployment\deployment.config
+#- or -
+#<JRE Installation Directory>\lib\deployment.config
+
+If (Test-Path -Path "C:\Windows\Sun\Java\Deployment\deployment.config"){
+    Write-Host "Deployment Config Already Installed"
+}Else {
+    Write-Output "Installing Java Deployment Config...."
+    Mkdir "C:\Windows\Sun\Java\Deployment\"
+    Copy-Item -Path .\Files\"JAVA Configuration Files"\deployment.config -Destination "C:\Windows\Sun\Java\Deployment\" -Force
+    Write-Output "JAVA Configs Installed"
+}
+If (Test-Path -Path "C:\temp\JAVA\"){
+    Write-Host "Configs Already Deployed"
+}Else {
+    Write-Output "Installing Java Configurations...."
+    Mkdir "C:\temp\JAVA"
+    Copy-Item -Path .\Files\"JAVA Configuration Files"\deployment.properties -Destination "C:\temp\JAVA\" -Force
+    Copy-Item -Path .\Files\"JAVA Configuration Files"\exception.sites -Destination "C:\temp\JAVA\" -Force
+    Write-Output "JAVA Configs Installed"
+}
+
+#SimeonOnSecurity - Microsoft .Net Framework 4 STIG Script
+#https://github.com/simeononsecurity
+#https://dl.dod.cyber.mil/wp-content/uploads/stigs/zip/U_MS_DotNet_Framework_4-0_V1R9_STIG.zip
+#https://docs.microsoft.com/en-us/dotnet/framework/tools/caspol-exe-code-access-security-policy-tool
+
+$netframework32="C:\Windows\Microsoft.NET\Framework"
+$netframework64="C:\Windows\Microsoft.NET\Framework64"
+$netframeworks=($netframework32,$netframework64)
+
+# .Net 32-Bit
+ForEach ($dotnet32version in (Get-ChildItem $netframework32 | ?{ $_.PSIsContainer }).Name){
+    $netframework32="C:\Windows\Microsoft.NET\Framework"
+    Write-Host ".Net 32-Bit $dotnet32version Is Installed"
+    cmd /c $netframework32\$dotnet32version\caspol.exe -q -f -pp on 
+    cmd /c $netframework32\$dotnet32version\caspol.exe -m -lg
+    #Vul ID: V-30935	   	Rule ID: SV-40977r3_rule	   	STIG ID: APPNET0063
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -Value "0" -Force
+    }Else {
+        New-Item -Path "HKLM:\SOFTWARE\Microsoft\" -Name ".NETFramework" -Force
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0" -Force
+    }
+    #Vul ID: V-81495	   	Rule ID: SV-96209r2_rule	   	STIG ID: APPNET0075	
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\$dotnet32version\SchUseStrongCrypto"){
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\$dotnet32version\" -Name "SchUseStrongCrypto" -Value "1" -Force
+    }Else {
+        New-Item -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework" -Name "$dotnet32version" -Force
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\$dotnet32version\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1" -Force
+    }
+}
+# .Net 64-Bit
+ForEach ($dotnet64version in (Get-ChildItem $netframework64 | ?{ $_.PSIsContainer }).Name){
+    $netframework64="C:\Windows\Microsoft.NET\Framework64"
+    Write-Host ".Net 64-Bit $dotnet64version Is Installed"
+    cmd /c $netframework64\$dotnet64version\caspol.exe -q -f -pp on 
+    cmd /c $netframework64\$dotnet64version\caspol.exe -m -lg
+    #Vul ID: V-30935	   	Rule ID: SV-40977r3_rule	   	STIG ID: APPNET0063
+    If (Test-Path -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\AllowStrongNameBypass") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -Value "0" -Force
+    }Else {
+        New-Item -Path "HKLM:\SOFTWARE\Microsoft\" -Name ".NETFramework" -Force
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\.NETFramework\" -Name "AllowStrongNameBypass" -PropertyType "DWORD" -Value "0" -Force
+    }
+    #Vul ID: V-81495	   	Rule ID: SV-96209r2_rule	   	STIG ID: APPNET0075	
+    If (Test-Path -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\$dotnet64version\") {
+        Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\$dotnet64version\" -Name "SchUseStrongCrypto" -Value "1" -Force
+    }Else {
+        New-Item -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\" -Name "$dotnet64version" -Force
+        New-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\.NETFramework\$dotnet64version\" -Name "SchUseStrongCrypto" -PropertyType "DWORD" -Value "1" -Force
+    }
+}
+
+#Vul ID: V-30937	   	Rule ID: SV-40979r3_rule	   	STIG ID: APPNET0064	  
+#FINDSTR /i /s "NetFx40_LegacySecurityPolicy" c:\*.exe.config 
 
 #GPO Configurations
 $gposdir = "$(Get-Location)\Files\GPOs"
@@ -336,12 +269,10 @@ Foreach ($gpocategory in Get-ChildItem "$(Get-Location)\Files\GPOs") {
         .\Files\LGPO\LGPO.exe /g $gpopath
     }
 }
-
 Add-Type -AssemblyName PresentationFramework
 $Answer = [System.Windows.MessageBox]::Show("Reboot to make changes effective?", "Restart Computer", "YesNo", "Question")
-Switch ($Answer)
-{
-    "Yes"   { Write-Warning "Restarting Computer in 15 Seconds"; Start-sleep -seconds 15; Restart-Computer -Force }
-    "No"    { Write-Warning "A reboot is required for all changed to take effect" }
+Switch ($Answer) {
+    "Yes" { Write-Host "Performing Gpupdate"; Gpupdate /force /boot; Get-Job; Write-Warning "Restarting Computer in 15 Seconds"; Start-sleep -seconds 15; Restart-Computer -Force }
+    "No" { Write-Host "Performing Gpupdate"; Gpupdate /force ; Get-Job; Write-Warning "A reboot is required for all changed to take effect" }
     Default { Write-Warning "A reboot is required for all changed to take effect" }
 }
