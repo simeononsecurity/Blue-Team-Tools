@@ -23,38 +23,38 @@ param (
 #Functions needed
 #generate secure passwords
 function get-strongpwd {
-$basepwd = "DirtyBirdsAtNight"
-$date = get-date -format yyyy-MM-dd
-$objRand = new-object random
-$num = $objRand.next(1,500)
-$finalPWD = $basepwd + "!" + $date + "!" + $num
-$finalPWD
+    $basepwd = "DirtyBirdsAtNight"
+    $date = get-date -format yyyy-MM-dd
+    $objRand = new-object random
+    $num = $objRand.next(1, 500)
+    $finalPWD = $basepwd + "!" + $date + "!" + $num
+    $finalPWD
 }
 #Get local users and document them
 function get-lusers {
     $adsi = [ADSI]"WinNT://$env:COMPUTERNAME"
-    $adsi.Children | Where-Object {$_.SchemaClassName -eq "user"} | Foreach-Object {
-        $groups = $_.Groups() | Foreach-Object {$_.GetType().InvokeMember("Name", "GetProperty", $null, $_, $null)}
+    $adsi.Children | Where-Object { $_.SchemaClassName -eq "user" } | Foreach-Object {
+        $groups = $_.Groups() | Foreach-Object { $_.GetType().InvokeMember("Name", "GetProperty", $null, $_, $null) }
         $namey = $_.name
         if ($null = $groups) {
             $groups = "N/A"
         }
         $namey 
- }
+    }
 }
 # Create new local Admin user for script purposes
 function add-backupadmin {
 
-$Computer = [ADSI]"WinNT://$Env:COMPUTERNAME,Computer"
-$passwd = get-strongpwd
-$LocalAdmin = $Computer.Create("User", "WGU-Admin")
-$LocalAdmin.SetPassword($passwd)
-$LocalAdmin.SetInfo()
-$LocalAdmin.FullName = "Nightowls Secured Account"
-$LocalAdmin.SetInfo()
-# ADS_UF_PASSWD_CANT_CHANGE + ADS_UF_DONT_EXPIRE_PASSWD
-$LocalAdmin.UserFlags = 64 + 65536
-$LocalAdmin.SetInfo()
+    $Computer = [ADSI]"WinNT://$Env:COMPUTERNAME,Computer"
+    $passwd = get-strongpwd
+    $LocalAdmin = $Computer.Create("User", "WGU-Admin")
+    $LocalAdmin.SetPassword($passwd)
+    $LocalAdmin.SetInfo()
+    $LocalAdmin.FullName = "Nightowls Secured Account"
+    $LocalAdmin.SetInfo()
+    # ADS_UF_PASSWD_CANT_CHANGE + ADS_UF_DONT_EXPIRE_PASSWD
+    $LocalAdmin.UserFlags = 64 + 65536
+    $LocalAdmin.SetInfo()
 }
 
 #add backup admin
@@ -66,7 +66,7 @@ $users = get-lusers
 
 #change passwords
 Write-Output "Attempting to change user passwors"
-$fdate = get-date -format o | ForEach-Object { $_ -replace ":","."}
+$fdate = get-date -format o | ForEach-Object { $_ -replace ":", "." }
 foreach ($user in $users) {
     try {
         $plainTextPWD = get-strongpwd
@@ -94,44 +94,52 @@ foreach ($user in $users) {
 Write-Output "Adding outbound rules to prevent LOLBins."
 #add rules to prevent lolbins outbound
 $Params = @{ "DisplayName" = "WGU-Block Network Connections-Notepad.exe"
-             "Direction" = "Outbound"
-             "Action" = "Block"
-             "Program" = "%systemroot%\system32\notepad.exe" }
+    "Direction"            = "Outbound"
+    "Action"               = "Block"
+    "Program"              = "%systemroot%\system32\notepad.exe" 
+}
 New-NetFirewallRule @params
 $Params = @{ "DisplayName" = "WGU-Block Network Connections-regsvr32.exe"
-             "Direction" = "Outbound"
-             "Action" = "Block"
-             "Program" = "%systemroot%\system32\regsvr32.exe" }
+    "Direction"            = "Outbound"
+    "Action"               = "Block"
+    "Program"              = "%systemroot%\system32\regsvr32.exe" 
+}
 New-NetFirewallRule @Params
 $Params = @{ "DisplayName" = "WGU-Block Network Connections-calc.exe" 
-             "Direction" = "Outbound"
-             "Action" = "Block"
-             "Program" = "%systemroot%\system32\calc.exe" }
+    "Direction"            = "Outbound"
+    "Action"               = "Block"
+    "Program"              = "%systemroot%\system32\calc.exe" 
+}
 New-NetFirewallRule @Params
 $Params = @{ "DisplayName" = "WGU-Block Network Connections-mshta.exe"
-             "Direction" = "Outbound"
-             "Action" = "Block"
-             "Program" = "%systemroot%\system32\mshta.exe" }
+    "Direction"            = "Outbound"
+    "Action"               = "Block"
+    "Program"              = "%systemroot%\system32\mshta.exe" 
+}
 New-NetFirewallRule @Params
 $Params = @{ "DisplayName" = "WGU-Block Network Connections-wscript.exe"
-             "Direction" = "Outbound"
-             "Action" = "Block"
-             "Program" = "%systemroot%\system32\wscript.exe" }
+    "Direction"            = "Outbound"
+    "Action"               = "Block"
+    "Program"              = "%systemroot%\system32\wscript.exe" 
+}
 New-NetFirewallRule @Params
 $Params = @{ "DisplayName" = "WGU-Block Network Connections-cscript.exe" 
-             "Direction" = "Outbound"
-             "Action" = "Block"
-             "Program" = "%systemroot%\system32\cscript.exe" }
+    "Direction"            = "Outbound"
+    "Action"               = "Block"
+    "Program"              = "%systemroot%\system32\cscript.exe" 
+}
 New-NetFirewallRule @Params
 $Params = @{ "DisplayName" = "WGU-Block Network Connections-runscripthelper.exe"
-             "Direction" = "Outbound"
-             "Action" = "Block"
-             "Program" = "%systemroot%\system32\runscripthelper.exe" }
+    "Direction"            = "Outbound"
+    "Action"               = "Block"
+    "Program"              = "%systemroot%\system32\runscripthelper.exe" 
+}
 New-NetFirewallRule @Params
 $Params = @{ "DisplayName" = "WGU-Block Network Connections-regsvr32.exe"
-             "Direction" = "Outbound"
-             "Action" = "Block"
-             "Program" = "%systemroot%\system32\regsvr32.exe" }
+    "Direction"            = "Outbound"
+    "Action"               = "Block"
+    "Program"              = "%systemroot%\system32\regsvr32.exe" 
+}
 New-NetFirewallRule @Params
 
 #add rules to filter inbound
@@ -143,14 +151,14 @@ New-NetFirewallRule @Params
 
 #enable firewall
 $Params = @{ #"Name" = "Domain, Public, Private"
-             "Enabled" = "true"
-             "defaultInboundAction" = "Block"
-             "LogAllowed" = "True"
-             "LogBlocked" = "True"
-             "LogIgnored" = "True"
-             "LogFileName" = "%windir%\system32\logfiles\firewall\pfirewall.log"
-             "LogMaxSizeKilobytes" = "32767"
-             "NotifyOnListen" = "True"
+    "Enabled"              = "true"
+    "defaultInboundAction" = "Block"
+    "LogAllowed"           = "True"
+    "LogBlocked"           = "True"
+    "LogIgnored"           = "True"
+    "LogFileName"          = "%windir%\system32\logfiles\firewall\pfirewall.log"
+    "LogMaxSizeKilobytes"  = "32767"
+    "NotifyOnListen"       = "True"
 }
 Set-NetFirewallProfile @Params -all
 # Set-NetFirewallProfile -Profile Domain,Public,Private `
@@ -307,10 +315,10 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CredentialsDel
 # }
 #disable netbios over tcp/ip and lmhosts lookups
 $nics = Get-WmiObject win32_NetworkAdapterConfiguration
-foreach ($nic in $nics){
-        $nic.settcpipnetbios(2) # 2 = disable netbios on interface
-        # $nic.enablewins($false,$false) #disable wins
-    }
+foreach ($nic in $nics) {
+    $nic.settcpipnetbios(2) # 2 = disable netbios on interface
+    # $nic.enablewins($false,$false) #disable wins
+}
 #enable powershell logging
 Write-Output "Enabling powershell logging"
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging" /v EnableModuleLogging /t REG_DWORD /d 1 /f
@@ -329,7 +337,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging" /v E
 # else {
 #     New-ItemProperty $params -Force | Out-Null
 # }
- reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" /v EnableScriptBlockLogging /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" /v EnableScriptBlockLogging /t REG_DWORD /d 1 /f
 # New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\" -Name "ScriptBlockLogging"
 # Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" -name "EnableScriptBlockLogging" -Type DWORD -Value 1 -Force
 
@@ -408,11 +416,4 @@ Write-Output "                                  `+dmmmmmmmy:"
 Write-Output "                                     /hmmms-"                                    
 Write-Output "                                       -+."
 Write-Output "                               Owls Rule the Night!"    
-Write-Output ""                               
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-"
+Write-Output ""
