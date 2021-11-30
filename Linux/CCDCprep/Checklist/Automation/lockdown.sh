@@ -9,7 +9,18 @@ enumerate_func (){
 #enumerate system
 date -u  >> sysinfo.txt
 uname -a >> sysinfo.txt
-. /etc/os-release
+
+# Added in error testing, who knows what gets borked
+# per https://www.linux.org/docs/man5/os-release.html
+# /usr/lib/os-release should be the fallback
+
+if . /etc/os-release ; then
+        OS=$NAME
+else
+        . /usr/lib/os-release
+        OS=$NAME
+fi
+
 echo "OS is $ID" >> sysinfo.txt
 lscpu    >> sysinfo.txt
 lsblk    >> sysinfo.txt
@@ -29,6 +40,19 @@ cat ~/.bash_history >> sysinfo.txt
 cat /etc/group >> sysinfo.txt
 cat /etc/passwd >> sysinfo.txt
 
+# If Debian or Ubuntu (or Arch if we add support), then ufw is installed
+# ufw = Uncomplicated Firewall - https://help.ubuntu.com/community/UFW
+if [ "$OS" = "Ubuntu" ]; then
+
+ufw-status=$(sudo ufw status)
+echo "ufw $ufw-status" >> sysinfo.txt
+
+elif [ "$OS" = "Debian" ]; then
+
+ufw-status=$(sudo ufw status)
+echo "ufw $ufw-status" >> sysinfo.txt
+
+fi
 }
 
 backup_admin_func (){
@@ -54,8 +78,21 @@ echo -e "$PASS\n$PASS" | passwd $i
 done
 
 install_tools_func () {
-. /etc/os-release
-OS=$NAME
+
+# Added in error testing, who knows what gets borked
+# per https://www.linux.org/docs/man5/os-release.html
+# /usr/lib/os-release should be the fallback
+
+if . /etc/os-release ; then
+        OS=$NAME
+        echo "$OS"
+else
+        . /usr/lib/os-release
+        OS=$NAME
+        echo "$OS"
+
+fi
+
 echo "$OS installing tools"
 
 if [ "$OS" = "Ubuntu" ]; then
