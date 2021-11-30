@@ -78,6 +78,7 @@ change_passwords_func (){
 
 # Backup, display differences to official repos, and restore (with flag)
 # to official repos
+# code for check_repositories_func released under GNU GPLv3
 check_repositories_func (restore){
 
 	currDate = $(date)
