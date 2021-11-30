@@ -2,7 +2,7 @@
 
 
 check_crontab_func (){
-for user in $(cut -f1 -d: /etc/passwd); do echo "###### $user crontab is:"; cat /var/spool/cron/{crontabs/$user,$user} 2>/dev/null; done >> sysinfo.txt
+	for user in $(cut -f1 -d: /etc/passwd); do echo "###### $user crontab is:"; cat /var/spool/cron/{crontabs/$user,$user} 2>/dev/null; done >> sysinfo.txt
 }
 
 enumerate_func (){
@@ -15,10 +15,10 @@ enumerate_func (){
 	# /usr/lib/os-release should be the fallback
 
 	if . /etc/os-release ; then
-	        OS=$NAME
+		OS=$NAME
 	else
-	        . /usr/lib/os-release
-	        OS=$NAME
+		. /usr/lib/os-release
+	    OS=$NAME
 	fi
 	
 	echo "OS is $ID" >> sysinfo.txt
@@ -79,7 +79,7 @@ change_passwords_func (){
 # Backup, display differences to official repos, and restore (with flag)
 # to official repos
 # code for check_repositories_func released under GNU GPLv3
-check_repositories_func (restore){
+check_repositories_func (){
 
 	currDate = $(date)
 
@@ -90,7 +90,7 @@ check_repositories_func (restore){
         else
                 . /usr/lib/os-release
                 OS=$NAME
-        fi
+    fi
 
 	if [ "$OS" = "Ubuntu" ]; then
 		
@@ -99,12 +99,17 @@ check_repositories_func (restore){
 			cp /etc/apt/sources.list $(currDate)-sources.list
 		else
 			echo "[-] /etc/apt/sources.list Not Found!"
+			echo "[ ] Attempting to create new source list"
 		fi
+		# /etc/apt/sources.list.d is a dir, need to check size before copying
+		# du, short for disk usage, seems to be a decent way since 4.0K is the size of empty
+		
+		sourceDirSize=`du -sh /etc/apt/sources.list.d | cut -f1` #removes the tab by default
 
-		if . /etc/apt/sources.list.d ; then
-                        cp /etc/apt/sources.list.d $(date)-sources.list.d
-                else
-                        echo "[-] /etc/apt/sources.list.d Not Found!"
+		if [ "$sourceDirSize" != "4.0K" ]; then
+			echo "[ ] Check /etc/apt/sources.list.d for any suspicious sources"
+		else
+			echo "[+] /etc/apt/sources.list.d not found"
 		fi
 
 		# display differences to official repos
@@ -124,11 +129,11 @@ check_repositories_func (restore){
         #elif [ "$OS" = "CentOS Linux" ];then
 		#yum -y install fail2ban tripwire clamav inotify-tools
 
-	#else
+		#else
 		#echo "Not Ubuntu, Debian or CentOS, install tools manually"
 
         #fi
-
+    fi
 }
 
 install_tools_func () {
