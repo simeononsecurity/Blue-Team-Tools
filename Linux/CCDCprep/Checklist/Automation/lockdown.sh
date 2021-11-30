@@ -76,6 +76,60 @@ change_passwords_func (){
 	done
 }
 
+# Backup, display differences to official repos, and restore (with flag)
+# to official repos
+check_repositories_func (restore){
+
+	currDate = $(date)
+
+	# Need to check OS to determine repo types
+	# Probably should make this a function at this point
+	if . /etc/os-release ; then
+                OS=$NAME
+        else
+                . /usr/lib/os-release
+                OS=$NAME
+        fi
+
+	if [ "$OS" = "Ubuntu" ]; then
+		
+		# Backups First with timestamp
+		if . /etc/apt/sources.list ; then
+			cp /etc/apt/sources.list $(currDate)-sources.list
+		else
+			echo "[-] /etc/apt/sources.list Not Found!"
+		fi
+
+		if . /etc/apt/sources.list.d ; then
+                        cp /etc/apt/sources.list.d $(date)-sources.list.d
+                else
+                        echo "[-] /etc/apt/sources.list.d Not Found!"
+		fi
+
+		# display differences to official repos
+		# will need to generate these files on clean installs then
+		# upload since no one copy ability exist
+		# wget <github raw text file link here>
+		#if diff file1 file2 > source.list-Diff.txt ; then
+			#echo "[+] Diff completed for file1 to file2
+ 
+		#else
+			#echo "[-] Diff failed for file1 to file2"
+		#fi
+
+        #elif [ "$OS" = "Debian" ]; then
+		#apt -y install fail2ban tripwire clamav inotify-tools
+
+        #elif [ "$OS" = "CentOS Linux" ];then
+		#yum -y install fail2ban tripwire clamav inotify-tools
+
+	#else
+		#echo "Not Ubuntu, Debian or CentOS, install tools manually"
+
+        #fi
+
+}
+
 install_tools_func () {
 
 	# Added in error testing, who knows what gets borked
