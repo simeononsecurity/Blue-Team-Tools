@@ -1,4 +1,4 @@
 _To Do_
 
-- Check out: https://cheatsheetseries.owasp.org/cheatsheets/ and narrow down list of potential actions
+- Check out: https://github.com/OWASP/CheatSheetSeries and narrow down list of potential actions
 
