@@ -1,0 +1,26 @@
+Generate an SSH Key Pair on UNIX and UNIX-Like Systems
+
+Use the following procedure to generate an SSH key pair on UNIX and UNIX-like systems:
+
+    1. Run the ssh-keygen command.
+
+    You can use the -t option to specify the type of key to create.
+
+    For example, to create an RSA key, run:
+
+    ssh-keygen -t rsa
+
+    You can use the -b option to specify the length (bit size) of the key, as shown in the following example:
+
+    ssh-keygen -b 2048 -t rsa
+
+    2. The command prompts you to enter the path to the file in which you want to save the key.
+
+    A default path and file name are suggested in parentheses. For example: /home/user_name/.ssh/id_rsa. To accept the default path and file name, press Enter. Otherwise, enter the required path and file name, and then press Enter.
+
+    3. The command prompts you to enter a passphrase.
+
+    4. When prompted, enter the passphrase again to confirm it.
+
+Use ssh-copy-id -i to add the new key pair to a remote machine. (the password option may need to be temporarily anabled if there isnt already a key for the local machine there)
+Once you can confirm that the new key pair is installed, you can delete the old one.
