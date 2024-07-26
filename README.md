@@ -1,5 +1,7 @@
 # Blue-Team-Tools
 
+[![Sponsor](https://img.shields.io/badge/Sponsor-Click%20Here-ff69b4)](https://github.com/sponsors/simeononsecurity) 
+
 A collection of scripts and tools for various OS'es, all free and or open-source, to assist in improptu Blue-Team defense under an active threat.
  
 
